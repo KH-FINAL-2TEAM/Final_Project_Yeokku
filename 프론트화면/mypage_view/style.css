@@ -1,0 +1,284 @@
+@import url("https://fonts.googleapis.com/css?family=Barlow:400,700|Open+Sans:300,400,600&display=swap");
+
+
+*{
+    font-family: "Open Sans", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a, a::after, a::before, a:hover, a:focus {
+    text-decoration: none;
+    color: black;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+
+.conta{
+    display: flex;
+    flex-direction: column;
+    margin-top: 94px;
+}
+
+.profile_section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 372px;
+    width: 100%;
+    padding: 12px;
+    color: white;
+    margin-bottom: 0;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    max-height: 400px;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+}
+
+.profile h1{
+    letter-spacing : 7px;
+    font-size: 1.25rem;
+}
+.profile_div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 24px;
+    
+}
+
+.profile_img_div{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 60%;
+    background-color: black;
+    margin-right: 12px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.profile_img{
+    width: 100%;
+    height: 100%;
+    border-radius: 60%;
+    object-fit: cover;
+}
+
+.profile_name{
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+
+.breadcrumb {
+    position: relative;
+    z-index: 1;
+}
+.breadcrumb_bg {
+    background-image: url("breadcrumb.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.breadcrumb:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    content: "";
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.nav{
+    background-color: #223b68;
+    display: flex;
+    justify-content: center;
+}
+
+.nav a{
+    color:white;
+}
+
+.navbar{
+    display: flex;
+    justify-content: flex-start;
+    padding: 4px 0;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.navbar ul li{
+    padding : 8px 12px;
+    font-size: 1.25rem;
+}
+
+.selected_nav{
+    background-color: white;
+    color : #223b68;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+.selected_nav a{
+    color : #223b68;
+}
+
+.list_nav{
+    display: flex;
+    justify-content: center;
+}
+
+.list_nav div{
+    padding: 16px 0;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.list_nav div>ul li{
+    padding-right: 24px;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.row{
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    padding: 12px;
+}
+
+.row>div{
+    margin-bottom: 24px;
+}
+
+/*
+    여행지
+*/
+
+.list_nav form input, .list_nav form select{
+    border: none;
+    outline:none;
+}
+
+.list_nav form select{
+    cursor: pointer;
+}
+.list_nav div form ul li{
+    padding: 2px;
+}
+.list_nav form div{
+    padding: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.submit_div{
+    background-color: #fe5c24;
+    border: none;
+}
+
+.submit{
+    background-color: #fe5c24;
+    color: white;
+    padding: 0 12px;
+}
+
+
+
+/*
+    회원정보
+*/
+.info{
+    display: flex;
+    justify-content : center;
+    margin: 24px ;
+    max-width: 1200px;
+    padding: 24px;
+}
+
+.info >div{
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding : 12px;
+}
+
+
+.info >div  h3 {
+    padding: 12px;
+}
+
+.btns{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+
+/*
+    여행코스
+*/
+.course_list>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.course_list h3{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/*
+    리뷰
+*/
+
+.comment-list{
+    padding: 12px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.single-comment{
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 12px;
+}
+
+
+
+/*
+    문의내역
+*/
+
+.qna-list{
+    padding: 12px;
+    max-width: 1200px;
+    width: 100%;
+}
