@@ -12,6 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>title</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
@@ -106,8 +107,6 @@
         <!-- Header part end-->
 
 
-    <!-- jquery plugins here-->
-    <script src="<c:url value="/resources/js/jquery-1.12.1.min.js" />"></script>
     <!-- bootstrap js -->
     <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
     <!-- custom js -->
