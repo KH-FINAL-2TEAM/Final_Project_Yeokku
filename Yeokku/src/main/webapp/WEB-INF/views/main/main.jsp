@@ -8,20 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>여꾸</title>
-    <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../resources/css/style_dh.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/style_dh.css">
 </head>
 <style>
 body {
     font-family: "Open Sans", sans-serif;
-    width: 1200px;
     padding: 0;
     margin: 0 auto;
     font-size: 14px;
-}
-
-.banner_part {
-    margin-top: 94px;
 }
 
 .btn_1 {
@@ -44,8 +39,11 @@ body {
 
 </style>
 </head>
+<!-- header 추가 -->
+	<%@ include file="../header/header.jsp" %> 
 <body>
-<div class="box">
+	
+	
     <section class="banner_part">
         <div class="container">
             <div class="row align-items-center justify-content-center">
@@ -63,13 +61,15 @@ body {
     </section>
     <br>
     <section class="search_part">
-        <form action="#">
-            <div class="form-inline" style="padding-left: 10%;">
-                    <input type="text" class="form-control w-75" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'"
-                    style="margin: 5px;">
-                    <button class="btn_1" type="submit" style="border-color: transparent;">Search</button>
-            </div>
-        </form>
+    	<div class="container">
+	        <form action="#">
+	            <div class="form-inline" style="padding-left: 10%;">
+	                    <input type="text" class="form-control w-75" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'"
+	                    style="margin: 5px;">
+	                    <button class="btn_1" type="submit" style="border-color: transparent;">Search</button>
+	            </div>
+	        </form>
+        </div>
     </section>
 
     <section class="top_place">
@@ -84,7 +84,7 @@ body {
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3 style="padding-bottom: 5px;">명소 이름</h3>
@@ -95,7 +95,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3 style="padding-bottom: 5px;">명소 이름</h3>
@@ -107,7 +107,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_3.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_3.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3 style="padding-bottom: 5px;">명소 이름</h3>
@@ -119,7 +119,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_4.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_4.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3 style="padding-bottom: 5px;">명소 이름</h3>
@@ -131,7 +131,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3 style="padding-bottom: 5px;">명소 이름</h3>
@@ -143,7 +143,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3 style="padding-bottom: 5px;">명소 이름</h3>
@@ -170,7 +170,7 @@ body {
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3>일정 이름</h3>
@@ -181,19 +181,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
-                        <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
-                            <div class="hover_text_iner">
-                                <h3>일정 이름</h3>
-                                <a href="#" class="place_btn">자세히 보기</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="single_place">
-                        <img src="img/single_place_3.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3>일정 이름</h3>
@@ -205,7 +193,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_4.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_3.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3>일정 이름</h3>
@@ -217,7 +205,7 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_4.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3>일정 이름</h3>
@@ -229,7 +217,19 @@ body {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single_place">
-                        <img src="img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
+                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
+                        <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
+                            <div class="hover_text_iner">
+                                <h3>일정 이름</h3>
+                                <a href="#" class="place_btn">자세히 보기</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="single_place">
+                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
                         <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
                             <div class="hover_text_iner">
                                 <h3>일정 이름</h3>
@@ -245,6 +245,5 @@ body {
     </section>
 
 
-</div>
 </body>
 </html>

@@ -15,11 +15,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>title</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <!-- animate CSS -->
-    <link rel="stylesheet" href="<c:url value="/resources/css/animate.css" />">
+    <link rel="stylesheet" href="resources/css/animate.css">
     <!-- style CSS -->
-    <link rel="stylesheet" href="<c:url value="/resources/css/header.css" />">
+    <link rel="stylesheet" href="resources/css/header.css">
     <!--폰트어썸-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
@@ -108,9 +108,9 @@
 
 
     <!-- bootstrap js -->
-    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <!-- custom js -->
-    <script src="<c:url value="/resources/js/header.js" />"></script>
+    <script src="resources/js/header.js"></script>
 </body>
 
 </html>
