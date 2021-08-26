@@ -17,7 +17,7 @@ public class AlarmDto {
 	}
 
 	public AlarmDto(int alarm_no, int alarm_userno, String alarm_content, String alarm_read, Date alarm_date,
-			UserDto userDto) {
+			UserDto user_dto) {
 		super();
 		this.alarm_no = alarm_no;
 		this.alarm_userno = alarm_userno;
