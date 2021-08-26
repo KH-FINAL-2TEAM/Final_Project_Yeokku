@@ -3,7 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
-  
+  	<typeAliases>
+  		<typeAlias type="com.kh.yeokku.model.dto.AlarmDto" alias="alarm_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.LikeTourCourseDto" alias="like_tour_course_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.LikeTourDto" alias="like_tour_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.NoticeDto" alias="notice_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.ProfileDto" alias="profile_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.QaDto" alias="qa_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.ReportDto" alias="report_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.TourCourseDto" alias="tour_course_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.TourCoursePostitDto" alias="tour_course_postit_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.TourCourseReviewDto" alias="tour_course_review_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.TourDto" alias="tour_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.TourReviewDto" alias="tour_review_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.UserDto" alias="user_dto"/>
+  	</typeAliases>
   
   
   
