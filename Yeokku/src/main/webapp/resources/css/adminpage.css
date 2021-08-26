@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css?family=Barlow:400,700|Open+Sans:300,400,600&display=swap");
+
+.adminpage{
+    font-family: "Open Sans", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.adminpage a, .adminpage a::after, .adminpage a::before, .adminpage a:hover, .adminpage a:focus {
+    text-decoration: none;
+    color: white;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.adminpage ul{
+    list-style: none;
+}
+
+.adminpage{
+    display: flex;
+    height: 100%;
+}
+
+
+.left{
+	position : fixed;
+	left : 0;
+	top : 100px;
+    max-width: 300px;
+    padding: 44px 12px;
+    font-weight: 700;
+    background-color: #223b68;
+    height: 100%;
+    color: white;
+}
+
+.left h1{
+    text-align: center;
+    width: 100%;
+    font-size: 3vmax;
+}
+
+.left ul{
+    margin-top: 32px;
+    padding-right: 32px;
+}
+
+.left li{
+    margin: 12px 0;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.left li:hover{
+    cursor: pointer;
+}
+
+.table-div{
+	margin-left : 200px;
+    width: 100%;
+    padding: 2rem 3.5rem;
+}
+
+.table-div h2{
+    margin-bottom: 3rem;
+}
+
+/* line 155, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_elements.scss */
+.genric-btn {
+    display: inline-block;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+    line-height: 40px;
+    
+}
+
+
+  /* line 166, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_elements.scss */
+.genric-btn:focus {
+    outline: none;
+}
+
+
+/* line 227, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_elements.scss */
+.genric-btn.primary-border:hover {
+    color: #fe5c24;
+    border: 1px solid #fe5c24;
+    background: #fff;
+}
+
+  /* line 231, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_elements.scss */
+.genric-btn.primary-border{
+    color: #fff;
+    background: #fe5c24;
+    border: 1px solid transparent;
+}

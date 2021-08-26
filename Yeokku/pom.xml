@@ -7,6 +7,16 @@
 	<name>Yeokku</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	
+	<!-- repository -->
+	<repositories>
+		<repository>
+			<id>datanucleus</id>
+			<url>http://www.datanucleus.org/downloads/maven2/</url>
+		</repository>
+	</repositories>
+	
+	
 	<properties>
 		<java-version>1.6</java-version>
 		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
@@ -115,7 +125,50 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>    
+		
+		
+		
+		<!-- ojdbc6 -->
+		<dependency>
+		    <groupId>oracle</groupId>
+		    <artifactId>ojdbc6</artifactId>
+		    <version>11.2.0.3</version>
+		</dependency>
+		
+		<!-- 마이바티스 -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.5.6</version>
+		</dependency>
+		
+		<!-- 마이바티스-스프링 -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>2.0.3</version>
+		</dependency>
+		
+		<!-- 커몬스-dbcp -->
+		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
+		<!-- 스프링-orm -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-orm</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		    
 	</dependencies>
     <build>
         <plugins>

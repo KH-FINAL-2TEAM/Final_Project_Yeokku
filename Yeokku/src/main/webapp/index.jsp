@@ -8,5 +8,6 @@
 </head>
 <body>
 	<a href="mypage.do">mypage</a>
+	
 </body>
 </html>
