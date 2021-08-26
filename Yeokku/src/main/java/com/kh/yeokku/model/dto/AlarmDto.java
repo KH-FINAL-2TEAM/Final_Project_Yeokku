@@ -71,7 +71,7 @@ public class AlarmDto {
 		return user_dto;
 	}
 
-	public void setUserBoardDto(UserDto userBoardDto) {
+	public void setUserBoardDto(UserDto user_dto) {
 		this.user_dto = user_dto;
 	}
 	

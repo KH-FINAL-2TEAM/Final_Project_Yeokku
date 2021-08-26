@@ -79,7 +79,7 @@ public class ProfileDto {
 		return user_dto;
 	}
 
-	public void setUserboardDto(UserDto userDto) {
+	public void setUserboardDto(UserDto user_dto) {
 		this.user_dto = user_dto;
 	}
 	
