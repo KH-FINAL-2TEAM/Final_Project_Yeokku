@@ -189,14 +189,9 @@
     
     </style>
 </head>
-<!-- header 추가 -->
-<%@ include file="../header/header.jsp" %> 
 <body>
-    <!--::header part start::-->
-    <header class="main_menu_" style="margin-top: 94px;">
-
-    </header>
-        <!-- Header part end-->
+	<!-- header 추가 -->
+	<%@ include file="../header/header.jsp" %> 
 
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
@@ -301,7 +296,7 @@
                  
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_1.png" alt="">
+                        <img src="resources/img/single_place_1.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>
@@ -324,7 +319,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_2.png" alt="">
+                        <img src="resources/img/single_place_2.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>
@@ -347,7 +342,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_3.png" alt="">
+                        <img src="resources/img/single_place_3.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>
@@ -373,7 +368,7 @@
 
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_4.png" alt="">
+                        <img src="resources/img/single_place_4.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>
@@ -396,7 +391,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_1.png" alt="">
+                        <img src="resources/img/single_place_1.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>
@@ -419,7 +414,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_2.png" alt="">
+                        <img src="resources/img/single_place_2.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>
@@ -442,7 +437,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_3.png" alt="">
+                        <img src="resources/img/single_place_3.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>
@@ -465,7 +460,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
-                        <img src="img/single_place_4.png" alt="">
+                        <img src="resources/img/single_place_4.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
                                 <a href="#" class="place_btn">travel</a>

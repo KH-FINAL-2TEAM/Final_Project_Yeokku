@@ -37,15 +37,8 @@
 </head>
 
 <body>
-   <!--::header part start::-->
-   <header class="main_menu_" style="margin-top: 94px;">
-
-</header>
-    <!-- Header part end-->
-
-    <!-- breadcrumb start-->
-  
-    <!-- breadcrumb start-->
+	<!-- header 추가 -->
+	<%@ include file="../header/header.jsp" %> 
 
     <!--================Blog Area =================-->
     <section class="blog_area single-post-area section_padding">
@@ -54,7 +47,7 @@
                 <div class="col-lg-8 posts-list">
                     <div class="single-post">
                         <div class="feature-img">
-                            <img class="img-fluid" src="img/single_place_3.png" alt="장소사진">
+                            <img class="img-fluid" src="resources/img/single_place_3.png" alt="장소사진">
                         </div>
                         <div class="blog_details">
                             <h2>클릭한 장소 이름</h2>
@@ -126,7 +119,7 @@
                                     </div>
                                     <div class="thumb">
                                         <a href="#">
-                                            <img class="img-fluid" src="img/post/next.png" alt="">
+                                            <img class="img-fluid" src="resources/img/post/next.png" alt="">
                                         </a>
                                     </div>
                                 </div>
@@ -135,7 +128,7 @@
                     </div>
                     <div class="blog-author">
                         <div class="media align-items-center">
-                            <img src="img/naver.PNG" alt="">
+                            <img src="resources/img/naver.PNG" alt="">
                             <div class="media-body">
                                 <a href="#">
                                     <h4>네이버 블로그</h4>
@@ -210,7 +203,7 @@
                     <div class="blog_right_sidebar" >
                         <aside class="single_sidebar_widget search_widget">
                             <form action="#">
-                                <img src="img/mapview.PNG" class="mapview" style="width: 100%; height: 100%; ">
+                                <img src="resources/img/mapview.PNG" class="mapview" style="width: 100%; height: 100%; ">
                 
                             </form>
                         </aside>

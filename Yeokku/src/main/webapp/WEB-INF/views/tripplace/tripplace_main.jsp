@@ -109,13 +109,11 @@
     
     
 </head>
+<body>
 <!-- header 추가 -->
 	<%@ include file="../header/header.jsp" %> 
-<body>
    <!--::header part start::-->
-   <header class="main_menu_" style="margin-top: 94px;">
 
-</header>
     <!-- Header part end-->
 
     <!-- banner part start-->

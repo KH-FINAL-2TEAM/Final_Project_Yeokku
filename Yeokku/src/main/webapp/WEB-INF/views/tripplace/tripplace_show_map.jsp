@@ -90,12 +90,7 @@
 </head>
 <%@ include file="../header/header.jsp" %> 
 <body>
-   <!--::header part start::-->
-   <header class="main_menu_" style="margin-top: 94px;">
-
-    </header>
-    <!-- Header part end-->
-
+   
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">

@@ -2414,10 +2414,10 @@ ul {
 }
 
 /* line 32, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_banner.scss */
-/*.banner_part .banner_text .banner_text_iner {
+.banner_part .banner_text .banner_text_iner {
   display: table-cell;
   vertical-align: middle;
-}*/
+}
 
 @media (max-width: 575px) {
   /* line 28, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_banner.scss */
@@ -2548,7 +2548,7 @@ ul {
 /*********** booking css start *************/
 /* line 2, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_booking.scss */
 .booking_part {
-  margin-top: -500px;
+  margin-top: -80px;
   z-index: 9;
   position: relative;
 }
