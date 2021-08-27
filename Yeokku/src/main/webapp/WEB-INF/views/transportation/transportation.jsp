@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>여꾸</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <!-- magnific CSS -->
-    <link rel="stylesheet" href="../../resources/css/gijgo.min.css">
+    <link rel="stylesheet" href="resources/css/gijgo.min.css">
     <!-- niceselect CSS -->
     <!-- style CSS -->
-    <link rel="stylesheet" href="../../resources/css/style_dh.css">
+    <link rel="stylesheet" href="resources/css/style_dh.css">
 
 
 <style type="text/css">
-body {
+.box {
     font-family: "Open Sans", sans-serif;
     width: 1200px;
     padding: 0;
@@ -32,11 +32,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Open Sans", sans-serif;
 }
 
-.breadcrumb_bg {
-    margin-top: 94px;
-}
-
-.searchinput {
+input[type=search] {
     width: 100%;
     border-color: #2493e0;
     border-radius: 0;
@@ -149,8 +145,11 @@ h1, h2, h3, h4, h5, h6 {
 </script>
 </head>
 
+
+<!-- header 추가 -->
+<%@ include file="../header/header.jsp" %>
 <body>
-   
+
     <!-- banner part start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
@@ -168,6 +167,7 @@ h1, h2, h3, h4, h5, h6 {
     </section>
     <!-- banner part end-->
 
+  <div class="box">
     <!-- booking part start-->
     <section class="booking_part">
         <div class="container">
@@ -649,13 +649,14 @@ h1, h2, h3, h4, h5, h6 {
 
     
     <!-- jquery plugins here-->
-    <script src="../../resources/js/jquery-1.12.1.min.js"></script>
+    <script src="resources/js/jquery-1.12.1.min.js"></script>
     <!-- bootstrap js -->
-    <script src="../../resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <!-- masonry js -->
-    <script src="../../resources/js/gijgo.min.js"></script>
+    <script src="resources/js/gijgo.min.js"></script>
     <!-- custom js -->
-    <script src="../../resources/js/custom.js"></script>
+    <script src="resources/js/custom.js"></script>
+</div>
 </body>
 
 </html>

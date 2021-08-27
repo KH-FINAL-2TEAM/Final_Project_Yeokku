@@ -45,24 +45,24 @@
                                     id="navbarSupportedContent">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">홈</a>
+                                            <a class="nav-link" href="main_form.do">홈</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">여행지</a>
+                                            <a class="nav-link" href="tripplace_main_form.do">여행지</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">여행코스</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">교통</a>
+                                            <a class="nav-link" href="transportation_form.do">교통</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">관리자</a>
+                                            <a class="nav-link" href="admin_user_form.do">관리자</a>
                                         </li>
                                     </ul>
                                 </div>
 
-                                <a class="nav-link mypage" href="#" >로그인</a>
+                                <a class="nav-link mypage" href="login_form.do" >로그인</a>
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown mypage">
                                         <a class="nav-link" href="#" id="navbarDropdown"
@@ -73,11 +73,11 @@
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">정보 수정</a>
-                                            <a class="dropdown-item" href="#">여행지</a>
-                                            <a class="dropdown-item" href="#">여행코스</a>
-                                            <a class="dropdown-item" href="#">리뷰</a>
-                                            <a class="dropdown-item" href="#">문의</a>
+                                            <a class="dropdown-item" href="mypage_profile_form.do">정보 수정</a>
+                                            <a class="dropdown-item" href="mypage_travel_form.do">여행지</a>
+                                            <a class="dropdown-item" href="mypage_course_form.do">여행코스</a>
+                                            <a class="dropdown-item" href="mypage_review_form.do">리뷰</a>
+                                            <a class="dropdown-item" href="mypage_qna.do">문의</a>
                                             <a class="dropdown-item" href="#">로그아웃</a>
                                         </div>
                                     </li>

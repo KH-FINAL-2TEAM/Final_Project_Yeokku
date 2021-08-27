@@ -1,22 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>여꾸</title>
+    <title>Document</title>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/style_dh.css">
-</head>
 <style>
-body {
+.box {
     font-family: "Open Sans", sans-serif;
+    width: 1200px;
     padding: 0;
     margin: 0 auto;
     font-size: 14px;
+}
+
+.search_part {
+	margin-top: 50px;
 }
 
 .btn_1 {
@@ -39,11 +43,13 @@ body {
 
 </style>
 </head>
+
+
 <!-- header 추가 -->
-	<%@ include file="../header/header.jsp" %> 
+<%@ include file="../header/header.jsp" %>
+
 <body>
-	
-	
+
     <section class="banner_part">
         <div class="container">
             <div class="row align-items-center justify-content-center">
@@ -59,17 +65,17 @@ body {
             </div>
         </div>
     </section>
-    <br>
+ 
+ <div class="box">
+    
     <section class="search_part">
-    	<div class="container">
-	        <form action="#">
-	            <div class="form-inline" style="padding-left: 10%;">
-	                    <input type="text" class="form-control w-75" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'"
-	                    style="margin: 5px;">
-	                    <button class="btn_1" type="submit" style="border-color: transparent;">Search</button>
-	            </div>
-	        </form>
-        </div>
+        <form action="#">
+            <div class="form-inline" style="padding-left: 10%;">
+                    <input type="text" class="form-control w-75" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'"
+                    style="margin: 5px;">
+                    <button class="btn_1" type="submit" style="border-color: transparent;">Search</button>
+            </div>
+        </form>
     </section>
 
     <section class="top_place">
@@ -245,5 +251,6 @@ body {
     </section>
 
 
+</div>
 </body>
 </html>
