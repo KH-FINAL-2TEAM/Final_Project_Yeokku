@@ -61,6 +61,7 @@
 	
 		<div id="Making_Area">
 			<img class="Close" id="Making_Close" src="resources/img/making/Close.png">
+			<canvas id="canvas" width="100%" height="100%"></canvas>
 		</div>
 		
 		<div id="Hotel" class="Search_Area">
@@ -246,7 +247,7 @@
 <link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking.css?ver=61">
 <link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking_Map.css">
 
-<script src="resources/js/CourseMaking_Map.js?" charset="utf-8"></script>
+<script src="resources/js/CourseMaking_Map.js" charset="utf-8"></script>
 <script src="resources/js/CourseMaking.js?ver=61" charset="utf-8"></script>
 
 <% /*
