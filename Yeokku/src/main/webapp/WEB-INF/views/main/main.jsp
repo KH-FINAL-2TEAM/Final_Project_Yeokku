@@ -73,7 +73,7 @@
             <div class="form-inline" style="padding-left: 10%;">
                     <input type="text" class="form-control w-75" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'"
                     style="margin: 5px;">
-                    <button class="btn_1" type="submit" style="border-color: transparent;">Search</button>
+                    <input class="btn_1" type="submit" style="border-color: transparent;" value="Search">
             </div>
         </form>
     </section>
