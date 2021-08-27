@@ -19,6 +19,10 @@
     font-size: 14px;
 }
 
+.search_part {
+	margin-top: 50px;
+}
+
 .btn_1 {
   display: inline-block;
   padding: 13px 30px;
@@ -45,7 +49,7 @@
 <%@ include file="../header/header.jsp" %>
 
 <body>
-<div class="box">
+
     <section class="banner_part">
         <div class="container">
             <div class="row align-items-center justify-content-center">
@@ -61,7 +65,9 @@
             </div>
         </div>
     </section>
-    <br>
+ 
+ <div class="box">
+    
     <section class="search_part">
         <form action="#">
             <div class="form-inline" style="padding-left: 10%;">
