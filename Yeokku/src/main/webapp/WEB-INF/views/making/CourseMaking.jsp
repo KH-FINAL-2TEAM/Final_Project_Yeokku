@@ -34,6 +34,7 @@
 		<img class="Icon" id="Chat_Icon" src="resources/img/making/Chat.png">
 		<img class="Icon" id="Book_Icon" src="resources/img/making/Book2.png">
 		<img class="Icon" id="Sticker_Icon" src="resources/img/making/Sticker.png">
+		<img class="Icon" id="Pencil_Icon" src="resources/img/making/Pencil.png">
 		
 		<span id="Select_Area">
 		    <select id="Select">
@@ -60,8 +61,9 @@
 	<article style="">
 	
 		<div id="Making_Area">
+			<canvas id="canvas"></canvas>
 			<img class="Close" id="Making_Close" src="resources/img/making/Close.png">
-			<canvas id="canvas" width="100%" height="100%"></canvas>
+			<!-- <div id="Q_List"></div> -->
 		</div>
 		
 		<div id="Hotel" class="Search_Area">
@@ -148,7 +150,7 @@
 			<img class="Close" id="Map_Close"  src="resources/img/making/Close.png">
 			
 			<div class="map_wrap">
-			    <div id="map" style="width:100%; height:100%; position:relative;overflow:hidden;"></div>
+			    <div id="map" style="width:1960px; height:1280px; position:relative;overflow:hidden;"></div>
 			
 			    <div id="menu_wrap" class="bg_white">
 			        <div class="option">
@@ -204,6 +206,29 @@
 			</div>
 		</div>
 		
+		<div id="Pencil" class="Pencil_Area">
+			<img class="Close" id="Pencil_Close"  src="resources/img/making/Close.png">
+			<div class="pen_options">
+		        <select id="type">
+		            <option value="stroke">실선</option>
+		            <option value="square">사각형</option>
+		            <option value="eraser">지우개</option>
+		        </select>
+		        <select id="strokeStyle">
+		            <option value="blue">파란색</option>
+		            <option value="red">빨간색</option>
+		            <option value="pink">분홍색</option>
+		            <option value="orange">주황색</option>
+		        </select>
+		        <select id="lineWidth">
+		            <option value="5">5px</option>
+		            <option value="10">10px</option>
+		            <option value="15">15px</option>
+		            <option value="20">20px</option>
+		        </select>
+		    </div>
+		</div>
+		
 		<div id="Chat">
 			<img class="Close" id="Chat_Close" src="resources/img/making/Close.png">
 			<div id="Chat_Middle">
@@ -241,24 +266,13 @@
 	</article>
 	
 	<footer></footer>
-	
 </body>
 
-<link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking.css?ver=61">
+<link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking.css?ver=152">
 <link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking_Map.css">
 
 <script src="resources/js/CourseMaking_Map.js" charset="utf-8"></script>
-<script src="resources/js/CourseMaking.js?ver=61" charset="utf-8"></script>
-
-<% /*
-	File path = new File("resources/img/sticker");
-	File[] fileList = path.listFiles();
- 
-	if(fileList.length > 0){
-	    for(int i=0; i < fileList.length; i++){
-	  		System.out.println(fileList[i]);
-	    }
-	}*/
-%>
+<script src="resources/js/CourseMaking_Paint.js" charset="utf-8"></script>
+<script src="resources/js/CourseMaking.js?ver=156" charset="utf-8"></script>
 
 </html>

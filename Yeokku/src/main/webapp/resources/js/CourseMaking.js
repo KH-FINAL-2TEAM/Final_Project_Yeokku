@@ -8,12 +8,21 @@ var Menu_Loading = false;
 var Dragging = false;
 var Map_Dragging = false;
 
+var Course_Q = [];
+
+var Scroll_Check;
+
 window.onload = function()
 {	
-	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show();
+	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show(); $("#Pencil").hide();
 	$("#Chat").resizable({ autoHide: true });
 	$(".Detail").resizable({ autoHide: true });
-	$("#Making_Area").resizable({ autoHide: true });
+	$("#Making_Area").resizable({ 
+		autoHide: true,
+		resize: function() { 
+			//$(this).children(".ui-resizable-handle").css("width", $(this).css('width')).css("height", $(this).css('height'));
+		}
+	});
 	$(".Search_Area").resizable({ 
 		aspectRatio: false, 
 		autoHide: true
@@ -28,6 +37,13 @@ window.onload = function()
 			Alarm_Check = true;
 			$(this).attr("src", "resources/img/making/Alarm2.png");
 		}
+	});
+	
+	
+	$(".Search_Area").on('mousewheel',function(e){
+		var wheel = e.originalEvent.wheelDelta;
+		$(this).children(".ui-resizable-s").css("bottom", -5-$(this).scrollTop());
+		$(this).children(".ui-resizable-se").css("bottom", -5-$(this).scrollTop());
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -399,6 +415,12 @@ window.onload = function()
 	////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////
 	
+	$("#Making_Area").on('mousewheel',function(e){
+		var wheel = e.originalEvent.wheelDelta;
+		$(this).children(".ui-resizable-s").css("bottom", -5-$(this).scrollTop());
+		$(this).children(".ui-resizable-se").css("bottom", -5-$(this).scrollTop());
+	});
+
 	$('#Making_Area').draggable({
 	
 		drag: function( event, ui ) {
@@ -524,6 +546,83 @@ window.onload = function()
 	////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////
 	
+	$('#Pencil').draggable({
+	
+		drag: function( event, ui ) {
+		
+			var limit_chat_xloc = Math.floor(window.innerWidth * 0.65);
+			var limit_chat_yloc = Math.floor(window.innerHeight * 0.6);
+				
+			ui.position.top = Math.min( limit_chat_yloc*1, ui.position.top );
+			ui.position.left = Math.min( limit_chat_xloc*1, ui.position.left );
+			
+			$("#Pencil").css("left", ui.position.left*1 + 20 + 220 + window.innerWidth*0.04 );
+			$("#Pencil").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
+	
+			Index_Change("pencil");
+		  }
+	});
+	
+	$('#Pencil_Icon').bind('click', function(){
+	
+		if(Icon_Switch[3] == 0) {
+			Icon_Switch[3] = 1;
+			$("#Pencil").hide();
+			$("#Pencil_Icon").attr("src","resources/img/making/Pencil.png");
+			
+			$("#Making_Area").draggable("enable");
+			$("#canvas").css("z-index", 29);
+			
+			canvas.removeEventListener("mousedown", listener);
+			canvas.removeEventListener("mousemove", listener);
+			canvas.removeEventListener("mouseup", listener);
+			canvas.removeEventListener("mouseout", listener);
+		} else {
+			Icon_Switch[3] = 0;
+			$("#Pencil").show();
+			$("#Pencil_Icon").attr("src","resources/img/making/Pencil2.png");
+			
+			canvas.addEventListener("mousedown", listener);
+			canvas.addEventListener("mousemove", listener);
+			canvas.addEventListener("mouseup", listener);
+			canvas.addEventListener("mouseout", listener);
+			
+			$("#Making_Area").draggable("disable");
+			$("#canvas").css("z-index", 50);
+			Index_Change("pencil");
+		}
+	});
+	
+	$('#Pencil_Close').bind('click', function(){
+		Icon_Switch[3] = 1;
+		$("#Pencil").hide();
+		$("#Pencil_Icon").attr("src","resources/img/making/Pencil.png");
+		
+		$("#Making_Area").draggable("enable");
+		$("#canvas").css("z-index", 29);
+		
+		canvas.removeEventListener("mousedown", listener);
+		canvas.removeEventListener("mousemove", listener);
+		canvas.removeEventListener("mouseup", listener);
+		canvas.removeEventListener("mouseout", listener);
+	});
+	
+	$('#Pencil').bind('dblclick', function(){
+		Icon_Switch[3] = 1;
+		$("#Pencil").hide();
+		$("#Pencil_Icon").attr("src","resources/img/making/Pencil.png");
+		
+		$("#Making_Area").draggable("enable");
+		
+		canvas.removeEventListener("mousedown", listener);
+		canvas.removeEventListener("mousemove", listener);
+		canvas.removeEventListener("mouseup", listener);
+		canvas.removeEventListener("mouseout", listener);
+	});
+	
+	///////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////
+	
 	$('.Detail').draggable({
 	
 		drag: function( event, ui ) {
@@ -547,6 +646,8 @@ window.onload = function()
 			$("#Making_Area").append($(this)); 
 			$(this).css("left", 0).css("top", 0).css("position", "absolute");
 			$(this).children(".Heart_In").css("opacity", 0);
+			
+			Course_Q.push( $(this).attr("id") );
 		} else {
 			var origin_loc = $(this).attr("name");
 			$("#" + origin_loc).append($(this));
@@ -632,6 +733,7 @@ function Index_Change(target) {
 	$("#Chat").css("z-index", "50");
     $(".Search_Area").css("z-index", "30");
 	$("#Making_Area").css("z-index", "30");
+	$("#Pencil").css("z-index", "50");
 
 	if(target == "chat") { $("#Chat_Icon").css("z-index", "51");$("#Chat").css("z-index", "31");  }
 	else if(target == "hotel") { $("#Hotel_Icon").css("z-index", "51");$("#Hotel").css("z-index", "31");  }
@@ -642,8 +744,15 @@ function Index_Change(target) {
 	else if(target == "heart") { $("#Heart_Icon").css("z-index", "51");$("#Heart").css("z-index", "31");  }
     else if(target == "book") { $("#Book_Icon").css("z-index", "51");$("#Making_Area").css("z-index", "31");  }
     else if(target == "sticker") { $("#Sticker_Icon").css("z-index", "51");$("#Sticker").css("z-index", "31");  }
+    else if(target == "pencil") { $("#Pencil_Icon").css("z-index", "51");$("#Pencil").css("z-index", "31");  }
 }
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-
+/*
+function Q_Update() {
+	
+	$("#Q_List").html('');
+	
+	
+}*/

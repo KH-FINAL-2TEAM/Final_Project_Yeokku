@@ -56,7 +56,7 @@ header {
 	width:2.8vw;
 	height:5vh;
 	
-	margin-left:54vw;
+	margin-left:51vw;
 }
 
 #Alarm_Img {
@@ -66,7 +66,7 @@ header {
 	width:2.8vw;
 	height:5vh;
 	
-	margin-left:50vw;
+	margin-left:47vw;
 	
 	cursor:pointer;
 }
@@ -97,7 +97,7 @@ header {
 
 #Select_Area {
   position: absolute;
-  margin-left:8vw;
+  margin-left:6vw;
   display: inline-block;
   vertical-align: middle;
   font-size: 1.15vw;
@@ -117,6 +117,7 @@ header {
   text-indent: 0.01px;
   text-overflow: '';
   -webkit-appearance: button;
+  text-align:center;
 }
 
 #Select_Area::before,
@@ -159,7 +160,7 @@ header {
   width: 45%;
   position: absolute;
   top: 50%;
-  margin-left: 83vw;
+  margin-left: 86vw;
   transform: translate(-50%, -50%);
 }
 
@@ -631,6 +632,7 @@ header {
 	cursor:pointer;
 	
 	position:relative;
+	z-index:32;
 }
 
 .Sticker {
@@ -658,4 +660,55 @@ header {
 
 .info h5 {
 	font-size:1vw;
+}
+
+#Q_List {
+	width:90%;
+	height:6vh;
+	background-color:white;
+	border:2px white double;
+	
+	position:absolute;
+	
+	margin-left:5%;
+	margin-top:-10vh;
+	
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+#canvas {
+	width:1960px;
+	height:1280px;
+	z-index:0;
+	position:absolute;
+}
+
+
+#Pencil {
+	 min-width:20vw;
+	 min-height:7vh;
+	 position:absolute;
+	
+	 margin-left:78vw;
+	 margin-top:53vh;
+	
+	 background-color: rgba(12,62,114,0.75);
+	 border-radius: 20px;
+	 border-top : 25px solid #150273;
+	 
+	 box-shadow: 7px 7px 20px rgb(119 119 119 / 60%);
+	 
+	 z-index:49;
+}
+
+#Pencil_Close {
+	position:absolute;
+	
+	width:1.5vw;
+	height:1.5vw;
+	
+	margin-top:1%;
+	margin-left:90%;
+	
+	z-index:49;
 }
