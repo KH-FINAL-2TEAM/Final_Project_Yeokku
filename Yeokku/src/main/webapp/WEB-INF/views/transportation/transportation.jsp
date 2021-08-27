@@ -149,7 +149,7 @@ input[type=search] {
 <!-- header 추가 -->
 <%@ include file="../header/header.jsp" %>
 <body>
-  <div class="box">
+
     <!-- banner part start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
@@ -167,6 +167,7 @@ input[type=search] {
     </section>
     <!-- banner part end-->
 
+  <div class="box">
     <!-- booking part start-->
     <section class="booking_part">
         <div class="container">
