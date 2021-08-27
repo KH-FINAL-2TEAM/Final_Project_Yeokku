@@ -88,8 +88,8 @@
 
      </script>
 </head>
-<%@ include file="../header/header.jsp" %> 
 <body>
+	<%@ include file="../header/header.jsp" %> 
    
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
@@ -112,7 +112,6 @@
     <section class="contact-section">
         <div class="container">
             <div class="d-none d-sm-block mb-5 pb-4">
-                <div id="map" style="height: 480px;"></div>
                 <script>
                     function initMap() {
                         var uluru = {
@@ -136,7 +135,7 @@
                     }
                 </script>
                 <!--카카오맵을 넣어두겠습니다.-->
-               <div id="map" style="width:100%;height:100%;"></div>
+               <div id="map" style="width:100%;height:480px;"></div>
                <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=724b81fc00a64486288dc0698b9a4edd"></script>
                <script>
                    var container = document.getElementById('map');
@@ -187,23 +186,9 @@
                    
                    
                    
-                   
-                   
-                   
-           
-                   
-                   
-                   
-                   
-                   
-                   
                </script>
            
            
-           
-           
-                </script>
-
             </div>
 
             <div class="row">
