@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb7542ca1e571489fa3dcf37d82cb528&libraries=services,clusterer,drawing"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="resources/js/CourseMaking_Rotate.js"></script>
+	<script src="resources/js/making/CourseMaking_Rotate.js"></script>
 	
 	<link rel= "stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
@@ -61,7 +61,7 @@
 	<article style="">
 	
 		<div id="Making_Area">
-			<canvas id="canvas"></canvas>
+			<canvas id="canvas" width="1960px" height="1280px"></canvas>
 			<img class="Close" id="Making_Close" src="resources/img/making/Close.png">
 			<!-- <div id="Q_List"></div> -->
 		</div>
@@ -72,23 +72,23 @@
 			<div class="Hotel_One Detail" id="hotel_1" name="Hotel">
 				<img class="Heart_In" src="resources/img/making/Heart_In.png">
 				<img class="Hotel_Img Detail_Img" src="resources/img/making/Hotel_Sample3.png"><br><hr>
-				<span>숙소 이름 : 그랜드호텔</span><br>
-				<span>종류 : 3성급 호텔</span><br>
-				<span>주소 : 경기도 경기시 경기동</span><hr>
-				<span>평점 : ★ ★ ★ ☆ ☆</span><br>
-				<span>연락처 : 010-1234-1234</span><br>
-				<span>홈페이지 : 미제공</span>
+				<span><b>:: 그랜드호텔  ::</b></span><br>
+				<span class="Detail_Reduce">종류 : 3성급 호텔</span><br>
+				<span class="Detail_Reduce">주소 : 경기도 경기시 경기동</span><hr>
+				<span class="Detail_Reduce">평점 : ★ ★ ★ ☆ ☆</span><br>
+				<span class="Detail_Reduce">연락처 : 010-1234-1234</span><br>
+				<span class="Detail_Reduce">홈페이지 : 미제공</span>
 			</div>
 			
 			<div class="Hotel_One Detail" id="hotel_2" name="Hotel">
 				<img class="Heart_In" src="resources/img/making/Heart_In.png">
 				<img class="Hotel_Img Detail_Img" src="resources/img/making/Hotel_Sample4.png"><br><hr>
-				<span>숙소 이름 : 싸구려 모텔</span><br>
-				<span>종류 : 모텔</span><br>
-				<span>주소 : 우주 안 어딘가</span><hr>
-				<span>평점 : 미제공</span><br>
-				<span>연락처 : 미제공</span><br>
-				<span>홈페이지 : 미제공</span>
+				<span><b>:: 싸구려 모텔 ::</b></span><br>
+				<span class="Detail_Reduce">종류 : 모텔</span><br>
+				<span class="Detail_Reduce">주소 : 우주 안 어딘가</span><hr>
+				<span class="Detail_Reduce">평점 : 미제공</span><br>
+				<span class="Detail_Reduce">연락처 : 미제공</span><br>
+				<span class="Detail_Reduce">홈페이지 : 미제공</span>
 			</div>
 		</div>
 		
@@ -98,23 +98,23 @@
 			<div class="Food_One Detail" id="food_1" name="Food">
 				<img class="Heart_In" src="resources/img/making/Heart_In.png">
 				<img class="Food_Img Detail_Img" src="resources/img/making/Food_Sample3.jpg"><br><hr>
-				<span>식당 이름 : 무궁화 포차</span><br>
-				<span>종류 : 튀김, 맥주, 소주</span><br>
-				<span>주소 : 대한민국 어딘가</span><hr>
-				<span>평점 :  ★ ★ ★ ★ ☆</span><br>
-				<span>연락처 : 010-5252-5252</span><br>
-				<span>홈페이지 : www.naver.com</span>
+				<span><b>:: 무궁화 포차 ::</b></span><br>
+				<span class="Detail_Reduce">종류 : 튀김, 맥주, 소주</span><br>
+				<span class="Detail_Reduce">주소 : 대한민국 어딘가</span><hr>
+				<span class="Detail_Reduce">평점 :  ★ ★ ★ ★ ☆</span><br>
+				<span class="Detail_Reduce">연락처 : 010-5252-5252</span><br>
+				<span class="Detail_Reduce">홈페이지 : www.naver.com</span>
 			</div>
 			
 			<div class="Food_One Detail" id="food_2" name="Food">
 				<img class="Heart_In" src="resources/img/making/Heart_In.png">
 				<img class="Food_Img Detail_Img" src="resources/img/making/Food_Sample4.jpg"><br><hr>
-				<span>식당 이름 : 대동국수</span><br>
-				<span>종류 : 국수, 보쌈, 족발</span><br>
-				<span>주소 : 부산시 부산동</span><hr>
-				<span>평점 :  ★ ★ ★ ☆ ☆</span><br>
-				<span>연락처 : 010-1414-3123</span><br>
-				<span>홈페이지 : 미제공</span>
+				<span><b>:: 대동국수 ::</b></span><br>
+				<span class="Detail_Reduce">종류 : 국수, 보쌈, 족발</span><br>
+				<span class="Detail_Reduce">주소 : 부산시 부산동</span><hr>
+				<span class="Detail_Reduce">평점 :  ★ ★ ★ ☆ ☆</span><br>
+				<span class="Detail_Reduce">연락처 : 010-1414-3123</span><br>
+				<span class="Detail_Reduce">홈페이지 : 미제공</span>
 			</div>
 		</div>
 		
@@ -124,18 +124,18 @@
 			<div class="GP_One Detail" id="gp_1" name="GP">
 				<img class="Heart_In" src="resources/img/making/Heart_In.png">
 				<img class="GP_Img Detail_Img" src="resources/img/making/GP_Sample6.png"><br><hr>
-				<span>이름 : 유관순열사 사적지</span><br>
-				<span>주소 : 충청남도 병천면</span><hr>
-				<span>유관순 열사의 정신을 후세에 길이 전하기 위하여 설립된 유관순 열사의 사적지입니다.<br>
+				<span><b>:: 유관순열사 사적지 ::</b></span><br>
+				<span class="Detail_Reduce">주소 : 충청남도 병천면</span><hr>
+				<span class="Detail_Reduce">유관순 열사의 정신을 후세에 길이 전하기 위하여 설립된 유관순 열사의 사적지입니다.<br>
 				역사를 잊은 민족에게 미래는 없습니다.</span>
 			</div>
 			
 			<div class="GP_One Detail" id="gp_2" name="GP">
 				<img class="Heart_In" src="resources/img/making/Heart_In.png">
 				<img class="GP_Img Detail_Img" src="resources/img/making/GP_Sample5.png"><br><hr>
-				<span>이름 : 독립기념관</span><br>
-				<span>주소 : 충청남도 천안시</span><hr>
-				<span>"거래의 얼"과 "한국의 빛"이 살아있는 뜨거운 역사의 현장<br>
+				<span><b>:: 독립기념관 ::</b></span><br>
+				<span class="Detail_Reduce">주소 : 충청남도 천안시</span><hr>
+				<span class="Detail_Reduce">"거래의 얼"과 "한국의 빛"이 살아있는 뜨거운 역사의 현장<br>
 				독립당시의 상황과 물품들을 볼 수 있습니다 !!</span>
 			</div>
 
@@ -156,7 +156,7 @@
 			        <div class="option">
 			            <div>
 			                <form onsubmit="searchPlaces(); return false;">
-			                   	 키워드 : <input type="text" value="놀이 공원" id="keyword" size="15"> 
+			                   	 검색 : <input type="text" value="놀이 공원" id="keyword" size="15"> 
 			                    <button type="submit">검색하기</button> 
 			                </form>
 			            </div>
@@ -208,25 +208,10 @@
 		
 		<div id="Pencil" class="Pencil_Area">
 			<img class="Close" id="Pencil_Close"  src="resources/img/making/Close.png">
-			<div class="pen_options">
-		        <select id="type">
-		            <option value="stroke">실선</option>
-		            <option value="square">사각형</option>
-		            <option value="eraser">지우개</option>
-		        </select>
-		        <select id="strokeStyle">
-		            <option value="blue">파란색</option>
-		            <option value="red">빨간색</option>
-		            <option value="pink">분홍색</option>
-		            <option value="orange">주황색</option>
-		        </select>
-		        <select id="lineWidth">
-		            <option value="5">5px</option>
-		            <option value="10">10px</option>
-		            <option value="15">15px</option>
-		            <option value="20">20px</option>
-		        </select>
-		    </div>
+			<div id="Color_Box_All" class="Color_box"><div id="Pallet_Box" class="pallet_box"></div></div>
+		    <div class="Pencil_In" id="Pencil_Pencil"> <img src="resources/img/making/Pencil2.png"> </div>
+		    <div class="Pencil_In" id="Pencil_Eraser"> <img src="resources/img/making/Eraser.png"> </div>
+		    <div class="seek-bar"> <div class="circle" id="Pencil_Size"> <span>1</span></div></div>
 		</div>
 		
 		<div id="Chat">
@@ -268,11 +253,11 @@
 	<footer></footer>
 </body>
 
-<link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking.css?ver=152">
+<link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking.css?ver=163">
 <link rel= "stylesheet" type="text/css" href="resources/css/CourseMaking_Map.css">
 
-<script src="resources/js/CourseMaking_Map.js" charset="utf-8"></script>
-<script src="resources/js/CourseMaking_Paint.js" charset="utf-8"></script>
-<script src="resources/js/CourseMaking.js?ver=156" charset="utf-8"></script>
+<script src="resources/js/CourseMaking/CourseMaking_Map.js" charset="utf-8"></script>
+<script src="resources/js/CourseMaking/CourseMaking_Paint.js?ver=7" charset="utf-8"></script>
+<script src="resources/js/CourseMaking/CourseMaking.js?ver=162" charset="utf-8"></script>
 
 </html>

@@ -16,7 +16,7 @@ window.onload = function()
 {	
 	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show(); $("#Pencil").hide();
 	$("#Chat").resizable({ autoHide: true });
-	$(".Detail").resizable({ autoHide: true });
+	//$(".Detail").resizable({ autoHide: true });
 	$("#Making_Area").resizable({ 
 		autoHide: true,
 		resize: function() { 
@@ -590,6 +590,11 @@ window.onload = function()
 			$("#Making_Area").draggable("disable");
 			$("#canvas").css("z-index", 50);
 			Index_Change("pencil");
+			
+			now_pencil = "pencil";
+			$("#Pencil_Pencil>img").attr("src","resources/img/making/Pencil2.png");
+			$("#Pencil_Eraser>img").attr("src","resources/img/making/Eraser.png");
+			$("#Pencil_Pencil").css("background-color", color_save);
 		}
 	});
 	
@@ -613,13 +618,14 @@ window.onload = function()
 		$("#Pencil_Icon").attr("src","resources/img/making/Pencil.png");
 		
 		$("#Making_Area").draggable("enable");
+		$("#canvas").css("z-index", 29);
 		
 		canvas.removeEventListener("mousedown", listener);
 		canvas.removeEventListener("mousemove", listener);
 		canvas.removeEventListener("mouseup", listener);
 		canvas.removeEventListener("mouseout", listener);
 	});
-	
+		
 	///////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////
 	
@@ -642,18 +648,38 @@ window.onload = function()
 	
 	$(".Detail").bind('click', function(){
 	
-		if( $(this).parents("div").attr('id') != "Making_Area" ) { 
-			$("#Making_Area").append($(this)); 
-			$(this).css("left", 0).css("top", 0).css("position", "absolute");
-			$(this).children(".Heart_In").css("opacity", 0);
+
+			$("#Making_Area").append($(this).clone());
 			
+			$("#Making_Area>div:last").css("left", 0).css("top", 0).css("position", "absolute");
+			$("#Making_Area>div:last").children(".Heart_In").remove();
+			
+			$("#Making_Area>div:last").draggable({
+				drag: function(){Dragging = true;},
+				stop: function() { setTimeout(function() { Dragging=false; }, 200); }		
+			});
+			
+			$("#Making_Area>div:last").bind('click', function() { $(this).remove(); });
+			$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/making/Minus.png'>");
+			
+			$("#Making_Area>div:last>img:first").bind('click', function() {
+				if(Dragging == true) { return false; }
+				if( $(this).attr("src") == "resources/img/making/Plus.png" ) {
+					$(this).attr("src","resources/img/making/Minus.png");
+					$(this).nextAll('.Detail_Reduce').show();
+					$(this).nextAll('hr').show(); $(this).nextAll('br').show();
+					$(this).parent().css("height", "292px");
+				} else {
+					$(this).attr("src","resources/img/making/Plus.png");
+					$(this).nextAll('.Detail_Reduce').hide();
+					$(this).nextAll('hr').hide(); $(this).nextAll('br').hide();
+					$(this).parent().css("height", "auto");
+				}
+				return false;
+			});
+
 			Course_Q.push( $(this).attr("id") );
-		} else {
-			var origin_loc = $(this).attr("name");
-			$("#" + origin_loc).append($(this));
-			$(this).css("left", 0).css("top", 0).css("position", "relative");
-			$(this).children(".Heart_In").css("opacity", 1);
-		}
+
 	});
 	
 	$(".Detail_Img").bind('click', function(){
@@ -674,13 +700,35 @@ window.onload = function()
 			
 			$("#Heart>div:last").bind('click', function() {
 				if(Dragging == true) {return false;}
-				if( $(this).parents("div").attr('id') != "Making_Area" ) { 
-					$("#Making_Area").append($(this)); 
-					$(this).css("left", 0).css("top", 0);
-				} else {
-					$("#Heart").append($(this));
-					$(this).css("left", 0).css("top", 0);
-				}
+				
+				$("#Making_Area").append($(this).clone());
+				
+				$("#Making_Area>div:last").css("left", 0).css("top", 0).css("position", "absolute");
+				$("#Making_Area>div:last").children(".Heart_In").remove();
+				
+				$("#Making_Area>div:last").draggable({
+					drag: function(){Dragging = true;},
+					stop: function() { setTimeout(function() { Dragging=false; }, 200); }		
+				});
+				
+				$("#Making_Area>div:last").bind('click', function() { $(this).remove(); });
+				$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/making/Minus.png'>");
+				
+				$("#Making_Area>div:last>img:first").bind('click', function() {
+					if(Dragging == true) { return false; }
+					if( $(this).attr("src") == "resources/img/making/Plus.png" ) {
+						$(this).attr("src","resources/img/making/Minus.png");
+						$(this).nextAll('.Detail_Reduce').show();
+						$(this).nextAll('hr').show(); $(this).nextAll('br').show();
+						$(this).parent().css("height", "292px");
+					} else {
+						$(this).attr("src","resources/img/making/Plus.png");
+						$(this).nextAll('.Detail_Reduce').hide();
+						$(this).nextAll('hr').hide(); $(this).nextAll('br').hide();
+						$(this).parent().css("height", "auto");
+					}
+					return false;
+				});
 			});
 			
 			$('#Heart>div:last').draggable({
@@ -733,7 +781,7 @@ function Index_Change(target) {
 	$("#Chat").css("z-index", "50");
     $(".Search_Area").css("z-index", "30");
 	$("#Making_Area").css("z-index", "30");
-	$("#Pencil").css("z-index", "50");
+	$("#Pencil").css("z-index", "29");
 
 	if(target == "chat") { $("#Chat_Icon").css("z-index", "51");$("#Chat").css("z-index", "31");  }
 	else if(target == "hotel") { $("#Hotel_Icon").css("z-index", "51");$("#Hotel").css("z-index", "31");  }

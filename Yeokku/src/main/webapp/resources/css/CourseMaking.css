@@ -6,6 +6,7 @@
 }
 
 body {
+	/* background-color:rgb(212, 244, 250); */
 	background:url('../img/making/Back.jpg') 100% 100%;
   	background-repeat: no-repeat;
   	background-size: cover;
@@ -615,6 +616,15 @@ header {
 	height:2vw;
 }
 
+.OF {
+	position:absolute;
+	
+	margin-left:0.5vw;
+	margin-top:1vh;
+	width:1.5vw;
+	height:1.5vw;
+}
+
 /* //////////////////////////////////////////////////////////////////////////////////////// */
 /* //////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -654,8 +664,9 @@ header {
 
 .info {
 	cursor:crosshair;
-	padding:0.3vw;
-	padding:0.6vh
+	padding:0.6vh;
+	
+	z-index:31;
 }
 
 .info h5 {
@@ -685,8 +696,8 @@ header {
 
 
 #Pencil {
-	 min-width:20vw;
-	 min-height:7vh;
+	 width:330px;;
+	 height:230px;
 	 position:absolute;
 	
 	 margin-left:78vw;
@@ -698,7 +709,7 @@ header {
 	 
 	 box-shadow: 7px 7px 20px rgb(119 119 119 / 60%);
 	 
-	 z-index:49;
+	 z-index:29;
 }
 
 #Pencil_Close {
@@ -711,4 +722,80 @@ header {
 	margin-left:90%;
 	
 	z-index:49;
+}
+		    
+.Pencil_In {
+	width:40px;
+	height:40px;
+	display:inline-block;
+	margin:5px;
+	border-radius: 10px;
+	cursor:pointer;
+}
+
+.Pencil_In img {
+	width:40px;
+	height:40px;
+}
+
+#Pencil_Pencil {
+   margin-left:15px;
+   background-color:rgba(0, 0, 0, 0.7);
+}
+
+.Color_Box_All{
+  width: 330px;
+  height: 150px;
+}
+
+.Color_Pallet{
+  width: 330px;
+  height: 250px;
+
+}
+
+.Color_Active{
+  outline: 1px solid black;
+}
+
+.Color_Box_One{
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 1px 1px 0px 0px;
+  cursor: pointer;
+}
+
+#Pallet_Box {
+	padding:12px;
+}
+
+.seek-bar {
+	position:relative;
+	width:180px;
+	height:10px;
+	background:#222;
+	border-radius:5px;
+	display:inline-block;
+	margin-left:15px;
+	margin-bottom:10px;
+}
+.seek-bar>.circle {
+	cursor:grab;
+	position:absolute;
+	left:0; top:50%;
+	width:30px; height:30px;
+	transform:translate(-50%,-50%);
+}
+
+.seek-bar>.circle>span { 
+	position:absolute;
+	display:block;
+	width:30px;
+	line-height:30px;
+	left:50%; top:50%;
+	transform:translate(-50%,-50%);
+	background:#2196f3;
+	border-radius:100%;
+	text-align:center;
 }
