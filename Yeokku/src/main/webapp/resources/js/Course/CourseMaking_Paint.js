@@ -93,8 +93,8 @@ function colorSet(target){
 	ctx.strokeStyle = target.id;
 	$("#Pencil_Pencil").css("background-color", target.id); 
 	now_pencil = "pencil";
-	$("#Pencil_Pencil>img").attr("src","resources/img/making/Pencil2.png");
-	$("#Pencil_Eraser>img").attr("src","resources/img/making/Eraser.png");
+	$("#Pencil_Pencil>img").attr("src","resources/img/Course/Pencil2.png");
+	$("#Pencil_Eraser>img").attr("src","resources/img/Course/Eraser.png");
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -105,8 +105,8 @@ var now_pencil = "pencil";
 $('#Pencil_Pencil').bind('click', function(){
 	if(now_pencil == "pencil") { return; }
 	now_pencil = "pencil";
-	$("#Pencil_Pencil>img").attr("src","resources/img/making/Pencil2.png");
-	$("#Pencil_Eraser>img").attr("src","resources/img/making/Eraser.png");
+	$("#Pencil_Pencil>img").attr("src","resources/img/Course/Pencil2.png");
+	$("#Pencil_Eraser>img").attr("src","resources/img/Course/Eraser.png");
 	$("#Pencil_Pencil").css("background-color", color_save);
 });
 
@@ -114,21 +114,27 @@ $('#Pencil_Eraser').bind('click', function(){
 	if(now_pencil == "eraser") { return; }
 	now_pencil = "eraser";
 	$("#Pencil_Pencil").css("background-color","rgba(255, 255, 255, 0)");
-	$("#Pencil_Pencil>img").attr("src","resources/img/making/Pencil.png");
-	$("#Pencil_Eraser>img").attr("src","resources/img/making/Eraser2.png");
+	$("#Pencil_Pencil>img").attr("src","resources/img/Course/Pencil.png");
+	$("#Pencil_Eraser>img").attr("src","resources/img/Course/Eraser2.png");
+});
+
+$('#Pencil_Eraser').bind('dblclick', function(){
+	ctx.clearRect(0, 0, 1920, 1280);
+	return false;
 });
 
 $('#Pencil_Size').draggable({
 	
-		drag: function( event, ui ) {
+	drag: function(event, ui) {
 		
-			if( ui.position.left >= 1 ) {
-			  	ui.position.left = Math.min( 170, ui.position.left );
-				ui.position.top = Math.min( 5, 5 );
-			} else { ui.position.left = 1;  ui.position.top = Math.min( 5, 5 ); }
+		if( ui.position.left >= 1 ) {
+			ui.position.left = Math.min( 170, ui.position.left );
+			ui.position.top = Math.min( 5, 5 );
+		} else { ui.position.left = 1;  ui.position.top = Math.min( 5, 5 ); }
 			
-				Line_Width = ui.position.left/5 + 1;
-				ctx.lineWidth = Line_Width;
-				$("#Pencil_Size>span").html(Line_Width);
-		  }
-	});
+		Line_Width = ui.position.left/5 + 1;
+		ctx.lineWidth = Line_Width;
+		$("#Pencil_Size>span").html(Line_Width);
+		window.scrollTo({left:0});
+	}
+});
