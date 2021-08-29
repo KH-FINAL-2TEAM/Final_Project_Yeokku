@@ -96,6 +96,11 @@ input[type=search] {
     color: #0c3e72;
 }
 
+.pagination_wrap {
+	padding: 20px;
+	margin: 0px auto;
+}
+
 .pagination {
 	display: inline-block;
 	text-align: center;
@@ -289,18 +294,20 @@ input[type=search] {
                                             <div id="result_detail" class="" style="border: 1px solid #2493e0">
                                                 <h3>검색 결과</h3>
                                             </div>
-                                            
-                                            <div class="row">
-                                                <ul class="pagination col-lg-12">
-                                                    <li><a href="">&laquo;</a></li>
-                                                    <li><a href="">1</a></li>
-                                                    <li><a href="">2</a></li>
-                                                    <li><a href="">3</a></li>
-                                                    <li><a href="">4</a></li>
-                                                    <li><a href="">5</a></li>
-                                                    <li><a href="">&raquo;</a></li>
-                                                </ul>
-                                            </div>
+                                                
+	                                        <div class="row">
+	                                        	<div class="pagination_wrap">
+		                                            <ul class="pagination col-lg-12">
+		                                                <li><a href="">&laquo;</a></li>
+		                                                <li><a href="">1</a></li>
+		                                                <li><a href="">2</a></li>
+		                                                <li><a href="">3</a></li>
+		                                                <li><a href="">4</a></li>
+		                                                <li><a href="">5</a></li>
+		                                                <li><a href="">&raquo;</a></li>
+		                                            </ul>
+	                                            </div>
+	                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -398,17 +405,19 @@ input[type=search] {
                                         <div id="result_detail" class="" style="border: 1px solid #2493e0">
                                             <h3>검색 결과</h3>
                                         </div>
-                                            
+                                                
                                         <div class="row">
-                                            <ul class="pagination col-lg-12">
-                                                <li><a href="">&laquo;</a></li>
-                                                <li><a href="">1</a></li>
-                                                <li><a href="">2</a></li>
-                                                <li><a href="">3</a></li>
-                                                <li><a href="">4</a></li>
-                                                <li><a href="">5</a></li>
-                                                <li><a href="">&raquo;</a></li>
-                                            </ul>
+                                        	<div class="pagination_wrap">
+	                                            <ul class="pagination col-lg-12">
+	                                                <li><a href="">&laquo;</a></li>
+	                                                <li><a href="">1</a></li>
+	                                                <li><a href="">2</a></li>
+	                                                <li><a href="">3</a></li>
+	                                                <li><a href="">4</a></li>
+	                                                <li><a href="">5</a></li>
+	                                                <li><a href="">&raquo;</a></li>
+	                                            </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     </div>
@@ -511,17 +520,19 @@ input[type=search] {
                                         <div id="result_detail" class="" style="border: 1px solid #2493e0">
                                             <h3>검색 결과</h3>
                                         </div>
-                                            
+                                                
                                         <div class="row">
-                                            <ul class="pagination col-lg-12">
-                                                <li><a href="">&laquo;</a></li>
-                                                <li><a href="">1</a></li>
-                                                <li><a href="">2</a></li>
-                                                <li><a href="">3</a></li>
-                                                <li><a href="">4</a></li>
-                                                <li><a href="">5</a></li>
-                                                <li><a href="">&raquo;</a></li>
-                                            </ul>
+                                        	<div class="pagination_wrap">
+	                                            <ul class="pagination col-lg-12">
+	                                                <li><a href="">&laquo;</a></li>
+	                                                <li><a href="">1</a></li>
+	                                                <li><a href="">2</a></li>
+	                                                <li><a href="">3</a></li>
+	                                                <li><a href="">4</a></li>
+	                                                <li><a href="">5</a></li>
+	                                                <li><a href="">&raquo;</a></li>
+	                                            </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     </div>
@@ -622,17 +633,19 @@ input[type=search] {
                                         <div id="result_detail" class="" style="border: 1px solid #2493e0">
                                             <h3>검색 결과</h3>
                                         </div>
-                                            
+                                                
                                         <div class="row">
-                                            <ul class="pagination col-lg-12">
-                                                <li><a href="">&laquo;</a></li>
-                                                <li><a href="">1</a></li>
-                                                <li><a href="">2</a></li>
-                                                <li><a href="">3</a></li>
-                                                <li><a href="">4</a></li>
-                                                <li><a href="">5</a></li>
-                                                <li><a href="">&raquo;</a></li>
-                                            </ul>
+                                        	<div class="pagination_wrap">
+	                                            <ul class="pagination col-lg-12">
+	                                                <li><a href="">&laquo;</a></li>
+	                                                <li><a href="">1</a></li>
+	                                                <li><a href="">2</a></li>
+	                                                <li><a href="">3</a></li>
+	                                                <li><a href="">4</a></li>
+	                                                <li><a href="">5</a></li>
+	                                                <li><a href="">&raquo;</a></li>
+	                                            </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     </div>
