@@ -32,10 +32,10 @@ window.onload = function()
 	$("#Alarm_Img").bind('click', function() {
 		if(Alarm_Check == true) { 
 			Alarm_Check = false;
-			$(this).attr("src", "resources/img/making/Alarm.png");
+			$(this).attr("src", "resources/img/Course/Alarm.png");
 		} else {
 			Alarm_Check = true;
-			$(this).attr("src", "resources/img/making/Alarm2.png");
+			$(this).attr("src", "resources/img/Course/Alarm2.png");
 		}
 	});
 	
@@ -67,11 +67,11 @@ window.onload = function()
 		if(Menu_Lock == "Unlock") { 
 			Menu_Lock = "Lock";
 			$('header').animate( { left:'0', right:'0'}, 300, 'linear');
-			$(this).attr("src", "resources/img/making/Lock.png");
+			$(this).attr("src", "resources/img/Course/Lock.png");
 		} else {
 			Menu_Lock = "Unlock";
 			$('header').animate( { left:'-100%', right:'100%'}, 300, 'linear');
-			$(this).attr("src", "resources/img/making/Unlock.png?ver=1");
+			$(this).attr("src", "resources/img/Course/Unlock.png?ver=1");
 		}
 	});
 	
@@ -92,6 +92,7 @@ window.onload = function()
 			$("#Chat").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 
             Index_Change("chat");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -100,11 +101,11 @@ window.onload = function()
 		if(Icon_Switch[0] == 0) {
 			Icon_Switch[0] = 1;
 			$("#Chat").hide();
-			$("#Chat_Icon").attr("src","resources/img/making/Chat.png");
+			$("#Chat_Icon").attr("src","resources/img/Course/Chat.png");
 		} else {
 			Icon_Switch[0] = 0;
 			$("#Chat").show();
-			$("#Chat_Icon").attr("src","resources/img/making/Chat2.png");
+			$("#Chat_Icon").attr("src","resources/img/Course/Chat2.png");
 
             Index_Change("chat");
 		}
@@ -113,13 +114,13 @@ window.onload = function()
 	$('#Chat_Close').bind('click', function(){
 		Icon_Switch[0] = 1;
 		$("#Chat").hide();
-		$("#Chat_Icon").attr("src","resources/img/making/Chat.png");
+		$("#Chat_Icon").attr("src","resources/img/Course/Chat.png");
 	});
 	
 	$('#Chat').bind('dblclick', function(){
 		Icon_Switch[0] = 1;
 		$("#Chat").hide();
-		$("#Chat_Icon").attr("src","resources/img/making/Chat.png");
+		$("#Chat_Icon").attr("src","resources/img/Course/Chat.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -139,6 +140,7 @@ window.onload = function()
 			$("#Hotel").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 
             Index_Change("hotel");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -147,11 +149,11 @@ window.onload = function()
 		if(Icon_Switch[1] == 0) {
 			Icon_Switch[1] = 1;
 			$("#Hotel").hide();
-			$("#Hotel_Icon").attr("src","resources/img/making/Hotel.png");
+			$("#Hotel_Icon").attr("src","resources/img/Course/Hotel.png");
 		} else {
 			Icon_Switch[1] = 0;
 			$("#Hotel").show();
-			$("#Hotel_Icon").attr("src","resources/img/making/Hotel2.png");
+			$("#Hotel_Icon").attr("src","resources/img/Course/Hotel2.png");
 
             Index_Change("hotel");
 		}
@@ -160,13 +162,13 @@ window.onload = function()
 	$('#Hotel_Close').bind('click', function(){
 		Icon_Switch[1] = 1;
 		$("#Hotel").hide();
-		$("#Hotel_Icon").attr("src","resources/img/making/Hotel.png");
+		$("#Hotel_Icon").attr("src","resources/img/Course/Hotel.png");
 	});
 	
 	$('#Hotel').bind('dblclick', function(){
 		Icon_Switch[1] = 1;
 		$("#Hotel").hide();
-		$("#Hotel_Icon").attr("src","resources/img/making/Hotel.png");
+		$("#Hotel_Icon").attr("src","resources/img/Course/Hotel.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -186,6 +188,7 @@ window.onload = function()
 			$("#Food").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 
             Index_Change("food");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -194,11 +197,11 @@ window.onload = function()
 		if(Icon_Switch[2] == 0) {
 			Icon_Switch[2] = 1;
 			$("#Food").hide();
-			$("#Food_Icon").attr("src","resources/img/making/Food.png");
+			$("#Food_Icon").attr("src","resources/img/Course/Food.png");
 		} else {
 			Icon_Switch[2] = 0;
 			$("#Food").show();
-			$("#Food_Icon").attr("src","resources/img/making/Food2.png");
+			$("#Food_Icon").attr("src","resources/img/Course/Food2.png");
 
             Index_Change("food");
 		}
@@ -207,13 +210,13 @@ window.onload = function()
 	$('#Food_Close').bind('click', function(){
 		Icon_Switch[2] = 1;
 		$("#Food").hide();
-		$("#Food_Icon").attr("src","resources/img/making/Food.png");
+		$("#Food_Icon").attr("src","resources/img/Course/Food.png");
 	});
 	
 	$('#Food').bind('dblclick', function(){
 		Icon_Switch[2] = 1;
 		$("#Food").hide();
-		$("#Food_Icon").attr("src","resources/img/making/Food.png");
+		$("#Food_Icon").attr("src","resources/img/Course/Food.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -233,6 +236,7 @@ window.onload = function()
 			$("#GP").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 
             Index_Change("gp");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -241,11 +245,11 @@ window.onload = function()
 		if(Icon_Switch[3] == 0) {
 			Icon_Switch[3] = 1;
 			$("#GP").hide();
-			$("#GP_Icon").attr("src","resources/img/making/GoodPoint.png");
+			$("#GP_Icon").attr("src","resources/img/Course/GoodPoint.png");
 		} else {
 			Icon_Switch[3] = 0;
 			$("#GP").show();
-			$("#GP_Icon").attr("src","resources/img/making/GoodPoint2.png");
+			$("#GP_Icon").attr("src","resources/img/Course/GoodPoint2.png");
 
             Index_Change("gp");
 		}
@@ -254,13 +258,13 @@ window.onload = function()
 	$('#GP_Close').bind('click', function(){
 		Icon_Switch[3] = 1;
 		$("#GP").hide();
-		$("#GP_Icon").attr("src","resources/img/making/GoodPoint.png");
+		$("#GP_Icon").attr("src","resources/img/Course/GoodPoint.png");
 	});
 	
 	$('#GP').bind('dblclick', function(){
 		Icon_Switch[3] = 1;
 		$("#GP").hide();
-		$("#GP_Icon").attr("src","resources/img/making/GoodPoint.png");
+		$("#GP_Icon").attr("src","resources/img/Course/GoodPoint.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -280,6 +284,7 @@ window.onload = function()
 			$("#Bus").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 
             Index_Change("bus");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -288,11 +293,11 @@ window.onload = function()
 		if(Icon_Switch[4] == 0) {
 			Icon_Switch[4] = 1;
 			$("#Bus").hide();
-			$("#Bus_Icon").attr("src","resources/img/making/Bus.png");
+			$("#Bus_Icon").attr("src","resources/img/Course/Bus.png");
 		} else {
 			Icon_Switch[4] = 0;
 			$("#Bus").show();
-			$("#Bus_Icon").attr("src","resources/img/making/Bus2.png");
+			$("#Bus_Icon").attr("src","resources/img/Course/Bus2.png");
 
             Index_Change("bus");
 		}
@@ -301,13 +306,13 @@ window.onload = function()
 	$('#Bus_Close').bind('click', function(){
 		Icon_Switch[4] = 1;
 		$("#Bus").hide();
-		$("#Bus_Icon").attr("src","resources/img/making/Bus.png");
+		$("#Bus_Icon").attr("src","resources/img/Course/Bus.png");
 	});
 	
 	$('#Bus').bind('dblclick', function(){
 		Icon_Switch[4] = 1;
 		$("#Bus").hide();
-		$("#Bus_Icon").attr("src","resources/img/making/Bus.png");
+		$("#Bus_Icon").attr("src","resources/img/Course/Bus.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -327,6 +332,7 @@ window.onload = function()
 			$("#Map").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 
             Index_Change("map");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -335,11 +341,11 @@ window.onload = function()
 		if(Icon_Switch[5] == 0) {
 			Icon_Switch[5] = 1;
 			$("#Map").hide();
-			$("#Map_Icon").attr("src","resources/img/making/Map.png");
+			$("#Map_Icon").attr("src","resources/img/Course/Map.png");
 		} else {
 			Icon_Switch[5] = 0;
 			$("#Map").show();
-			$("#Map_Icon").attr("src","resources/img/making/Map2.png");
+			$("#Map_Icon").attr("src","resources/img/Course/Map2.png");
 
             Index_Change("map");
 		}
@@ -348,13 +354,13 @@ window.onload = function()
 	$('#Map_Close').bind('click', function(){
 		Icon_Switch[5] = 1;
 		$("#Map").hide();
-		$("#Map_Icon").attr("src","resources/img/making/Map.png");
+		$("#Map_Icon").attr("src","resources/img/Course/Map.png");
 	});
 	
 	$('#Map').bind('dblclick', function(){
 		Icon_Switch[5] = 1;
 		$("#Map").hide();
-		$("#Map_Icon").attr("src","resources/img/making/Map.png");
+		$("#Map_Icon").attr("src","resources/img/Course/Map.png");
 	});
 	
 	$(".map_wrap").bind("mouseover", function(){
@@ -382,6 +388,7 @@ window.onload = function()
 			$("#Heart").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 
             Index_Change("heart");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -390,11 +397,11 @@ window.onload = function()
 		if(Icon_Switch[6] == 0) {
 			Icon_Switch[6] = 1;
 			$("#Heart").hide();
-			$("#Heart_Icon").attr("src","resources/img/making/Heart.png");
+			$("#Heart_Icon").attr("src","resources/img/Course/Heart.png");
 		} else {
 			Icon_Switch[6] = 0;
 			$("#Heart").show();
-			$("#Heart_Icon").attr("src","resources/img/making/Heart2.png");
+			$("#Heart_Icon").attr("src","resources/img/Course/Heart2.png");
 
             Index_Change("heart");
 		}
@@ -403,13 +410,13 @@ window.onload = function()
 	$('#Heart_Close').bind('click', function(){
 		Icon_Switch[6] = 1;
 		$("#Heart").hide();
-		$("#Heart_Icon").attr("src","resources/img/making/Heart.png");
+		$("#Heart_Icon").attr("src","resources/img/Course/Heart.png");
 	});
 	
 	$('#Heart').bind('dblclick', function(){
 		Icon_Switch[6] = 1;
 		$("#Heart").hide();
-		$("#Heart_Icon").attr("src","resources/img/making/Heart.png");
+		$("#Heart_Icon").attr("src","resources/img/Course/Heart.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -435,6 +442,7 @@ window.onload = function()
 			$("#Making_Area").css("top", ui.position.top*1 - window.innerHeight * 0.075 );
 
             Index_Change("book");
+            window.scrollTo({left:0});
   		}
 	});
 	
@@ -443,11 +451,11 @@ window.onload = function()
 		if(Icon_Switch[7] == 0) {
 			Icon_Switch[7] = 1;
 			$("#Making_Area").hide();
-			$("#Book_Icon").attr("src","resources/img/making/Book.png");
+			$("#Book_Icon").attr("src","resources/img/Course/Book.png");
 		} else {
 			Icon_Switch[7] = 0;
 			$("#Making_Area").show();
-			$("#Book_Icon").attr("src","resources/img/making/Book2.png");
+			$("#Book_Icon").attr("src","resources/img/Course/Book2.png");
 
             Index_Change("book");
 		}
@@ -456,13 +464,13 @@ window.onload = function()
 	$('#Making_Close').bind('click', function(){
 		Icon_Switch[7] = 1;
 		$("#Making_Area").hide();
-		$("#Book_Icon").attr("src","resources/img/making/Book.png");
+		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
 	$('#Making_Area').bind('dblclick', function(){
 		Icon_Switch[7] = 1;
 		$("#Making_Area").hide();
-		$("#Book_Icon").attr("src","resources/img/making/Book.png");
+		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -484,6 +492,7 @@ window.onload = function()
 			$("#Sticker").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 	
 			Index_Change("sticker");
+			window.scrollTo({left:0});
 		  },
 		  
 		  stop: function() { setTimeout(function() { Dragging=false; }, 200); }
@@ -494,11 +503,11 @@ window.onload = function()
 		if(Icon_Switch[6] == 0) {
 			Icon_Switch[6] = 1;
 			$("#Sticker").hide();
-			$("#Sticker_Icon").attr("src","resources/img/making/Sticker.png");
+			$("#Sticker_Icon").attr("src","resources/img/Course/Sticker.png");
 		} else {
 			Icon_Switch[6] = 0;
 			$("#Sticker").show();
-			$("#Sticker_Icon").attr("src","resources/img/making/Sticker2.png");
+			$("#Sticker_Icon").attr("src","resources/img/Course/Sticker2.png");
 	
 			Index_Change("sticker");
 		}
@@ -507,13 +516,13 @@ window.onload = function()
 	$('#Sticker_Close').bind('click', function(){
 		Icon_Switch[6] = 1;
 		$("#Sticker").hide();
-		$("#Sticker_Icon").attr("src","resources/img/making/Sticker.png");
+		$("#Sticker_Icon").attr("src","resources/img/Course/Sticker.png");
 	});
 	
 	$('#Sticker').bind('dblclick', function(){
 		Icon_Switch[6] = 1;
 		$("#Sticker").hide();
-		$("#Sticker_Icon").attr("src","resources/img/making/Sticker.png");
+		$("#Sticker_Icon").attr("src","resources/img/Course/Sticker.png");
 	});
 	
 	$(".Sticker").bind('click', function(){
@@ -560,6 +569,7 @@ window.onload = function()
 			$("#Pencil").css("top", ui.position.top*1 + window.innerHeight * 0.1 );
 	
 			Index_Change("pencil");
+			window.scrollTo({left:0});
 		  }
 	});
 	
@@ -568,7 +578,7 @@ window.onload = function()
 		if(Icon_Switch[3] == 0) {
 			Icon_Switch[3] = 1;
 			$("#Pencil").hide();
-			$("#Pencil_Icon").attr("src","resources/img/making/Pencil.png");
+			$("#Pencil_Icon").attr("src","resources/img/Course/Pencil.png");
 			
 			$("#Making_Area").draggable("enable");
 			$("#canvas").css("z-index", 29);
@@ -580,7 +590,7 @@ window.onload = function()
 		} else {
 			Icon_Switch[3] = 0;
 			$("#Pencil").show();
-			$("#Pencil_Icon").attr("src","resources/img/making/Pencil2.png");
+			$("#Pencil_Icon").attr("src","resources/img/Course/Pencil2.png");
 			
 			canvas.addEventListener("mousedown", listener);
 			canvas.addEventListener("mousemove", listener);
@@ -592,8 +602,8 @@ window.onload = function()
 			Index_Change("pencil");
 			
 			now_pencil = "pencil";
-			$("#Pencil_Pencil>img").attr("src","resources/img/making/Pencil2.png");
-			$("#Pencil_Eraser>img").attr("src","resources/img/making/Eraser.png");
+			$("#Pencil_Pencil>img").attr("src","resources/img/Course/Pencil2.png");
+			$("#Pencil_Eraser>img").attr("src","resources/img/Course/Eraser.png");
 			$("#Pencil_Pencil").css("background-color", color_save);
 		}
 	});
@@ -601,7 +611,7 @@ window.onload = function()
 	$('#Pencil_Close').bind('click', function(){
 		Icon_Switch[3] = 1;
 		$("#Pencil").hide();
-		$("#Pencil_Icon").attr("src","resources/img/making/Pencil.png");
+		$("#Pencil_Icon").attr("src","resources/img/Course/Pencil.png");
 		
 		$("#Making_Area").draggable("enable");
 		$("#canvas").css("z-index", 29);
@@ -615,7 +625,7 @@ window.onload = function()
 	$('#Pencil').bind('dblclick', function(){
 		Icon_Switch[3] = 1;
 		$("#Pencil").hide();
-		$("#Pencil_Icon").attr("src","resources/img/making/Pencil.png");
+		$("#Pencil_Icon").attr("src","resources/img/Course/Pencil.png");
 		
 		$("#Making_Area").draggable("enable");
 		$("#canvas").css("z-index", 29);
@@ -660,17 +670,17 @@ window.onload = function()
 			});
 			
 			$("#Making_Area>div:last").bind('click', function() { $(this).remove(); });
-			$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/making/Minus.png'>");
+			$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/Course/Minus.png'>");
 			
 			$("#Making_Area>div:last>img:first").bind('click', function() {
 				if(Dragging == true) { return false; }
-				if( $(this).attr("src") == "resources/img/making/Plus.png" ) {
-					$(this).attr("src","resources/img/making/Minus.png");
+				if( $(this).attr("src") == "resources/img/Course/Plus.png" ) {
+					$(this).attr("src","resources/img/Course/Minus.png");
 					$(this).nextAll('.Detail_Reduce').show();
 					$(this).nextAll('hr').show(); $(this).nextAll('br').show();
 					$(this).parent().css("height", "292px");
 				} else {
-					$(this).attr("src","resources/img/making/Plus.png");
+					$(this).attr("src","resources/img/Course/Plus.png");
 					$(this).nextAll('.Detail_Reduce').hide();
 					$(this).nextAll('hr').hide(); $(this).nextAll('br').hide();
 					$(this).parent().css("height", "auto");
@@ -694,8 +704,8 @@ window.onload = function()
 	
 	$(".Heart_In").bind('click', function(){
 	
-		if( $(this).attr("src") == "resources/img/making/Heart_In.png") { 
-			$(this).attr("src", "resources/img/making/Heart_In2.png");
+		if( $(this).attr("src") == "resources/img/Course/Heart_In.png") { 
+			$(this).attr("src", "resources/img/Course/Heart_In2.png");
 			$("#Heart").append($(this).parent().clone());
 			
 			$("#Heart>div:last").bind('click', function() {
@@ -712,17 +722,17 @@ window.onload = function()
 				});
 				
 				$("#Making_Area>div:last").bind('click', function() { $(this).remove(); });
-				$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/making/Minus.png'>");
+				$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/Course/Minus.png'>");
 				
 				$("#Making_Area>div:last>img:first").bind('click', function() {
 					if(Dragging == true) { return false; }
-					if( $(this).attr("src") == "resources/img/making/Plus.png" ) {
-						$(this).attr("src","resources/img/making/Minus.png");
+					if( $(this).attr("src") == "resources/img/Course/Plus.png" ) {
+						$(this).attr("src","resources/img/Course/Minus.png");
 						$(this).nextAll('.Detail_Reduce').show();
 						$(this).nextAll('hr').show(); $(this).nextAll('br').show();
 						$(this).parent().css("height", "292px");
 					} else {
-						$(this).attr("src","resources/img/making/Plus.png");
+						$(this).attr("src","resources/img/Course/Plus.png");
 						$(this).nextAll('.Detail_Reduce').hide();
 						$(this).nextAll('hr').hide(); $(this).nextAll('br').hide();
 						$(this).parent().css("height", "auto");
@@ -750,7 +760,7 @@ window.onload = function()
 				var temp = $(this).parent().attr("id");
 				$(this).parent().remove();
 
-				$("#"+temp).children(".Heart_In").attr("src", "resources/img/making/Heart_In.png");
+				$("#"+temp).children(".Heart_In").attr("src", "resources/img/Course/Heart_In.png");
 			});
 			
 			$("#Heart>div:last>img:eq(1)").bind('click', function() {
@@ -763,7 +773,7 @@ window.onload = function()
 			$("#Heart>div:last>span").bind('mouseout', function(){ Dragging = false; });
 			
 		} else {
-			$(this).attr("src", "resources/img/making/Heart_In.png");
+			$(this).attr("src", "resources/img/Course/Heart_In.png");
 			var temp = $(this).parent().attr("id");
 			$("#Heart").children("#"+temp).remove();
 		}

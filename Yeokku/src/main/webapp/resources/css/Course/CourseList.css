@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.list_area {
+    font-family: "Open Sans", sans-serif;
+    width: 1280px;
+    margin: auto;
+    font-size: 15px;
+}
+
+.form-control {
+	width:100%;
+}
+
+.page {
+	margin:auto;
+	text-align:center;
+	text-size:25px;
+}
+
+.btn_1 {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 0;
+  font-size: 20px;
+  color: #fff;
+  text-transform: capitalize;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  background-color: #fe5c24;
+  font-weight: 300;
+}
+
+.btn_1:hover {
+  color: #fff;
+  background-color: #2493e0;
+}
+
+.course_title {
+	font-size:25px;
+}
+
+.course_detail {
+	font-size:13px;
+}
+
+.course_tag {
+	font-size:13px;
+	color:gray
+}
