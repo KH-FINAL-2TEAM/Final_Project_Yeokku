@@ -94,31 +94,14 @@
 
     </script>
     <style type="text/css">
-       
-        
-        .filter_container a{
-		color: white;
-		text-decoration: none;
-		background-color: #150072;
-		padding: 15px; 
-		
-		
-		display: inline-block; 
-		
-		width: 200px;
-		text-align: center;
-		
-		margin: 5px;
-	} 
-	
-	.filter_container a:hover{
-		background-color: #6353aa;
-		text-decoration: none;
-		
+      
+	.search_part, .top_place {
+		margin-top: 30px;
+		padding: 20px 0px;
 	}
-
+      
     #sido1, #gugun1 {
-            width: 200px;
+            width: 100%;
             padding: .8em .5em;
             border: 1px solid cornflowerblue;
             font-family: inherit;
@@ -128,63 +111,34 @@
             }
            
     .kind_select{
-            width: 425px;
+            width: 100%;
             padding: .8em .5em;
             border: 1px solid cornflowerblue;
             font-family: inherit;
             background: url('arrow.jpg') no-repeat 95% 50%;
             border-radius: 0px;
     }     
-
-
-
+    
     .keyword{
-            width: 320px;
+            width: 100%;
             padding: .8em .5em;
             border: 1px solid cornflowerblue;
             font-family: inherit;
             background: url('arrow.jpg') no-repeat 95% 50%;
             border-radius: 0px;
-            
     }       
 
-    
-    .searchBtn{
-        border: #FE5C24;
-        color: white;
-        width: 136.42;
-        height: 50;
-        background-color: #FE5C24;
-        padding: 13px 30px;
-        
+    .btn_1{
+        border: 0px;
+        width: 100%;
+        margin-top: 20px;
     }
   
-    .searchBtn:hover{
+    .btn_1:hover{
         border: #38A4FF;
         color: white;
         background-color: #38A4FF;
     }
-    
-    .local, .search, .kind, .date {
-        position: absolute;
-        left: 13%;
-    }
-    
- 
-    #datepicker_1, #datepicker_2{
-        width: 80%;
-        border-color: #2493e0;
-        border-radius: 0;
-        color: #2493e0;
-        height: 50px;
-        display: flex;
-        align-items: center;
-
-
-    }
-
- 
- 
 
     
     </style>
@@ -201,7 +155,6 @@
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item text-center">
                             <h2>여행지</h2>
-                            <p>경기도 가평시</p>
                         </div>
                     </div>
                 </div>
@@ -215,104 +168,61 @@
 
 
 
-    <!-- hotel list css start-->
-    <section class="top_place section_padding">
+    <!-- search start-->
+    <section class="search_part">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-6">
-                    <div class="section_tittle text-center">
-                        <!--추가-->
-                        
-                        <div class="filter_container" >
-                           <!--
-                            <a href="" >전체</a>
-                            <a href="" >관광지</a>
-                            <a href="" >문화시설</a>
-                            <a href="" >축제/공연/행사</a>
-                            <a href="" >레포츠</a>
-                            <a href="" >숙박</a>
-                            <a href="" >쇼핑</a>
-                            <a href="" >음식점</a>
-
-                            -->         
-                        <form action="" method="" >
-                            <b class="kind">분류</b><br>
-                            <select name="kind_select" class="kind_select">
-                                <option value="">전체</option>
-                                <option value="">관광지</option>
-                                <option value="">문화시설</option>
-                                <option value="">축제/공연/행사</option>
-                                <option value="">레포츠</option>
-                                <option value="">숙박</option>
-                                <option value="">쇼핑</option>
-                                <option value="">음식점</option>
-
-                            </select>
-
-
-
-                            <br><br>
-                            <b class="local">지역</b><br>
-                            <select name="sido1" id="sido1" ></select>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <select name="gugun1" id="gugun1" ></select>
-
-
-                            <br><br>
-                            <b class="search">검색어</b><br>
-                            <input type="text" name="keyword" class="keyword" >
-                            <input type="submit" value="Search" class="searchBtn" >
-
-                            <!--
-                            <br><br><br><br>
-                            <b class="date">날짜</b><br>
-                            <input id="datepicker_1" placeholder="Check in date">
-                            <br><br>
-                            <input id="datepicker_2" placeholder="Check in date">
-                            -->
-                            
-
-                        </form>
-                                
-                            <br><br><br>
-                            <br><br><br>
-                            <br>
-                        </div>
-                        
-                        <h2>여꾸 인기장소</h2> 
-                        <p>Best Place </p><!--index.html에서 선택한 지역이름 나타내주기-->
-                        
-                        
-
+                    <div class="section_tittle">
+	                        <form action="tripplace_search_result_form.do" method="" >
+	                        
+	                            <b>분류</b><br>
+	                            <select name="kind_select" class="kind_select">
+	                                <option value="">전체</option>
+	                                <option value="">관광지</option>
+	                                <option value="">문화시설</option>
+	                                <option value="">축제/공연/행사</option>
+	                                <option value="">레포츠</option>
+	                                <option value="">숙박</option>
+	                                <option value="">쇼핑</option>
+	                                <option value="">음식점</option>
+	                            </select>
+	
+	                            <br><br>
+	                            <b>지역</b><br>
+	                            <select name="sido1" id="sido1" ></select>
+	                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                            <select name="gugun1" id="gugun1" ></select>
+	
+	                            <br><br>
+	                            <b>검색어</b><br>
+	                            <input type="text" name="keyword" class="keyword" >
+	                            <input type="submit" value="Search" class="btn_1" >
+	                        </form>
                     </div>
                 </div>
+			</div>
+		</div>
+	</section>
+
+            
+            
+	<!-- 인기장소 start -->
+	<section class="top_place">
+		<div class="container text-center">
+			<div class="section_tittle text-center">
+            	<h2>여꾸 인기장소</h2>
+            	<p>Best Place </p><!--index.html에서 선택한 지역이름 나타내주기-->
             </div>
-            
-
-            
-            
-            
             <div class="row">
-                 
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
                         <img src="resources/img/single_place_1.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
@@ -322,20 +232,9 @@
                         <img src="resources/img/single_place_2.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
@@ -345,46 +244,21 @@
                         <img src="resources/img/single_place_3.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-               
-
-
                 <div class="col-lg-6 col-md-6">
                     <div class="single_place">
                         <img src="resources/img/single_place_4.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
@@ -394,20 +268,9 @@
                         <img src="resources/img/single_place_1.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
@@ -417,20 +280,9 @@
                         <img src="resources/img/single_place_2.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
@@ -440,20 +292,9 @@
                         <img src="resources/img/single_place_3.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
@@ -463,20 +304,9 @@
                         <img src="resources/img/single_place_4.png" alt="">
                         <div class="hover_Text d-flex align-items-end justify-content-between">
                             <div class="hover_text_iner">
-                                <a href="#" class="place_btn">travel</a>
+                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
                                 <h3>Saintmartine Iceland</h3>
                                 <p>Technaf, Bangladesh</p>
-                                <div class="place_review">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <span>(210 review)</span>
-                                </div>
-                            </div>
-                            <div class="details_icon text-right">
-                                <i class="ti-share"></i>
                             </div>
                         </div>
                     </div>
@@ -484,7 +314,9 @@
             </div>
         </div>
     </section>
-    <!-- hotel list css end -->
+    <!-- 인기장소 end -->
+
+
 
     <!-- footer part start-->
     <footer class="footer-area">
@@ -510,6 +342,11 @@
 
                     </div>
                 </div>
+                
+                
+                
+                
+                <!-- footer -->
                 <div class="col-sm-6 col-md-4">
                     <div class="single-footer-widget">
                         <h4>Subscribe Newsletter</h4>

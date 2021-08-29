@@ -33,7 +33,7 @@ public class HomeController {
 	//여행지
 	@RequestMapping("/tripplace_main_form.do")
 	public String tripplaceMainForm(Model model) {
-		return "tripplace/tripplace_main";
+		return "tripplace/tripplace_search";
 	}
 	//교통
 	@RequestMapping("/transportation_form.do")

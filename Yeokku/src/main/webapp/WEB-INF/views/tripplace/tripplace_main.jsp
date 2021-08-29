@@ -142,47 +142,16 @@
                 <div class="col-lg-12">
                     <!--여기-->
                     <div class="booking_content" >
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
                                 <div class="booking_form" style="text-align: center;">
-                                    <form action="#">
-                                        
-                                            
-                                                <select name="sido1" id="sido1" ></select>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <select name="gugun1" id="gugun1" ></select>
+                                    <form action="tripplace_search_form.do">
+                                        <select name="sido1" id="sido1" ></select>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <select name="gugun1" id="gugun1" ></select>
                                            
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <a href="#" class="btn_1">search</a>
-                                            
-                                        
-                                    </form>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input class="btn_1" type="submit" style="border-color: transparent;" value="Search">
+                                     </form>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="tricket" role="tabpanel" aria-labelledby="tricket-tab">
-                                <div class="booking_form">
-                                    <form action="#">
-                                        <select name="sido1" id="sido1"></select>
-                                        
-                                        <select name="gugun1" id="gugun1"></select>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="place" role="tabpanel" aria-labelledby="place-tab">
-                                <div class="booking_form">
-                                    <form action="#">
-                                        <div class="form-row">
-                                            <div class="form_colum">
-                                                <select name="sido1" id="sido1"></select>
-                                                <select name="gugun1" id="gugun1"></select>
-                                            <div class="form_btn">
-                                                <a href="#" class="btn_1">search</a>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
