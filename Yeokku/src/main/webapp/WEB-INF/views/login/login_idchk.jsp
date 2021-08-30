@@ -41,7 +41,7 @@
 
 <table>
 		<tr>
-			<td><input type="text" class="intext" name="id" style="border:none;"></td>
+			<td><input type="text" class="intext" name="id" style="border:none; font-weight:bold;"></td>
 		</tr>
 		<tr>
 			

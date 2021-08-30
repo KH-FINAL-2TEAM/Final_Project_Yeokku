@@ -174,14 +174,14 @@ function execPostCode() {
                                                 <th>주소</th>
                                                 <td>
 	                                                <div>
-													<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="user_address_1" id="addr1" type="text" readonly="readonly" >
+													<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="user_address" id="addr1" type="text" readonly="readonly" >
 												    <button type="button" class="btn btn-default" onclick="execPostCode();"  ><i class="fa fa-search"></i> 우편번호 찾기</button>                               
 													</div>
 													<div class="form-group">
-													    <input class="form-control" style="width: 73%; top: 5px;" placeholder="도로명 주소" name="user_address_2" id="addr2" type="text" readonly="readonly" />
+													    <input class="form-control" style="width: 73%; top: 5px;" placeholder="도로명 주소" name="user_extraaddress" id="addr2" type="text" readonly="readonly" />
 													</div>
 													<div class="form-group">
-													    <input class="form-control" style="width: 73%;" placeholder="상세주소" name="user_address_3" id="addr3" type="text"  />
+													    <input class="form-control" style="width: 73%;" placeholder="상세주소" name="user_detailaddress" id="addr3" type="text"  />
 													</div>
                                                	 	<!--  <input type="button" value="&#xf002; 주소찾기" class="finalbox2">-->
                                                 
