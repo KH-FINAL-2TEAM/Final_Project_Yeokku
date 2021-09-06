@@ -21,6 +21,7 @@
   
     <mappers>
 		<mapper resource="/mybatis/user-mapper.xml" />
+		<mapper resource="/mybatis/adminpage-mapper.xml"/>
 	</mappers>
   
   
