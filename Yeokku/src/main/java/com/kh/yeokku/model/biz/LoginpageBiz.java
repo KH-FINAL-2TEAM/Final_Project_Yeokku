@@ -1,5 +1,6 @@
 package com.kh.yeokku.model.biz;
 
+import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 public interface LoginpageBiz {
@@ -10,5 +11,6 @@ public interface LoginpageBiz {
 	public UserDto login(UserDto dto);//로그인
 	public UserDto findId(UserDto dto);//아이디 찾기
 	public UserDto findPw(UserDto dto);//비밀번호 찾기
+	public ProfileDto profile(UserDto user); // 프로필 사진 정보
 	
 }

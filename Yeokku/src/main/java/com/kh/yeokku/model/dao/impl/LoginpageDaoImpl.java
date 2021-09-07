@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yeokku.model.dao.LoginpageDao;
+import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 
@@ -82,6 +83,21 @@ public class LoginpageDaoImpl implements LoginpageDao{
 		
 		
 		return user;
+	}
+
+	//프로필사진
+	@Override
+	public ProfileDto profile(UserDto user) {
+		ProfileDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"profile",user);
+		} catch (Exception e) {
+			System.out.println("[error] : user profile info error");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 }

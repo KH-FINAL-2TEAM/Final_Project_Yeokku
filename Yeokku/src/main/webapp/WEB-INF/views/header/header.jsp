@@ -74,7 +74,7 @@
 		                                            role="button" data-toggle="dropdown" aria-haspopup="true"
 		                                            aria-expanded="false">
 		                                            <div class="profile_img_div">
-		                                                <img src="1.png" onerror="this.src='resources/img/none_profile.png'" alt="" class="profile_img">
+		                                                <img src="uploadfile/${profile.pf_name}${profile.pf_type}" onerror="this.src='resources/img/none_profile.png'" alt="" class="profile_img">
 		                                            </div>
 		                                        </a>
 		                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

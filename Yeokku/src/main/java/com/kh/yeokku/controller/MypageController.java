@@ -11,6 +11,7 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.yeokku.model.biz.MypageBiz;
 import com.kh.yeokku.model.biz.impl.MypageBizImpl;
 import com.kh.yeokku.model.dto.ProfileDto;
+import com.kh.yeokku.model.dto.UserDto;
 
 @Controller
 public class MypageController {
@@ -37,9 +39,12 @@ public class MypageController {
 	
 	@RequestMapping(value="/profile_upload.do",produces = "application/text; charset=utf8", method=RequestMethod.POST)
 	@ResponseBody
-	public String profileUpload(HttpServletRequest request,String strImg,int user_no) throws IOException {
+	public String profileUpload(HttpServletRequest request,HttpSession session, String strImg) throws IOException {
 		logger.info("page_canvasUpload > ");
 
+		UserDto user_dto = (UserDto)session.getAttribute("user");
+		int user_no = user_dto.getUser_no();
+				
 		String uploadpath="uploadfile\\";
 		String folder=request.getServletContext().getRealPath("/") +uploadpath;
 		String fullpath="";
@@ -66,7 +71,6 @@ public class MypageController {
 		System.out.println(folder);//경로
 		System.out.println(type);//확장자명
 		System.out.println(filename);//파일명
-		System.out.println(user_no);
 		
 	
 		boolean pf_chk = biz.profileCheck(user_no);// 프로필 사진이 등록되어 있으면 true 없으면 false
@@ -80,6 +84,7 @@ public class MypageController {
 			if(pf_chk) {
 				int res = biz.profileUpdate(pfdto);
 				if(res>0) {
+					session.setAttribute("profile", pfdto);
 					return "프로필 사진 수정 성공";
 				}else {
 					return "프로필 사진 수정 실패";
@@ -87,6 +92,7 @@ public class MypageController {
 			}else {
 				int res = biz.profileUpload(pfdto);
 				if(res>0) {
+					session.setAttribute("profile", pfdto);
 					return "프로필 사진 등록 성공";
 				}else {
 					return "프로필 사진 등록 실패";

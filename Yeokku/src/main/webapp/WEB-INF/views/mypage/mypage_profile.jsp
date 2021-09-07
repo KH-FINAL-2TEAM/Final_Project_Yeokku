@@ -31,7 +31,7 @@
             <div class="profile">
                     <div class="profile_div">
                         <div class="profile_img_div">
-                            <img src="" onerror="this.src='resources/img/none_profile.png'" class="profile_img" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <img src="uploadfile/${profile.pf_name}${profile.pf_type}" onerror="this.src='resources/img/none_profile.png'" class="profile_img" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         </div>
                         <p class="profile_name">${user.user_nickname }</p>
                     </div>
@@ -195,7 +195,6 @@
 				url : 'profile_upload.do',
 				data : { 
 					strImg: canvImgStr,
-					user_no : 0
 				},
 				type : 'POST',
 				success : function(msg) {

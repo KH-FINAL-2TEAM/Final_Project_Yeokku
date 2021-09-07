@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.yeokku.model.biz.LoginpageBiz;
+import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Controller
@@ -38,7 +39,6 @@ public class LoginController {
 
 	@Autowired
 	private LoginpageBiz biz;
-	
 	//로그인
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -48,6 +48,10 @@ public class LoginController {
 		boolean check = false;
 		
 		if(user!=null) {
+			ProfileDto pfdto = biz.profile(user);
+			if(pfdto!=null) {
+				session.setAttribute("profile", pfdto);
+			}
 			session.setAttribute("user", user);
 			check = true;
 		}

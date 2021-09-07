@@ -1,5 +1,6 @@
 package com.kh.yeokku.model.dao;
 
+import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 public interface LoginpageDao {
@@ -11,4 +12,5 @@ public interface LoginpageDao {
 	public UserDto login(UserDto dto);//로그인
 	public UserDto findId(UserDto dto);//아이디 찾기 
 	public UserDto findPw(UserDto dto);//아이디 찾기 
+	public ProfileDto profile(UserDto user); // 프로필 사진 정보
 }
