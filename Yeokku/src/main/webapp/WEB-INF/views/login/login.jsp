@@ -19,6 +19,74 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
+    
+<style type="text/css">    
+    
+	.login_warn{
+	    margin-top: 30px;
+	    text-align: center;
+	    color : red;
+	}
+ 
+</style>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script><!-- 카카오 로그인 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".login_warn").hide();
+});
+
+
+//로그인 버튼 클릭 
+function loginBtn(){
+	var user_id = $("#user_id").val().trim();
+	var user_pw = $("#user_pw").val().trim();
+	
+	var loginVal = {
+		"user_id":user_id,
+		"user_pw":user_pw
+	};
+	
+	if(user_id == null || user_id=="" || user_pw == null || user_pw == ""){
+		alert("아이디와 비밀번호를 확인해주세요.");
+	}else{
+		
+		
+		
+		$.ajax({
+			type:"post",
+			url:"login.do",
+			data:JSON.stringify(loginVal),
+			contentType:"application/json",
+			dataType:"json",
+			success:function(msg){
+				if(msg.check == true){
+					//제대로 로그인 성공해서 회원 정보 담김
+					location.href="test.do";
+				}else{
+					$(".login_warn").show();
+				}
+			},
+			error:function(){
+				alert("통신 실패");
+			}
+		});
+	
+	}
+	
+}
+
+
+
+
+
+
+</script>   
+
+
+
+    
 </head>
 <body>
 	<!-- header 추가 -->
@@ -50,35 +118,46 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
                                 <div class="booking_form">
-                                    <form action="#" method="POST">
+                                    <form action="" method="POST" id="login_form" name="login_frm">
                                         <table class="regi_tool">
                                             <tr>
                                                 <th>아이디</th>
-                                                <td><input type="text" name="user_id"  required="required" class="intext" placeholder="아이디를 입력해주세요"></td>
+                                                <td><input type="text" name="user_id" id="user_id" required="required" class="intext" placeholder="아이디를 입력해주세요"></td>
                                             </tr>
                                             <tr>
                                                 <th>비밀번호</th>
-                                                <td><input type="text" name="user_pw"  required="required" class="intext" placeholder="비밀번호를 입력해주세요"></td>
+                                                <td>
+                                                	<input type="text" name="user_pw" id="user_pw" required="required" class="intext" placeholder="비밀번호를 입력해주세요"><br>
+                                                	<div class = "login_warn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <div class="loginmaintain"><input type="checkbox" name="loginCookie"> 로그인 유지 </div>                                                 
-                                                    <div class="loginfindbox"><a href="">아이디찾기</a>|<a href="">비밀번호찾기</a></div>
+                                                   
+                                                    <div class="loginfindbox"><a href="idfind.do">아이디찾기</a>|<a href="pwfind.do">비밀번호찾기</a></div>
+                                                	
                                                 </td>
-                                            </tr>                                          
+                                            </tr>     
+                                                
                                             <tr>
                                                 <td colspan="2" style="text-align: center;">
-                                                    <input type="submit" class="finalsub" value="로그인"><br>
-                                                    <input type="button" class="finalsub2" value="회원가입">
+                                                    <input type="button" class="finalsub" value="로그인" onclick="loginBtn();"><br>
+                                                    <input type="button" class="finalsub2" value="회원가입" onclick="location.href='signup.do'">
                                                 </td>
                                             </tr>
                                         </table>
+                                      
                                     </form>
                                     <div class="sociallogin">
+                                    	
                                         <ul>
                                             <li><a href="" class="googlesub"><img src="<c:url value="/resources/img/login_google_icon.gif" />" width="37px" height="37px"><span>구글 로그인</span></a></li>
                                             <li><a href="" class="kakaosub"><img src="<c:url value="/resources/img/login_kakao_icon.gif" />" width="37px" height="37px"><span>카카오로그인</span></a></li>
                                         </ul>
+                                        
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>

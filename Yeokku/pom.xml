@@ -176,6 +176,7 @@
             <version>1.4.7</version>
         </dependency>        
         
+		<!-- 메일 전송 -->	        
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -183,6 +184,25 @@
             <version>${org.springframework-version}</version>
         </dependency>    
 		    
+		    
+		<!-- 잭슨  -->    
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-core-asl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+		
+		
+		
+
 	</dependencies>
     <build>
         <plugins>

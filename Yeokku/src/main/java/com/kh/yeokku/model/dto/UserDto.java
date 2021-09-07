@@ -13,7 +13,6 @@ public class UserDto {
 	private int user_postcode;
 	private String user_address;
 	private String user_extraaddress;
-	private String user_detailaddress;
 	private Date user_reg_date;
 	private String user_able;
 	private String user_role;
@@ -25,8 +24,8 @@ public class UserDto {
 
 
 	public UserDto(int user_no, String user_id, String user_pw, String user_name, String user_email,
-			String user_nickname, int user_postcode, String user_address, String user_extraaddress,
-			String user_detailaddress, Date user_reg_date, String user_able, String user_role) {
+			String user_nickname, int user_postcode, String user_address, String user_extraaddress, Date user_reg_date,
+			String user_able, String user_role) {
 		super();
 		this.user_no = user_no;
 		this.user_id = user_id;
@@ -37,7 +36,6 @@ public class UserDto {
 		this.user_postcode = user_postcode;
 		this.user_address = user_address;
 		this.user_extraaddress = user_extraaddress;
-		this.user_detailaddress = user_detailaddress;
 		this.user_reg_date = user_reg_date;
 		this.user_able = user_able;
 		this.user_role = user_role;
@@ -134,16 +132,6 @@ public class UserDto {
 	}
 
 
-	public String getUser_detailaddress() {
-		return user_detailaddress;
-	}
-
-
-	public void setUser_detailaddress(String user_detailaddress) {
-		this.user_detailaddress = user_detailaddress;
-	}
-
-
 	public Date getUser_reg_date() {
 		return user_reg_date;
 	}
@@ -173,6 +161,8 @@ public class UserDto {
 		this.user_role = user_role;
 	}
 
+
+	
 	
 	
 	
