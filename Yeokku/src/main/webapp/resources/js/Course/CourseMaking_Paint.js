@@ -120,6 +120,10 @@ $('#Pencil_Eraser').bind('click', function(){
 
 $('#Pencil_Eraser').bind('dblclick', function(){
 	ctx.clearRect(0, 0, 1920, 1280);
+	now_pencil = "pencil";
+	$("#Pencil_Pencil>img").attr("src","resources/img/Course/Pencil2.png");
+	$("#Pencil_Eraser>img").attr("src","resources/img/Course/Eraser.png");
+	$("#Pencil_Pencil").css("background-color", color_save);
 	return false;
 });
 

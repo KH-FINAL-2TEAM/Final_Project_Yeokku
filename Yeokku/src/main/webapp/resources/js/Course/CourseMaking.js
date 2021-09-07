@@ -9,6 +9,7 @@ var Dragging = false;
 var Map_Dragging = false;
 
 var Course_Q = [];
+var detail_count = 1;
 
 var Scroll_Check;
 
@@ -427,6 +428,8 @@ window.onload = function()
 		$(this).children(".ui-resizable-s").css("bottom", -5-$(this).scrollTop());
 		$(this).children(".ui-resizable-se").css("bottom", -5-$(this).scrollTop());
 	});
+	
+	$("#Queue_All").draggable({ drag:function(){Index_Change("book");} });
 
 	$('#Making_Area').draggable({
 	
@@ -450,11 +453,11 @@ window.onload = function()
 
 		if(Icon_Switch[7] == 0) {
 			Icon_Switch[7] = 1;
-			$("#Making_Area").hide();
+			$("#Making_Area").hide(); $("#Queue_All").hide();
 			$("#Book_Icon").attr("src","resources/img/Course/Book.png");
 		} else {
 			Icon_Switch[7] = 0;
-			$("#Making_Area").show();
+			$("#Making_Area").show(); $("#Queue_All").show();
 			$("#Book_Icon").attr("src","resources/img/Course/Book2.png");
 
             Index_Change("book");
@@ -463,13 +466,13 @@ window.onload = function()
 	
 	$('#Making_Close').bind('click', function(){
 		Icon_Switch[7] = 1;
-		$("#Making_Area").hide();
+		$("#Making_Area").hide(); $("#Queue_All").hide();
 		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
 	$('#Making_Area').bind('dblclick', function(){
 		Icon_Switch[7] = 1;
-		$("#Making_Area").hide();
+		$("#Making_Area").hide(); $("#Queue_All").hide();
 		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
@@ -661,6 +664,9 @@ window.onload = function()
 
 			$("#Making_Area").append($(this).clone());
 			
+			var id = $("#Making_Area>div:last").attr("id");
+			$("#Making_Area>div:last").addClass(id+"_"+detail_count);
+			
 			$("#Making_Area>div:last").css("left", 0).css("top", 0).css("position", "absolute");
 			$("#Making_Area>div:last").children(".Heart_In").remove();
 			
@@ -669,8 +675,15 @@ window.onload = function()
 				stop: function() { setTimeout(function() { Dragging=false; }, 200); }		
 			});
 			
-			$("#Making_Area>div:last").bind('click', function() { $(this).remove(); });
+			$("#Making_Area>div:last").bind('click', function() { 
+				var arr = $(this).attr('class').split(" ");
+				$("."+arr[4]).remove(); $("#q_"+arr[4]).remove(); 
+				Q_Delete(Course_Q, -1, arr[4]);
+				Q_Update();
+			});
+			
 			$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/Course/Minus.png'>");
+			$("#Making_Area>div:last").prepend("<div class='Index_Num'><b></b></div>");
 			
 			$("#Making_Area>div:last>img:first").bind('click', function() {
 				if(Dragging == true) { return false; }
@@ -688,7 +701,9 @@ window.onload = function()
 				return false;
 			});
 
-			Course_Q.push( $(this).attr("id") );
+			Course_Q.push( $(this).attr("id")+"_"+(detail_count) );
+			detail_count++;
+			Q_Update();
 
 	});
 	
@@ -702,16 +717,22 @@ window.onload = function()
 	////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////
 	
+	
 	$(".Heart_In").bind('click', function(){
 	
 		if( $(this).attr("src") == "resources/img/Course/Heart_In.png") { 
+		
 			$(this).attr("src", "resources/img/Course/Heart_In2.png");
 			$("#Heart").append($(this).parent().clone());
 			
 			$("#Heart>div:last").bind('click', function() {
+			
 				if(Dragging == true) {return false;}
 				
 				$("#Making_Area").append($(this).clone());
+				
+				var id = $("#Making_Area>div:last").attr("id");
+				$("#Making_Area>div:last").addClass(id+"_"+detail_count);
 				
 				$("#Making_Area>div:last").css("left", 0).css("top", 0).css("position", "absolute");
 				$("#Making_Area>div:last").children(".Heart_In").remove();
@@ -721,8 +742,14 @@ window.onload = function()
 					stop: function() { setTimeout(function() { Dragging=false; }, 200); }		
 				});
 				
-				$("#Making_Area>div:last").bind('click', function() { $(this).remove(); });
+				$("#Making_Area>div:last").bind('click', function() { 
+					var arr = $(this).attr('class').split(" ");
+					$("."+arr[4]).remove(); $("#q_"+arr[4]).remove(); 
+					Q_Delete(Course_Q, -1, arr[4]);
+					Q_Update();
+				});
 				$("#Making_Area>div:last").prepend("<img class='OF' src='resources/img/Course/Minus.png'>");
+				$("#Making_Area>div:last").prepend("<div class='Index_Num'><b></b></div>");
 				
 				$("#Making_Area>div:last>img:first").bind('click', function() {
 					if(Dragging == true) { return false; }
@@ -739,6 +766,10 @@ window.onload = function()
 					}
 					return false;
 				});
+				
+				Course_Q.push( $(this).attr("id")+"_"+detail_count );
+				detail_count++;
+				Q_Update();
 			});
 			
 			$('#Heart>div:last').draggable({
@@ -792,6 +823,7 @@ function Index_Change(target) {
     $(".Search_Area").css("z-index", "30");
 	$("#Making_Area").css("z-index", "30");
 	$("#Pencil").css("z-index", "29");
+	$("#Queue_List").css("z-index", "30");
 
 	if(target == "chat") { $("#Chat_Icon").css("z-index", "51");$("#Chat").css("z-index", "31");  }
 	else if(target == "hotel") { $("#Hotel_Icon").css("z-index", "51");$("#Hotel").css("z-index", "31");  }
@@ -800,17 +832,200 @@ function Index_Change(target) {
 	else if(target == "bus") { $("#Bus_Icon").css("z-index", "51");$("#Bus").css("z-index", "31");  }
 	else if(target == "map") { $("#Map_Icon").css("z-index", "51");$("#Map").css("z-index", "31");  }
 	else if(target == "heart") { $("#Heart_Icon").css("z-index", "51");$("#Heart").css("z-index", "31");  }
-    else if(target == "book") { $("#Book_Icon").css("z-index", "51");$("#Making_Area").css("z-index", "31");  }
+    else if(target == "book") { $("#Book_Icon").css("z-index", "51");$("#Making_Area").css("z-index", "31"); $("#Queue_All").css("z-index", "31"); }
     else if(target == "sticker") { $("#Sticker_Icon").css("z-index", "51");$("#Sticker").css("z-index", "31");  }
     else if(target == "pencil") { $("#Pencil_Icon").css("z-index", "51");$("#Pencil").css("z-index", "31");  }
 }
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-/*
+
+var Q_Size = "big";
+
+$("#Queue_Size").bind('click', function() {
+	if(Q_Size == "big") { 
+		$("#Queue_All").css("width", "3vw");
+		$("#Queue_All").children('div').hide();
+		$("#Queue_Size").attr("src", "resources/img/Course/Plus.png"); 
+		Q_Size = "small";
+	}
+	else { 
+		$("#Queue_All").children('div').show(); 
+		$("#Queue_All").css("width", "50%");
+		$("#Queue_Size").attr("src", "resources/img/Course/Minus.png"); 
+		Q_Size = "big";
+	}
+}); 
+
 function Q_Update() {
+
+
+	if(Q_Size == "big") { $("#Queue_All").html('<img id="Queue_Size" src="resources/img/Course/Minus.png">');}
+	else { $("#Queue_All").html('<img id="Queue_Size" src="resources/img/Course/Plus.png">'); }
 	
-	$("#Q_List").html('');
+	$("#Queue_Size").bind('click', function() {
+		if(Q_Size == "big") { 
+			$("#Queue_All").css("width", "3vw");
+			$("#Queue_All").children('div').hide();
+			$("#Queue_Size").attr("src", "resources/img/Course/Plus.png"); 
+			Q_Size = "small";
+		}
+		else { 
+			$("#Queue_All").children('div').show(); 
+			$("#Queue_All").css("width", "50%");
+			$("#Queue_Size").attr("src", "resources/img/Course/Minus.png"); 
+			Q_Size = "big";
+		}
+	}); 
 	
+	var temp = '';
+	var count = 1;
 	
-}*/
+	temp += "<div class='Queue_List'> <div id='Q_Start' class='Queue_One'>시 작</div> &nbsp;&nbsp; <div class='Queue_Next'></div> &nbsp;&nbsp;"; // 여기
+	
+	for(var j=0; j<=Course_Q.length/5; j++) {
+	
+		for(var i=j*5; i<j*5+5; i++) {
+		
+			try {
+				if(Course_Q[i] == null) {continue;}
+			} catch(e){}
+			
+			var id = Course_Q[i];
+			var title = '';
+		
+			temp += '<div class="Queue_One" id="q_' + id + '">';
+
+			if(id.includes("map_detail_")) { title = $("."+id).children('h5').html(); }
+			else { title = $("."+id).children('span:first').children('b').html(); title = title.substr(3, title.length-6); }
+
+			temp += title + '</div> &nbsp;&nbsp';
+			if( i != Course_Q.length-1 ) { temp += "<div class='Queue_Next'></div> &nbsp;&nbsp;"; }
+			else { }
+		}
+	}
+	
+	temp += "<div class='Queue_Next'></div> &nbsp;&nbsp;<div id='Q_End' class='Queue_One'>종 료</div></div>"; // 여기
+	
+	$("#Queue_All").append(temp);
+	
+	if(Q_Size == "small") { $("#Queue_All").children('div').hide();}
+	else {  $("#Queue_All").children('div').show(); }
+	
+	Q_Bind();
+	Q_Index_Update();
+	Q_Drag_Grant();
+} 
+
+function Q_Bind() {
+	$(".Queue_One").unbind('click');
+	$(".Queue_One").bind('click', function() {
+	
+		if( Dragging == true ) { return false; }
+		
+		var id = $(this).attr("id").substr(2, $(this).attr("id").length);
+		
+		$(this).next().remove(); $("."+id).remove();
+		Q_Delete(Course_Q, -1, id);
+		Q_Update();
+	}); 
+	
+	$("#Q_Start").unbind('click');
+	$("#Q_End").unbind('click');
+}
+
+function Q_Delete(arr, index, content) {
+
+	if(index != -1) {
+		for(var i=index; i<arr.length-1; i++) { arr[i] = arr[i+1]; }
+	} else {
+		var index2 = 0;
+		for(var i=0; i<arr.length; i++) {  if(arr[i]==content){index2=i;} }	
+		for(var i=index2; i<arr.length-1; i++) { arr[i] = arr[i+1]; }
+	}
+	arr.pop();
+}
+
+function Q_Index_Update() {
+	for(var i=1; i<Course_Q.length+1; i++) {
+		$("."+Course_Q[i-1]).children(".Index_Num").children("b").html(i);
+	}
+}
+
+function Q_Index_Return(id) {
+	for(var i=0; i<Course_Q.length; i++) {
+		if( Course_Q[i] == id ) { return i; }
+	}
+	return Course_Q.length;
+}
+
+function Q_Change(x, y) {
+
+	var min; var max; var type;
+	if( x > y ) { max=x; min=y; type="front"; } else { max=y; min=x; type="back";}
+	
+	var temp_min = Course_Q[min];
+	var temp_max = Course_Q[max];
+	
+	alert(min + " / " + max);
+	
+	console.log( "바꾸기 전 : " + Course_Q);
+	
+	if(type == "front") {
+		for(var i=max; i>min; i--) {
+			Course_Q[i] = Course_Q[i-1];
+			console.log( "Front 바꾸는 중 : " + Course_Q);
+		}
+		Course_Q[min] = temp_max;
+	} else {
+		for(var i=min; i<max-1; i++) {
+			Course_Q[i] = Course_Q[i+1];
+			console.log( "Back 바꾸는 중 : " + Course_Q);
+		}
+		Course_Q[max-1] = temp_min;
+	}
+	
+	console.log( "바꾼 후 : " + Course_Q);
+	
+	Q_Update();
+}
+
+var Dragging_Target;
+
+function Q_Drag_Grant() {
+
+	$('.Queue_One').draggable({ 
+		drag: function( event, ui ) {
+		
+			Dragging = true;
+			Dragging_Target = $(this).attr('id');
+		
+            $("#Queue_All").scrollLeft(0);
+            
+  		},
+  		stop: function() { setTimeout(function() { Dragging_Target=""; Dragging=false; }, 350); },
+  		
+  		revert : true
+	});
+	
+	$( ".Queue_Next" ).droppable({
+		drop: function( event, ui ) {
+		
+			var arr = Dragging_Target.split("q_");
+			var main_id = arr[1];	
+			
+			var left_id = $(this).prev().attr("id").split("q_");
+			var right_id = $(this).next().attr("id").split("q_");
+
+			var point_index = Q_Index_Return(main_id);
+			var left_index = Q_Index_Return(left_id[1]);
+			var right_index = Q_Index_Return(right_id[1]);
+			
+			Q_Change(point_index, right_index);
+		}
+	});
+	
+	$( "#Q_Start" ).draggable( "destroy" );
+	$( "#Q_End" ).draggable( "destroy" );
+	
+}

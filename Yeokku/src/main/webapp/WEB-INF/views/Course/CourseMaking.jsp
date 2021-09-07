@@ -10,6 +10,7 @@
 	<title>우리의 여행은 노래의 한 소절. 우여곡절</title>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb7542ca1e571489fa3dcf37d82cb528&libraries=services,clusterer,drawing"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="resources/js/Course/CourseMaking_Rotate.js"></script>
@@ -63,13 +64,16 @@
 		<div id="Making_Area">
 			<canvas id="canvas" width="1960px" height="1280px"></canvas>
 			<img class="Close" id="Making_Close" src="resources/img/Course/Close.png">
-			<!-- <div id="Q_List"></div> -->
+		</div>
+		<div id="Queue_All">
+			<img id="Queue_Size" src='resources/img/Course/Minus.png'>
 		</div>
 		
 		<div id="Hotel" class="Search_Area">
 			<img class="Close" id="Hotel_Close"  src="resources/img/Course/Close.png">
 			
 			<div class="Hotel_One Detail" id="hotel_1" name="Hotel">
+			<!--<div class='Index_Num'><b>0</b></div> -->
 				<img class="Heart_In" src="resources/img/Course/Heart_In.png">
 				<img class="Hotel_Img Detail_Img" src="resources/img/Course/Hotel_Sample3.png"><br><hr>
 				<span><b>:: 그랜드호텔  ::</b></span><br>
@@ -217,6 +221,7 @@
 		<div id="Chat">
 			<img class="Close" id="Chat_Close" src="resources/img/Course/Close.png">
 			<div id="Chat_Middle">
+			
 				<div class="Chat_One">
 					<img class="Your_PF" src="resources/img/Course/PF1.jpg"/>
 					<div class="Your_Chat Chat_Detail">안녕~ 실험중이야</div>
@@ -225,6 +230,7 @@
 					<img class="My_PF" src="resources/img/Course/PF2.jpg"/>
 					<div class="My_Chat Chat_Detail">그래 ㅎㅎ 잘작동하면 좋겠네 !</div>
 				</div>
+				
 				<div class="Chat_One">
 					<img class="Your_PF" src="resources/img/Course/PF1.jpg"/>
 					<div class="Your_Chat Chat_Detail">잘 되는것 같아 !! 난 이만 가볼게</div>
@@ -241,9 +247,10 @@
 				<img class="My_PF" src="resources/img/Course/PF2.jpg"/>
 					<div class="My_Chat Chat_Detail">아, 맞다. 내일 3시 지각하지 말고 ㅋㅋ</div>
 				</div>
+				
 			</div>
 			<div id="Chat_Bottom">
-				<input type="text" id="Chat_Input"placeholder="Type a message..." />
+				<input type="text" id="Chat_Input" placeholder="Type a message..." />
 	       		<button type="submit" id="Chat_Button"></button>
 			</div>
 		</div>
@@ -253,11 +260,12 @@
 	<footer></footer>
 </body>
 
-<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=165">
+<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=180">
 <link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking_Map.css">
 
-<script src="resources/js/Course/CourseMaking_Map.js" charset="utf-8"></script>
 <script src="resources/js/Course/CourseMaking_Paint.js" charset="utf-8"></script>
-<script src="resources/js/Course/CourseMaking.js?ver=165" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking.js?ver=181" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking_Map.js" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking_Chat.js?ver=3" charset="utf-8"></script>
 
 </html>

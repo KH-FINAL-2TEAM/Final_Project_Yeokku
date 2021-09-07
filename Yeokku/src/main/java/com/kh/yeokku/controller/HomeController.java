@@ -19,9 +19,8 @@ public class HomeController {
 	@RequestMapping("/mypage.do")
 	public String home(Locale locale, Model model) {
 		
-		return "tripplace/tripplace_show_map";
+		return "tripplace/tripplace_main";
 	}
-	
 	
 	
 	//헤더 네비 이동
@@ -33,7 +32,7 @@ public class HomeController {
 	//여행지
 	@RequestMapping("/tripplace_main_form.do")
 	public String tripplaceMainForm(Model model) {
-		return "tripplace/tripplace_search";
+		return "tripplace/tripplace_main";
 	}
 	//여행코스
 	@RequestMapping("/course_list.do")
