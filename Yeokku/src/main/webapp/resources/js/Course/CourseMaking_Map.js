@@ -90,13 +90,28 @@ function displayPlaces(places) {
     map.setBounds(bounds);
     
     $(".info").bind('click', function(){
+    
 		$("#Making_Area").append( $(this).clone() ); 
+		$("#Making_Area>div:last").prepend("<div class='Index_Num Index_Num_Map'><b></b></div>");
+		
+		$("#Making_Area>div:last").addClass("map_detail_"+detail_count);
+	
 		$("#Making_Area>div:last").css("left", 5).css("top", 5).css("position", "absolute").css("border","double 2px white");
-		$("#Making_Area>div:last").bind('click', function() { if(Dragging == true){ return false; } $(this).remove(); });
+		$("#Making_Area>div:last").bind('click', function() { 
+			if(Dragging == true){ return false; } 
+			var arr = $(this).attr('class').split(" ");
+			$("."+arr[1]).remove(); $("#q_"+arr[1]).remove(); 
+			Q_Delete(Course_Q, -1, arr[1]);
+			Q_Update();
+		});
 		$("#Making_Area>div:last").draggable({
 			drag: function() { Dragging = true; },
 			stop: function() { setTimeout(function(){ Dragging = false; }, 200)} 
 		});
+		
+		Course_Q.push( "map_detail_"+(detail_count) );
+		detail_count++;
+		Q_Update();
 	});
 }
 
