@@ -48,7 +48,7 @@ public class LoginController {
 		boolean check = false;
 		
 		if(user!=null) {
-			session.setAttribute("login", user);
+			session.setAttribute("user", user);
 			check = true;
 		}
 		

@@ -63,7 +63,7 @@ function loginBtn(){
 			success:function(msg){
 				if(msg.check == true){
 					//제대로 로그인 성공해서 회원 정보 담김
-					location.href="test.do";
+					location.href="main_form.do";
 				}else{
 					$(".login_warn").show();
 				}
