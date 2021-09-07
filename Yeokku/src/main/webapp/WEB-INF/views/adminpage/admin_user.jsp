@@ -24,7 +24,7 @@
     <title>Document</title>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
+        	var table = $('#example').DataTable({
                 "language": {
                     "emptyTable": "데이터가 없어요.",
                     "lengthMenu": "페이지당 _MENU_ 개씩 보기",
@@ -40,8 +40,98 @@
                         "previous": "이전"
                     }
                 },
+                'columnDefs': [
+                    {
+                       'targets': 0,
+                       'checkboxes': {
+                          'selectRow': true
+                       }
+                    }
+                 ],
+                 'select': {
+                    'style': 'multi'
+                 },
+                 'order': [[1, 'asc']]
+              });
+
+        	
+             
+            /* Column별 검색박스 추가 */
+            $('#example_filter').prepend('<select id="select" style="display: inline-block; width : auto;"></select> 에서 ');
+            $('#example > thead > tr').children().each(function (indexInArray, valueOfElement) { 
+                $('#select').append('<option>'+valueOfElement.innerHTML+'</option>');
             });
+            
+            /* Column별 검색기능 추가 */
+            $('.dataTables_filter input').unbind().bind('keyup', function () {
+                var colIndex = document.querySelector('#select').selectedIndex;
+                table.column(colIndex).search(this.value).draw();
+            });
+
+
+            /* Column 삭제버튼 추가 */
+            $('#example_length').append('<button id="delete_btn" class="btn btn-outline-secondary" style="margin-left : 20px;">선택 삭제</button>')
+            .append('<button id="all_delete_btn" class="btn btn-outline-secondary" style="margin-left : 20px;">전체 삭제</button>');
+         
+            
+            // 체크한 항목 삭제
+            $('#delete_btn').on('click', function(e){
+            	var selected_list = [];
+            	 $(".dt-checkboxes:checked").each(function () {
+            		 selected_no = table.row($(this).parents()).data();
+					selected_list.push(selected_no[1]);
+            	 });
+				console.log(selected_list);       	 
+				$.ajax({
+		        	url:"user_selected_delete.do",
+		        	type:"post",
+		        	data:  {
+		                selected : selected_list
+		            },
+		        	success:function(msg){
+		        		if(msg == "true"){
+		        			alert("삭제 처리 성공")
+		        		}else{
+		        			alert("삭제 처리 실패")
+		        		}
+		        	},
+		        	error : function() {
+		        		alert("처리 실패")
+					},
+					complete : function() {
+						refreshList();
+					}
+		        });
+            });
+            
+         // 전체 항목 삭제
+            $('#all_delete_btn').on('click', function(e){
+            	   	 
+				$.ajax({
+		        	url:"user_all_delete.do",
+		        	type:"post",		        	
+		        	success:function(msg){
+		        		if(msg == "true"){
+		        			alert("전체 삭제 성공")
+		        		}else{
+		        			alert("전체 삭제 실패")
+		        		}
+		        	},
+		        	error : function() {
+		        		alert("처리 실패")
+					},
+					complete : function() {
+						refreshList();
+					}
+		        });
+            });
+            
+
         } );
+        
+        function refreshList(){
+    		location.reload();
+    	}
     </script>
 </head>
 <body>
@@ -53,9 +143,9 @@
         <div class="left">
             <h1>ADMIN</h1>
             <ul>
-                <li><a href="admin_user.html">회원 관리</a></li>
-                <li><a href="admin_report.html">신고 관리</a></li>
-                <li><a href="admin_qna.html">문의 관리</a></li>
+                <li><a href="admin_user.do">회원 관리</a></li>
+                <li><a href="admin_report.do">신고 관리</a></li>
+                <li><a href="admin_qna.do">문의 관리</a></li>
             </ul>
         </div>
         
@@ -64,8 +154,8 @@
 
             <table id="example" class="ui celled table" style="width:100%">
                 <colgroup>
+                	<col>
                     <col width="60">
-                    <col>
                     <col>
                     <col>
                     <col>
@@ -80,6 +170,7 @@
                 </colgroup>
                 <thead>
                     <tr>
+                    	<th></th>
                         <th>번호</th>
                         <th>아이디</th>
                         <th>비밀번호</th>
@@ -88,7 +179,6 @@
                         <th>닉네임</th>
                         <th>지역코드</th>
                         <th>주소</th>
-                        <th>추가주소</th>
                         <th>상세주소</th>
                         <th>가입일자</th>
                         <th>로그인</th>
@@ -97,54 +187,32 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>admin</td>
-                        <td>admin</td>
-                        <td>admin</td>
-                        <td>admin@gmail.com</td>
-                        <td> </td>
-                        <td>0000</td>
-                        <td>서울시 강남구 강남도로 1번길</td>
-                        <td>강남동</td>
-                        <td>강남역 108번째 계단</td>
-                        <td>21/08/16</td>
-                        <td>Y</td>
-                        <td>ADMIN</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>admin</td>
-                        <td>admin</td>
-                        <td>admin@gmail.com</td>
-                        <td>관리자</td>
-                        <td>0000</td>
-                        <td>서울시 강남구 강남도로 1번길</td>
-                        <td>강남동</td>
-                        <td>강남역 108번째 계단</td>
-                        <td>21/08/16</td>
-                        <td>Y</td>
-                        <td>ADMIN</td>
-                    </tr><tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>admin</td>
-                        <td>admin</td>
-                        <td>admin@gmail.com</td>
-                        <td>관리자</td>
-                        <td>0000</td>
-                        <td>서울시 강남구 강남도로 1번길</td>
-                        <td>강남동</td>
-                        <td>강남역 108번째 계단</td>
-                        <td>21/08/16</td>
-                        <td>Y</td>
-                        <td>ADMIN</td>
-                    </tr>
+                	<c:choose>
+	                	<c:when test="${empty list }"></c:when>
+	                	<c:otherwise>
+	                		<c:forEach items="${list }" var="user_dto">
+	                			<tr>
+	                				<td></td>
+		                			<td>${user_dto.user_no }</td>
+			                        <td>${user_dto.user_id }</td>
+			                        <td>${user_dto.user_pw }</td>
+			                        <td>${user_dto.user_name }</td>
+			                        <td>${user_dto.user_email }</td>
+			                        <td>${user_dto.user_nickname }</td>
+			                        <td>${user_dto.user_postcode }</td>
+			                        <td>${user_dto.user_address }</td>
+			                        <td>${user_dto.user_extraaddress }</td>
+			                        <td>${user_dto.user_reg_date }</td>
+			                        <td>${user_dto.user_able }</td>
+			                        <td>${user_dto.user_role }</td>
+		                        </tr>
+	                		</c:forEach>
+	                	</c:otherwise>
+                	</c:choose>
                 </tbody>
                 <tfoot>
                     <tr>
+                    	<th></th>
                         <th>번호</th>
                         <th>아이디</th>
                         <th>비밀번호</th>
@@ -153,7 +221,6 @@
                         <th>닉네임</th>
                         <th>지역코드</th>
                         <th>주소</th>
-                        <th>추가주소</th>
                         <th>상세주소</th>
                         <th>가입일자</th>
                         <th>로그인</th>
