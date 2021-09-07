@@ -19,7 +19,10 @@
   		<typeAlias type="com.kh.yeokku.model.dto.UserDto" alias="user_dto"/>
   	</typeAliases>
   
-  
+    <mappers>
+		<mapper resource="/mybatis/user-mapper.xml" />
+		<mapper resource="/mybatis/adminpage-mapper.xml"/>
+	</mappers>
   
   
   

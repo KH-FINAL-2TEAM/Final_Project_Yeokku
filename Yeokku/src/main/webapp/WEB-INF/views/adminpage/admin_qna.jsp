@@ -22,7 +22,7 @@
     <title>Document</title>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
+        	var table = $('#example').DataTable({
                 "language": {
                     "emptyTable": "데이터가 없어요.",
                     "lengthMenu": "페이지당 _MENU_ 개씩 보기",
@@ -36,10 +36,122 @@
                     "paginate": {
                         "next": "다음",
                         "previous": "이전"
-                    }
+                    }                    
                 },
+                'columnDefs': [
+                    {
+                       'targets': 0,
+                       'checkboxes': {
+                          'selectRow': true
+                       }
+                    }
+                 ],
+                 'select': {
+                    'style': 'multi'
+                 },
+                 'order': [[1, 'asc']]
+              });
+
+
+            /* Column별 검색박스 추가 */
+            $('#example_filter').prepend('<select id="select" style="display: inline-block; width : auto;"></select> 에서 ');
+            $('#example > thead > tr').children().each(function (indexInArray, valueOfElement) { 
+                $('#select').append('<option>'+valueOfElement.innerHTML+'</option>');
             });
+            
+            /* Column별 검색기능 추가 */
+            $('.dataTables_filter input').unbind().bind('keyup', function () {
+                var colIndex = document.querySelector('#select').selectedIndex;
+                table.column(colIndex).search(this.value).draw();
+            });
+
+            /* Column 삭제버튼 추가 */
+            $('#example_length').append('<button id="delete_btn" class="btn btn-outline-secondary" style="margin-left : 20px;">선택 삭제</button>')
+            .append('<button id="all_delete_btn" class="btn btn-outline-secondary" style="margin-left : 20px;">전체 삭제</button>');
+         
+            
+            // 체크한 항목 삭제
+            $('#delete_btn').on('click', function(e){
+            	var selected_list = [];
+            	 $(".dt-checkboxes:checked").each(function () {
+            		 selected_no = table.row($(this).parents()).data();
+					selected_list.push(selected_no[1]);
+            	 });
+				console.log(selected_list);       	 
+				$.ajax({
+		        	url:"qna_selected_delete.do",
+		        	type:"post",
+		        	data:  {
+		                selected : selected_list
+		            },
+		        	success:function(msg){
+		        		if(msg == "true"){
+		        			alert("삭제 처리 성공")
+		        		}else{
+		        			alert("삭제 처리 실패")
+		        		}
+		        	},
+		        	error : function() {
+		        		alert("처리 실패")
+					},
+					complete : function() {
+						refreshList();
+					}
+		        });
+            });
+            
+         // 전체 항목 삭제
+            $('#all_delete_btn').on('click', function(e){
+            	   	 
+				$.ajax({
+		        	url:"qna_all_delete.do",
+		        	type:"post",		        	
+		        	success:function(msg){
+		        		if(msg == "true"){
+		        			alert("전체 삭제 성공")
+		        		}else{
+		        			alert("전체 삭제 실패")
+		        		}
+		        	},
+		        	error : function() {
+		        		alert("처리 실패")
+					},
+					complete : function() {
+						refreshList();
+					}
+		        });
+            });
+            
         } );
+        
+        function refreshList(){
+    		location.reload();
+    	}
+        
+        function qnaConfirm(index){
+	        $.ajax({
+	        	url:"qna_confirm.do",
+	        	type:"post",
+	        	data:{
+	        		qa_no : index
+	        	},
+	        	success:function(msg){
+	        		if(msg == "true"){
+	        			alert("문의 처리 성공")
+	        		}else{
+	        			alert("문의 처리 실패")
+	        		}
+	        	},
+	        	error : function() {
+					alert("처리 실패");
+				},
+				complete : function() {
+					 refreshList();
+				}
+	        });
+	       
+        }
+
     </script>
 </head>
 <body>
@@ -51,9 +163,9 @@
         <div class="left">
             <h1>ADMIN</h1>
             <ul>
-                <li><a href="admin_user.html">회원 관리</a></li>
-                <li><a href="admin_report.html">신고 관리</a></li>
-                <li><a href="admin_qna.html">문의 관리</a></li>
+                <li><a href="admin_user.do">회원 관리</a></li>
+                <li><a href="admin_report.do">신고 관리</a></li>
+                <li><a href="admin_qna.do">문의 관리</a></li>
             </ul>
         </div>
         
@@ -62,737 +174,68 @@
 
             <table id="example" class="ui celled table" style="width:100%">
                 <colgroup>
+                    <col >
                     <col width="60">
                 </colgroup>
                 <thead>
                     <tr>
+                    	<th></th>
                         <th>번호</th>
                         <th>제목</th>
                         <th>문의내용</th>
                         <th>문의자</th>
                         <th>이메일</th>
                         <th>문의일자</th>
-                        <th>처리상태</th>
                         <th>처리일자</th>
+                        <th>처리상태</th>
                         <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr>
-
-
- <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr> <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>문의내용</td>
-                        <td>문의자</td>
-                        <td>이메일</td>
-                        <td>문의일자</td>
-                        <td>처리상태</td>
-                        <td>21/08/17</td>
-                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border">처리</button></td>
-
-                    </tr>
-
+                	<c:choose>
+	                	<c:when test="${empty list }"></c:when>
+	                	<c:otherwise>
+	                		<c:forEach items="${list }" var="qa_dto">
+	                			<tr>
+	                				<td></td>
+		                			<td>${qa_dto.qa_no }</td>
+			                        <td>${qa_dto.qa_name }</td>
+			                        <td>${qa_dto.qa_title }</td>
+			                        <td>${qa_dto.qa_content }</td>
+			                        <td>${qa_dto.qa_email }</td>
+			                        <td>${qa_dto.qa_date }</td>
+			                        <td>${qa_dto.qa_done_date }</td>
+			                        <td>
+			                        	<c:choose>
+				                        	<c:when test="${qa_dto.qa_confirm  eq 'Y' }">
+				                        		처리 완료
+				                        	</c:when>
+				                        	<c:otherwise>
+					                        	처리 대기
+				                        	</c:otherwise>
+			                        	</c:choose>
+			                        </td>
+			                        <c:choose>
+				                        <c:when test="${qa_dto.qa_confirm  eq 'Y' }">
+					                        <td width="80" style="padding: 2px;"><button class="genric-btn" disabled="disabled">완료</button></td>
+				                        </c:when>
+				                        <c:otherwise>
+					                        <td width="80" style="padding: 2px;"><button class="genric-btn primary-border" onclick="qnaConfirm(${qa_dto.qa_no});">처리</button></td>
+				                        </c:otherwise>
+			                        </c:choose>
+		                        </tr>
+	                		</c:forEach>
+	                	</c:otherwise>
+                	</c:choose>
+                	
+                   
 
 
                 </tbody>
                 <tfoot>
                     <tr>
+                    	<th></th>
                         <th>번호</th>
                         <th>제목</th>
                         <th>문의내용</th>

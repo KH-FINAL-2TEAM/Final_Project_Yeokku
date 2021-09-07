@@ -19,6 +19,63 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+
+function pwFindBtn(){
+	var user_id = $("#user_id").val();//입력한 아이디 
+	var user_name = $("#user_name").val(); //입력한 이름 
+	var user_email = $("#user_email").val(); //입력한 이메일 
+	
+	//console.log(user_id, user_name, user_email);
+	
+	var warnMsg = $(".mail_input_box_warn");// 이메일 입력 경고글
+	
+	
+	
+	/* 이메일 형식 유효성 검사 */
+	
+	
+		
+	
+	if(user_id==""||user_name==""||user_email==""){
+		alert("모두 입력해주세요.");
+	}else{
+		
+		if(mailFormCheck(user_email)){
+			   warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+			   warnMsg.css("display", "inline-block");
+	    } else {
+			   warnMsg.html("올바르지 못한 이메일 형식입니다.");
+			   warnMsg.css("display", "inline-block");
+			   warnMsg.css("color", "red");
+			   return false;
+		}    
+	 
+	}	
+	
+	 $.ajax({
+			type:"GET",
+			url:"pwFind.do?user_email="+user_email+"&user_name="+user_name+"&user_id="+user_id,
+			success:function(data){
+				 console.log("data: "+data);
+			}
+		});
+	
+	
+	 
+	 
+}
+//이메일 유효성 검사
+function mailFormCheck(user_email){
+	 var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	 return form.test(user_email);
+
+}
+
+</script>
 </head>
 <body>
 	<!-- header 추가 -->
@@ -60,18 +117,21 @@
                                             </tr>
                                             <tr>
                                                 <th>아이디</th>
-                                                <td><input type="text" name="user_name"  required="required" class="intext" placeholder="아이디를 입력해주세요"></td>
+                                                <td><input type="text" name="user_id" id="user_id"  required="required" class="intext" placeholder="아이디를 입력해주세요"></td>
                                             </tr>
                                             <tr>
                                                 <th>이름</th>
-                                                <td><input type="text" name="user_name"  required="required" class="intext" placeholder="이름을 입력해주세요"></td>
+                                                <td><input type="text" name="user_name" id="user_name" required="required" class="intext" placeholder="이름을 입력해주세요"></td>
                                             </tr>
                                             <tr>
                                                 <th>이메일</th>
-                                                <td><input type="text" name="user_email"  required="required" class="intext" placeholder="가입하신 이메일을 입력해주세요"></td>
+                                                <td>
+                                                	<input type="text" name="user_email" id="user_email" required="required" class="intext" placeholder="가입하신 이메일을 입력해주세요"><br>
+                                                	<font class="mail_input_box_warn" size="2"></font>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="text-align: center;"><input type="submit" class="finalsub" value="발송"></td>
+                                                <td colspan="2" style="text-align: center;"><input type="button" class="finalsub" value="발송" onclick="pwFindBtn();"></td>
                                             </tr>
                                         </table>
                                     </form>

@@ -1,6 +1,7 @@
 package com.kh.yeokku.model.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class ReportDto {
 	//db 변수
@@ -15,13 +16,18 @@ public class ReportDto {
 	
 	private UserDto user_dto; // 쿼리로 join할 dto
 	
+	//쿼리 변수
+	private String report_user_id; // 신고자 id
+	
 	public ReportDto() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public ReportDto(int report_no, String report_reason, String report_content, int report_userno,
-			int report_target_userno, Date report_date, Date report_done_date, String report_confirm,
-			UserDto user_dto) {
+			int report_target_userno, Date report_date, Date report_done_date, String report_confirm, UserDto user_dto,
+			String report_user_id) {
 		super();
 		this.report_no = report_no;
 		this.report_reason = report_reason;
@@ -32,7 +38,10 @@ public class ReportDto {
 		this.report_done_date = report_done_date;
 		this.report_confirm = report_confirm;
 		this.user_dto = user_dto;
+		this.report_user_id = report_user_id;
 	}
+
+
 
 	public int getReport_no() {
 		return report_no;
@@ -104,6 +113,18 @@ public class ReportDto {
 
 	public void setUser_dto(UserDto user_dto) {
 		this.user_dto = user_dto;
+	}
+
+
+
+	public String getReport_user_id() {
+		return report_user_id;
+	}
+
+
+
+	public void setReport_user_id(String report_user_id) {
+		this.report_user_id = report_user_id;
 	}
 	
 	

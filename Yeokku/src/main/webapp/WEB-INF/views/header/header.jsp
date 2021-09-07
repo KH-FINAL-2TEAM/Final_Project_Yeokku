@@ -51,13 +51,13 @@
                                             <a class="nav-link" href="tripplace_main_form.do">여행지</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">여행코스</a>
+                                            <a class="nav-link" href="course_list.do">여행코스</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="transportation_form.do">교통</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="admin_user_form.do">관리자</a>
+                                            <a class="nav-link" href="admin_user.do">관리자</a>
                                         </li>
                                     </ul>
                                 </div>

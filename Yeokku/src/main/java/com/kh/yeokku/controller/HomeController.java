@@ -34,6 +34,11 @@ public class HomeController {
 	public String tripplaceMainForm(Model model) {
 		return "tripplace/tripplace_main";
 	}
+	//여행코스
+	@RequestMapping("/course_list.do")
+	public String courseMainForm(Model model) {
+		return "Course/CourseList";
+	}
 	//교통
 	@RequestMapping("/transportation_form.do")
 	public String transportationForm(Model model) {

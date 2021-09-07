@@ -10,16 +10,15 @@ public class QaDto {
 	private String qa_content;
 	private String qa_email;
 	private Date qa_date;
+	private Date qa_done_date;
 	private String qa_confirm;
 	
 	public QaDto() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	public QaDto(int qa_no, String qa_name, String qa_title, String qa_content, String qa_email, Date qa_date,
-			String qa_confirm) {
+			Date qa_done_date, String qa_confirm) {
 		super();
 		this.qa_no = qa_no;
 		this.qa_name = qa_name;
@@ -27,9 +26,9 @@ public class QaDto {
 		this.qa_content = qa_content;
 		this.qa_email = qa_email;
 		this.qa_date = qa_date;
+		this.qa_done_date = qa_done_date;
 		this.qa_confirm = qa_confirm;
 	}
-
 
 
 	public int getQa_no() {
@@ -78,6 +77,14 @@ public class QaDto {
 
 	public void setQa_date(Date qa_date) {
 		this.qa_date = qa_date;
+	}
+
+	public Date getQa_done_date() {
+		return qa_done_date;
+	}
+
+	public void setQa_done_date(Date qa_done_date) {
+		this.qa_done_date = qa_done_date;
 	}
 
 	public String getQa_confirm() {
