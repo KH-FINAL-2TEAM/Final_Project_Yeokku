@@ -56,48 +56,55 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="transportation_form.do">교통</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="admin_user.do">관리자</a>
-                                        </li>
+                                        <c:if test="${user.user_role eq 'ADMIN' }">
+	                                        <li class="nav-item">
+	                                            <a class="nav-link" href="admin_user.do">관리자</a>
+	                                        </li>                                        
+                                        </c:if>
                                     </ul>
                                 </div>
-
-                                <a class="nav-link mypage" href="login_form.do" >로그인</a>
-                                <ul class="navbar-nav">
-                                    <li class="nav-item dropdown mypage">
-                                        <a class="nav-link" href="#" id="navbarDropdown"
-                                            role="button" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <div class="profile_img_div">
-                                                <img src="1.png" alt="" class="profile_img">
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="mypage_profile_form.do">정보 수정</a>
-                                            <a class="dropdown-item" href="mypage_travel_form.do">여행지</a>
-                                            <a class="dropdown-item" href="mypage_course_form.do">여행코스</a>
-                                            <a class="dropdown-item" href="mypage_review_form.do">리뷰</a>
-                                            <a class="dropdown-item" href="mypage_qna.do">문의</a>
-                                            <a class="dropdown-item" href="#">로그아웃</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="navbar-nav">
-                                    <li class="nav-item dropdown alarm">
-                                        <a class="nav-link" href="#" id="alarmDropdown"
-                                            role="button" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <div class="profile_img_div">
-                                                <i class="fas fa-bell fa-3x"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="alarmDropdown">
-                                            <ul style="padding: 0;">
-                                                <li class="dropdown-item" >알림 내용asfsafasfasdfsadsadasdasdsadfs</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
+								<c:choose>
+									<c:when test="${empty user }">
+		                                <a class="nav-link mypage" href="login_form.do" >로그인</a>
+									</c:when>
+									<c:otherwise>
+		                                <ul class="navbar-nav">
+		                                    <li class="nav-item dropdown mypage">
+		                                        <a class="nav-link" href="#" id="navbarDropdown"
+		                                            role="button" data-toggle="dropdown" aria-haspopup="true"
+		                                            aria-expanded="false">
+		                                            <div class="profile_img_div">
+		                                                <img src="1.png" onerror="this.src='resources/img/none_profile.png'" alt="" class="profile_img">
+		                                            </div>
+		                                        </a>
+		                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+		                                            <a class="dropdown-item" href="mypage_profile_form.do">정보 수정</a>
+		                                            <a class="dropdown-item" href="mypage_travel_form.do">여행지</a>
+		                                            <a class="dropdown-item" href="mypage_course_form.do">여행코스</a>
+		                                            <a class="dropdown-item" href="mypage_review_form.do">리뷰</a>
+		                                            <a class="dropdown-item" href="mypage_qna.do">문의</a>
+		                                            <a class="dropdown-item" href="#">로그아웃</a>
+		                                        </div>
+		                                    </li>
+		                                </ul>
+		                                <ul class="navbar-nav">
+		                                    <li class="nav-item dropdown alarm">
+		                                        <a class="nav-link" href="#" id="alarmDropdown"
+		                                            role="button" data-toggle="dropdown" aria-haspopup="true"
+		                                            aria-expanded="false">
+		                                            <div class="profile_img_div">
+		                                                <i class="fas fa-bell fa-3x"></i>
+		                                            </div>
+		                                        </a>
+		                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="alarmDropdown">
+		                                            <ul style="padding: 0;">
+		                                                <li class="dropdown-item" >알림 내용asfsafasfasdfsadsadasdasdsadfs</li>
+		                                            </ul>
+		                                        </div>
+		                                    </li>
+		                                </ul>
+									</c:otherwise>
+								</c:choose>
                             </nav>
                         </div>
                     </div>

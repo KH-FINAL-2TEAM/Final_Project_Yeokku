@@ -79,6 +79,10 @@
     object-fit: cover;
 }
 
+.conta .profile_img:hover{
+	cursor: pointer;
+}
+
 .conta .profile_name{
     font-size: 4rem;
     font-weight: 700;
@@ -279,4 +283,14 @@
     padding: 12px;
     max-width: 1200px;
     width: 100%;
+}
+
+
+
+
+/* 모달 */
+
+canvas{
+	widows: 100%;
+	height: auto;
 }
