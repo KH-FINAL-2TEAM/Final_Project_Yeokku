@@ -61,4 +61,18 @@ public class MypageDaoImpl implements MypageDao{
 		return res;
 	}
 
+	@Override
+	public int resign(int user_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"resign",user_no);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : resign error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

@@ -30,4 +30,9 @@ public class MypageBizImpl implements MypageBiz {
 		return dao.profileUpdate(pfdto);
 	}
 
+	@Override
+	public int resign(int user_no) {
+		return dao.resign(user_no);
+	}
+
 }

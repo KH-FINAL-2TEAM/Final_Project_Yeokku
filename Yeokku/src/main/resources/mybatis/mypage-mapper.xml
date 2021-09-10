@@ -39,4 +39,8 @@
   		WHERE PF_USERNO = #{pf_userno}
   	</update>
   	
+  	<delete id="resign" parameterType="int">
+  		DELETE FROM USERBOARD
+  		WHERE USER_NO = #{user_no}
+  	</delete>
   </mapper>

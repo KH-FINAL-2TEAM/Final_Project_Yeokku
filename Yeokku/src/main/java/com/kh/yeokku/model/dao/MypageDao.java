@@ -12,4 +12,6 @@ public interface MypageDao {
 
 	int profileUpdate(ProfileDto pfdto); // 프로필 사진 수정
 
+	int resign(int user_no); //회원 탈퇴
+
 }

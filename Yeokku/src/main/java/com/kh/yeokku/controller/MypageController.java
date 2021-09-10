@@ -102,4 +102,17 @@ public class MypageController {
 			return "사진 업로드 실패";
 		}
 	}
+	
+	@RequestMapping("/resign.do")
+	public String resign(Model model, HttpSession session) {
+		UserDto dto = (UserDto)session.getAttribute("user");
+		System.out.println(dto.getUser_no());
+		int res = biz.resign(dto.getUser_no());
+		if(res>0) {
+			session.invalidate();
+			return "main/main";
+		}else {
+			return "mypage/mypage_profile"; 
+		}
+	}
 }

@@ -18,8 +18,54 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  	<link href="resources/css/mypage.css" rel="stylesheet">
  	<script src="resources/js/cropper.js"></script>
+ 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
  	
     <title>Document</title>
+    
+    <script type="text/javascript">
+		  //3. 주소찾기 
+		  //주소찾기 
+		  function execPostCode() {
+		      new daum.Postcode({
+		          oncomplete: function(data) {
+		             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		
+		             // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+		             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		             var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+		             var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+		
+		             // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		             // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		             if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                 extraRoadAddr += data.bname;
+		             }
+		             // 건물명이 있고, 공동주택일 경우 추가한다.
+		             if(data.buildingName !== '' && data.apartment === 'Y'){
+		                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		             }
+		             // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		             if(extraRoadAddr !== ''){
+		                 extraRoadAddr = ' (' + extraRoadAddr + ')';
+		             }
+		             // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+		             if(fullRoadAddr !== ''){
+		                 fullRoadAddr += extraRoadAddr;
+		             }
+		
+		             // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		             console.log(data.zonecode);
+		             console.log(fullRoadAddr);
+		             
+		             
+		             $("[name=user_postcode]").val(data.zonecode);
+		             $("[name=user_address]").val(fullRoadAddr);
+		             
+		
+		         }
+		      }).open();
+		  }
+    </script>
 </head>
 	
 	<!-- header 추가 -->
@@ -79,12 +125,16 @@
                             <input type="password" class="form-control" id="inputepassword">
                         </div>
                         <div class="col-12">
+                            <label for="inputepassword" class="form-label">비밀번호 확인</label>
+                            <input type="password" class="form-control" id="inputepasswordchk">
+                        </div>
+                        <div class="col-12">
                             <label for="inputenickname" class="form-label">벌명</label>
                             <input type="text" class="form-control" id="inputenickname" value="${user.user_nickname }">
                         </div>
                         <div class="col-12">
                             <label for="inputemail" class="form-label">이메일</label>
-                            <input type="text" class="form-control" id="inputemail" value="${user.user_email }" >
+                            <input type="text" class="form-control" id="inputemail" value="${user.user_email }" readonly="readonly">
                         </div>
                     </div>
                     
@@ -94,17 +144,20 @@
                     <h3>
                        	 주소정보
                     </h3> 
-                    <div class="col-3">
-                        <label for="zipcode" class="form-label">우편번호</label>
-                        <input type="text" class="form-control" id="zipcode" value="${user.user_postcode }">
+                    <div class="col-12">
+                    	<button type="button" class="form-control" onclick="execPostCode();" ><i class="fa fa-search"></i> 우편번호 찾기</button> 
                     </div>
+                    <div class="col-3">
+                        <label for="zipcode" class="form-label" name="user_postcode">우편번호</label>
+                        <input type="text" class="form-control" id="zipcode" value="${user.user_postcode }" readonly="readonly">
+                    </div>                  
                     <div class="col-9">
                         <label for="inputAddress" class="form-label">주소</label>
-                        <input type="text" class="form-control" id="inputAddress" value="${user.user_address }">
+                        <input type="text" class="form-control" id="inputAddress" name="user_address" value="${user.user_address }" readonly="readonly">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress2" class="form-label">상세주소</label>
-                        <input type="text" class="form-control" id="inputAddress2" value="${user.user_extraaddress }">
+                        <input type="text" class="form-control" id="inputAddress2" name="user_extraaddress" value="${user.user_extraaddress }">
                     </div>
                 </div>
                 
@@ -114,11 +167,11 @@
                     </h3>
                     <div class="col-md-10">
                         <label for="inputdate" class="form-label">가입일자</label>
-                        <input type="text" class="form-control" id="inputdate" readonly="readonly" value="${user.user_reg_date }">
+                        <input type="text" class="form-control" id="inputdate" disabled="disabled" value="${user.user_reg_date }">
                     </div>
                     <div class="btns col-md-2">
                         <input type="submit" class="btn btn-primary" value="수정">
-                        <button class="btn btn-primary">회원탈퇴</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='resign.do'">회원탈퇴</button>
                     </div>
                 </div>
             </form>
