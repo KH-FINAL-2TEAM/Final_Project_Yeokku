@@ -23,6 +23,27 @@
     <title>Document</title>
     
     <script type="text/javascript">
+		  //2. 비밀번호 확인
+		    $(function(){
+		    	$("#user_pw1").keyup(function(){
+		    		$("#chkNotice").html('');
+		    	});
+		    	
+		    	$("#user_pw2").keyup(function(){
+		    		
+		    		if($("#user_pw1").val() != $("#user_pw2").val()){
+		    			$("#chkNotice").html('비밀번호가 일치하지 않습니다.<br>');
+		    			$("#chkNotice").attr('color', 'red');
+		    			$("#chkNotice").attr('title', 'n');
+		    		}else{
+		    			$("#chkNotice").html('비밀번호가 일치합니다.<br>');
+		    			$("#chkNotice").attr('color', 'blue');
+		    			$("#chkNotice").attr('title', 'y');
+		    		}
+		    		
+		    	});
+		    	
+		    });
 		  //3. 주소찾기 
 		  //주소찾기 
 		  function execPostCode() {
@@ -117,23 +138,24 @@
                     </h3>
                     <div class="row">
                         <div class="col-12">
-                            <label for="inputname" class="form-label">이름</label>
+                            <label for="inputname" class="form-label" name="user_name">이름</label>
                             <input type="text" class="form-control" id="inputname" readonly="readonly" value="${user.user_name }">
                         </div>
                         <div class="col-12">
-                            <label for="inputepassword" class="form-label">비밀번호</label>
-                            <input type="password" class="form-control" id="inputepassword">
+                            <label for="user_pw1" class="form-label" name="user_pw">비밀번호</label>
+                            <input type="password" class="form-control" id="user_pw1">
                         </div>
                         <div class="col-12">
-                            <label for="inputepassword" class="form-label">비밀번호 확인</label>
-                            <input type="password" class="form-control" id="inputepasswordchk">
+                            <label for="user_pw2" class="form-label">비밀번호 확인</label>
+                            <input type="password" class="form-control" id="user_pw2">
+                            <font id="chkNotice" name="chkNotice" size="2" title=""></font>
                         </div>
                         <div class="col-12">
-                            <label for="inputenickname" class="form-label">벌명</label>
+                            <label for="inputenickname" class="form-label" name="user_nickname">벌명</label>
                             <input type="text" class="form-control" id="inputenickname" value="${user.user_nickname }">
                         </div>
                         <div class="col-12">
-                            <label for="inputemail" class="form-label">이메일</label>
+                            <label for="inputemail" class="form-label" name="user_email">이메일</label>
                             <input type="text" class="form-control" id="inputemail" value="${user.user_email }" readonly="readonly">
                         </div>
                     </div>
@@ -167,10 +189,10 @@
                     </h3>
                     <div class="col-md-10">
                         <label for="inputdate" class="form-label">가입일자</label>
-                        <input type="text" class="form-control" id="inputdate" disabled="disabled" value="${user.user_reg_date }">
+                        <input type="text" class="form-control" id="inputdate" disabled="disabled" value="${user.user_reg_date }" name="user_reg_date">
                     </div>
                     <div class="btns col-md-2">
-                        <input type="submit" class="btn btn-primary" value="수정">
+                        <input type="submit" class="btn btn-primary" value="수정" onclick="user_info_update();">
                         <button type="button" class="btn btn-primary" onclick="location.href='resign.do'">회원탈퇴</button>
                     </div>
                 </div>
@@ -253,16 +275,46 @@
 				success : function(msg) {
 					alert(msg);
 					window.location.reload();
-					},
+				},
 				error : function(a, b, c){
 					alert("비동기 전송 실패");
 				}
 	
-				});
+			});
 	
-				return;
-			}
+			return;
+		}
 		
+		
+		function user_info_update(){
+			var pwchk = document.getElementsByName("chkNotice")[0].title; 
+			if(pwchk=="n"){
+				alert("비밀번호 확인을 해주세요.");
+			}else{
+				$.ajax({
+					url : 'user_info_update.do',
+					data : { 
+						user_no : '${user.user_no}',
+						user_pw: $('#user_pw1').val(),
+						user_nickname : $('#inputenickname').val(),
+						user_postcode : $('#zipcode').val(),
+						user_address : $('#inputAddress').val(),
+						user_extraaddress : $('#inputAddress2').val(),
+					},
+					type : 'POST',
+					success : function(msg) {
+						alert(msg);
+						window.location.reload();
+					},
+					error : function(){
+						alert("비동기 전송 실패");
+					}
+		
+				});
+			}
+		} 
+		
+	
 	</script>
 	
 </body>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.yeokku.model.dao.MypageDao;
 import com.kh.yeokku.model.dto.ProfileDto;
+import com.kh.yeokku.model.dto.UserDto;
 
 @Repository
 public class MypageDaoImpl implements MypageDao{
@@ -70,6 +71,20 @@ public class MypageDaoImpl implements MypageDao{
 			
 		} catch (Exception e) {
 			System.out.println("[error] : resign error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int userInfoUpdate(UserDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"user_info_update",dto);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : user info update error");
 			e.printStackTrace();
 		}
 		return res;

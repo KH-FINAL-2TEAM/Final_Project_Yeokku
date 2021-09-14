@@ -115,4 +115,24 @@ public class MypageController {
 			return "mypage/mypage_profile"; 
 		}
 	}
+	
+	@RequestMapping(value="/user_info_update.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String userInfoUpdate(Model model, UserDto dto, HttpSession session) {
+		int res = biz.userInfoUpdate(dto);
+		if(res>0) {
+			UserDto user_dto = (UserDto) session.getAttribute("user");
+			dto.setUser_id(user_dto.getUser_id());
+			dto.setUser_name(user_dto.getUser_name());
+			dto.setUser_email(user_dto.getUser_email());
+			dto.setUser_able(user_dto.getUser_able());
+			dto.setUser_role(user_dto.getUser_role());
+			
+			session.setAttribute("user", dto);
+			return "수정 완료";
+		}else {
+			return "수정 실패";
+		}
+		
+	}
 }

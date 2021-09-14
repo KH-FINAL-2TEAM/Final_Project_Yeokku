@@ -43,4 +43,10 @@
   		DELETE FROM USERBOARD
   		WHERE USER_NO = #{user_no}
   	</delete>
+  	
+  	<update id="user_info_update" parameterType="user_dto">
+		UPDATE USERBOARD
+		SET USER_PW = #{user_pw}, USER_NICKNAME = #{user_nickname}, USER_POSTCODE = #{user_postcode}, USER_ADDRESS = #{user_address}, USER_EXTRAADDRESS = #{user_extraaddress}
+		WHERE USER_NO = #{user_no}
+  	</update>
   </mapper>

@@ -1,6 +1,7 @@
 package com.kh.yeokku.model.dao;
 
 import com.kh.yeokku.model.dto.ProfileDto;
+import com.kh.yeokku.model.dto.UserDto;
 
 public interface MypageDao {
 
@@ -13,5 +14,7 @@ public interface MypageDao {
 	int profileUpdate(ProfileDto pfdto); // 프로필 사진 수정
 
 	int resign(int user_no); //회원 탈퇴
+
+	int userInfoUpdate(UserDto dto); //회원정보 수정
 
 }

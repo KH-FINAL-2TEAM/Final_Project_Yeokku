@@ -7,6 +7,7 @@ import com.kh.yeokku.model.biz.MypageBiz;
 import com.kh.yeokku.model.dao.MypageDao;
 import com.kh.yeokku.model.dao.impl.MypageDaoImpl;
 import com.kh.yeokku.model.dto.ProfileDto;
+import com.kh.yeokku.model.dto.UserDto;
 
 @Service
 public class MypageBizImpl implements MypageBiz {
@@ -33,6 +34,11 @@ public class MypageBizImpl implements MypageBiz {
 	@Override
 	public int resign(int user_no) {
 		return dao.resign(user_no);
+	}
+
+	@Override
+	public int userInfoUpdate(UserDto dto) {
+		return dao.userInfoUpdate(dto);
 	}
 
 }
