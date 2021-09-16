@@ -1,3 +1,4 @@
+
 package com.kh.yeokku.controller;
 
 
@@ -10,8 +11,10 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -29,6 +32,7 @@ import com.google.gson.JsonParser;
 @Controller
 public class KakaoController {
 	
+	
 	private static final Logger logger = LoggerFactory.getLogger(KakaoController.class);
 	@RequestMapping(value = "getKakaoAuthUrl.do")
 	public @ResponseBody String getKakaoAuthUrl(
@@ -36,7 +40,7 @@ public class KakaoController {
 		String reqUrl = 
 				"https://kauth.kakao.com/oauth/authorize"
 				+ "?client_id=4f55f237ee8d2ddceca32b2b1e523c46"
-				+ "&redirect_uri=http://localhost:8787/yeokku/test.do"
+				+ "&redirect_uri=http://localhost:8787/yeokku/redirect.do"
 				+ "&response_type=code";
 		
 		return reqUrl;
@@ -46,14 +50,14 @@ public class KakaoController {
 	@RequestMapping(value = "oauth_kakao.do")
 	public String oauthKakao(
 			@RequestParam(value = "code", required = false) String code
-			, Model model) throws Exception {
+			, Model model, HttpSession session) throws Exception {
 
 		System.out.println("#########" + code);
         String access_Token = getAccessToken(code);
         System.out.println("###access_Token#### : " + access_Token);
         
         
-        HashMap<String, Object> userInfo = getUserInfo(access_Token);
+        HashMap<String, Object> userInfo = getUserInfo(access_Token, session);
         System.out.println("###access_Token#### : " + access_Token);
         System.out.println("###userInfo#### : " + userInfo.get("email"));
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
@@ -84,7 +88,7 @@ public class KakaoController {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=4f55f237ee8d2ddceca32b2b1e523c46");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:8787/yeokku/test.do");     // 본인이 설정해 놓은 경로
+            sb.append("&redirect_uri=http://localhost:8787/yeokku/redirect.do");     // 본인이 설정해 놓은 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -124,7 +128,7 @@ public class KakaoController {
     }
 	
     //유저정보조회
-    public HashMap<String, Object> getUserInfo (String access_Token) {
+    public HashMap<String, Object> getUserInfo ( String access_Token, HttpSession session) {
 
         //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
@@ -162,7 +166,14 @@ public class KakaoController {
             userInfo.put("accessToken", access_Token);
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
-
+            
+            if (userInfo.get("email") != null) {
+                session.setAttribute("userId", userInfo.get("email"));
+                session.setAttribute("access_Token", access_Token);
+                System.out.println(session);
+            }
+            
+            
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -171,11 +182,38 @@ public class KakaoController {
         return userInfo;
     }
 	
+
+ 
     
     
-    
+   /* 
     @RequestMapping("/kakao.do")
-	public String adminReport() {
-		return "login/test2";
-	}
+	public String access(HttpSession session) throws IOException {
+    	    String reqURL = "https://kapi.kakao.com/v1/user/logout";
+    	    
+    	    URL url = new URL(reqURL);
+    	    
+    	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    	    
+			String access_token = (String)session.getAttribute("access_token");
+			
+			Map<String, String> map = new HashMap<String, String>();
+			
+			map.put("Authorization", "Bearer "+ access_token);
+			
+			
+			
+			return "login/kakaoRedirectForm";
+		}
+    
+ */
+    
+    
+
+
+    
+    
+    
+    
+    
 }

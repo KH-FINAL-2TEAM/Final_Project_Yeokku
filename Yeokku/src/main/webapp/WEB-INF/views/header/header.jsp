@@ -23,6 +23,7 @@
     <!--폰트어썸-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
+
 </head>
 
 <body>
@@ -78,7 +79,7 @@
                                             <a class="dropdown-item" href="mypage_course_form.do">여행코스</a>
                                             <a class="dropdown-item" href="mypage_review_form.do">리뷰</a>
                                             <a class="dropdown-item" href="mypage_qna.do">문의</a>
-                                            <a class="dropdown-item" href="#">로그아웃</a>
+                                            <a class="dropdown-item" href="logout.do">로그아웃</a>
                                         </div>
                                     </li>
                                 </ul>

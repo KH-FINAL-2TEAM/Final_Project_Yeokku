@@ -41,7 +41,8 @@
      <property name="port" value="465"/> <!-- 메이서버 포트번호 -->
      <property name="username" value="heyon123@naver.com"/> <!-- 자신의 이메일 아이디 -->
      <property name="password" value="wls728548"/> <!-- 자신의 비밀번호 -->
-       <!-- 보안연결 SSL과 관련된 설정 -->
+     
+     <!-- 보안연결 SSL과 관련된 설정 -->
      <property name="javaMailProperties">
       <props>
       <prop key="mail.smtp.auth">true</prop>
@@ -54,4 +55,8 @@
      </property>
     </bean>
 
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<bean id="naverLoginBO" class="com.kh.yeokku.model.dto.NaverLoginBO" />
+
+	
 </beans>

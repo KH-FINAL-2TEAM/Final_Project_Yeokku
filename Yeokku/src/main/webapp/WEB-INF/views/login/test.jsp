@@ -6,9 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript">
+/*일반 로그인 했을 때*/ 
+$(document).ready(function() {
+
+    alert("로그인 성공");
+    location.href="loginpage.do";
+	
+  });
+    
+
+</script>
 </head>
 <body>
-<!-- 테스트로 잠깐 넣어뒀습니다 -->
- ${login.getUser_id() }님 안녕하세요 
+
+ 
 </body>
 </html>
