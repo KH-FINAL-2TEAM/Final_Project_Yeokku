@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.yeokku.model.biz.LoginpageBiz;
 import com.kh.yeokku.model.dao.LoginpageDao;
+import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Service
@@ -41,6 +42,11 @@ public class LoginpageBizImpl implements LoginpageBiz{
 	@Override
 	public UserDto findPw(UserDto dto) {
 		return dao.findPw(dto);
+	}
+
+	@Override
+	public ProfileDto profile(UserDto user) {
+		return dao.profile(user);
 	}
 
 }

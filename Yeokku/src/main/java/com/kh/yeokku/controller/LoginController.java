@@ -21,9 +21,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.yeokku.model.biz.LoginpageBiz;
+import com.kh.yeokku.model.dto.NaverLoginBO;
+import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Controller
@@ -38,35 +42,25 @@ public class LoginController {
 
 	@Autowired
 	private LoginpageBiz biz;
-	
-	//로그인
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Boolean> logIn(HttpSession session, @RequestBody UserDto dto) {
-		
-		UserDto user = biz.login(dto);
-		boolean check = false;
-		
-		if(user!=null) {
-			session.setAttribute("login", user);
-			check = true;
-		}
-		
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("check", check);
-		
-	 return map;
-	}
 
-	@RequestMapping("/loginpage.do")
-	public String adminReport() {
-		return "login/login";
-	}
+	
+	
+	/* NaverLoginBO */
+    private NaverLoginBO naverLoginBO;
+    private String apiResult = null;
+    
+    @Autowired
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+        this.naverLoginBO = naverLoginBO;
+    }
+	
+    
+	
+	
 	@RequestMapping("/test.do")
 	public String test() {
 		return "login/test";
 	}
-	
 	@RequestMapping("/signup.do")
 	public String signUp() {
 		return "login/login_regi";
@@ -79,6 +73,37 @@ public class LoginController {
 	public String pwFindPage() {
 		return "login/login_findpw";
 	}
+	@RequestMapping("/redirect.do")
+	public String redirectPage() {
+		return "login/kakaoRedirectForm";
+	}
+	
+	
+	//로그인
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Boolean> logIn(HttpSession session, @RequestBody UserDto dto) {
+		
+		UserDto user = biz.login(dto);
+		boolean check = false;
+		
+		if(user!=null) {
+			ProfileDto pfdto = biz.profile(user);
+			if(pfdto!=null) {
+				session.setAttribute("profile", pfdto);
+			}
+			session.setAttribute("user", user);
+			check = true;
+		}
+		
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("check", check);
+		
+	 return map;
+	}
+
+	
+	
 	
 	//회원가입 - 아이디 중복확인 
 	@RequestMapping("/idchk.do")
@@ -155,7 +180,6 @@ public class LoginController {
     		return "login/login";
     	}else {
     		
-    		
     		try {
 				jsResponse("회원가입 실패.",response);
 			} catch (IOException e) {
@@ -207,9 +231,6 @@ public class LoginController {
             e.printStackTrace();
         }
     	
-    	
-    	
-        
     }
     
     
@@ -261,20 +282,51 @@ public class LoginController {
         
     }
     
-  /*  
-  //카카오 로그인 연습
-  	@RequestMapping("/kakao.do")
-  	public String kakaoLogin2() {
-  		return "login/test2";
-  	}
-    
-  */ 
     
     
+    //*** 네이버 로그인
+    //로그인 첫 화면 요청 메소드
+    @RequestMapping(value = "/loginpage.do", method = { RequestMethod.GET, RequestMethod.POST })
+    public String login(Model model, HttpSession session) {
+        
+        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        
+        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+        //System.out.println("네이버:" + naverAuthUrl);
+        
+        //네이버 
+        model.addAttribute("url", naverAuthUrl);
+ 
+        /* 생성한 인증 URL을 View로 전달 */
+        return "login/login";
+    }
+ 
+    //네이버 로그인 성공시 callback호출 메소드
+    @RequestMapping(value = "/naverredirect.do", method = { RequestMethod.GET, RequestMethod.POST })
+    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+            throws IOException {
+        System.out.println("여기는 callback");
+        OAuth2AccessToken oauthToken;
+        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+        //로그인 사용자 정보를 읽어온다.
+        apiResult = naverLoginBO.getUserProfile(oauthToken);
+        model.addAttribute("result", apiResult);
+ 
+        /* 네이버 로그인 성공 페이지 View 호출 */
+        return "login/naverRedirectForm";
+    }
     
     
     
-    
+    //로그아웃 
+    @RequestMapping("/logout.do")
+    public String logout(HttpSession session) {
+    	
+    	session.invalidate();
+    	return "login/login";
+    }
     
     
     

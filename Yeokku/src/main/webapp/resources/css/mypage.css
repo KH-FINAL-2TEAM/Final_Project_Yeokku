@@ -79,6 +79,10 @@
     object-fit: cover;
 }
 
+.conta .profile_img:hover{
+	cursor: pointer;
+}
+
 .conta .profile_name{
     font-size: 4rem;
     font-weight: 700;
@@ -143,6 +147,11 @@
     color : #223b68;
 }
 
+.conta .mypage_nav:hover{
+	color: #ff7e5f;
+	cursor: pointer;
+}
+
 .list_nav{
     display: flex;
     justify-content: center;
@@ -195,6 +204,9 @@
     border-radius: 5px;
 }
 
+.travel_list img{
+	width: 100%;
+}
 .submit_div{
     background-color: #fe5c24;
     border: none;
@@ -269,6 +281,9 @@
     margin-bottom: 12px;
 }
 
+.desc{
+	width : 100%;
+}
 
 
 /*
@@ -279,4 +294,14 @@
     padding: 12px;
     max-width: 1200px;
     width: 100%;
+}
+
+
+
+
+/* 모달 */
+
+canvas{
+	widows: 100%;
+	height: auto;
 }

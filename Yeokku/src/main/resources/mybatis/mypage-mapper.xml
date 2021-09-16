@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mypage">
+  	
+  	<resultMap type="user_dto" id="user_map">
+  		<result property="user_no" column="USER_NO"/>
+  		<result property="user_id" column="USER_ID"/>
+  		<result property="user_pw" column="USER_PW"/>
+  		<result property="user_name" column="USER_NAME"/>
+  		<result property="user_email" column="USER_EMAIL"/>
+  		<result property="user_nickname" column="USER_NICKNAME"/>
+  		<result property="user_postcode" column="USER_POSTCODE"/>
+  		<result property="user_address" column="USER_ADDRESS"/>
+  		<result property="user_extraaddress" column="USER_EXTRAADDRESS"/>
+  		<result property="user_reg_date" column="USER_REG_DATE"/>
+  		<result property="user_able" column="USER_ABLE"/>
+  		<result property="user_role" column="USER_ROLE"/>
+  	</resultMap>
+  	
+  	<resultMap type="profile_dto" id="profile_map"></resultMap>
+  	
+  	<select id="profile_check" parameterType="int" resultType="int">
+  		SELECT COUNT(*)
+		FROM PROFILEBOARD
+		WHERE PF_USERNO = #{user_no}
+  	</select>
+  	
+  	
+  	<insert id="profile_upload" parameterType="profile_dto">
+  		INSERT INTO PROFILEBOARD
+  		VALUES(NVL((SELECT MAX(PF_NO) FROM PROFILEBOARD)+1,0),#{pf_userno},#{pf_name},#{pf_src},#{pf_type})
+  	</insert>
+  	
+  	<update id="profile_update" parameterType="profile_dto">
+  		UPDATE PROFILEBOARD
+  		SET PF_NAME = #{pf_name}, PF_SRC = #{pf_src}, PF_TYPE = #{pf_type}
+  		WHERE PF_USERNO = #{pf_userno}
+  	</update>
+  	
+  	<delete id="resign" parameterType="int">
+  		DELETE FROM USERBOARD
+  		WHERE USER_NO = #{user_no}
+  	</delete>
+  	
+  	<update id="user_info_update" parameterType="user_dto">
+		UPDATE USERBOARD
+		SET USER_PW = #{user_pw}, USER_NICKNAME = #{user_nickname}, USER_POSTCODE = #{user_postcode}, USER_ADDRESS = #{user_address}, USER_EXTRAADDRESS = #{user_extraaddress}
+		WHERE USER_NO = #{user_no}
+  	</update>
+  	
+  	<select id="user_qna_list_all" parameterType="qa_dto" resultType="qa_dto">
+  		SELECT QA_NO, QA_TITLE, QA_CONTENT, QA_EMAIL, QA_DATE, QA_DONE_DATE, QA_CONFIRM
+  		FROM QABOARD
+  		WHERE QA_EMAIL = #{qa_email}
+  	</select>
+  	
+  	<select id="user_qna_list" parameterType="qa_dto" resultType="qa_dto">
+  		SELECT QA_NO, QA_TITLE, QA_CONTENT, QA_EMAIL, QA_DATE, QA_DONE_DATE, QA_CONFIRM
+  		FROM QABOARD
+  		WHERE QA_EMAIL = #{qa_email} AND QA_CONFIRM = #{qa_confirm}
+  	</select>
+  	
+  	<select id="mypage_travel" parameterType="int" resultType="like_tour_dto">
+  		SELECT LT_CONTENTID, LT_CONTENTTYPEID, LT_TITLE, LT_FIRSTIMAGE
+  		FROM LTBOARD
+  		WHERE LT_USERNO = #{no}
+  	</select>
+  </mapper>

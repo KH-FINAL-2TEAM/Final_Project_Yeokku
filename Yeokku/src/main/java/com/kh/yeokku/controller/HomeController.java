@@ -25,8 +25,7 @@ public class HomeController {
 		session.setAttribute("user_no", 1+Math.random()*1000);
 		session.setAttribute("pfimg", 1+Math.random()*1000);
 		
-		return "tripplace/tripplace_main";
-		//return "Course/CourseMaking";
+		return "main/main";
 	}
 	
 	
@@ -65,11 +64,6 @@ public class HomeController {
 	@RequestMapping("/mypage_profile_form.do")
 	public String mypageProfileForm(Model model) {
 		return "mypage/mypage_profile";
-	}
-	//마이페이지-여행지
-	@RequestMapping("/mypage_travel_form.do")
-	public String mypageTravelForm(Model model) {
-		return "mypage/mypage_travel";
 	}
 	//마이페이지-여행코스
 	@RequestMapping("/mypage_course_form.do")
