@@ -3,7 +3,8 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>    
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -19,6 +20,24 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-lite.css">	
+
+    <script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
+ 	<script>
+ 		$("textarea.autosize").on('keydown keyup', function () {
+		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+		});
+		
+	</script>
+	<style>
+		textarea.autosize { min-height: 500px; }
+		textarea:focus {
+    		outline: none;
+		}
+	</style>
+    
 </head>
 <body>
 	<!-- header 추가 -->
@@ -66,38 +85,32 @@
                 </div>
                 
                 <div class="col-lg-8">
-                    <h2 class="contact-title">온라인 문의</h2>
-                    <form class="form-contact contact_form" action="insertQa.do" method="post" id="contactForm" novalidate="novalidate">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <select name="qa_title" id="sel_contact">
-                                        <option value="계정관련문의">계정관련 문의</option>
-                                        <option value="사용관련문의">사용관련 문의</option>
-                                        <option value="기타문의">기타 문의</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <textarea class="form-control w-100" name="qa_content" id="message" cols="30" rows="9" placeholder='문의 내용을 작성해주세요' required="required"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="qa_name" id="name" type="text"  placeholder='이름을 입력해주세요' required="required">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="qa_email" id="email" type="email" placeholder='답변받으실 메일주소를 입력해주세요' required="required">
-                                </div>
-                            </div>                            
-                        </div>
-                        <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm btn_1">문의하기</button>
-                        </div>
-                    </form>
+                    <h2 class="contact-title">공지사항</h2>
+                    <table class="notice">
+                        <colgroup>
+                            <col width="450px"/>
+                            <col width="300px"/>
+                        </colgroup>
+                        <tr>
+                            <th colspan="2" align="center"><h4>${noticedto.notice_title}</h4></th>
+                        </tr>
+                        <tr>
+                        	<td></td>
+                        	<td align="left"><fmt:formatDate value="${noticedto.notice_reg_date}" pattern="yyyy-MM-dd (HH:mm)"/>  |  ${noticedto.notice_reg_view}</td>
+                        </tr>
+                        <tr>
+                        	<td colspan="2" align="center"><textarea id="summernote" readonly="readonly" rows="8" style="width:90%; resize: none; border: none">${noticedto.notice_content}</textarea></td>
+                        </tr>
+                        <tr>
+                        	<td colspan="2" align="right">
+                        		<c:if test="${user.user_role eq 'ADMIN' }">
+                        			<input type="button" value="글수정" onclick="location.href='updateNoticeform.do?notice_no=${dto.notice_no}'">
+                        			<input type="button" value="글삭제" onclick="location.href='deleteNotice.do?notice_no=${dto.notice_no}'">
+                        		</c:if>
+                        		<input type="button" value="목록" onclick="location.href='qna_notice_form.do'">
+                        	</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

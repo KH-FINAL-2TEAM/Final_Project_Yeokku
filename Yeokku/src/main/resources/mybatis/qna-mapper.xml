@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="qna">
+  	
+  	<resultMap type="notice_dto" id="notice_map">
+  		<result property="notice_no" column="NOTICE_NO"/>
+  		<result property="notice_userno" column="NOTICE_USERNO"/>
+  		<result property="notice_title" column="NOTICE_TITLE"/>
+  		<result property="notice_content" column="NOTICE_CONTENT"/>
+  		<result property="notice_reg_date" column="NOTICE_REG_DATE"/>
+  		<result property="notice_reg_view" column="NOTICE_REG_VIEW"/>
+  	</resultMap>
+  	
+  	
+  	<resultMap type="qa_dto" id="qa_map">
+  		<result property="qa_no" column="QA_NO"/>
+  		<result property="qa_name" column="QA_NAME"/>
+  		<result property="qa_title" column="QA_TITLE"/>
+  		<result property="qa_content" column="QA_CONTENT"/>
+  		<result property="qa_email" column="QA_EMAIL"/>
+  		<result property="qa_date" column="QA_DATE"/>
+  		<result property="qa_done_date" column="QA_DONE_DATE"/>
+  		<result property="qa_confirm" column="QA_CONFIRM"/>
+  	</resultMap>
+  
+  	<select id="selectList" resultMap="notice_map">
+  		SELECT NOTICE_NO, NOTICE_TITLE, NOTICE_REG_DATE, NOTICE_REG_VIEW 
+		FROM NOTICEBOARD
+		ORDER BY NOTICE_NO DESC 
+  	</select>
+  	
+  	<select id="selectOne" parameterType="int" resultType="notice_dto" >
+  		SELECT *
+  		FROM NOTICEBOARD
+  		WHERE NOTICE_NO = #{notice_no }
+  	</select>
+  	
+  	<insert id="insertNotice" parameterType="NoticeDto">
+  		INSERT INTO NOTICEBOARD
+  		VALUES(NOTICESEQ.NEXTVAL,#{notice_userno}, #{notice_title},#{notice_content},SYSDATE,0)
+  	</insert>
+  	
+  	<update id="updateNotice" parameterType="NoticeDto">
+  		UPDATE NOTICEBOARD
+  		SET NOTICE_TITLE= #{notice_title} , NOTICE_CONTENT= #{notice_content}
+  		WHERE NOTICE_NO= #{notice_no)
+  	</update>
+  	
+  	<delete id="deleteNotice" parameterType="int">
+  		DELETE FROM NOTICEBOARD
+  		WHERE NOTICE_NO=#{notice_no}
+  	</delete>
+  	
+  	<insert id="insertEmail" parameterType="QaDto">
+  		INSERT INTO QABOARD
+  		VALUES(QASEQ.NEXTVAL,#{qa_name},#{qa_title},#{qa_content},#{qa_email},SYSDATE,,'N')
+  	</insert>
+  	
+  </mapper>

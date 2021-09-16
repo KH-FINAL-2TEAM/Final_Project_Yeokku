@@ -5,7 +5,7 @@ import java.util.Date;
 public class NoticeDto {
 	//db 변수
 	private int notice_no;
-	private int notice_usrrno;
+	private int notice_userno;
 	private String notice_title;
 	private String notice_content;
 	private Date notice_reg_date;
@@ -21,7 +21,7 @@ public class NoticeDto {
 			int notice_reg_view, UserDto user_dto) {
 		super();
 		this.notice_no = notice_no;
-		this.notice_usrrno = notice_usrrno;
+		this.notice_userno = notice_usrrno;
 		this.notice_title = notice_title;
 		this.notice_content = notice_content;
 		this.notice_reg_date = notice_reg_date;
@@ -38,11 +38,11 @@ public class NoticeDto {
 	}
 
 	public int getNotice_usrrno() {
-		return notice_usrrno;
+		return notice_userno;
 	}
 
 	public void setNotice_usrrno(int notice_usrrno) {
-		this.notice_usrrno = notice_usrrno;
+		this.notice_userno = notice_usrrno;
 	}
 
 	public String getNotice_title() {

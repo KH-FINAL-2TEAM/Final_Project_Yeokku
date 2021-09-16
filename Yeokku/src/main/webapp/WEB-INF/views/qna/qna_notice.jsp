@@ -4,6 +4,7 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -66,38 +67,45 @@
                 </div>
                 
                 <div class="col-lg-8">
-                    <h2 class="contact-title">온라인 문의</h2>
-                    <form class="form-contact contact_form" action="insertQa.do" method="post" id="contactForm" novalidate="novalidate">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <select name="qa_title" id="sel_contact">
-                                        <option value="계정관련문의">계정관련 문의</option>
-                                        <option value="사용관련문의">사용관련 문의</option>
-                                        <option value="기타문의">기타 문의</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <textarea class="form-control w-100" name="qa_content" id="message" cols="30" rows="9" placeholder='문의 내용을 작성해주세요' required="required"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="qa_name" id="name" type="text"  placeholder='이름을 입력해주세요' required="required">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="qa_email" id="email" type="email" placeholder='답변받으실 메일주소를 입력해주세요' required="required">
-                                </div>
-                            </div>                            
-                        </div>
-                        <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm btn_1">문의하기</button>
-                        </div>
-                    </form>
+                    <h2 class="contact-title">공지사항</h2>
+                    <table class="notice">
+                        <colgroup>
+                            <col width="450px"/>
+                            <col width="150px"/>
+                            <col width="150px"/>
+                        </colgroup>
+                        <tr>
+                            <th>제목</th>
+                            <th>등록일</th>
+                            <th>조회수</th>
+                        </tr>
+                        <c:choose>
+                        	<c:when test="${empty list }">
+                        		<tr>
+                        			<td colspan="3" align="center">
+                        				<p>-----작성된 공지사항이 없습니다-----</p>
+                        			</td>
+                        		</tr>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<c:forEach items="${list}" var="dto">
+                        			<tr>
+                            			<td><a href="qna_notice_detail.do?notice_no=${dto.notice_no}">${dto.notice_title }</a></td>
+                            			<td><fmt:formatDate value="${dto.notice_reg_date}" pattern="yyyy-MM-dd"/></td>
+                            			<td>${dto.notice_reg_view}</td>
+                        			</tr>
+                        		</c:forEach>                        	
+                        	</c:otherwise>
+                        </c:choose>
+                        <tr>
+                        	<td colspan="3" align="right">
+                        		<c:if test="${user.user_role eq 'ADMIN' }">
+                        			<input type="button" value="글작성" onclick="location.href='qna_notice_insert.do'">
+                        		</c:if>
+                        		<input type="button" value="목록" onclick="qna_notice_form.do">
+                        	</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
