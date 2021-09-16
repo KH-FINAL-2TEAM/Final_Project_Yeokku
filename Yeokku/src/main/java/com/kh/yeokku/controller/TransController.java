@@ -33,16 +33,12 @@ public class TransController {
 	@ResponseBody
 	public <TransResultAirDto>List search_air(TransSearchDto dto) {
 		
-		System.out.println(dto.toString());
-
 		return biz.search_air(dto);
 	}
 	
 	@RequestMapping(value="/ship_search.do", method=RequestMethod.POST)
 	@ResponseBody
 	public <TransResultShipDto>List search_ship(TransSearchDto dto) {
-		
-		System.out.println(dto.toString());
 		
 		return biz.search_ship(dto);
 	}
@@ -51,8 +47,6 @@ public class TransController {
 	@ResponseBody
 	public <TransResultTrainDto>List search_train(TransSearchDto dto) {
 		
-		System.out.println(dto.toString());
-		
 		return biz.search_train(dto);	
 	}
 	
@@ -60,13 +54,18 @@ public class TransController {
 	@ResponseBody
 	public <TransResultBusDto>List search_bus(TransSearchDto dto) {
 		
-		System.out.println(dto.toString());
-		
 		return biz.search_bus(dto);
 	}
 }
 
-// api 승인 나면, 공항코드같은거 미리 다 받아서 db에 저장하고
-// 각 들어온  dto를 요쳥변수에 맞게 변환해주는 작업이 필요함
-// 그리고 Trans.jsp에서 입력 받을때 지금은 그냥 text 인데 select로 해주는게 좋을것 같음
-// 이 3가지 하면 교통은 끝
+
+
+
+
+
+
+
+
+// api 승인 나면, 공항코드같은거 미리 다 받아서 db에 저장하고 각 들어온  dto를 요쳥변수에 맞게 변환해주는 작업이 필요함
+// 이건 해도 그만 안해도 그만인데 Trans.jsp에서 입력 받을때 지금은 그냥 text 인데 select로 해주는게 좋을것 같음
+// 이 2가지 하면 교통은 끝

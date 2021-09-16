@@ -1,5 +1,5 @@
 
-var Icon_Switch = [ 1, 0, 1, 1, 1, 1, 1, 0, 1 ];
+var Icon_Switch = [ 1, 0, 1, 1, 1, 1, 1, 0, 1, 1 ];
 var Alarm_Check = true;
 
 var Menu_Lock = "Lock";
@@ -15,7 +15,9 @@ var Scroll_Check;
 
 window.onload = function()
 {	
-	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show(); $("#Pencil").hide();
+	$("#Start_Area").bind('click', function() { document.documentElement.requestFullscreen(); $("#Start_Area").fadeOut();});
+
+	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show(); $("#Pencil").hide(); $("#Save_Area").hide(); $("#Black_Mask").hide();
 	$("#Chat").resizable({ autoHide: true });
 	//$(".Detail").resizable({ autoHide: true });
 	$("#Making_Area").resizable({ 
@@ -45,6 +47,22 @@ window.onload = function()
 		var wheel = e.originalEvent.wheelDelta;
 		$(this).children(".ui-resizable-s").css("bottom", -5-$(this).scrollTop());
 		$(this).children(".ui-resizable-se").css("bottom", -5-$(this).scrollTop());
+	});
+	
+	////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
+	
+	$("#Save_Icon").bind('click', function() {
+		
+		if(Icon_Switch[0] == 0) {
+			Icon_Switch[9] = 1;
+			$("#Save_Area").hide(); $("#Black_Mask").hide();
+			$("#Save_Icon").attr("src","resources/img/Course/Save.png");
+		} else {
+			Icon_Switch[9] = 0;
+			$("#Save_Area").show(); $("#Black_Mask").show();
+			$("#Save_Icon").attr("src","resources/img/Course/Save2.png");
+		}
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -966,26 +984,18 @@ function Q_Change(x, y) {
 	
 	var temp_min = Course_Q[min];
 	var temp_max = Course_Q[max];
-	
-	alert(min + " / " + max);
-	
-	console.log( "바꾸기 전 : " + Course_Q);
-	
+
 	if(type == "front") {
 		for(var i=max; i>min; i--) {
 			Course_Q[i] = Course_Q[i-1];
-			console.log( "Front 바꾸는 중 : " + Course_Q);
 		}
 		Course_Q[min] = temp_max;
 	} else {
 		for(var i=min; i<max-1; i++) {
 			Course_Q[i] = Course_Q[i+1];
-			console.log( "Back 바꾸는 중 : " + Course_Q);
 		}
 		Course_Q[max-1] = temp_min;
 	}
-	
-	console.log( "바꾼 후 : " + Course_Q);
 	
 	Q_Update();
 }
@@ -1017,15 +1027,35 @@ function Q_Drag_Grant() {
 			var left_id = $(this).prev().attr("id").split("q_");
 			var right_id = $(this).next().attr("id").split("q_");
 
+			if( Dragging_Target == $(this).prev().attr("id") ) { alert("경고! 옳지 않은 행동 ! 반복시 강제종료 !"); return; }
+			if( Dragging_Target == $(this).next().attr("id") ) { alert("경고! 옳지 않은 행동 ! 반복시 강제종료 !"); return; }
+			
 			var point_index = Q_Index_Return(main_id);
 			var left_index = Q_Index_Return(left_id[1]);
 			var right_index = Q_Index_Return(right_id[1]);
-			
+
 			Q_Change(point_index, right_index);
 		}
 	});
 	
 	$( "#Q_Start" ).draggable( "destroy" );
 	$( "#Q_End" ).draggable( "destroy" );
+}
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+function save() {
+	$.ajax({
+        url: "",
+        dataType: "",
+        success: function (msg) {},
+        error: function () {}
+    });
+    
+    Icon_Switch[9] = 1;
+	$("#Save_Area").hide(); $("#Black_Mask").hide();
+	$("#Save_Icon").attr("src","resources/img/Course/Save.png");
 	
+	// 임시임
 }

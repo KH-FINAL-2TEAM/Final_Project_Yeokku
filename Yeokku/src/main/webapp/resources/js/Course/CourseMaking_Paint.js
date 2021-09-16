@@ -3,6 +3,7 @@ var pos = { drawable: false, x: -1, y: -1 };
 var canvas, ctx;
 var Line_Width = 1;
 var Line_Color = 'black';
+var save_count = 0;
 
 canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
@@ -13,7 +14,7 @@ function listener(event){
         case "mousedown": initDraw(event); draw(event); break;
         case "mousemove": if(pos.drawable) { draw(event); }  break;
         case "mouseout": 
-        case "mouseup": finishDraw(); break;
+        case "mouseup": finishDraw(); drawSave(); break;
     }
 }
 
@@ -40,6 +41,9 @@ function draw(event){
 	} else if ( now_pencil == "eraser" ) {
 		ctx.clearRect(coors.X-Line_Width/2, coors.Y-Line_Width/2, Line_Width, Line_Width);
 	}
+	
+	save_count++;
+	if(save_count == 100) { save_count=0; drawSave(); }
 }
  
 function finishDraw(){
@@ -142,3 +146,34 @@ $('#Pencil_Size').draggable({
 		window.scrollTo({left:0});
 	}
 });
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+function drawSave() {
+
+	const imgBase64 = canvas.toDataURL('image/jpeg', 'image/octet-stream');
+	const decodImg = atob(imgBase64.split(',')[1]);
+	
+	let array = [];
+	for (let i = 0; i < decodImg .length; i++) {
+	  array.push(decodImg .charCodeAt(i));
+	}
+	
+	const file = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+	const fileName = 'room_111.jpg'; // 임시 방 번호 이름
+	let formData = new FormData();
+	formData.append('file', file, fileName);
+	
+	$.ajax({
+	  type: 'post',
+	  url: '/coursecanvas/',
+	  cache: false,
+	  data: formData,
+	  processData: false,
+	  contentType: false,
+	  success: function (data) {
+	    alert('Uploaded !!')
+	  }
+	})
+}

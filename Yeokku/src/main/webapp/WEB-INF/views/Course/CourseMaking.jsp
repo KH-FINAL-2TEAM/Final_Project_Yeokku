@@ -20,7 +20,7 @@
 
 <body>
 
-	<!-- <div id="White_Mask"><br><br><br><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;유지보수 작업 중입니다. 잠시 기다려주세요.</h1></h1></div>  -->
+	<div id="Start_Area"></div>
 
 	<img id="Menu_Icon" src="resources/img/Course/Lock.png">
 
@@ -36,6 +36,7 @@
 		<img class="Icon" id="Book_Icon" src="resources/img/Course/Book2.png">
 		<img class="Icon" id="Sticker_Icon" src="resources/img/Course/Sticker.png">
 		<img class="Icon" id="Pencil_Icon" src="resources/img/Course/Pencil.png">
+		<img class="Icon" id="Save_Icon" src="resources/img/Course/Save.png">
 		
 		<span id="Select_Area">
 		    <select id="Select">
@@ -220,52 +221,35 @@
 		
 		<div id="Chat">
 			<img class="Close" id="Chat_Close" src="resources/img/Course/Close.png">
-			<div id="Chat_Middle">
-			
-				<div class="Chat_One">
-					<img class="Your_PF" src="resources/img/Course/PF1.jpg"/>
-					<div class="Your_Chat Chat_Detail">안녕~ 실험중이야</div>
-				</div>
-				<div class="Chat_One">
-					<img class="My_PF" src="resources/img/Course/PF2.jpg"/>
-					<div class="My_Chat Chat_Detail">그래 ㅎㅎ 잘작동하면 좋겠네 !</div>
-				</div>
-				
-				<div class="Chat_One">
-					<img class="Your_PF" src="resources/img/Course/PF1.jpg"/>
-					<div class="Your_Chat Chat_Detail">잘 되는것 같아 !! 난 이만 가볼게</div>
-				</div>
-				<div class="Chat_One">
-				<img class="My_PF" src="resources/img/Course/PF2.jpg"/>
-					<div class="My_Chat Chat_Detail">잘가 ~</div>
-				</div>
-				<div class="Chat_One">
-					<img class="Your_PF" src="resources/img/Course/PF1.jpg"/>
-					<div class="Your_Chat Chat_Detail">바이바이</div>
-				</div>
-				<div class="Chat_One">
-				<img class="My_PF" src="resources/img/Course/PF2.jpg"/>
-					<div class="My_Chat Chat_Detail">아, 맞다. 내일 3시 지각하지 말고 ㅋㅋ</div>
-				</div>
-				
-			</div>
+			<div id="Chat_Middle"></div>
 			<div id="Chat_Bottom">
 				<input type="text" id="Chat_Input" placeholder="Type a message..." />
 	       		<button type="submit" id="Chat_Button"></button>
 			</div>
 		</div>
 	
+		<div id="Black_Mask"></div>
+	
+		<div id="Save_Area"><br>
+			<b>코스 제목</b> <br>
+			<input type="text" id="Content_Title"><br><br>
+			<b>태그</b> <br>
+			<textarea id="Content_Tag" rows="5" cols="30"></textarea><br><br>
+			<input type="button" value="저장" class="Btn" onclick="save();"> &nbsp;&nbsp;
+			<input type="button" value="취소" class="Btn" onclick='Icon_Switch[9] = 1; $("#Save_Area").hide(); $("#Black_Mask").hide(); $("#Save_Icon").attr("src","resources/img/Course/Save.png");'>
+		</div>
+		
 	</article>
 	
 	<footer></footer>
 </body>
 
-<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=180">
+<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=184">
 <link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking_Map.css">
 
 <script src="resources/js/Course/CourseMaking_Paint.js" charset="utf-8"></script>
-<script src="resources/js/Course/CourseMaking.js?ver=181" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking.js?ver=182" charset="utf-8"></script>
 <script src="resources/js/Course/CourseMaking_Map.js" charset="utf-8"></script>
-<script src="resources/js/Course/CourseMaking_Chat.js?ver=3" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking_Chat.js?ver=11" charset="utf-8"></script>
 
 </html>
