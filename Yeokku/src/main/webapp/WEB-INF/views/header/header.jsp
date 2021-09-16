@@ -64,7 +64,6 @@
                                         </c:if>
                                     </ul>
                                 </div>
-<<<<<<< HEAD
 
                                 <a class="nav-link mypage" href="login_form.do" >로그인</a>
                                 <ul class="navbar-nav">
@@ -102,7 +101,6 @@
                                         </div>
                                     </li>
                                 </ul>
-=======
 								<c:choose>
 									<c:when test="${empty user }">
 		                                <a class="nav-link mypage" href="login_form.do" >로그인</a>
@@ -145,7 +143,6 @@
 		                                </ul>
 									</c:otherwise>
 								</c:choose>
->>>>>>> 797c6805febc92bedf2457fb2face79f76a397f6
                             </nav>
                         </div>
                     </div>
