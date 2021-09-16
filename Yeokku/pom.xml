@@ -259,6 +259,7 @@
 		    <version>1.9</version>
 		</dependency>
 		
+<<<<<<< HEAD
 		<!-- 카카오 로그인 사용 추가  -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
@@ -271,6 +272,16 @@
 			<artifactId>scribejava-core</artifactId>
 			<version>2.8.1</version>
 		</dependency>
+=======
+		<!-- gson -->
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.6</version>
+		</dependency>
+
+>>>>>>> 797c6805febc92bedf2457fb2face79f76a397f6
 		
 		
 		<!-- 네이버 로그인 사용 추가 -->

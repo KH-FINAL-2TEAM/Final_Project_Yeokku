@@ -43,5 +43,10 @@
 		WHERE USER_NAME=#{user_name} AND USER_EMAIL=#{user_email} AND USER_ID=#{user_id}
 	</select>
 	
+	<select id="profile" parameterType="user_dto" resultType="profile_dto">
+		SELECT *
+		FROM PROFILEBOARD
+		WHERE PF_USERNO = #{user_no}
+	</select>
 
 </mapper>  
