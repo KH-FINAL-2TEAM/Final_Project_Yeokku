@@ -3,7 +3,11 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+
+<%@page import="java.util.*"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,64 +39,71 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-                $('document').ready(function() {
-                    var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
-                    var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
-                    var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
-                    var area3 = ["대덕구","동구","서구","유성구","중구"];
-                    var area4 = ["광산구","남구","동구",     "북구","서구"];
-                    var area5 = ["남구","달서구","동구","북구","서구","수성구","중구","달성군"];
-                    var area6 = ["남구","동구","북구","중구","울주군"];
-                    var area7 = ["강서구","금정구","남구","동구","동래구","부산진구","북구","사상구","사하구","서구","수영구","연제구","영도구","중구","해운대구","기장군"];
-                    var area8 = ["고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"];
-                    var area9 = ["강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"];
-                    var area10 = ["제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"];
-                    var area11 = ["계룡시","공주시","논산시","보령시","서산시","아산시","천안시","금산군","당진군","부여군","서천군","연기군","예산군","청양군","태안군","홍성군"];
-                    var area12 = ["군산시","김제시","남원시","익산시","전주시","정읍시","고창군","무주군","부안군","순창군","완주군","임실군","장수군","진안군"];
-                    var area13 = ["광양시","나주시","목포시","순천시","여수시","강진군","고흥군","곡성군","구례군","담양군","무안군","보성군","신안군","영광군","영암군","완도군","장성군","장흥군","진도군","함평군","해남군","화순군"];
-                    var area14 = ["경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"];
-                    var area15 = ["거제시","김해시","마산시","밀양시","사천시","양산시","진주시","진해시","창원시","통영시","거창군","고성군","남해군","산청군","의령군","창녕군","하동군","함안군","함양군","합천군"];
-                    var area16 = ["서귀포시","제주시","남제주군","북제주군"];
-
-        
-
-        // 시/도 선택 박스 초기화
-
-        $("select[name^=sido]").each(function() {
-            $selsido = $(this);
-            $.each(eval(area0), function() {
-                $selsido.append("<option value='"+this+"'>"+this+"</option>");
-            });
-            $selsido.next().append("<option value=''>구/군 선택</option>");
-        });
-
-        
-
-        // 시/도 선택시 구/군 설정
-
-        $("select[name^=sido]").change(function() {
-            var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
-            var $gugun = $(this).next(); // 선택영역 군구 객체
-            $("option",$gugun).remove(); // 구군 초기화
-
-            if(area == "area0")
-                $gugun.append("<option value=''>구/군 선택</option>");
-            else {
-                $.each(eval(area), function() {
-                    $gugun.append("<option value='"+this+"'>"+this+"</option>");
-                });
-            }
-        });
-
-
-        });
-
-        
-        
-
-
+    <script>
+    
+	    
+	  //검색설정
+		function check(){
+				var keyword = $("#keyword").val().trim();
+				
+				if(keyword=='' || keyword==null || keyword.length<2){
+					alert("검색어를 두글자 이상 입력해주세요.");
+					
+					return false;
+				}//여기에 ajax로 url=endpoint해서 성공하면 json/xml값을 컨트롤러로 return해주는 방법 생각해볼것 
+		}
+    
+    	//지역 설정
+	    $.ajax({
+	  	  url: "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode?ServiceKey=ZQscfOiocZrQpK8kXr9QPPdHPfyhCNoAZ8fMA%2BO83K3x1rrMn8AL%2FP%2FvKnQghMb8XezP4cqE%2Fpree8FPMqfdwQ%3D%3D&numOfRows=17&MobileOS=ETC&MobileApp=AppTest&_type=json",
+	  	  method: "GET",
+	  	  success: function(msg){
+	  		  $("#sido").append("<option value=''>시/도 선택</option>")
+	  		  
+	            var mySido = msg.response.body.items.item;
+	  		  
+	            for(var i=0; i<mySido.length; i++){
+	            	$("#sido").append("<option value='"+mySido[i].code+"'>"+ mySido[i].name + "</option>");
+	            }
+	            
+	            $("#sido").next().append("<option value='''>구/군 선택</option>");
+	            
+	            $("#sido").change(function(){
+	            	
+				    var areaCode = $("#sido").val();
+				    
+	            	$.ajax({
+	            		url: "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode?ServiceKey=ZQscfOiocZrQpK8kXr9QPPdHPfyhCNoAZ8fMA%2BO83K3x1rrMn8AL%2FP%2FvKnQghMb8XezP4cqE%2Fpree8FPMqfdwQ%3D%3D&numOfRows=50&areaCode="+areaCode+"&MobileOS=ETC&MobileApp=AppTest&_type=json",
+	            		method: "GET",
+	            		dataType: "json",
+	            		success: function(obj){
+	            			console.log(obj);
+	            			var myGugun = obj.response.body.items.item;
+	            			
+	            			if(areaCode == 0){
+	            				$("#gugun option").remove();
+	            				$("#gugun").append("<option value=''>구/군 선택</option>");
+	            			} else if(areaCode == 8){
+	            				$("#gugun option").remove();
+	            				$("#gugun").append("<option value='"+myGugun.code+"'>" + myGugun.name + "</option>");	
+	            			} else{
+		            			$("#gugun option").remove();
+		            			for(var j=0; j<myGugun.length; j++){
+		            				$("#gugun").append("<option value='"+myGugun[j].code+"'>" + myGugun[j].name + "</option>");
+		            			}
+	            			}
+	            		}
+	            	});
+	            });
+	  	  }	  
+	  	});
+	  	
+	  	
+	  	
+    	
+   		
     </script>
+   
     <style type="text/css">
       
 	.search_part, .top_place {
@@ -100,7 +111,7 @@
 		padding: 20px 0px;
 	}
       
-    #sido1, #gugun1 {
+    #sido, #gugun {
             width: 100%;
             padding: .8em .5em;
             border: 1px solid cornflowerblue;
@@ -139,6 +150,11 @@
         color: white;
         background-color: #38A4FF;
     }
+    
+   	.single_place img {
+		width: 100%;
+		max-height: 350px;
+	}
 
     
     </style>
@@ -147,7 +163,7 @@
 	<!-- header 추가 -->
 	<%@ include file="../header/header.jsp" %> 
 
-    <!-- breadcrumb start-->
+    <!-- 배너 start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
             <div class="row">
@@ -161,43 +177,39 @@
             </div>
         </div>
     </section>
-    <!-- breadcrumb start-->
+    <!-- 배너 end-->
     
         
-  
-
-
-
-    <!-- search start-->
+    <!-- 검색 start-->
     <section class="search_part">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-6">
                     <div class="section_tittle">
-	                        <form action="tripplace_search_result_form.do" method="" >
+	                        <form action="tripplace_result_form.do" method="post" onsubmit="return check();" accept-charset="utf-8">
 	                        
 	                            <b>분류</b><br>
-	                            <select name="kind_select" class="kind_select">
+	                            <select name="contentTypeId" id="contentTypeId" class="kind_select">
 	                                <option value="">전체</option>
-	                                <option value="">관광지</option>
-	                                <option value="">문화시설</option>
-	                                <option value="">축제/공연/행사</option>
-	                                <option value="">레포츠</option>
-	                                <option value="">숙박</option>
-	                                <option value="">쇼핑</option>
-	                                <option value="">음식점</option>
+	                                <option value="12">관광지</option>
+	                                <option value="14">문화시설</option>
+	                                <option value="15">행사/공연/축제</option>
+	                                <option value="28">레포츠</option>
+	                                <option value="32">숙박</option>
+	                                <option value="38">쇼핑</option>
+	                                <option value="39">음식점</option>
 	                            </select>
 	
 	                            <br><br>
 	                            <b>지역</b><br>
-	                            <select name="sido1" id="sido1" ></select>
+	                            <select name="areaCode" id="sido" ></select>
 	                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                            <select name="gugun1" id="gugun1" ></select>
+	                            <select name="sigunguCode" id="gugun" ></select>
 	
 	                            <br><br>
 	                            <b>검색어</b><br>
-	                            <input type="text" name="keyword" class="keyword" >
-	                            <input type="submit" value="Search" class="btn_1" >
+	                            <input type="text" name="keyword" class="keyword" id="keyword">
+	                            <input type="submit" value="Search" class="btn_1">
 	                        </form>
                     </div>
                 </div>
@@ -215,102 +227,34 @@
             	<p>Best Place </p><!--index.html에서 선택한 지역이름 나타내주기-->
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_1.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_2.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_3.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_4.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_1.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_2.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_3.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_4.png" alt="">
-                        <div class="hover_Text d-flex align-items-end justify-content-between">
-                            <div class="hover_text_iner">
-                                <a href="tripplace_show_detail_form.do" class="place_btn">자세히 보기</a>
-                                <h3>Saintmartine Iceland</h3>
-                                <p>Technaf, Bangladesh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	            		<c:forEach items="${list }" var="dto">
+	            			<div class="col-lg-6 col-md-6">
+			                    <div class="single_place">
+			                    	<c:choose>
+			                    		<c:when test="${empty dto.firstimage }">
+			                    			<img src="resources/img/nullImage.png">
+			                    			<div class="hover_Text d-flex align-items-end justify-content-between">
+				                            	<div class="hover_text_iner">
+				                                <a href="tripplace_detail_form.do?contentid=${dto.contentid }" class="place_btn">자세히 보기</a>
+				                    				<h3>${dto.title }</h3>
+				                    				<p>${dto.addr1 }</p>
+			                    				</div>
+			                    			</div>
+			                    		</c:when>
+			                    		<c:otherwise>
+			                    			<img src="${dto.firstimage }">
+			                    			<div class="hover_Text d-flex align-items-end justify-content-between">
+					                            <div class="hover_text_iner">
+					                                <a href="tripplace_detail_form.do?contentid=${dto.contentid }" class="place_btn">자세히 보기</a>
+					                                <h3>${dto.title }</h3>
+					                                <p>${dto.addr1 }</p>
+					                            </div>
+					                        </div>
+			                    		</c:otherwise>
+			                    	</c:choose>
+			                    </div>
+			                </div>
+	            		</c:forEach>
             </div>
         </div>
     </section>

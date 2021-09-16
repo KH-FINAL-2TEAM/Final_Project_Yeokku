@@ -73,25 +73,23 @@
             
         }
         
-
-
+        #overview {
+         	background-color: #e6ffff;
+			display: -webkit-box;
+			white-space: normal;
+			line-height: 30px;
+			height: 210px;
+			word-wrap: break-word;
+			-webkit-line-clamp: 7;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
     </style>
-     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script type="text/javascript">
-        $( ".star_rating a" ).click(function() {
-            $(this).parent().children("a").removeClass("on");
-            $(this).addClass("on").prevAll("a").addClass("on");
-            return false;
-        });
-
-
-
-     </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<%@ include file="../header/header.jsp" %> 
-   
-    <!-- breadcrumb start-->
+	
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
             <div class="row">
@@ -106,89 +104,140 @@
             </div>
         </div>
     </section>
-    <!-- breadcrumb start-->
 
     <!-- ================ contact section start ================= -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="d-none d-sm-block mb-5 pb-4">
-                <script>
-                    function initMap() {
-                        var uluru = {
-                            lat: -25.363,
-                            lng: 131.044
-                        };
-                        var grayStyles = [{
-                            featureType: "all",
-                            stylers: [{
-                                saturation: -90
-                            }, {
-                                lightness: 50
-                            }]
-                        }, {
-                            elementType: 'labels.text.fill',
-                            stylers: [{
-                                color: '#ccdee9'
-                            }]
-                        }];
-                       
-                    }
-                </script>
-                <!--카카오맵을 넣어두겠습니다.-->
-               <div id="map" style="width:100%;height:480px;"></div>
-               <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=724b81fc00a64486288dc0698b9a4edd"></script>
-               <script>
-                   var container = document.getElementById('map');
-                   var options = {
-                       center: new kakao.maps.LatLng(37.269681, 127.033539),
-                       level: 11
-                   };
-           
-                   var map = new kakao.maps.Map(container, options); //지도 생성
-                   
-                   /* !!!!여기서부터 컨트롤!!! */
-                   var mapTypeControl = new kakao.maps.MapTypeControl(); //일반지도와 스카이뷰로 전환할 수 있는 지도타입 컨트롤 생성
-                   
-                   // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-                   // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-                   map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-           
-                   // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-                   var zoomControl = new kakao.maps.ZoomControl();
-                   map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-                   
-           
+	<section class="contact-section">
+		<div class="container">
+			<div class="d-none d-sm-block mb-5 pb-4">
+				<script>
+					function initMap() {
+						var uluru = {
+						    lat: -25.363,
+						    lng: 131.044
+						};
+						var grayStyles = [{
+						    featureType: "all",
+						    stylers: [{
+						        saturation: -90
+						    }, {
+						        lightness: 50
+						    }]
+						}, {
+						    elementType: 'labels.text.fill',
+						    stylers: [{
+						        color: '#ccdee9'
+						    }]
+						}];
+					}
+              </script>
+              
+              <!--카카오맵-->
+              <div id="map" style="width:100%;height:480px; margin-bottom:20px"></div>
+              <p><button onclick="setBounds()" class="btn btn-warning">검색 결과 위치로 이동</button></p>
+              <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=724b81fc00a64486288dc0698b9a4edd"></script>
+              <script type="text/javascript">
+              var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+              
+              
+              mapOption = { 
+                  center: new kakao.maps.LatLng(37.5546004596746, 126.97063750463796), // 지도의 중심좌표
+                  level: 11 // 지도의 확대 레벨
+              };
+              
+              var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+              
+           		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+              var mapTypeControl = new kakao.maps.MapTypeControl();
 
-                   //예시로 넣어두겠습니다*******************
+              // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+              // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+              map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-                  //---- 대전광역시 동물보호센터
-                    var markerPosition  = new kakao.maps.LatLng(36.49160748512353, 127.38529230340947); 
-                    var marker = new kakao.maps.Marker({
-                        position: markerPosition
-                    });
-                    marker.setMap(map);
-                    
-                    //인포윈도우 표시 위치
-                    var iwContent = '<div style="padding:2px;">예시로넣어두겠습니다.<br><a href="https://map.kakao.com/link/map/Hello World!,36.49160748512353, 127.38529230340947" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-                    iwPosition = new kakao.maps.LatLng(36.49160748512353, 127.38529230340947);
-                    
-                    // 인포윈도우를 생성합니다
-                    var infowindow = new kakao.maps.InfoWindow({
-                        position : iwPosition, 
-                        content : iwContent 
-                    });
-                    
-                    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-                    infowindow.open(map, marker); 
-                   
-                   
-                   
-                   
-                   
-                   
-               </script>
-           
-           
+              // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+              var zoomControl = new kakao.maps.ZoomControl();
+              map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+              
+				// 마커를 표시할 위치와 title 객체 배열입니다 
+              var positions = [
+            	  <c:forEach items="${list }" var="dto">
+            	  {
+                      content: '<div class="content" style="padding:5px;">${dto.title }</div>',
+                      latlng: new kakao.maps.LatLng(${dto.mapy }, ${dto.mapx }),
+                      contentid: ${dto.contentid }
+                  },
+	  	          </c:forEach>
+              ];
+				
+	           // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+	           var bounds = new kakao.maps.LatLngBounds();    
+	           
+              
+              for (var i = 0; i < positions.length; i ++) {
+            	    // 마커를 생성합니다
+            	    var marker = new kakao.maps.Marker({
+            	        map: map, // 마커를 표시할 지도
+            	        position: positions[i].latlng // 마커의 위치
+            	    });
+					
+	              	marker.setClickable(true);
+	              	marker.id = positions[i].contentid; // object extension
+	              	
+            	    // 마커에 표시할 인포윈도우를 생성합니다 
+            	    var infowindow = new kakao.maps.InfoWindow({
+            	        content: positions[i].content // 인포윈도우에 표시할 내용
+            	    });
+            	    
+            	 	// LatLngBounds 객체에 좌표를 추가합니다
+            	    bounds.extend(positions[i].latlng);
+            	    
+            	    
+            	    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+            	    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+            	    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+            	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+            	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+            	    kakao.maps.event.addListener(marker, 'click', function() { 
+            	    	$.ajax({
+            	    		url: "tripplace_marker_click.do",
+            	    		method: "POST",
+            	    		data: "contentid="+this.id,
+            	    		dataType: "json",
+            	    		success: function(data){
+            	    			console.log(data.title);
+            	    			var info = "<h2>"+data.title+"</h2>"
+            	    						+"<p id='overview'>"+data.overview+"</p>"
+			                                +"<a href='tripplace_detail_form.do?contentid="+data.contentid+"' class='btn btn-primary float-right'>자세히보기</a>"
+			                                
+            	    			$(".img_div *").remove();
+            	    			$(".info_div *").remove();
+            	    			$(".img_div").append("<img src='"+data.firstimage+"'>");
+			                    $(".info_div").append(info); 		
+            	    		},
+            	    		error: function(){
+            	    			alert("통신실패");
+            	    		}
+            	    	});
+            	    });
+            	    
+            	}
+            	// 인포윈도우 표시 
+            	 function makeOverListener(map, marker, infowindow) {
+            	    return function() {
+            	        infowindow.open(map, marker);
+            	    };
+            	}
+            	// 인포윈도우 닫기
+            	function makeOutListener(infowindow) {
+            	    return function() {
+            	        infowindow.close();
+            	    };
+            	} 
+            	//지도범위 재설정
+            	function setBounds() {
+            	    map.setBounds(bounds);
+            	}
+              </script>
             </div>
 
             <div class="row">
@@ -197,43 +246,17 @@
                 </div>
                  
                 <!--추가-->
-                <div class="map_div" style="width: 100%; height: 300px; border: 1px solid #9acdf1;   ">
-                    <div class="img_div" style="width:40%; height: 298px; border: 1px solid #9acdf1; float: left; margin: 0;">
-                        클릭한 장소 이미지 
-                    </div>
-                    <div class="info_div" style="width: 60%; height: 100%; 
-                        border: 1px solid #9acdf1; float: right; margin: 0; padding: 10px;">
-                        <h2>장소명</h2>
-                        <p>english name</p>
-                        <p class="star_rating">
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#">★</a>
-                            <a href="#">★</a>
-
-                            <a href="" style="font-size:13px; color: royalblue;" >이용후기 보기</a>
-                            <p style="background-color: rgb(219, 214, 214); height: 80px;">
-                                설명
-                            </p>
-                            
-                            <a href=""  class="detail_a">자세히보기</a>
-                        </p>
-                        
-                        
-                        
-                        
-
-                    </div>
-                    
-                    
-                </div>        
-                
-               
+                <div class="map_div" style="width: 100%; height: 300px; padding: 20px">
+                    <div class="img_div" style="width:40%; height: 100%; float: left;"></div>
+                    <div class="info_div" style="width: 60%; height: 100%; float: right; padding-left: 20px"></div>
+                 </div>        
             </div>
         </div>
     </section>
-    <!-- ================ contact section end ================= -->
+    
+    
+    
+    
 
     <!-- footer part start-->
     <footer class="footer-area">

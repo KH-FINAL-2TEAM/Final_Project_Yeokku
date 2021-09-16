@@ -32,7 +32,7 @@ public class HomeController {
 	//여행지
 	@RequestMapping("/tripplace_main_form.do")
 	public String tripplaceMainForm(Model model) {
-		return "tripplace/tripplace_main";
+		return "redirect:tripplace_search_form.do";
 	}
 	//여행코스
 	@RequestMapping("/course_list.do")
