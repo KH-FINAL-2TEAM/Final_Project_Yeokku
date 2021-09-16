@@ -47,27 +47,23 @@
                 <div class="col-lg-8 posts-list">
                     <div class="single-post">
                         <div class="feature-img">
-                            <img class="img-fluid" src="resources/img/single_place_3.png" alt="장소사진">
+                            <img class="img-fluid" src="${dto.firstimage }" alt="장소사진">
                         </div>
                         <div class="blog_details">
-                            <h2>클릭한 장소 이름</h2>
+                            <h2>${dto.title }</h2>
+                            <p>주소: (${dto.zipcode }) ${dto.addr1 } ${dto.addr2 }</p>
+                            <p>전화번호: ${dto.tel }</p>
+                            <p>${dto.homepage }</p>
                             <ul class="blog-info-link mt-3 mb-4">
-                                <a href="#"><i class="far fa-comments"></i> n개의 리뷰</a><br>
-                                <a href=""><p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span>  좋아요 n개</p></a>
+                                <a href="#"><i class="far fa-comments"></i>  n개의 리뷰</a><br>
+                                <a href="#"><p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span>  좋아요 n개</p></a>
                             </ul>
                             
-                            
-                            <p>
-                                
-                                        <strong>-분류</strong>&nbsp; &nbsp;대분류 > 중분류 > 소분류
-                                 
-                            </p>
+                            <p><strong>-분류</strong>&nbsp; &nbsp;${dto.cat1 } > ${dto.cat2 } > ${dto.cat3 }</p>
          
-
                             <div class="quote-wrapper">
                                 <div class="quotes">
-                                   장소에 대한 설명
-                                   <br><br><br><br>
+                                   		${dto.overview }
                                 </div>
                             </div>
                         </div>
@@ -75,16 +71,13 @@
                     <div class="navigation-top">
                         <div class="d-sm-flex justify-content-between text-center">
                             
-                            <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
-                            </div>
+                            <div class="col-sm-4 text-center my-2 my-sm-0"></div>
                             <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
                             </ul>
                         </div>
+                        
                         <div class="navigation-area">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
@@ -210,132 +203,12 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">더보기</h4>
                             <ul class="list cat-list">
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>인근의 호텔</p>
-                                        <p></p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>인근의 음식점</p>
-                                        <p></p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>인근의 레포츠</p>
-                                        <p></p>
-                                    </a>
-                                </li>
+                                <li><a href="tripplace_close_place.do?type=32&mapx=${dto.mapx }&mapy=${dto.mapy }" class="d-flex"><p>주변 호텔</p></a></li>
+                                <li><a href="tripplace_close_place.do?type=39&mapx=${dto.mapx }&mapy=${dto.mapy }" class="d-flex"><p>주변 음식점</p></a></li>
+                                <li><a href="tripplace_close_place.do?type=28&mapx=${dto.mapx }&mapy=${dto.mapy }" class="d-flex"><p>주변 레포츠</p></a></li>
                             </ul>
                         </aside>
-                        <!--
-                        <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Recent Post</h3>
-                            <div class="media post_item">
-                                <img src="img/post/post_1.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
-                                    </a>
-                                    <p>January 12, 2019</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/post/post_2.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/post/post_3.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/post/post_4.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
-                        </aside>
-                       
-                        <aside class="single_sidebar_widget tag_cloud_widget">
-                            <h4 class="widget_title">Tag Clouds</h4>
-                            <ul class="list">
-                                <li>
-                                    <a href="#"></a>
-                                </li>
-                                <li>
-                                    <a href="#">love</a>
-                                </li>
-                                <li>
-                                    <a href="#">technology</a>
-                                </li>
-                                <li>
-                                    <a href="#">travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">restaurant</a>
-                                </li>
-                                <li>
-                                    <a href="#">life style</a>
-                                </li>
-                                <li>
-                                    <a href="#">design</a>
-                                </li>
-                                <li>
-                                    <a href="#">illustration</a>
-                                </li>
-                            </ul>
-                        </aside>
-                        <aside class="single_sidebar_widget instagram_feeds">
-                            <h4 class="widget_title">Instagram Feeds</h4>
-                            <ul class="instagram_row flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/post/post_5.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/post/post_6.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/post/post_7.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/post/post_8.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/post/post_9.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/post/post_10.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside>
-                         -->
+                        
                         
                     </div>
                 </div>

@@ -1,58 +1,45 @@
 package com.kh.yeokku.model.dto;
 
 public class TourDto {
-	//db 변수
-	private int tour_contentid;
-	private int tour_contenttypeid;
-	private int tour_view;
-	
-	//select 변수
-	private int tour_lt_cnt; //여행지 좋아요 수 담는 변수
+	private String contentTypeId;
+	private String areaCode;
+	private String sigunguCode;
+	private String keyword;
 	
 	public TourDto() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public TourDto(int tour_contentid, int tour_contenttypeid, int tour_view, int tour_lt_cnt) {
 		super();
-		this.tour_contentid = tour_contentid;
-		this.tour_contenttypeid = tour_contenttypeid;
-		this.tour_view = tour_view;
-		this.tour_lt_cnt = tour_lt_cnt;
 	}
-
-	public int getTour_contentid() {
-		return tour_contentid;
+	public TourDto(String contentTypeId, String areaCode, String sigunguCode, String keyword) {
+		super();
+		this.contentTypeId = contentTypeId;
+		this.areaCode = areaCode;
+		this.sigunguCode = sigunguCode;
+		this.keyword = keyword;
 	}
-
-	public void setTour_contentid(int tour_contentid) {
-		this.tour_contentid = tour_contentid;
+	public String getContentTypeId() {
+		return contentTypeId;
 	}
-
-	public int getTour_contenttypeid() {
-		return tour_contenttypeid;
+	public void setContentTypeId(String contentTypeId) {
+		this.contentTypeId = contentTypeId;
 	}
-
-	public void setTour_contenttypeid(int tour_contenttypeid) {
-		this.tour_contenttypeid = tour_contenttypeid;
+	public String getAreaCode() {
+		return areaCode;
 	}
-
-	public int getTour_view() {
-		return tour_view;
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
 	}
-
-	public void setTour_view(int tour_view) {
-		this.tour_view = tour_view;
+	public String getSigunguCode() {
+		return sigunguCode;
 	}
-
-	public int getTour_lt_cnt() {
-		return tour_lt_cnt;
+	public void setSigunguCode(String sigunguCode) {
+		this.sigunguCode = sigunguCode;
 	}
-
-	public void setTour_lt_cnt(int tour_lt_cnt) {
-		this.tour_lt_cnt = tour_lt_cnt;
+	public String getKeyword() {
+		return keyword;
 	}
-	
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	
 	
 }
