@@ -1,6 +1,3 @@
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -143,7 +140,6 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
 			"user_pw":user_pw
 		};
 		
-<<<<<<< HEAD
 		if(user_id == null || user_id=="" || user_pw == null || user_pw == ""){
 			alert("아이디와 비밀번호를 확인해주세요.");
 		}else{
@@ -166,20 +162,6 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
 				},
 				error:function(){
 					alert("통신 실패");
-=======
-		$.ajax({
-			type:"post",
-			url:"login.do",
-			data:JSON.stringify(loginVal),
-			contentType:"application/json",
-			dataType:"json",
-			success:function(msg){
-				if(msg.check == true){
-					//제대로 로그인 성공해서 회원 정보 담김
-					location.href="main_form.do";
-				}else{
-					$(".login_warn").show();
->>>>>>> 797c6805febc92bedf2457fb2face79f76a397f6
 				}
 			});
 		
@@ -387,7 +369,7 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
                                         </ul>
 
                                     </div>
-                                    
+                                    <!-- 혜인 추가 -->
                                       <div class="success_login_total" style="width: 40%; height: 200px; border: 1px solid #9acdf1;">
 			                              <div class="success_login_image" style="width:40%; height: 100%; border: 1px solid #9acdf1; float: left; margin: 0;">
 			                                 <img src="<c:url value="/resources/img/profile.PNG" />" width="100%" height="100%">
@@ -403,7 +385,7 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
 			                              </div>
 
                                     </div>
-                                    
+                                    <!--  -->
                                 </div>
                             </div>
                         </div>
@@ -421,6 +403,8 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
     
 </body>
 </html>
+
+
 
 
 
