@@ -147,6 +147,11 @@
     color : #223b68;
 }
 
+.conta .mypage_nav:hover{
+	color: #ff7e5f;
+	cursor: pointer;
+}
+
 .list_nav{
     display: flex;
     justify-content: center;
@@ -199,6 +204,9 @@
     border-radius: 5px;
 }
 
+.travel_list img{
+	width: 100%;
+}
 .submit_div{
     background-color: #fe5c24;
     border: none;
@@ -273,6 +281,9 @@
     margin-bottom: 12px;
 }
 
+.desc{
+	width : 100%;
+}
 
 
 /*

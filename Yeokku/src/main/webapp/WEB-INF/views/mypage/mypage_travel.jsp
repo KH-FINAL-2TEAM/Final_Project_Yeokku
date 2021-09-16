@@ -18,6 +18,24 @@
     <link rel="stylesheet" href="resources/css/mypage.css">
     <script src="resources/js/cropper.js"></script>
     <title>Document</title>
+    <script type="text/javascript">
+		function filter(){
+	
+			var value, name, item, i;
+
+			value = document.getElementById("value").value.toUpperCase();
+	        item = document.getElementsByClassName("list_item");
+	
+	        for(i=0;i<item.length;i++){
+	        	name = item[i].getElementsByClassName("travel_title");
+	        	if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+	            	item[i].style.display = "flex";
+	          	}else{
+	            	item[i].style.display = "none";
+	          	}
+	        }
+		}
+	</script>
 </head>
 <body>
 
@@ -32,7 +50,7 @@
                         <div class="profile_img_div">
                             <img src="uploadfile/${profile.pf_name}${profile.pf_type}" onerror="this.src='resources/img/none_profile.png'" class="profile_img" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         </div>
-                        <p class="profile_name">닉네임</p>
+                        <p class="profile_name">${user.nickname }</p>
                     </div>
                     <h1>여행지</h1>
             </div>
@@ -42,11 +60,11 @@
         <nav class="nav">
             <div class="navbar">
                 <ul>
-                    <li><a href="mypage_profile.html">회원정보</a></li>
-                    <li class="selected_nav"><a href="mypage_travel.html">여행지</a></li>
+                    <li><a href="mypage_profile_form.do">회원정보</a></li>
+                    <li class="selected_nav"><a href="mypage_travel_form.do">여행지</a></li>
                     <li><a href="mypage_course.html">여행코스</a></li>
                     <li><a href="mypage_review.html">리뷰</a></li>
-                    <li><a href="mypage_qna.html">문의내역</a></li>
+                    <li><a href="mypage_qna.do">문의내역</a></li>
                 </ul>
             </div>
         </nav>
@@ -58,21 +76,12 @@
                 <ul>
                     <li>
                         <div >
-                            <select name="" id="">
-                                <option value="">지역</option>
-                                <option value="">카테고리</option>
-                                <option value="">이름</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div >
-                            <input type="text">
+                            <input type="text" id="value" placeholder="Type to Search">
                         </div>
                     </li>
                     <li>
                         <div class="submit_div">
-                            <input class="submit" type="submit" value="검색">
+                            <input class="submit" type="button" value="검색" onclick="filter()">
                         </div>
                     </li>
                 </ul>
@@ -82,70 +91,32 @@
 
         <section class="content">
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_1.png" alt="">
-                        <h3> <a href="#"> 제목</a></h3>
-                        <p>기본 정보?</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_2.png" alt="">
-                        <h3> <a href="#"> Guidence</a></h3>
-                        <p>We offer the best guidence for you</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_3.png" alt="">
-                        <h3> <a href="#"> Accomodation</a></h3>
-                        <p>Luxarious and comfortable</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <p>Best tour plan for your next tour</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_1.png" alt="">
-                        <h3> <a href="#"> 제목</a></h3>
-                        <p>기본 정보?</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_2.png" alt="">
-                        <h3> <a href="#"> Guidence</a></h3>
-                        <p>We offer the best guidence for you</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_3.png" alt="">
-                        <h3> <a href="#"> Accomodation</a></h3>
-                        <p>Luxarious and comfortable</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="travel_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <p>Best tour plan for your next tour</p>
-                    </div>
-                </div>
+            
+            
+            
+            	<c:choose>
+					<c:when test="${empty list}">
+						목록이 없습니다.
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${list }" var="list">
+							<div class="list_item col-lg-3 col-sm-6">
+			                    <div class="travel_list">
+			                        <img src="${list.lt_firstimage }" alt="" style="width:100%;">
+			                        <h3> <a class="travel_title" href="#"> ${list.lt_title }</a></h3>
+			                    </div>
+			                </div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
+				
+				
             </div>
 
+
+
         </section>
-
-
-
-
 
     </div>
     

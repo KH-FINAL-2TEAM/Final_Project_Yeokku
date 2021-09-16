@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
@@ -24,9 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.yeokku.model.biz.MypageBiz;
 import com.kh.yeokku.model.biz.impl.MypageBizImpl;
+import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
+import com.kh.yeokku.model.dto.QaDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Controller
@@ -134,5 +138,32 @@ public class MypageController {
 			return "수정 실패";
 		}
 		
+	}
+	
+	@RequestMapping(value="/qna_list.do", method = RequestMethod.POST,produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String qnaList(Model model,QaDto dto) {
+		
+		if(dto.getQa_confirm() == null) {
+			List<QaDto> list = biz.userQnaAllList(dto);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
+		}else {
+			List<QaDto> list = biz.userQnaList(dto);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
+		}
+	}
+	
+	@RequestMapping(value="/mypage_travel_form.do")
+	public String mypageTravel(Model model,HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		int no = user.getUser_no();
+		
+		List<LikeTourDto> list = biz.mypageTravel(no);
+		model.addAttribute("list",list);
+		return "mypage/mypage_travel";
 	}
 }

@@ -94,6 +94,13 @@ public class QaDto {
 	public void setQa_confirm(String qa_confirm) {
 		this.qa_confirm = qa_confirm;
 	}
+
+	@Override
+	public String toString() {
+		return "QaDto [qa_no=" + qa_no + ", qa_name=" + qa_name + ", qa_title=" + qa_title + ", qa_content="
+				+ qa_content + ", qa_email=" + qa_email + ", qa_date=" + qa_date + ", qa_done_date=" + qa_done_date
+				+ ", qa_confirm=" + qa_confirm + "]";
+	}
 	
 	
 }

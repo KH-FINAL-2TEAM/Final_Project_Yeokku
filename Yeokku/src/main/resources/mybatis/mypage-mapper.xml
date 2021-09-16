@@ -49,4 +49,22 @@
 		SET USER_PW = #{user_pw}, USER_NICKNAME = #{user_nickname}, USER_POSTCODE = #{user_postcode}, USER_ADDRESS = #{user_address}, USER_EXTRAADDRESS = #{user_extraaddress}
 		WHERE USER_NO = #{user_no}
   	</update>
+  	
+  	<select id="user_qna_list_all" parameterType="qa_dto" resultType="qa_dto">
+  		SELECT QA_NO, QA_TITLE, QA_CONTENT, QA_EMAIL, QA_DATE, QA_DONE_DATE, QA_CONFIRM
+  		FROM QABOARD
+  		WHERE QA_EMAIL = #{qa_email}
+  	</select>
+  	
+  	<select id="user_qna_list" parameterType="qa_dto" resultType="qa_dto">
+  		SELECT QA_NO, QA_TITLE, QA_CONTENT, QA_EMAIL, QA_DATE, QA_DONE_DATE, QA_CONFIRM
+  		FROM QABOARD
+  		WHERE QA_EMAIL = #{qa_email} AND QA_CONFIRM = #{qa_confirm}
+  	</select>
+  	
+  	<select id="mypage_travel" parameterType="int" resultType="like_tour_dto">
+  		SELECT LT_CONTENTID, LT_CONTENTTYPEID, LT_TITLE, LT_FIRSTIMAGE
+  		FROM LTBOARD
+  		WHERE LT_USERNO = #{no}
+  	</select>
   </mapper>

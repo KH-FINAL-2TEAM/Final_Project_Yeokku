@@ -1,11 +1,16 @@
 package com.kh.yeokku.model.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yeokku.model.dao.MypageDao;
+import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
+import com.kh.yeokku.model.dto.QaDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Repository
@@ -88,6 +93,45 @@ public class MypageDaoImpl implements MypageDao{
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public List<QaDto> userQnaAllList(QaDto dto) {
+		List<QaDto> list = new ArrayList<QaDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"user_qna_list_all",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : user qna all list error");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<QaDto> userQnaList(QaDto dto) {
+		List<QaDto> list = new ArrayList<QaDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"user_qna_list",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : user qna list error");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<LikeTourDto> mypageTravel(int no) {
+		List<LikeTourDto> list = new ArrayList<LikeTourDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"mypage_travel",no);
+		} catch (Exception e) {
+			System.out.println("[error] : mypage travel");
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

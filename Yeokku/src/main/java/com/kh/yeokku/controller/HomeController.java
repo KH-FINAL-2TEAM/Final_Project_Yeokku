@@ -19,7 +19,7 @@ public class HomeController {
 	@RequestMapping("/mypage.do")
 	public String home(Locale locale, Model model) {
 		
-		return "tripplace/tripplace_main";
+		return "main/main";
 	}
 	
 	
@@ -58,11 +58,6 @@ public class HomeController {
 	@RequestMapping("/mypage_profile_form.do")
 	public String mypageProfileForm(Model model) {
 		return "mypage/mypage_profile";
-	}
-	//마이페이지-여행지
-	@RequestMapping("/mypage_travel_form.do")
-	public String mypageTravelForm(Model model) {
-		return "mypage/mypage_travel";
 	}
 	//마이페이지-여행코스
 	@RequestMapping("/mypage_course_form.do")

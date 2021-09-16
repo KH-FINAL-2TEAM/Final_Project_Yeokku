@@ -1,12 +1,16 @@
 package com.kh.yeokku.model.biz.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.yeokku.model.biz.MypageBiz;
 import com.kh.yeokku.model.dao.MypageDao;
 import com.kh.yeokku.model.dao.impl.MypageDaoImpl;
+import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
+import com.kh.yeokku.model.dto.QaDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Service
@@ -39,6 +43,21 @@ public class MypageBizImpl implements MypageBiz {
 	@Override
 	public int userInfoUpdate(UserDto dto) {
 		return dao.userInfoUpdate(dto);
+	}
+
+	@Override
+	public List<QaDto> userQnaAllList(QaDto dto) {
+		return dao.userQnaAllList(dto);
+	}
+
+	@Override
+	public List<QaDto> userQnaList(QaDto dto) {
+		return dao.userQnaList(dto);
+	}
+
+	@Override
+	public List<LikeTourDto> mypageTravel(int no) {
+		return dao.mypageTravel(no);
 	}
 
 }

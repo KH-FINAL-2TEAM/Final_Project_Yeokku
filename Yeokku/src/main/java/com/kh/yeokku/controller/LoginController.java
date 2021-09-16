@@ -26,11 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.yeokku.model.biz.LoginpageBiz;
-<<<<<<< HEAD
 import com.kh.yeokku.model.dto.NaverLoginBO;
-=======
 import com.kh.yeokku.model.dto.ProfileDto;
->>>>>>> 797c6805febc92bedf2457fb2face79f76a397f6
 import com.kh.yeokku.model.dto.UserDto;
 
 @Controller
@@ -45,7 +42,7 @@ public class LoginController {
 
 	@Autowired
 	private LoginpageBiz biz;
-<<<<<<< HEAD
+
 	
 	
 	/* NaverLoginBO */
@@ -82,8 +79,6 @@ public class LoginController {
 	}
 	
 	
-=======
->>>>>>> 797c6805febc92bedf2457fb2face79f76a397f6
 	//로그인
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -93,13 +88,10 @@ public class LoginController {
 		boolean check = false;
 		
 		if(user!=null) {
-<<<<<<< HEAD
-=======
 			ProfileDto pfdto = biz.profile(user);
 			if(pfdto!=null) {
 				session.setAttribute("profile", pfdto);
 			}
->>>>>>> 797c6805febc92bedf2457fb2face79f76a397f6
 			session.setAttribute("user", user);
 			check = true;
 		}
