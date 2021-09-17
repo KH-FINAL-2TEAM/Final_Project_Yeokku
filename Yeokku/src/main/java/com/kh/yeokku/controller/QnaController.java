@@ -97,7 +97,7 @@ public class QnaController {
 		if(res>0) {
 			return "redirect:qna_notice_form.do";
 		}else {
-			return "redirect:qna_notice_detail.do?notice_no="+notice_no;
+			return "redirect:qna_notice_form.do";
 		}
 	}
 	//자주묻는 질문게시판
