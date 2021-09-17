@@ -17,11 +17,11 @@ public class NoticeDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NoticeDto(int notice_no, int notice_usrrno, String notice_title, String notice_content, Date notice_reg_date,
+	public NoticeDto(int notice_no, int notice_userno, String notice_title, String notice_content, Date notice_reg_date,
 			int notice_reg_view, UserDto user_dto) {
 		super();
 		this.notice_no = notice_no;
-		this.notice_userno = notice_usrrno;
+		this.notice_userno = notice_userno;
 		this.notice_title = notice_title;
 		this.notice_content = notice_content;
 		this.notice_reg_date = notice_reg_date;
@@ -41,8 +41,8 @@ public class NoticeDto {
 		return notice_userno;
 	}
 
-	public void setNotice_usrrno(int notice_usrrno) {
-		this.notice_userno = notice_usrrno;
+	public void setNotice_usrrno(int notice_userno) {
+		this.notice_userno = notice_userno;
 	}
 
 	public String getNotice_title() {
