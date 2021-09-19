@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.yeokku.model.biz.TripplaceBiz;
-import com.kh.yeokku.model.dto.TourDto;
-import com.kh.yeokku.model.dto.TourResultDto;
-
 @Controller
 public class TripPlaceController {
+	/*
 	@Autowired
 	private TripplaceBiz biz;
 	
@@ -76,6 +73,6 @@ public class TripPlaceController {
 		
 		return "tripplace/tripplace_search_result";
 	}
-	
+	*/
 	
 }

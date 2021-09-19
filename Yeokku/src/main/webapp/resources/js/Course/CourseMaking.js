@@ -467,16 +467,16 @@ window.onload = function()
   		}
 	});
 	
-	$('#Book_Icon').bind('click', function(){
+	$('#Making_Icon').bind('click', function(){
 
 		if(Icon_Switch[7] == 0) {
 			Icon_Switch[7] = 1;
 			$("#Making_Area").hide(); $("#Queue_All").hide();
-			$("#Book_Icon").attr("src","resources/img/Course/Book.png");
+			$("#Making_Icon").attr("src","resources/img/Course/Book.png");
 		} else {
 			Icon_Switch[7] = 0;
 			$("#Making_Area").show(); $("#Queue_All").show();
-			$("#Book_Icon").attr("src","resources/img/Course/Book2.png");
+			$("#Making_Icon").attr("src","resources/img/Course/Book2.png");
 
             Index_Change("book");
 		}
@@ -485,13 +485,13 @@ window.onload = function()
 	$('#Making_Close').bind('click', function(){
 		Icon_Switch[7] = 1;
 		$("#Making_Area").hide(); $("#Queue_All").hide();
-		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
+		$("#Making_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
 	$('#Making_Area').bind('dblclick', function(){
 		Icon_Switch[7] = 1;
 		$("#Making_Area").hide(); $("#Queue_All").hide();
-		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
+		$("#Making_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -850,7 +850,7 @@ function Index_Change(target) {
 	else if(target == "bus") { $("#Bus_Icon").css("z-index", "51");$("#Bus").css("z-index", "31");  }
 	else if(target == "map") { $("#Map_Icon").css("z-index", "51");$("#Map").css("z-index", "31");  }
 	else if(target == "heart") { $("#Heart_Icon").css("z-index", "51");$("#Heart").css("z-index", "31");  }
-    else if(target == "book") { $("#Book_Icon").css("z-index", "51");$("#Making_Area").css("z-index", "31"); $("#Queue_All").css("z-index", "31"); }
+    else if(target == "book") { $("#Making_Icon").css("z-index", "51");$("#Making_Area").css("z-index", "31"); $("#Queue_All").css("z-index", "31"); }
     else if(target == "sticker") { $("#Sticker_Icon").css("z-index", "51");$("#Sticker").css("z-index", "31");  }
     else if(target == "pencil") { $("#Pencil_Icon").css("z-index", "51");$("#Pencil").css("z-index", "31");  }
 }

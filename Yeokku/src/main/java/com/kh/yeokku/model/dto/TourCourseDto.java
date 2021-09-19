@@ -12,6 +12,7 @@ public class TourCourseDto {
 	private String tc_region;
 	private int tc_pre_contentid;
 	private int tc_next_contentid;
+	private String tc_content;
 	private int tc_contentid;
 	private int tc_contenttypeid;
 	private Date tc_date;
@@ -27,8 +28,8 @@ public class TourCourseDto {
 	}
 
 	public TourCourseDto(int tc_no, int tc_userno, String tc_title, int tc_days, int tc_day, String tc_region,
-			int tc_pre_contentid, int tc_next_contentid, int tc_contentid, int tc_contenttypeid, Date tc_date,
-			int tc_view, int tc_lt_cnt, UserDto user_dto) {
+			int tc_pre_contentid, int tc_next_contentid, String tc_content, int tc_contentid, int tc_contenttypeid,
+			Date tc_date, int tc_view, int tc_lt_cnt, UserDto user_dto) {
 		super();
 		this.tc_no = tc_no;
 		this.tc_userno = tc_userno;
@@ -38,6 +39,7 @@ public class TourCourseDto {
 		this.tc_region = tc_region;
 		this.tc_pre_contentid = tc_pre_contentid;
 		this.tc_next_contentid = tc_next_contentid;
+		this.tc_content = tc_content;
 		this.tc_contentid = tc_contentid;
 		this.tc_contenttypeid = tc_contenttypeid;
 		this.tc_date = tc_date;
@@ -157,6 +159,12 @@ public class TourCourseDto {
 	public void setUser_dto(UserDto user_dto) {
 		this.user_dto = user_dto;
 	}
-	
-	
+
+	public String getTc_content() {
+		return tc_content;
+	}
+
+	public void setTc_content(String tc_content) {
+		this.tc_content = tc_content;
+	}
 }

@@ -32,7 +32,7 @@
                             <span style="font-size:25px;">o</span> ?<br>
                             <h1>Course List</h1>
                             <p>다른 사람들의 일정을 살펴볼까요 ?</p>
-                            <a href="#" class="btn_1" style="border:double 3px white;">나만의 계획 짜러가기 !!</a>
+                            <a href="course_making.do" class="btn_1" style="border:double 3px white;">나만의 계획 짜러가기 !!</a>
                         </div>
                     </div>
                 </div>

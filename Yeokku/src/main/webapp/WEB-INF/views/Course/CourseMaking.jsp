@@ -33,7 +33,7 @@
 		<img class="Icon" id="Map_Icon" src="resources/img/Course/Map.png">
 		<img class="Icon" id="Heart_Icon" src="resources/img/Course/Heart.png">
 		<img class="Icon" id="Chat_Icon" src="resources/img/Course/Chat.png">
-		<img class="Icon" id="Book_Icon" src="resources/img/Course/Book2.png">
+		<img class="Icon" id="Making_Icon" src="resources/img/Course/Book2.png">
 		<img class="Icon" id="Sticker_Icon" src="resources/img/Course/Sticker.png">
 		<img class="Icon" id="Pencil_Icon" src="resources/img/Course/Pencil.png">
 		<img class="Icon" id="Save_Icon" src="resources/img/Course/Save.png">
