@@ -14,7 +14,7 @@
 $(document).ready(function() {
 
     alert("로그인 성공");
-    location.href="loginpage.do";
+    location.href="login_form.do";
 	
   });
     

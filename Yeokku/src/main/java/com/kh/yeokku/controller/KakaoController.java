@@ -35,8 +35,7 @@ public class KakaoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(KakaoController.class);
 	@RequestMapping(value = "getKakaoAuthUrl.do")
-	public @ResponseBody String getKakaoAuthUrl(
-			HttpServletRequest request) throws Exception {
+	public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
 		String reqUrl = 
 				"https://kauth.kakao.com/oauth/authorize"
 				+ "?client_id=4f55f237ee8d2ddceca32b2b1e523c46"
@@ -209,6 +208,7 @@ public class KakaoController {
  */
     
     
+
 
 
     
