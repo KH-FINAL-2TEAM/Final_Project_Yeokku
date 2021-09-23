@@ -31,7 +31,7 @@ $(document).ready(function() {
 	//console.log(sessionStorage.getItem("naver_token"));
 	
     alert("네이버 로그인 성공");
-    location.href="loginpage.do";
+    location.href="login_form.do";
 	
   });
     

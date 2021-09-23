@@ -3,13 +3,17 @@ package com.kh.yeokku.model.dao.impl;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,11 +24,17 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import com.kh.yeokku.model.dao.TripplaceDao;
+import com.kh.yeokku.model.dto.LikeTourDto;
+import com.kh.yeokku.model.dto.NaverBlogDto;
 import com.kh.yeokku.model.dto.TourDto;
 import com.kh.yeokku.model.dto.TourResultDto;
+import com.kh.yeokku.model.dto.TourReviewDto;
 
 @Repository
 public class TripplaceDaoImpl implements TripplaceDao{
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
 	String serviceKey ="ZQscfOiocZrQpK8kXr9QPPdHPfyhCNoAZ8fMA%2BO83K3x1rrMn8AL%2FP%2FvKnQghMb8XezP4cqE%2Fpree8FPMqfdwQ%3D%3D";
 	
 	@Override
@@ -205,11 +215,10 @@ public class TripplaceDaoImpl implements TripplaceDao{
 		return list;
 	}
 	
-
 	@Override
-	public TourResultDto searchResultDetail(String contentid) {
+	public TourResultDto searchResultDetail(TourResultDto dto) {
 		TourResultDto resDto = new TourResultDto();
-		
+		String contentid = dto.getContentid();
 		String baseUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String etcUrl = "&contentId="+contentid+"&defaultYN=Y&firstImageYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&&MobileOS=ETC&MobileApp=AppTest";
 		String deKey = null;
@@ -252,7 +261,6 @@ public class TripplaceDaoImpl implements TripplaceDao{
 			String zipcode = String.valueOf(jsonItem.get("zipcode"));
 			String mapx = String.valueOf(jsonItem.get("mapx"));
 			String mapy = String.valueOf(jsonItem.get("mapy"));
-			String mlevel = String.valueOf(jsonItem.get("mlevel"));
 			String overview = (String) jsonItem.get("overview");
 			
 			resDto.setHomepage(homepage);
@@ -267,8 +275,8 @@ public class TripplaceDaoImpl implements TripplaceDao{
 			resDto.setZipcode(zipcode);
 			resDto.setMapx(mapx);
 			resDto.setMapy(mapy);
-			resDto.setMlevel(mlevel);
 			resDto.setOverview(overview);
+			resDto.setContentid(contentid);
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -362,6 +370,182 @@ public class TripplaceDaoImpl implements TripplaceDao{
 		}
 		
 		return list;
+	}
+
+	public List<TourReviewDto> tripplaceReviewList(TourResultDto dto) {
+		List<TourReviewDto> list = new ArrayList<TourReviewDto>();
+		int tr_contentid = Integer.parseInt(dto.getContentid());
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectList",tr_contentid);
+			for(TourReviewDto res : list) {
+			  Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(res.getTr_date());
+			  SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd a HH:mm");
+			  String stringDate = sdf.format(date);
+			  res.setTr_date(stringDate);
+			}
+		
+		} catch(Exception e) {
+			System.out.println("[error] : tour review select list");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	public int tripplaceReviewCount(TourResultDto dto) {
+		int tr_contentid = Integer.parseInt(dto.getContentid());
+		int res = 0;
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"countReview",tr_contentid);
+		} catch(Exception e) {
+			System.out.println("[error] : tour review count");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int tripplaceReviewWrite(TourReviewDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertReview",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : tour review insert");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+		
+	public int tripplaceReviewUpdate(TourReviewDto dto) { 
+		  int res = 0;
+	  
+		  try { 
+			  res = sqlSession.update(NAMESPACE+"updateReview", dto);
+		  } catch(Exception e) { 
+			  System.out.println("[error] : tour review update");
+			  e.printStackTrace(); 
+		  }
+		  
+		  return res; 
+	  
+	  }
+	 
+	public int tripplaceReviewDelete(TourReviewDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteReview", dto);
+		}catch(Exception e) {
+			System.out.println("[error] : tour review delete");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	public LikeTourDto tripplaceLikeUser(TourResultDto dto, String userno) {
+		LikeTourDto lt = new LikeTourDto();
+		LikeTourDto res = new LikeTourDto();
+		if(userno==null||userno=="") { res=null; return res; }
+		int lt_contentid = Integer.parseInt(dto.getContentid());
+		int lt_userno = Integer.parseInt(userno);
+		lt.setLt_contentid(lt_contentid);
+		lt.setLt_userno(lt_userno);
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE2+"selectOne", lt);
+		}catch(Exception e) {
+			System.out.println("[error] : tour like user");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int tripplaceLikeCount(TourResultDto dto) {
+		int tr_contentid = Integer.parseInt(dto.getContentid());
+		int res = 0;
+		try {
+			res = sqlSession.selectOne(NAMESPACE2+"countLike",tr_contentid);
+		} catch(Exception e) {
+			System.out.println("[error] : tour review count");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int tripplaceLike(LikeTourDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE2+"insert",dto);
+			
+		} catch(Exception e) {
+			System.out.println("[error] : like tour insert");
+			e.printStackTrace();
+		}
+		
+		return res;
+		
+	}
+	
+	public int tripplaceLikeCancel(LikeTourDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE2+"delete",dto);
+		} catch(Exception e) {
+			System.out.println("[error] : like tour insert");
+			e.printStackTrace();
+		}
+		
+		return res;
+		
+	}
+
+	public List<NaverBlogDto> tripplaceNaverBlog(TourResultDto dto){
+		List<NaverBlogDto> list = new ArrayList<NaverBlogDto>();
+		String clientId="vniixtCIlVTsjVRIV40O";
+		String clientSecret="hborH_mlH4";
+		
+		String url = "https://openapi.naver.com/v1/search/blog?display=3&query="+dto.getTitle();
+		
+		RestTemplate rt = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("X-Naver-Client-Id", clientId);
+		headers.set("X-Naver-Client-Secret", clientSecret);
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+		ResponseEntity<String> res = rt.exchange(url, HttpMethod.GET, entity, String.class);
+		JSONParser parser = new JSONParser();
+		try {
+			JSONObject obj = (JSONObject) parser.parse(res.getBody());
+			JSONArray items = (JSONArray) obj.get("items");
+			
+			for(int i=0; i<items.size(); i++) {
+				NaverBlogDto blogDto = new NaverBlogDto();
+				JSONObject item = (JSONObject) items.get(i);
+				String title = (String) item.get("title");
+				blogDto.setTitle(title);
+				String description = (String) item.get("description");
+				blogDto.setDescription(description);
+				String link = (String) item.get("link");
+				blogDto.setLink(link);
+				
+				list.add(blogDto);
+			}
+			
+		} catch (ParseException e) {
+			System.out.println("parsing error");
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+		
 	}
 
 }

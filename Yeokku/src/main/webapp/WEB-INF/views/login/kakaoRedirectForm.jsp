@@ -50,7 +50,7 @@
 					console.log(sessionStorage.getItem("kakao_name"));
 					
 					alert("카카오 로그인 성공");
-				    location.href="loginpage.do";
+				    location.href="login_form.do";
 					
 				}
 				

@@ -3,7 +3,6 @@ package com.kh.yeokku.model.dto;
 public class LikeTourDto {
 	//db 변수
 	private int lt_contentid;
-	private int lt_contenttypeid;
 	private int lt_userno;
 	private String lt_title;
 	private String lt_firstimage;
@@ -16,11 +15,10 @@ public class LikeTourDto {
 
 
 
-	public LikeTourDto(int lt_contentid, int lt_contenttypeid, int lt_userno, String lt_title, String lt_firstimage,
+	public LikeTourDto(int lt_contentid, int lt_userno, String lt_title, String lt_firstimage,
 			UserDto user_dto) {
 		super();
 		this.lt_contentid = lt_contentid;
-		this.lt_contenttypeid = lt_contenttypeid;
 		this.lt_userno = lt_userno;
 		this.lt_title = lt_title;
 		this.lt_firstimage = lt_firstimage;
@@ -35,14 +33,6 @@ public class LikeTourDto {
 
 	public void setLt_contentid(int lt_contentid) {
 		this.lt_contentid = lt_contentid;
-	}
-
-	public int getLt_contenttypeid() {
-		return lt_contenttypeid;
-	}
-
-	public void setLt_contenttypeid(int lt_contenttypeid) {
-		this.lt_contenttypeid = lt_contenttypeid;
 	}
 
 	public int getLt_userno() {
@@ -88,7 +78,7 @@ public class LikeTourDto {
 
 	@Override
 	public String toString() {
-		return "LikeTourDto [lt_contentid=" + lt_contentid + ", lt_contenttypeid=" + lt_contenttypeid + ", lt_userno="
+		return "LikeTourDto [lt_contentid=" + lt_contentid + ", lt_userno="
 				+ lt_userno + ", lt_title=" + lt_title + ", lt_firstimage=" + lt_firstimage + ", user_dto=" + user_dto
 				+ "]";
 	}

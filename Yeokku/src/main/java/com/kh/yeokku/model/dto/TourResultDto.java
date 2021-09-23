@@ -9,24 +9,19 @@ public class TourResultDto {
 	private String cat2;
 	private String cat3;
 	private String firstimage;
-	private String createdtime;
-	private String readcount;
 	private String mapx;
 	private String mapy;
 	private String contentid;
-	private String totalCount;
 	private String zipcode;
 	private String tel;
-	private String mlevel;
 	private String overview;
 	
 	public TourResultDto() {
 		super();
 	}
-	
 	public TourResultDto(String homepage, String title, String addr1, String addr2, String cat1, String cat2,
-			String cat3, String firstimage, String createdtime, String readcount, String mapx, String mapy,
-			String contentid, String totalCount, String zipcode, String tel, String mlevel, String overview) {
+			String cat3, String firstimage, String mapx, String mapy, String contentid, String zipcode, String tel,
+			String overview) {
 		super();
 		this.homepage = homepage;
 		this.title = title;
@@ -36,26 +31,19 @@ public class TourResultDto {
 		this.cat2 = cat2;
 		this.cat3 = cat3;
 		this.firstimage = firstimage;
-		this.createdtime = createdtime;
-		this.readcount = readcount;
 		this.mapx = mapx;
 		this.mapy = mapy;
 		this.contentid = contentid;
-		this.totalCount = totalCount;
 		this.zipcode = zipcode;
 		this.tel = tel;
-		this.mlevel = mlevel;
 		this.overview = overview;
 	}
-
 	public String getHomepage() {
 		return homepage;
 	}
-
 	public void setHomepage(String homepage) {
 		this.homepage = homepage;
 	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -98,18 +86,6 @@ public class TourResultDto {
 	public void setFirstimage(String firstimage) {
 		this.firstimage = firstimage;
 	}
-	public String getCreatedtime() {
-		return createdtime;
-	}
-	public void setCreatedtime(String createdtime) {
-		this.createdtime = createdtime;
-	}
-	public String getReadcount() {
-		return readcount;
-	}
-	public void setReadcount(String readcount) {
-		this.readcount = readcount;
-	}
 	public String getMapx() {
 		return mapx;
 	}
@@ -128,42 +104,26 @@ public class TourResultDto {
 	public void setContentid(String contentid) {
 		this.contentid = contentid;
 	}
-	public String getTotalCount() {
-		return totalCount;
-	}
-	public void setTotalCount(String totalCount) {
-		this.totalCount = totalCount;
-	}
-
 	public String getZipcode() {
 		return zipcode;
 	}
-
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-
 	public String getTel() {
 		return tel;
 	}
-
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
-	public String getMlevel() {
-		return mlevel;
-	}
-
-	public void setMlevel(String mlevel) {
-		this.mlevel = mlevel;
-	}
-
 	public String getOverview() {
 		return overview;
 	}
-
 	public void setOverview(String overview) {
 		this.overview = overview;
 	}
+	
+	
+	
+	
 }
