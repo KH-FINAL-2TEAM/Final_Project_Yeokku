@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="main_form.do">mypage</a>
-	
+	<a href="mypage.do">mypage</a>
 </body>
 </html>

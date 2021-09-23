@@ -9,12 +9,13 @@ var Dragging = false;
 var Map_Dragging = false;
 
 var Course_Q = [];
-var detail_count = 1;
 
 var Scroll_Check;
 
 window.onload = function()
-{	
+{
+	setTimeout(function() { remakeLoading(); }, 300);
+	
 	$("#Start_Area").bind('click', function() { document.documentElement.requestFullscreen(); $("#Start_Area").fadeOut();});
 
 	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show(); $("#Pencil").hide(); $("#Save_Area").hide(); $("#Black_Mask").hide();
@@ -467,16 +468,16 @@ window.onload = function()
   		}
 	});
 	
-	$('#Book_Icon').bind('click', function(){
+	$('#Making_Icon').bind('click', function(){
 
 		if(Icon_Switch[7] == 0) {
 			Icon_Switch[7] = 1;
 			$("#Making_Area").hide(); $("#Queue_All").hide();
-			$("#Book_Icon").attr("src","resources/img/Course/Book.png");
+			$("#Making_Icon").attr("src","resources/img/Course/Book.png");
 		} else {
 			Icon_Switch[7] = 0;
 			$("#Making_Area").show(); $("#Queue_All").show();
-			$("#Book_Icon").attr("src","resources/img/Course/Book2.png");
+			$("#Making_Icon").attr("src","resources/img/Course/Book2.png");
 
             Index_Change("book");
 		}
@@ -485,13 +486,13 @@ window.onload = function()
 	$('#Making_Close').bind('click', function(){
 		Icon_Switch[7] = 1;
 		$("#Making_Area").hide(); $("#Queue_All").hide();
-		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
+		$("#Making_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
 	$('#Making_Area').bind('dblclick', function(){
 		Icon_Switch[7] = 1;
 		$("#Making_Area").hide(); $("#Queue_All").hide();
-		$("#Book_Icon").attr("src","resources/img/Course/Book.png");
+		$("#Making_Icon").attr("src","resources/img/Course/Book.png");
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -850,7 +851,7 @@ function Index_Change(target) {
 	else if(target == "bus") { $("#Bus_Icon").css("z-index", "51");$("#Bus").css("z-index", "31");  }
 	else if(target == "map") { $("#Map_Icon").css("z-index", "51");$("#Map").css("z-index", "31");  }
 	else if(target == "heart") { $("#Heart_Icon").css("z-index", "51");$("#Heart").css("z-index", "31");  }
-    else if(target == "book") { $("#Book_Icon").css("z-index", "51");$("#Making_Area").css("z-index", "31"); $("#Queue_All").css("z-index", "31"); }
+    else if(target == "book") { $("#Making_Icon").css("z-index", "51");$("#Making_Area").css("z-index", "31"); $("#Queue_All").css("z-index", "31"); }
     else if(target == "sticker") { $("#Sticker_Icon").css("z-index", "51");$("#Sticker").css("z-index", "31");  }
     else if(target == "pencil") { $("#Pencil_Icon").css("z-index", "51");$("#Pencil").css("z-index", "31");  }
 }
@@ -877,7 +878,6 @@ $("#Queue_Size").bind('click', function() {
 
 function Q_Update() {
 
-
 	if(Q_Size == "big") { $("#Queue_All").html('<img id="Queue_Size" src="resources/img/Course/Minus.png">');}
 	else { $("#Queue_All").html('<img id="Queue_Size" src="resources/img/Course/Plus.png">'); }
 	
@@ -894,7 +894,7 @@ function Q_Update() {
 			$("#Queue_Size").attr("src", "resources/img/Course/Minus.png"); 
 			Q_Size = "big";
 		}
-	}); 
+	});
 	
 	var temp = '';
 	var count = 1;
@@ -915,7 +915,7 @@ function Q_Update() {
 			temp += '<div class="Queue_One" id="q_' + id + '">';
 
 			if(id.includes("map_detail_")) { title = $("."+id).children('h5').html(); }
-			else { title = $("."+id).children('span:first').children('b').html(); title = title.substr(3, title.length-6); }
+			else { title = $("."+id).children('span:first').children('b').html(); title = title + ""; title = title.substr(3, title.length-6); }
 
 			temp += title + '</div> &nbsp;&nbsp';
 			if( i != Course_Q.length-1 ) { temp += "<div class='Queue_Next'></div> &nbsp;&nbsp;"; }
@@ -1045,17 +1045,186 @@ function Q_Drag_Grant() {
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
+function scUpdate() {
+
+	var title = $("#Content_Title").val();
+	var tag = $("#Content_Tag").val();
+	var content = $("#Making_Area").html();
+	var open = $(':radio[name="open_check"]:checked').val();
+	
+	const imgBase64 = canvas.toDataURL('image/png', 'image/octet-stream');
+	const decodImg = atob(imgBase64.split(',')[1]);
+
+	const img = imgBase64.replace("data:image/png;base64," ,"");
+	
+	 let array = [];
+	 for (let i = 0; i < decodImg.length; i++) {
+	    array.push(decodImg.charCodeAt(i));
+	 }
+
+	var temp = [];
+	temp = content.split('<img class="Close" id="Making_Close" src="resources/img/Course/Close.png">');
+	content = temp[1];
+	
+	var q = "START";
+	for(var i=0; i<Course_Q.length; i++) {
+		q += "&&" + Course_Q[i];
+	}
+	
+	var Room = {
+		"tc_title":title,
+		"tc_content":content,
+		"tc_open":open,
+		"tc_tag":tag,
+		"tc_jpg":img,
+		"tc_q":q
+	}
+	
+	ws.send(Room);
+}
+
 function save() {
+
+	var title = $("#Content_Title").val();
+	var tag = $("#Content_Tag").val();
+	var content = $("#Making_Area").html();
+	var open = $(':radio[name="open_check"]:checked').val();
+	
+	const imgBase64 = canvas.toDataURL('image/png', 'image/octet-stream');
+	const decodImg = atob(imgBase64.split(',')[1]);
+
+	const img = imgBase64.replace("data:image/png;base64," ,"");
+	
+	 let array = [];
+	 for (let i = 0; i < decodImg.length; i++) {
+	    array.push(decodImg.charCodeAt(i));
+	 }
+
+	var temp = [];
+	content = content.replace('<div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90; display: none;"></div>', "");
+	content = content.replace('<div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; display: none;"></div>', "");
+	content = content.replace('<div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; display: none;"></div>', "");
+	content = content.split('<img class="Close" id="Making_Close" src="resources/img/Course/Close.png">');
+	content = content[1];
+	
+	var q = "START";
+	for(var i=0; i<Course_Q.length; i++) {
+		q += "&&" + Course_Q[i];
+	}
+	
+	var Room = {
+		"tc_title":title,
+		"tc_content":content,
+		"tc_open":open,
+		"tc_tag":tag,
+		"tc_jpg":img,
+		"tc_q":q,
+		"tc_dc":detail_count
+	}
+
 	$.ajax({
-        url: "",
-        dataType: "",
-        success: function (msg) {},
-        error: function () {}
-    });
-    
+		type:"post",
+		url:"roomsave.do",
+		data:JSON.stringify(Room),
+		contentType:"application/json",
+		dataType:"json",
+		success:function(msg) {
+			if(msg.check == true) {
+				var back = confirm(" 저장 완료 \n 현재 페이지에서 나가시겠습니까? ");
+				if(back==true) {location.href="mypage.do";}
+			} else {
+				alert("[F] 오류가 발생하였습니다. 반복된다면 문의 부탁드립니다.");
+			}
+		},
+		error:function() {
+			alert("[E] 오류가 발생하였습니다. 반복된다면 문의 부탁드립니다.");
+		}
+	});
+	
     Icon_Switch[9] = 1;
 	$("#Save_Area").hide(); $("#Black_Mask").hide();
 	$("#Save_Icon").attr("src","resources/img/Course/Save.png");
-	
-	// 임시임
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+function remakeLoading() {
+
+	Course_Q = tc_q.split("&&");
+	
+	Course_Q.splice(0, 1);
+	
+	var temp = '';
+	var count = 1;
+	
+	temp += "<div class='Queue_List'> <div id='Q_Start' class='Queue_One'>시 작</div> &nbsp;&nbsp; <div class='Queue_Next'></div> &nbsp;&nbsp;"; // 여기
+	
+	for(var j=0; j<=Course_Q.length/5; j++) {
+	
+		for(var i=j*5; i<j*5+5; i++) {
+		
+			try {
+				if( (Course_Q[i] == null) || (Course_Q[i] == "START") ) {continue;}
+			} catch(e){}
+			
+			var id = Course_Q[i];
+			var title = '';
+		
+			temp += '<div class="Queue_One" id="q_' + id + '">';
+
+			if(id.includes("map_detail_")) { title = $("."+id).children('h5').html(); }
+			else {
+				title = $("."+id).children('span:first').children('b').html();
+				title = title + "";
+				title = title.substr(3, title.length-6);
+			}
+
+			temp += title + '</div> &nbsp;&nbsp';
+			if( i != Course_Q.length-1 ) { temp += "<div class='Queue_Next'></div> &nbsp;&nbsp;"; }
+			else { }
+		}
+	}
+	
+	temp += "<div class='Queue_Next'></div> &nbsp;&nbsp;<div id='Q_End' class='Queue_One'>종 료</div></div>"; // 여기
+	
+	$("#Queue_All").append(temp);
+	
+	$(".Queue_One").bind('click', function() { alert("상세 페이지로 이동은 현재 지원하지 않습니다."); });
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	
+	$("#Making_Area>.Detail").unbind('click');
+	$("#Making_Area>.Sticker").unbind('click');
+	
+	$("#Making_Area>.Detail").bind('click', function() { 
+		var arr = $(this).attr('class').split(" ");
+		$("."+arr[4]).remove(); $("#q_"+arr[4]).remove(); 
+		Q_Delete(Course_Q, -1, arr[4]);
+		Q_Update();
+	});
+	
+	$("#Making_Area>.Sticker_One").bind('click', function() { 
+		$(this).remove();
+	});
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////
+
+	var img = new Image();
+	img.src = png;
+	
+	img.onload = function() {
+		ctx.drawImage(img, 0, 0)
+	};
+	
+}
+
+
+
+
+
+
+
+

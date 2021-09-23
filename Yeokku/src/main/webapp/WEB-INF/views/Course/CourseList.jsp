@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html><html>
 
 <head>
@@ -12,6 +14,7 @@
     <link rel="stylesheet" href="resources/css/style_dh.css">
     <link rel="stylesheet" href="resources/css/Course/CourseList.css">
     <script src="resources/js/Course/CourseList.js" charset="utf-8"></script>
+    
 </head>
 
 
@@ -32,7 +35,7 @@
                             <span style="font-size:25px;">o</span> ?<br>
                             <h1>Course List</h1>
                             <p>다른 사람들의 일정을 살펴볼까요 ?</p>
-                            <a href="#" class="btn_1" style="border:double 3px white;">나만의 계획 짜러가기 !!</a>
+                            <a href="course_making.do" class="btn_1" style="border:double 3px white;">나만의 계획 짜러가기 !!</a>
                         </div>
                     </div>
                 </div>
@@ -61,163 +64,30 @@
 	            
 	            <div class="row">
 	            
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_3.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_4.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_3.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_4.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>
-	                
-	                <div class="col-lg-4 col-md-4">
-	                	<a href="detail.do?id=000">
-		                    <div class="single_place">
-		                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
-		                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-		                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-		                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>여자친구랑 부산 2박 3일 여행 !</b></span><br>
-		                                <span class="course_detail" id="id"> 👤 최대아이디는몇글자일 </span><br>
-		                                <span class="course_detail" id="watch"> 👁 14,231 </span><br>
-		                                <span class="course_detail" id="heart"> 💗 32 </span><br>
-		                                <span class="course_tag"id="tag">#해운대, #서면밀면, #바다, #기차, #오버플로우 테스트용 따라서 길게 적어야함 으앙아아</span><br>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </a>
-	                </div>    
-	                
-	                <br><hr><br>
-	                
-	                <a href="#" class="page"><b>&lt;&lt; &nbsp;&nbsp; &lt; &nbsp;&nbsp; 1 &nbsp;&nbsp; 2 &nbsp;&nbsp; 3 &nbsp;&nbsp; 4 &nbsp;&nbsp; 5 &nbsp;&nbsp; &gt; &nbsp;&nbsp; &gt;&gt;</b></a>
+					<c:forEach items="${list }" var="dto" varStatus="status">
+						<c:choose>
+							<c:when test="${dto.tc_open == 'Y' }">
+								<div class="col-lg-4 col-md-4">
+				                	<a href="course_detail.do?room=${dto.tc_no }">
+					                    <div class="single_place">
+					                        <img src="resources/img/single_place_${status.index%4+1}.png" alt="" class="col-lg-12 col-md-12">
+					                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
+					                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
+					                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>${dto.tc_title } &nbsp; </b></span><br>
+					                                <span class="course_detail" id="id"> &nbsp; 👤  ${dto.tc_userid } &nbsp; </span><br>
+					                                <span class="course_detail" id="watch"> &nbsp; 👁 &nbsp; ${dto.tc_view } &nbsp; </span><br>
+					                                <span class="course_detail" id="heart"> &nbsp; 💗  ${dto.tc_like } &nbsp; </span><br>
+					                                <span class="course_tag"id="tag"> &nbsp; ${dto.tc_tag } &nbsp; </span><br>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </a>
+				                </div> 
+							</c:when>
+						</c:choose>
+					</c:forEach>
 	            
+	                <br><hr><br>
 	            </div>
 	        </div>
 	    </section>

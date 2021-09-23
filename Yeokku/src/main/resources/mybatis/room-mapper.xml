@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="room">
+  
+  	<select id="seqCheck" resultType="int">
+  		SELECT TCBOARDALLSEQ.CURRVAL
+		FROM DUAL
+  	</select>
+  	
+  	<insert id="createRoom" parameterType="user_dto">
+  		INSERT INTO TCBOARDALL
+  		VALUES ( TCBOARDALLSEQ.NEXTVAL, #{user_id}, '  ', '  ', '월', 0, 0, '0', #{pw}, 'N', '#임시테그, #임시테그2', '공백 큐', 1)
+  		<selectKey keyProperty="seq" resultType="Integer" order="AFTER">
+			SELECT TCBOARDALLSEQ.CURRVAL FROM DUAL
+		</selectKey>
+  	</insert>
+  	
+  	<select id="selectAll" resultType="room_dto">
+		SELECT * FROM TCBOARDALL
+	</select>
+	
+	<select id="selectOne" resultType="room_dto">
+		SELECT * FROM TCBOARDALL WHERE TC_NO=#{room}
+	</select>
+	
+	<select id="remakeRoom" resultType="room_dto">
+		SELECT * FROM TCBOARDALL WHERE TC_PW=#{pw}
+	</select>
+  	
+  	<update id="roomUpdate" parameterType="room_dto">
+  		UPDATE TCBOARDALL
+  		SET TC_TITLE= #{tc_title}, TC_CONTENT= #{tc_content}, TC_OPEN= #{tc_open}, TC_TAG= #{tc_tag}, TC_Q= #{tc_q}, TC_DC= #{tc_dc}
+  		WHERE TC_NO= #{tc_no}
+  	</update>
+  	
+  	<update id="viewPlus">
+  		UPDATE TCBOARDALL
+  		SET TC_VIEW = TC_VIEW + 1
+  		WHERE TC_NO= #{room}
+  	</update>
+  	
+  	<update id="imgUpdate" parameterType="room_dto">
+  		UPDATE TCBOARDALL
+  		SET TC_JPG= #{tc_jpg}
+  		WHERE TC_NO= #{tc_no}
+  	</update>
+  	
+  	<delete id="deleteNotice" parameterType="int">
+  		DELETE FROM NOTICEBOARD
+  		WHERE NOTICE_NO=#{notice_no}
+  	</delete>
+  	
+  </mapper>

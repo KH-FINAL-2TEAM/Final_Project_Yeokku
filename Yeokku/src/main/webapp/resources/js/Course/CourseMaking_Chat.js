@@ -2,7 +2,6 @@ var url = window.location.host;
 var pathname = window.location.pathname;
 var appCtx = pathname.substring(0, pathname.indexOf("/",2));
 var root = url+appCtx;
-var ws = new WebSocket("ws://"+root+"/chat?room=10");
 var mypfimg = "resources/img/Course/PF2.jpg"; // 임시. 이후 수정 필요
      
 function connect() {
@@ -24,7 +23,7 @@ function connect() {
 
 	};
 	
-	ws.onclose = function (event) { console.log('Socket End Clear'); };
+	ws.onclose = function (event) { console.log('Socket End Clear'); setTimeout( function(){ connect(); }, 1000); };
 	ws.onerror = function (event) { console.log('Socket Error !!'); };
 }
 
@@ -41,5 +40,3 @@ $('#Chat_Button').on('click', function(evt) {
 	$('#Chat_Input').val('');
 	ws.send(msg);
 });
-  
- connect();

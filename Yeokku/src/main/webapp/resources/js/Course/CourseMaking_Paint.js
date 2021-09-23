@@ -167,7 +167,7 @@ function drawSave() {
 	
 	$.ajax({
 	  type: 'post',
-	  url: '/coursecanvas/',
+	  url: '/paint_go',
 	  cache: false,
 	  data: formData,
 	  processData: false,
@@ -177,3 +177,4 @@ function drawSave() {
 	  }
 	})
 }
+

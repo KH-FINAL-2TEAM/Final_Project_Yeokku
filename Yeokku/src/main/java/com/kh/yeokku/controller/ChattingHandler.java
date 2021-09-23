@@ -28,8 +28,9 @@ public class ChattingHandler extends TextWebSocketHandler{
 			System.out.println("접속 시작 단계");
 
 			Map<String, Object> user_no = session.getAttributes(); 
-
+			
 			Map<String, String> values = getQueryMap(session.getUri().toString()); 
+			
 			if( roomSessions.containsKey(values.get("room")) ) { 
 				Map<String, WebSocketSession> room = roomSessions.get( values.get("room") ).getSessions();
 				room.put( user_no.get("user_no").toString(), session);
@@ -40,6 +41,10 @@ public class ChattingHandler extends TextWebSocketHandler{
 				room.addSessions( user_no.get("user_no").toString(), session);
 				roomSessions.put(values.get("room"), room); 
 			} 
+			
+			System.out.println(user_no);
+			System.out.println(values);
+			System.out.println(roomSessions);
 			
 			System.out.println("접속 완료");
 		}

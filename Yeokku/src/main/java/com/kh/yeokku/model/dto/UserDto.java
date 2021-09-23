@@ -16,7 +16,7 @@ public class UserDto {
 	private Date user_reg_date;
 	private String user_able;
 	private String user_role;
-	
+	private int user_room;
 	
 	public UserDto() {
 		// TODO Auto-generated constructor stub
@@ -162,8 +162,14 @@ public class UserDto {
 	}
 
 
-	
-	
-	
+	public int getUser_room() {
+		return user_room;
+	}
+
+
+	public void setUser_room(int user_room) {
+		this.user_room = user_room;
+	}
+
 	
 }

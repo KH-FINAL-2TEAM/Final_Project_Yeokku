@@ -1,20 +1,51 @@
 @charset "UTF-8";
 
 .breadcrumb_iner_item span { color : white; }
-		
+
+.Detail {
+	width:257px;
+	height:321px;
+}
+	
 #detail_area { 
 	width:1280px;
-	height:auto;
+	height:850px;
 	
-	margin:auto;
+	border:5px white double;
 	padding:0;
+	
+	position:absolute;
+	
+	left:0; right:0; margin-left:auto; margin-right:auto;
+	
+	overflow:scroll;
+	
+	background-color: rgba(21,155,218,0.8);
+}
+
+
+#detail_area::-webkit-scrollbar-track{ 
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+#detail_area::-webkit-scrollbar{ 
+	width: 10px;
+	background-color: #F5F5F5;
+}
+#detail_area::-webkit-scrollbar-thumb{ 
+	background-color: #0ae;
+	
+	background-image: -webkit-gradient(linear, 0 0, 0 100%,
+	                   color-stop(.5, rgba(255, 255, 255, .2)),
+					   color-stop(.5, transparent), to(transparent));
 }
 
 /* ================================================================= */
 /* ================================================================= */
 
-#q_list {
+#q_list_detail {
 	width:80%;
+	height:12vh;
 	margin : auto;
 	
     display: -webkit-box; 
@@ -31,7 +62,16 @@
     -moz-box-pack: center; 
     -ms-flex-pack: center; 
     justify-content: center;
+    
+    background-color:rgba(255, 255, 255, 0.8);
+    
+    padding-top:1.3vh;
            
+}
+
+.Queue_One {
+	width:5vw;
+	height:8.5vh;
 }
 
 .q_one {
@@ -94,9 +134,13 @@
 
 #review {
 	width:50%;
-	margin:auto;
+	margin-top:920px;
 	
 	border: 5px double #F5F5F5;
+	
+	position:absolute;
+	
+	left:0; right:0; margin-left:auto; margin-right:auto;
 
 }
 
@@ -174,10 +218,10 @@
 
 .review_icon {
 	position:absolute;
-	margin:auto;
 	display:inline-block;
-	right:calc(25% + 25px);
+	right:-13%;
 	cursor:pointer;
+	width:200px
 }
 
 .user_id {
@@ -190,7 +234,7 @@
 }
 
 .content {
-	width:45%;
+	width:108%;
 	font-size:15px;
 	overflow:auto;
 	height:50px;

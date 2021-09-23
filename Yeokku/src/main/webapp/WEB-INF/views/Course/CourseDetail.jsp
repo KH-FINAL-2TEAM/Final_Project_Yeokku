@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ page import="com.kh.yeokku.model.dto.RoomDto" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script>var tc_q = '${dto.tc_q}';</script>
+    
 <!DOCTYPE html><html>
 
 <head>
@@ -12,8 +17,9 @@
     <link rel="stylesheet" href="resources/css/style_dh.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     
-    <link rel="stylesheet" href="resources/css/Course/CourseDetail.css?ver=6">
-    <script src="resources/js/Course/CourseDetail.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="resources/css/Course/CourseMaking.css?ver=11">
+    <link rel="stylesheet" href="resources/css/Course/CourseDetail.css?ver=15">
+    <script src="resources/js/Course/CourseDetail.js?ver=1" charset="utf-8"></script>
 </head>
 
 <%@ include file="../header/header.jsp" %>
@@ -26,9 +32,9 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item text-center">
-                            <h2 id="course_title">여자친구와 2박 3일 부산 여행 !</h2>
-                            <span id="course_writer">👤 최대아이디는몇글자일</span> &nbsp; <span id="course_watch">👁 14,231</span> &nbsp; <span id="course_heart">💗 32</span><br><br>
-                            <span id="course_tag">#유관순 열사 사적지, #무궁화 포차, #독립 기념관, #그랜드 호텔, #기차여행</span>
+                            <h2 id="course_title">${dto.tc_title }</h2>
+                            <span id="course_writer">👤 ${dto.tc_userid} </span> &nbsp; <span id="course_watch">👁 ${dto.tc_view} </span> &nbsp; <span id="course_heart">💗 ${dto.tc_like }</span><br><br>
+                            <span id="course_tag">${dto.tc_tag }</span>
                         </div>
                     </div>
                 </div>
@@ -38,23 +44,16 @@
     
     <br><hr><br>
     
-    <div id="q_list">
-    	<div class="q_one" id="q_1"><a href="www.naver.com">유관순 열사 사적지</a></div> &nbsp;&nbsp;
-    	<div class="q_next"></div> &nbsp;&nbsp;
-    	<div class="q_one" id="q_2"><a href="www.naver.com">무궁화 포차</a></div> &nbsp;&nbsp;
-    	<div class="q_next"></div> &nbsp;&nbsp;
-    	<div class="q_one" id="q_3"><a href="www.naver.com">독립 기념관</a></div> &nbsp;&nbsp;
-    	<div class="q_next"></div> &nbsp;&nbsp;
-    	<div class="q_one" id="q_4"><a href="www.naver.com">그랜드 호텔</a></div> &nbsp;&nbsp;
+    <div id="q_list_detail">
+    	
     </div>
     
     <br><hr><br>
-    
+
     <div id="detail_area">
-    	<img id="detail_img" src="resources/img/Course/Detail_Sample.png">
+    	<img id="canvasimg" src="data:image/png;base64,${jpg }">
+    	${dto.tc_content}
     </div>
-    
-    <br><hr><br>
     
     <div id="review">
     
@@ -115,9 +114,28 @@
     		</div>
     	</div>
     	
+    	<div style="height:70px;"></div>
     </div>
-    
-    <br><br><hr><br><br>
-	
+
 </body>
+
+<style>
+	body {
+		font-family:'Goyang', Goyang;
+		line-height:1.2;
+	}
+	
+	hr{
+		margin-top:0.5rem;
+		margin-bottom:0.5rem;
+	}
+	canvasimg {
+		position:absolute;
+	}
+	
+	img {
+		max-width:3000px;
+	}
+</style>
+
 </html>
