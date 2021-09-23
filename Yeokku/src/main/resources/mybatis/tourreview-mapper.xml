@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace="tourreview">
+	
+	<resultMap type="user_dto" id="user_map">
+  		<result property="user_no" column="USER_NO"/>
+  		<result property="user_id" column="USER_ID"/>
+  		<result property="user_pw" column="USER_PW"/>
+  		<result property="user_name" column="USER_NAME"/>
+  		<result property="user_email" column="USER_EMAIL"/>
+  		<result property="user_nickname" column="USER_NICKNAME"/>
+  		<result property="user_postcode" column="USER_POSTCODE"/>
+  		<result property="user_address" column="USER_ADDRESS"/>
+  		<result property="user_extraaddress" column="USER_EXTRAADDRESS"/>
+  		<result property="user_reg_date" column="USER_REG_DATE"/>
+  		<result property="user_able" column="USER_ABLE"/>
+  		<result property="user_role" column="USER_ROLE"/>
+  	</resultMap>
+  	
+  	<resultMap type="profile_dto" id="profile_map">
+		<result property="pf_no" column="PF_NO" />
+		<result property="pf_userno" column="PF_USERNO" />
+		<result property="pf_name" column="PF_NAME" />
+		<result property="pf_src" column="PF_SRC" />
+		<result property="pf_type" column="PF_TYPE" />
+  		<collection property="user_dto" resultMap="user_map"/>
+	</resultMap>
+	
+	<resultMap type="tour_review_dto" id="tour_review_map">
+		<result property="tr_no" column="TR_NO" />
+		<result property="tr_userno" column="TR_USERNO" />
+		<result property="tr_contentid" column="TR_CONTENTID" />
+		<result property="tr_content" column="TR_CONTENT" />
+		<result property="tr_date" column="TR_DATE" />
+  		<collection property="user_dto" resultMap="user_map"/>
+  		<collection property="profile_dto" resultMap="profile_map"/>
+	</resultMap>
+
+	<select id="selectList" parameterType="int" resultMap="tour_review_map">
+		SELECT TR.*, U.USER_NAME, PF.PF_NAME, PF.PF_TYPE 
+		FROM TRBOARD TR
+		LEFT JOIN USERBOARD U ON TR.TR_USERNO = U.USER_NO
+		LEFT JOIN PROFILEBOARD PF ON U.USER_NO = PF.PF_USERNO
+		WHERE TR_CONTENTID = #{tr_contentid}
+		ORDER BY TR_NO DESC
+	</select>
+	
+	<select id="countReview" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM TRBOARD
+		WHERE TR_CONTENTID = #{tr_contentid}
+	</select>
+	
+	<insert id="insertReview" parameterType="tour_review_dto">
+		INSERT INTO TRBOARD
+		VALUES(TRBOARDSEQ.NEXTVAL, #{tr_userno}, #{tr_contentid}, #{tr_content}, SYSDATE)
+	</insert>
+	
+	<update id="updateReview" parameterType="tour_review_dto">
+		UPDATE TRBOARD
+		SET TR_CONTENT=#{tr_content}, TR_DATE=SYSDATE
+		WHERE TR_NO=#{tr_no}
+	</update>
+	
+	<delete id="deleteReview" parameterType="tour_review_dto">
+		DELETE FROM TRBOARD
+		WHERE TR_NO=#{tr_no}
+	</delete>
+
+
+
+</mapper>

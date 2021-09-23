@@ -43,22 +43,6 @@ public class TestController {
 	@RequestMapping(value="/couse_tour_list.do")
 	public String CourseTourList(Model model) throws IOException {
 		System.out.println("리스트");
-		/*
-		JsonArray hotel_item = biz.CourseTourList("32");
-		JsonArray food_item = biz.CourseTourList("39");
-		JsonArray place_item = biz.CourseTourList("12");
-		
-
-		Gson hotel_gson = new Gson();
-		List<testDto> hotel_list  = hotel_gson.fromJson( hotel_item , new TypeToken<ArrayList<testDto>>(){}.getType() );
-		Gson food_gson = new Gson();
-		List<testDto> food_list  = food_gson.fromJson( food_item , new TypeToken<ArrayList<testDto>>(){}.getType() );
-		Gson palce_gson = new Gson();
-		List<testDto> place_list  = palce_gson.fromJson( place_item , new TypeToken<ArrayList<testDto>>(){}.getType() );
-		model.addAttribute("hotel_list",hotel_list);
-		model.addAttribute("food_list",food_list);
-		model.addAttribute("place_list",place_list);
-		*/
 		return "Course/CourseMaking";
 	}
 	
@@ -74,4 +58,12 @@ public class TestController {
 		}
 		return gson;
 	}
+	/*
+	@RequestMapping("/tripplace_result_form.do")
+	public String tourSearch(Model model,String contentTypeId, String areaCode, String sigunguCode) {
+		
+		
+		System.out.println("dd");
+		return "tripplace/tripplace_search_result";
+	}*/
 }

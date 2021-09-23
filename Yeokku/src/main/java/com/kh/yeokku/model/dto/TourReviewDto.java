@@ -7,26 +7,26 @@ public class TourReviewDto {
 	private int tr_no;
 	private int tr_userno;
 	private int tr_contentid;
-	private int tr_contenttypeid;
 	private String tr_content;
-	private Date tr_date;
+	private String tr_date;
 	
 	private UserDto user_dto; // 쿼리로 join할 dto
+	private ProfileDto profile_dto;
 	
 	public TourReviewDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TourReviewDto(int tr_no, int tr_userno, int tr_contentid, int tr_contenttypeid, String tr_content,
-			Date tr_date, UserDto user_dto) {
+	public TourReviewDto(int tr_no, int tr_userno, int tr_contentid, String tr_content, String tr_date, UserDto user_dto,
+			ProfileDto profile_dto) {
 		super();
 		this.tr_no = tr_no;
 		this.tr_userno = tr_userno;
 		this.tr_contentid = tr_contentid;
-		this.tr_contenttypeid = tr_contenttypeid;
 		this.tr_content = tr_content;
 		this.tr_date = tr_date;
 		this.user_dto = user_dto;
+		this.profile_dto = profile_dto;
 	}
 
 	public int getTr_no() {
@@ -53,14 +53,6 @@ public class TourReviewDto {
 		this.tr_contentid = tr_contentid;
 	}
 
-	public int getTr_contenttypeid() {
-		return tr_contenttypeid;
-	}
-
-	public void setTr_contenttypeid(int tr_contenttypeid) {
-		this.tr_contenttypeid = tr_contenttypeid;
-	}
-
 	public String getTr_content() {
 		return tr_content;
 	}
@@ -69,11 +61,11 @@ public class TourReviewDto {
 		this.tr_content = tr_content;
 	}
 
-	public Date getTr_date() {
+	public String getTr_date() {
 		return tr_date;
 	}
 
-	public void setTr_date(Date tr_date) {
+	public void setTr_date(String tr_date) {
 		this.tr_date = tr_date;
 	}
 
@@ -83,6 +75,14 @@ public class TourReviewDto {
 
 	public void setUser_dto(UserDto user_dto) {
 		this.user_dto = user_dto;
+	}
+
+	public ProfileDto getProfile_dto() {
+		return profile_dto;
+	}
+
+	public void setProfile_dto(ProfileDto profile_dto) {
+		this.profile_dto = profile_dto;
 	}
 	
 	
