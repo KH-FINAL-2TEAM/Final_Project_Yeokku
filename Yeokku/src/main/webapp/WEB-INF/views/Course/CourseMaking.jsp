@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="java.io.File" %>
+<%@ page import="com.kh.yeokku.model.dto.RoomDto" %>
+<% String roomNo = session.getAttribute("roomNo").toString(); %>
+
+<script>
+	var detail_count = "${dto.tc_dc}";
+	if(detail_count<1) { detail_count=1;}
+	var tc_q = '${dto.tc_q}';
+	var png = "data:image/png;base64," + '${png}';
+</script>
     
 <!DOCTYPE html><html>
 
@@ -65,6 +74,7 @@
 		<div id="Making_Area">
 			<canvas id="canvas" width="1960px" height="1280px"></canvas>
 			<img class="Close" id="Making_Close" src="resources/img/Course/Close.png">
+			${dto.tc_content }
 		</div>
 		<div id="Queue_All">
 			<img id="Queue_Size" src='resources/img/Course/Minus.png'>
@@ -91,7 +101,7 @@
 				<span><b>:: 싸구려 모텔 ::</b></span><br>
 				<span class="Detail_Reduce">종류 : 모텔</span><br>
 				<span class="Detail_Reduce">주소 : 우주 안 어딘가</span><hr>
-				<span class="Detail_Reduce">평점 : 미제공</span><br>
+				<span class="Detail_Reduce">평점 : ${roomNo}</span><br>
 				<span class="Detail_Reduce">연락처 : 미제공</span><br>
 				<span class="Detail_Reduce">홈페이지 : 미제공</span>
 			</div>
@@ -233,10 +243,20 @@
 		<div id="Save_Area"><br>
 			<b>코스 제목</b> <br>
 			<input type="text" id="Content_Title"><br><br>
-			<b>태그</b> <br>
+			
+			<b>설명 & 태그</b> <br>
 			<textarea id="Content_Tag" rows="5" cols="30"></textarea><br><br>
+			
+			<input type="radio" id="open_y" name="open_check" value="Y">
+			<label for="contactChoice1">공개</label>
+		    <input type="radio" id="open_n" name="open_check" value="N" checked>
+		    <label for="contactChoice2">미공개</label><br><br>
+		    
 			<input type="button" value="저장" class="Btn" onclick="save();"> &nbsp;&nbsp;
 			<input type="button" value="취소" class="Btn" onclick='Icon_Switch[9] = 1; $("#Save_Area").hide(); $("#Black_Mask").hide(); $("#Save_Icon").attr("src","resources/img/Course/Save.png");'>
+			
+			<br><hr><span style="font-size:15px">http://localhost:8787/yeokku/course_remake.do?room=${link }</span>
+		
 		</div>
 		
 	</article>
@@ -244,12 +264,13 @@
 	<footer></footer>
 </body>
 
-<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=184">
+<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=188">
 <link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking_Map.css">
 
 <script src="resources/js/Course/CourseMaking_Paint.js" charset="utf-8"></script>
-<script src="resources/js/Course/CourseMaking.js?ver=182" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking.js?ver=185" charset="utf-8"></script>
 <script src="resources/js/Course/CourseMaking_Map.js" charset="utf-8"></script>
-<script src="resources/js/Course/CourseMaking_Chat.js?ver=11" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking_Chat.js?ver=13" charset="utf-8"></script>
+<script>var ws = new WebSocket("ws://" + root  +"/chat?room=${dto.tc_no}");  connect();</script>
 
 </html>

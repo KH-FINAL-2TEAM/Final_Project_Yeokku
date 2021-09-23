@@ -1,10 +1,17 @@
 package com.kh.yeokku.model.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.yeokku.model.dao.RoomDao;
+import com.kh.yeokku.model.dto.RoomDto;
+import com.kh.yeokku.model.dto.UserDto;
 
 @Service
 public class RoomDaoImpl implements RoomDao {
@@ -13,19 +20,78 @@ public class RoomDaoImpl implements RoomDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public int createRoom() {
+	public int createRoom(Map<String, Object> map, String pw) {
 		
-		int res = 0;
-		int roomNum = 0;
+		map.put("pw", pw);
+		
 		try {
-			roomNum = sqlSession.selectOne(NAMESPACE+"seqCheck");
-			res = sqlSession.insert(NAMESPACE+"createRoom");
+			sqlSession.insert(NAMESPACE+"createRoom", map);
 		} catch ( Exception e ) {
 			System.out.println("[ Error !! - Create Room ]");
 			e.printStackTrace();
 		}
-
+		
+		return Integer.parseInt(map.get("seq").toString());
+	}
+	
+	@Override
+	public RoomDto remakeRoom(String pw) {
+		
+		RoomDto dto = new RoomDto();
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"remakeRoom", pw);
+		} catch ( Exception e ) {
+			System.out.println("[ Error !! - Remake Room ]");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	@Override
+	public List<RoomDto> selectAll() {
+		
+		List<RoomDto> list = new ArrayList<RoomDto>();
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectAll");
+		} catch ( Exception e ) {
+			System.out.println("[ Error !! - Select All ]");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public int roomUpdate(RoomDto dto) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"imgUpdate", dto);
+			res = sqlSession.update(NAMESPACE+"roomUpdate", dto);
+		} catch ( Exception e ) {
+			System.out.println("[ Error !! - Room Update ]");
+			e.printStackTrace();
+		}
+		
 		return res;
+	}
+	
+	@Override
+	public RoomDto viewRoom(int room) {
+		
+		RoomDto dto = new RoomDto();
+		try {
+			sqlSession.update(NAMESPACE+"viewPlus", room);
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", room);
+		} catch ( Exception e ) {
+			System.out.println("[ Error !! - Select One ]");
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 }
