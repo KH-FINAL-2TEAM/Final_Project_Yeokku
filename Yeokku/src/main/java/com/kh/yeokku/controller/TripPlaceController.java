@@ -8,13 +8,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.yeokku.model.biz.TripplaceBiz;
+import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.TourDto;
 import com.kh.yeokku.model.dto.TourResultDto;
+import com.kh.yeokku.model.dto.TourReviewDto;
 
 @Controller
 public class TripPlaceController {
@@ -48,24 +51,27 @@ public class TripPlaceController {
 	
 	@ResponseBody
 	@RequestMapping(value="/tripplace_marker_click.do", method=RequestMethod.POST)
-	public Map<String, String> tripPlaceMarkerClick(Model model, String contentid, HttpSession session){
+	public Map<String, String> tripPlaceMarkerClick(Model model, TourResultDto dto){
 		
-		TourResultDto dto = biz.searchResultDetail(contentid);
+		TourResultDto res = biz.searchResultDetail(dto);
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("title",dto.getTitle());
-		map.put("firstimage",dto.getFirstimage());
-		map.put("overview",dto.getOverview());
-		map.put("contentid",contentid);
+		map.put("title",res.getTitle());
+		map.put("firstimage",res.getFirstimage());
+		map.put("overview",res.getOverview());
+		map.put("contentid",res.getContentid());
 		
 		return map;
 	}
 	
 	@RequestMapping("/tripplace_detail_form.do")
-	public String tripPlaceShowDetailForm(Model model, String contentid) {
-
-		model.addAttribute("dto", biz.searchResultDetail(contentid));
-		
+	public String tripPlaceShowDetailForm(Model model, TourResultDto dto, String userno) {
+		model.addAttribute("blog", biz.tripplaceNaverBlog(dto));
+		model.addAttribute("likeUser", biz.tripplaceLikeUser(dto, userno));
+		model.addAttribute("likeCount", biz.tripplaceLikeCount(dto));
+		model.addAttribute("reviewCount",biz.tripplaceReviewCount(dto));
+		model.addAttribute("dto", biz.searchResultDetail(dto));
+		model.addAttribute("review",biz.tripplaceReviewList(dto));
 		return "tripplace/tripplace_show_detail";
 	}
 	
@@ -77,5 +83,100 @@ public class TripPlaceController {
 		return "tripplace/tripplace_search_result";
 	}
 	
+	@RequestMapping("/tripplace_review_form.do")
+	public String tripplaceReview(TourReviewDto dto, String title, Model model) {
+		
+		int res = biz.tripplaceReviewWrite(dto);
+		
+		if(res>0) {
+			model.addAttribute("msg", "리뷰 작성에 성공했습니다.");
+			model.addAttribute("url", "tripplace_detail_form.do");
+			model.addAttribute("contentid", dto.getTr_contentid());
+			model.addAttribute("title", title);
+			return "tripplace/tripplace_review_alert";
+		} else {
+			model.addAttribute("msg", "리뷰 작성에 실패했습니다.");
+			model.addAttribute("url", "tripplace_detail_form.do");
+			model.addAttribute("contentid", dto.getTr_contentid());
+			model.addAttribute("title", title);
+			return "tripplace/tripplace_review_alert";
+		}
+	}
 	
+	@RequestMapping("/tripplace_review_update.do")
+	public String tripplaceReviewUpdate(TourReviewDto dto, String title, Model model) {
+		int res = biz.tripplaceReviewUpdate(dto);
+		
+		if(res>0) {
+			model.addAttribute("msg", "리뷰 수정에 성공했습니다.");
+			model.addAttribute("url", "tripplace_detail_form.do");
+			model.addAttribute("contentid", dto.getTr_contentid());
+			model.addAttribute("title", title);
+			return "tripplace/tripplace_review_alert";
+		} else {
+			model.addAttribute("msg", "리뷰 수정에 실패했습니다.");
+			model.addAttribute("url", "tripplace_detail_form.do");
+			model.addAttribute("contentid", dto.getTr_contentid());
+			model.addAttribute("title", title);
+			return "tripplace/tripplace_review_alert";
+		}
+	}
+	
+	@RequestMapping("/tripplace_review_delete.do")
+	public String tripplaceReviewDelete(TourReviewDto dto,String title, Model model) {
+		int res = biz.tripplaceReviewDelete(dto);
+		
+		if(res>0) {
+			model.addAttribute("msg", "리뷰 삭제에 성공했습니다.");
+			model.addAttribute("url", "tripplace_detail_form.do");
+			model.addAttribute("contentid", dto.getTr_contentid());
+			model.addAttribute("title", title);
+			return "tripplace/tripplace_review_alert";
+		} else {
+			model.addAttribute("msg", "리뷰 삭제에 실패했습니다.");
+			model.addAttribute("url", "tripplace_detail_form.do");
+			model.addAttribute("contentid", dto.getTr_contentid());
+			model.addAttribute("title", title);
+			return "tripplace/tripplace_review_alert";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/tripplace_like.do")
+	public Map<String,String> tripplaceLike(@RequestBody LikeTourDto dto, Model model) {
+		Map<String,String> map= new HashMap<String,String>();
+		TourResultDto tr = new TourResultDto();
+		
+		int res = biz.tripplaceLike(dto);
+		if(res>0) {
+			String contentid = String.valueOf(dto.getLt_contentid());
+			tr.setContentid(contentid);
+			map.put("likeCount", String.valueOf(biz.tripplaceLikeCount(tr)));
+			map.put("msg1", "<a href=\"#\" onclick=\"return likeInfo();\" style=\"cursor:hand;\" class=\"like-info\" id=\"iconB\"><i class=\"fas fa-heart fa-lg\"></i></a>");
+		}else {
+			map.put("msg2","좋아요에 실패했습니다.");
+		}
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/tripplace_like_cancel.do")
+	public Map<String,String> tripplaceLikeCancel(@RequestBody LikeTourDto dto, Model model) {
+		
+		int res = biz.tripplaceLikeCancel(dto);
+		
+		Map<String,String> map= new HashMap<String,String>();
+		TourResultDto tr = new TourResultDto();
+		if(res>0) {
+			String contentid = String.valueOf(dto.getLt_contentid());
+			tr.setContentid(contentid);
+			map.put("likeCount", String.valueOf(biz.tripplaceLikeCount(tr)));
+			map.put("msg1", "<a href=\"#\" onclick=\"return likeInfo();\" style=\"cursor:hand;\" class=\"like-info\" id=\"iconA\"><i class=\"far fa-heart fa-lg\"></i></a>");
+		}else {
+			map.put("msg2","좋아요 취소에 실패했습니다.");
+		}
+		
+		return map;
+	}
 }
