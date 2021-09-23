@@ -94,7 +94,7 @@ public class TripplaceDaoImpl implements TripplaceDao{
 		String areaCode = dto.getAreaCode();
 		String sigunguCode = dto.getSigunguCode();
 		String keyword = dto.getKeyword();		//RestTemplate이 자동 인코딩하기 때문에 인코딩 필요 없음
-		String baseUrl ="http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=";
+		String baseUrl ="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
 		String deKey = null;	//RestTemplate이 자동 인코딩하기 때문에 디코딩 해줘야함
 		try {
 			deKey = URLDecoder.decode(serviceKey, "UTF-8");
@@ -108,7 +108,7 @@ public class TripplaceDaoImpl implements TripplaceDao{
 		if(keyword==null) {keyword="";}
 		if(arrange==null||arrange=="") { arrange="A"; }
 		
-		String etcUrl ="&keyword="+keyword+"&contentTypeId="+contentTypeId+"&areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&arrange="+arrange+"&numOfRows=10&pageNo=1&listYN=Y&MobileOS=ETC&MobileApp=TestApp";
+		String etcUrl ="&contentTypeId="+contentTypeId+"&areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&arrange="+arrange+"&numOfRows=1000&pageNo=1&listYN=Y&MobileOS=ETC&MobileApp=TestApp";
 		String addr = baseUrl+deKey+etcUrl;
 		
 		RestTemplate rt = new RestTemplate();

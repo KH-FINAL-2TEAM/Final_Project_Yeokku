@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<% request.setCharacterEncoding("UTF-8"); %>
+<% response.setContentType("text/html; charset=UTF-8"); %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,78 +91,26 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
-                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-                            <div class="hover_text_iner">
-                                <h3 style="padding-bottom: 5px;">명소 이름</h3>
-                                <a href="#" class="place_btn">자세히 보기</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
-                        <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
-                            <div class="hover_text_iner">
-                                <h3 style="padding-bottom: 5px;">명소 이름</h3>
-                                <a href="#" class="place_btn">자세히 보기</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_3.png" alt="" class="col-lg-12 col-md-12">
-                        <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
-                            <div class="hover_text_iner">
-                                <h3 style="padding-bottom: 5px;">명소 이름</h3>
-                                <a href="#" class="place_btn">자세히 보기</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_4.png" alt="" class="col-lg-12 col-md-12">
-                        <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
-                            <div class="hover_text_iner">
-                                <h3 style="padding-bottom: 5px;">명소 이름</h3>
-                                <a href="#" class="place_btn">자세히 보기</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_1.png" alt="" class="col-lg-12 col-md-12">
-                        <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
-                            <div class="hover_text_iner">
-                                <h3 style="padding-bottom: 5px;">명소 이름</h3>
-                                <a href="#" class="place_btn">자세히 보기</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="single_place">
-                        <img src="resources/img/single_place_2.png" alt="" class="col-lg-12 col-md-12">
-                        <div class="hover_Text d-flex align-items-end justify-content-between"  style="padding-bottom: 15px;">
-                            <div class="hover_text_iner">
-                                <h3 style="padding-bottom: 5px;">명소 이름</h3>
-                                <a href="#" class="place_btn">자세히 보기</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <a href="#" class="btn_1 text-cnter">더 보기</a>
+            	<c:choose>
+            		<c:when test="${empty tour_list }"></c:when>
+            		<c:otherwise>
+            			<c:forEach items="${tour_list }" var="list" end="5">
+            				<div class="col-lg-4 col-md-4" style="width: 350px; height: 230px;">
+			                    <div class="single_place" style="width: 100%; height: 90%" >
+			                        <img src="${list.firstimage }" alt="" class="col-lg-12 col-md-12" style="height: 100%; object-fit: fill;">
+			                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
+			                            <div class="hover_text_iner">
+			                                <h3 style="padding-bottom: 5px;">${list.title }</h3>
+			                                <a href="tripplace_detail_form.do?contentid=${list.contentid }" class="place_btn">자세히 보기</a>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+            			</c:forEach>
+            		</c:otherwise>
+            	</c:choose>
+                
+                <a href="tripplace_search_form.do" class="btn_1 text-cnter">더 보기</a>
             </div>
         </div>
     </section>
@@ -250,7 +201,9 @@
         </div>
     </section>
 
-
+	
 </div>
+	<!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
 </body>
 </html>

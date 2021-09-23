@@ -50,7 +50,7 @@
                         <div class="profile_img_div">
                             <img src="uploadfile/${profile.pf_name}${profile.pf_type}" onerror="this.src='resources/img/none_profile.png'" class="profile_img" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         </div>
-                        <p class="profile_name">${user.nickname }</p>
+                        <p class="profile_name">${user.user_nickname }</p>
                     </div>
                     <h1>여행지</h1>
             </div>
@@ -100,7 +100,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${list }" var="list">
-							<div class="list_item col-lg-3 col-sm-6">
+							<div class="list_item col-lg-3 col-sm-6" onclick="location.href='tripplace_detail_form.do?contentid=${list.lt_contentid }'" style="cursor: pointer;">
 			                    <div class="travel_list">
 			                        <img src="${list.lt_firstimage }" alt="" style="width:100%;">
 			                        <h3> <a class="travel_title" href="#"> ${list.lt_title }</a></h3>

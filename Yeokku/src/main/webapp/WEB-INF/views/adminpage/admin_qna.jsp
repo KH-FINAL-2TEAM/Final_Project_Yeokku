@@ -251,4 +251,6 @@
         </div>
     </div>
 </body>
+	<!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
 </html>
