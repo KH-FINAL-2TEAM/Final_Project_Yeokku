@@ -24,6 +24,8 @@
 		<mapper resource="/mybatis/adminpage-mapper.xml"/>
 		<mapper resource="/mybatis/mypage-mapper.xml"/>
 		<mapper resource="/mybatis/qna-mapper.xml"/>
+		<mapper resource="/mybatis/tourreview-mapper.xml"/>
+		<mapper resource="/mybatis/tourlike-mapper.xml"/>
 	</mappers>
   
   

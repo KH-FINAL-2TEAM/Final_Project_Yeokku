@@ -33,6 +33,104 @@
     <link rel="stylesheet" href="<c:url value= "/resources/css/slick.css" />">
     <!-- style CSS -->
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	//리뷰 작성
+	function reviewWrite(){
+		var user = $("#userno").val();
+		if(user==null){
+			alert("리뷰작성은 로그인 후 이용할 수 있습니다.");
+			return false;
+		} else if($("#tr_content").val()==null || $("#tr_content").val()==""){
+			alert("리뷰를 작성해 주세요.")
+			return false;
+		}
+	}
+	//리뷰 수정
+	function reviewUpdate(){
+		if($("#updateContent").val()==null || $("#updateContent").val()==""){
+			alert("리뷰를 작성해 주세요.")
+			return false;
+		}
+	}
+	//리뷰 삭제
+	function reviewDelete(form, url){
+		form.action = url;
+		form.submit();
+	}
+	//리뷰 수정시 텍스트박스/완료버튼
+	$(function(){
+		$(".updateBtn").click(function(){
+			var tr_content = $(this).parent().parent().next().children().text();
+			$(this).parent().parent().next().children().replaceWith("<textarea class='form-control w-100' cols='30' rows='9' name='tr_content' id='updateContent'>"+tr_content+"</textarea>");
+			$(this).replaceWith("<input type='submit' class='btn btn-sm btn-outline-primary' value='완료' formaction='tripplace_review_update.do'>");	
+		});
+	});
+	
+	//여행지 좋아요 클릭
+	function likeInfo(){
+		var user = $("#userno").val();
+		var contentid = $("#tr_contentid").val();
+		var lt_title = $("#contentTitle").text();
+		var lt_firstimage = $("#contentImage").attr("src");
+		var like = {
+				"lt_contentid" : contentid,
+				"lt_userno" : user,
+				"lt_title" : lt_title,
+				"lt_firstimage" : lt_firstimage
+				}
+		if(user==null){
+			
+			alert("좋아요는 로그인 후 이용할 수 있습니다.");
+			return false;
+			
+		}else if($("#iconA").children().attr("class")=="far fa-heart fa-lg") {
+			
+			$.ajax({
+				url: "tripplace_like.do",
+				method: "POST",
+				data: JSON.stringify(like),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(data){
+					if(data.msg1 != null){
+						$("#iconA").next().text(" 좋아요"+ data.likeCount+"개");
+						$("#iconA").replaceWith(data.msg1);
+					}else {
+						alert(data.msg2);
+					}
+				},
+				error: function(){
+					alert("통신 실패");
+				}
+			});
+			
+		} else if( $("#iconB").children("i").attr("class")=="fas fa-heart fa-lg" ){
+			$.ajax({
+				url: "tripplace_like_cancel.do",
+				method: "POST",
+				data: JSON.stringify(like),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(data){
+					if(data.msg1 != null){
+						$("#iconB").next().text(" 좋아요"+ data.likeCount+"개");
+						$("#iconB").replaceWith(data.msg1);
+					}else {
+						alert(data.msg2);
+					}
+				},
+				error: function(){
+					alert("통신 실패");
+				}
+			});
+			
+		}
+		
+	}
+	
+</script>
+
 
 </head>
 
@@ -40,27 +138,46 @@
 	<!-- header 추가 -->
 	<%@ include file="../header/header.jsp" %> 
 
-    <!--================Blog Area =================-->
     <section class="blog_area single-post-area section_padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 posts-list">
                     <div class="single-post">
                         <div class="feature-img">
-                            <img class="img-fluid" src="${dto.firstimage }" alt="장소사진">
+                        	<c:choose>
+                        		<c:when test="${empty dto.firstimage }">
+                        			<img src="resources/img/nullImage.png">
+                        		</c:when>
+	                        	<c:otherwise>
+	                            	<img class="img-fluid" id="contentImage" src="${dto.firstimage }" alt="장소사진">                       	
+	                        	</c:otherwise>
+                        	</c:choose>
                         </div>
                         <div class="blog_details">
-                            <h2>${dto.title }</h2>
+	                        <div style="position:absolute">
+	                            <h2 id="contentTitle">${dto.title }</h2>
+	                        </div>
+	                        <div style="float:right; position:relative; padding-right:25px;">
+	                            <a href="#reviewArea"><i class="far fa-comments fa-lg"></i><span style="font-size:15px; margin-right:10px;">&nbsp ${reviewCount }개의 리뷰</span></a>
+	                            <c:choose>
+	                            	<c:when test="${empty user }">
+			                            <a href="#" onclick="return likeInfo();" style="cursor:hand;" class="like-info"><i class="far fa-heart fa-lg"></i></a><span style="font-size: 15px;">&nbsp 좋아요 ${likeCount }개</span>
+	                            	</c:when>
+	                            	<c:when test="${empty likeUser }">
+			                            <a href="#" onclick="return likeInfo();" style="cursor:hand;" class="like-info" id="iconA"><i class="far fa-heart fa-lg"></i></a><span style="font-size: 15px;">&nbsp 좋아요 ${likeCount }개</span>
+	                            	</c:when>
+	                            	<c:when test="${not empty likeUser }">
+			                            <a href="#" onclick="return likeInfo();" style="cursor:hand;" class="like-info" id="iconB"><i class="fas fa-heart fa-lg"></i></a><span style="font-size: 15px;">&nbsp 좋아요 ${likeCount }개</span>
+	                                </c:when>
+	                            </c:choose>
+	                            <!-- <i class="fas fa-heart fa-lg"></i> -->
+	                        </div>
+	                        <br><br>
                             <p>주소: (${dto.zipcode }) ${dto.addr1 } ${dto.addr2 }</p>
                             <p>전화번호: ${dto.tel }</p>
-                            <p>${dto.homepage }</p>
-                            <ul class="blog-info-link mt-3 mb-4">
-                                <a href="#"><i class="far fa-comments"></i>  n개의 리뷰</a><br>
-                                <a href="#"><p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span>  좋아요 n개</p></a>
-                            </ul>
-                            
+                            <p>홈페이지: ${dto.homepage }</p>
                             <p><strong>-분류</strong>&nbsp; &nbsp;${dto.cat1 } > ${dto.cat2 } > ${dto.cat3 }</p>
-         
+         					
                             <div class="quote-wrapper">
                                 <div class="quotes">
                                    		${dto.overview }
@@ -68,126 +185,91 @@
                             </div>
                         </div>
                     </div>
-                    <div class="navigation-top">
-                        <div class="d-sm-flex justify-content-between text-center">
-                            
-                            <div class="col-sm-4 text-center my-2 my-sm-0"></div>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                        
-                        <div class="navigation-area">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="img/post/preview.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-left"></span>
-                                        </a>
-                                    </div>
-                                    <div class="detials">
-                                        <p>◀이전 글</p>
-                                        <a href="#">
-                                            <h4>이전 글 장소명</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                    <div class="detials">
-                                        <p>다음 글▶</p>
-                                        <a href="#">
-                                            <h4>다음 글 장소명</h4>
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="resources/img/post/next.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <hr style="margin: 50px 0px">
+                    <div>
+                    	<h5>블로그 후기</h5>
+	                    <c:forEach items="${blog }" var="dto">
+		                    <div class="blog-author" style="margin-top: 20px;">
+		                        <div class="media align-items-center">
+		                        	<!-- <img src="resources/img/naver.PNG" alt=""> -->
+		                            <div class="media-body">
+		                                <a href="${dto.link }">
+		                                    <h4>${dto.title }</h4>
+		                                </a>
+		                                <p>${dto.description }</p>
+		                            </div>
+		                        </div>
+		                    </div>
+	                    </c:forEach>
                     </div>
-                    <div class="blog-author">
-                        <div class="media align-items-center">
-                            <img src="resources/img/naver.PNG" alt="">
-                            <div class="media-body">
-                                <a href="#">
-                                    <h4>네이버 블로그</h4>
-                                </a>
-                                <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he our dominion twon Second divided from</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comments-area">
-                        <h4>리뷰</h4>
+                    <div class="comments-area" id="reviewArea">
+                        <h4>사용자 후기</h4>
                         <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/comment_1.png" alt=""><!-- 작성자 프로필 사진 -->
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                       <a href="#">작성자</a>
-                                    </h5>
-                                                <p class="date">작성날짜 </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" >수정 |</a>
-                                                <a href="#" >삭제 |</a>
-                                                <a href="#" >신고</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                       
+                           	<c:choose>
+                           		<c:when test="${empty review }">
+	                            	<div class="single-comment justify-content-between d-flex">
+	                            		<div class="user justify-content-between d-flex">
+	                                    	<div class="desc">
+		                                        <p class="comment"> 등록된 리뷰가 없습니다.</p>
+		                                    </div>
+	                                	</div>
+                                	</div>
+                            	</c:when>
+                            	<c:otherwise>
+	            					<c:forEach items="${review }" var="list">
+										<form method="post" onsubmit="return reviewUpdate()">
+		            						<div class="container">  
+										        <div class="row">
+										            <div class="col-lg-2">
+										                <div class="profile">
+										                    <img src="uploadfile/${list.profile_dto.pf_name}${list.profile_dto.pf_type}" onerror="this.src='resources/img/none_profile.png'"alt="" style="width: 70px; height: 70px;">
+										                </div>
+										            </div>
+										            <div class="col-lg-10">
+										            	<div class="row">
+												            <div class="col-lg-8">
+												                <div class="user">
+												                    <span style="color:gray">${list.user_dto.user_name } </span> ·
+												                    <span style="color:gray" id="tr_date">${list.tr_date }</span>
+												                </div>
+												            </div>
+												            <c:if test="${user.user_no eq list.tr_userno }">
+													            <div class="col-lg-4">
+													                <div class="user_button" style="text-align:right;">
+													                	<input type="hidden" name="tr_contentid" value=${dto.contentid }>
+													                	<input type="hidden" name="tr_no" value="${list.tr_no }">
+													                	<input type="hidden" name="title" value="${dto.title }">
+													                	<input type="button" class="btn btn-sm btn-outline-primary updateBtn" value="수정">
+													                	<input type="button" class="btn btn-sm btn-outline-danger" value="삭제"  onclick="reviewDelete(this.form, 'tripplace_review_delete.do');">
+													            	</div>
+												            	</div>
+												            </c:if>
+												            <div class="col-lg-12" style="padding: 15px;">
+												            	<p>${list.tr_content }</p>
+												            </div>
+											        	</div>
+											        </div>
+										        </div>
+										    </div>
+										</form>
+	                            	</c:forEach>
+                            	</c:otherwise>
+                           	</c:choose>
+						</div>
                     </div>
                     <div class="comment-form">
                         <h4>리뷰쓰기</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
-                            <div class="row">
+                        <form action="tripplace_review_form.do" method="post" onsubmit="return reviewWrite();">
+                        	<div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                    	<input type="hidden" name="tr_contentid" id="tr_contentid" value=${dto.contentid }>
+                                    	<input type="hidden" name="title" value="${dto.title }">
+                                    	<input type="hidden" name="tr_userno" value=${user.user_no } id="userno">
+                                        <textarea class="form-control w-100" name="tr_content" id="tr_content" cols="30" rows="9" placeholder="리뷰를 작성해 주세요."></textarea>
+                                        <input type="submit" class="button button-contactForm btn_1" value="작성" style="margin-top: 20px; float: right;">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="button button-contactForm btn_1">작성</button>
                             </div>
                         </form>
                     </div>
@@ -195,10 +277,42 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar" >
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
-                                <img src="resources/img/mapview.PNG" class="mapview" style="width: 100%; height: 100%; ">
-                
-                            </form>
+               				<div id="map" style="width:100%; height:200px;"></div>
+               				<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=724b81fc00a64486288dc0698b9a4edd"></script>
+				            <script type="text/javascript">
+				            var mapContainer = document.getElementById('map'),
+				              
+				            mapOption = { 
+				                center: new kakao.maps.LatLng(${dto.mapy }, ${dto.mapx }),
+				                level: 8
+				            };
+				              
+				            var map = new kakao.maps.Map(mapContainer, mapOption);
+				              
+				            var mapTypeControl = new kakao.maps.MapTypeControl();
+				
+				            map.addControl(mapTypeControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
+				              
+				            var markerPosition  = new kakao.maps.LatLng(${dto.mapy }, ${dto.mapx }); 
+				            var marker = new kakao.maps.Marker({
+				                position: markerPosition
+				            });
+				            marker.setMap(map);
+				            
+				            var iwContent = '<div style="padding:5px; text-align:center;"><b>${dto.title }</b><br>'
+				              		+'<a href="https://map.kakao.com/link/map/${dto.title },${dto.mapy },${dto.mapx }" target="_blank">'
+				              		+'<span style="color:blue;">큰지도보기</span></a>'
+				              		+'<a href="https://map.kakao.com/link/to/${dto.title },${dto.mapy },${dto.mapx }" target="_blank">'
+				              		+' <span style="color:blue;">길찾기</span></a></div>',
+				              	iwPosition = new kakao.maps.LatLng(${dto.mapy }, ${dto.mapx });
+
+					        var infowindow = new kakao.maps.InfoWindow({
+					            position : iwPosition, 
+					            content : iwContent 
+					        });
+					        
+					        infowindow.open(map, marker);
+							</script>
                         </aside>
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">더보기</h4>
@@ -216,79 +330,8 @@
         </div>
     </section>
     
-    <!--================ Blog Area end =================-->
-
-    <!-- footer part start-->
-    <footer class="footer-area">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-sm-6 col-md-5">
-                    <div class="single-footer-widget">
-                        <h4>Discover Destination</h4>
-                        <ul>
-                            <li><a href="#">Miami, USA</a></li>
-                            <li><a href="#">California, USA</a></li>
-                            <li><a href="#">London, UK</a></li>
-                            <li><a href="#">Saintmartine, Bangladesh</a></li>
-                            <li><a href="#">Mount Everast, India</a></li>
-                            <li><a href="#">Sidney, Australia</a></li>
-                            <li><a href="#">Miami, USA</a></li>
-                            <li><a href="#">California, USA</a></li>
-                            <li><a href="#">London, UK</a></li>
-                            <li><a href="#">Saintmartine, Bangladesh</a></li>
-                            <li><a href="#">Mount Everast, India</a></li>
-                            <li><a href="#">Sidney, Australia</a></li>
-                        </ul>
-
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="single-footer-widget">
-                        <h4>Subscribe Newsletter</h4>
-                        <div class="form-wrap" id="mc_embed_signup">
-                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
-                                <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '" required="" type="email">
-                                <button class="click-btn btn btn-default text-uppercase"> <i class="far fa-paper-plane"></i>
-                                </button>
-                                <div style="position: absolute; left: -5000px;">
-                                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-                                </div>
-
-                                <div class="info"></div>
-                            </form>
-                        </div>
-                        <p>Subscribe our newsletter to get update news and offers</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="single-footer-widget footer_icon">
-                        <h4>Contact Us</h4>
-                        <p>4156, New garden, New York, USA +880 362 352 783</p>
-                        <span>contact@martine.com</span>
-                        <div class="social-icons">
-                            <a href="#"><i class="ti-facebook"></i></a>
-                            <a href="#"><i class="ti-twitter-alt"></i></a>
-                            <a href="#"><i class="ti-pinterest"></i></a>
-                            <a href="#"><i class="ti-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="copyright_part_text text-center">
-                        <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer part end-->
-
+    
+    
     <!-- jquery plugins here-->
 
     <script src="../../resources/js/jquery-1.12.1.min.js"></script>

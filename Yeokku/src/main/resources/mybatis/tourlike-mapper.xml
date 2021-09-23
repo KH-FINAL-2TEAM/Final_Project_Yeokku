@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="liketour">
+
+	<resultMap type="like_tour_dto" id="like_tour_map">
+		<result property="lt_contentid" column="LT_CONTENTID" />
+		<result property="lt_userno" column="LT_USERNO" />
+		<result property="lt_title" column="LT_TITLE" />
+		<result property="lt_firstimage" column="LT_FIRSTIMAGE" />
+	</resultMap>
+	
+	<select id="selectOne" parameterType="like_tour_dto" resultMap="like_tour_map">
+		SELECT *
+		FROM LTBOARD
+		WHERE LT_CONTENTID=#{lt_contentid} AND LT_USERNO=#{lt_userno}
+	</select>
+	
+	<select id="countLike" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM LTBOARD
+		WHERE LT_CONTENTID = #{lt_contentid}
+	</select>
+
+	<insert id="insert" parameterType="like_tour_dto">
+		INSERT INTO LTBOARD
+		VALUES(#{lt_contentid}, #{lt_userno}, #{lt_title}, #{lt_firstimage})
+	</insert>
+	
+	<delete id="delete" parameterType="like_tour_dto">
+		DELETE FROM LTBOARD
+		WHERE LT_CONTENTID = #{lt_contentid} AND LT_USERNO = #{lt_userno}
+	</delete>
+	
+
+
+
+</mapper>
