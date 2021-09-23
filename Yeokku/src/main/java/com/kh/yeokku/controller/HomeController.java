@@ -2,7 +2,6 @@ package com.kh.yeokku.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -15,19 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kh.yeokku.model.biz.TripplaceBiz;
-import com.kh.yeokku.model.biz.impl.TripplaceBizImpl;
-import com.kh.yeokku.model.dto.TourDto;
-import com.kh.yeokku.model.dto.TourResultDto;
-
+import com.kh.yeokku.model.biz.RoomBiz;
 
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	@Autowired
-	private TripplaceBiz tour_biz;
 	
 	@RequestMapping("/mypage.do")
 	public String home(HttpSession session, Locale locale, Model model) {
@@ -39,23 +31,16 @@ public class HomeController {
 		return "main/main";
 	}
 	
-	
 	//헤더 네비 이동
 	//홈
 	@RequestMapping("/main_form.do")
 	public String mainForm(Model model) {
-		model.addAttribute("tour_list",tour_biz.tripplaceMain());
 		return "main/main";
 	}
 	//여행지
 	@RequestMapping("/tripplace_main_form.do")
 	public String tripplaceMainForm(Model model) {
 		return "redirect:tripplace_search_form.do";
-	}
-	//여행코스
-	@RequestMapping("/course_list.do")
-	public String courseMainForm(Model model) {
-		return "Course/CourseList";
 	}
 	//교통
 	@RequestMapping("/transportation_form.do")
