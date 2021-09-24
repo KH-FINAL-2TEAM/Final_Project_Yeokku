@@ -72,10 +72,10 @@
  <div class="box">
     
     <section class="search_part">
-        <form action="#">
+        <form action="course_search.do" method="post">
             <div class="form-inline" style="padding-left: 10%;">
                     <input type="text" class="form-control w-75" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'"
-                    style="margin: 5px;">
+                    style="margin: 5px;" name="keyword">
                     <input class="btn_1" type="submit" style="border-color: transparent;" value="Search">
             </div>
         </form>

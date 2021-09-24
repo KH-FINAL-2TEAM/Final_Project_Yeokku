@@ -127,4 +127,35 @@ public class TestController {
 		}
 	}
 	
+	@RequestMapping(value="/course_search.do",method = RequestMethod.POST)
+	public String courseSearch(Model model, String keyword ) {
+		System.out.println(keyword);
+		List<RoomDto> list = biz.courseSearch(keyword);
+		for(int i=0; i<list.size(); i++) {
+			RoomDto dto = new RoomDto();
+			dto = list.get(i);
+			String temp_content = dto.getTc_content();
+			temp_content = temp_content.replace( "<img class=\"OF\" src=\"resources/img/Course/Minus.png\">", "");
+			temp_content = substringBetween(temp_content, "<img class=", ">");
+			temp_content = substringBetween(temp_content, "src=\"", "\"");
+			dto.setTc_content( temp_content );	
+			list.set(i, dto);
+		}
+		model.addAttribute("list",list);
+		return "Course/CourseList";
+	}
+	
+	private String substringBetween(String str, String open, String close) {
+	    if (str == null || open == null || close == null) {
+	       return null;
+	    }
+	    int start = str.indexOf(open);
+	    if (start != -1) {
+	       int end = str.indexOf(close, start + open.length());
+	       if (end != -1) {
+	          return str.substring(start + open.length(), end);
+	       }
+	    }
+	    return null;
+	}
 }

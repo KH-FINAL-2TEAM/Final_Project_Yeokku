@@ -40,9 +40,9 @@
     <!-- 배너 end-->
      <section   style="margin:auto; width:50%; margin-top: 50px;">
 	        <div class="contatiner text-center">
-		        <form action="#">
+		        <form action="course_search.do" method="post">
 		            <div class="form-inline" style="padding-left: 10%; width:100%;">
-		                    <input type="text" class="form-control search_area" placeholder="검색어를 입력해주세요." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'" style="width:80%; margin: 5px;">
+		                    <input type="text" class="form-control search_area" placeholder="검색어를 입력해주세요." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'" style="width:80%; margin: 5px;" name="keyword">
 		                    <button class="btn_1" type="submit" style="border-color: transparent;"> 🔍 </button>
 		            </div>
 		        </form>
