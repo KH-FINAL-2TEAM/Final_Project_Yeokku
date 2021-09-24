@@ -11,6 +11,8 @@ import com.kh.yeokku.model.dao.MypageDao;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.TourCourseReviewDto;
+import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Repository
@@ -129,6 +131,32 @@ public class MypageDaoImpl implements MypageDao{
 			list = sqlSession.selectList(NAMESPACE+"mypage_travel",no);
 		} catch (Exception e) {
 			System.out.println("[error] : mypage travel");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<TourReviewDto> tourReviewList(int tr_userno) {
+		List<TourReviewDto> list = new ArrayList<TourReviewDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"tour_review_list",tr_userno);
+		} catch (Exception e) {
+			System.out.println("[error] : user tour review list error");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<TourCourseReviewDto> courseReviewList(int tcr_userno) {
+		List<TourCourseReviewDto> list = new ArrayList<TourCourseReviewDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"course_review_list",tcr_userno);
+		} catch (Exception e) {
+			System.out.println("[error] : user course review list error");
 			e.printStackTrace();
 		}
 		return list;

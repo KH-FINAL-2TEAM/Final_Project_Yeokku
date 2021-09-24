@@ -51,7 +51,7 @@
 	             'select': {
 	                'style': 'multi'
 	             },
-	             'order': [[1, 'asc']]
+	             'order': [[1, 'desc']]
 	          });
             /* Column별 검색박스 추가 */
             $('#example_filter').prepend('<select id="select" style="display: inline-block; width : auto;"></select> 에서 ');
@@ -152,13 +152,14 @@
 	       
         }
         
-        function reportBanConfirm(index,userno){
+        function reportBanConfirm(index,userno,reason){
 	        $.ajax({
 	        	url:"report_ban_confirm.do",
 	        	type:"post",
 	        	data:{
 	        		report_no : index,
-	        		report_target_userno : userno
+	        		report_target_userno : userno,
+	        		report_reason : reason
 	        	},
 	        	success:function(msg){
 	        		if(msg == "true"){
@@ -224,7 +225,7 @@
                     <tr>
                     	<th></th>
                         <th>번호</th>
-                        <th>사유</th>
+                        <th>게시글번호</th>
                         <th>내용</th>
                         <th>신고자</th>
                         <th>신고대상자</th>
@@ -275,7 +276,7 @@
 				                        <c:otherwise>
 					                        <td  style="padding: 2px;">
 						                        <button style="float:left; width: 50%;" class="genric-btn primary-border" onclick="reportConfirm(${report_dto.report_no});">보류</button>
-						                        <button style=" width: 50%;" class="genric-btn primary-border" onclick="reportBanConfirm(${report_dto.report_no},${report_dto.report_target_userno });">정지</button>
+						                        <button style=" width: 50%;" class="genric-btn primary-border" onclick="reportBanConfirm(${report_dto.report_no},${report_dto.report_target_userno },${report_dto.report_reason });">정지</button>
 					                        </td>
 				                        </c:otherwise>
 			                        </c:choose>

@@ -56,63 +56,40 @@
     </div>
     
     <div id="review">
-    
+		<c:if test="${!empty user }">   
     	<div id="review_input_area"> 
-    		<textarea class="input_content" name="content"></textarea> &nbsp;
-    		<input type="button" id="input_button" value="작성">
+    		<textarea id="tcr_content" class="input_content" name="content"></textarea> &nbsp;
+    		<input type="button" id="input_button" value="작성" onclick="writeReview(${dto.tc_no},${user.user_no});">
     	</div>
+    	</c:if> 
     	
-    	<div class="review_one" id="review_1">
-    		<div class="pf_img"><img class="pf_img" src="resources/img/Course/PF1.jpg"></div>
-    		<div class="review_detail">
-    			<span class="user_id"><b>커피는커</b></span> &nbsp;&nbsp; <span class="date">(2021-08-30)</span><br>
-	    		<div class="content">그대로 따라갔다가 여친한테 등짝맞았습니다.<br>글쓴이는 커플들을 헤어지게 하려고 이런 글을 쓴 첩자가 분명합니다.<br>일주일동안 저 식당 밥만 먹여야해요. 진짜로.</div>
-    		</div>
-    		<div class="review_icon">
-    			<img src="resources/img/Course/Pencil.png" class="review_update" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Alert.png" class="review_alert" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Close.png" class="review_close" style="width:20px; height:20px;">
-    		</div>
-    	</div>
-    	
-    	<div class="review_one" id="review_2">
-    		<div class="pf_img"><img class="pf_img" src="resources/img/Course/PF2.jpg"></div>
-    		<div class="review_detail">
-    			<span class="user_id"><b>사냥꾼</b></span> &nbsp;&nbsp; <span class="date">(2021-07-21)</span><br>
-	    		<div class="content">글쓴이를 산채로 잡아오는 사람에게 포상금을 내리겠다.<br>구경하는 장소는 좋았으나 이 글 쓴놈은 저 식당 주인이 틀림없다.</div>
-    		</div>
-    		<div class="review_icon">
-    			<img src="resources/img/Course/Pencil.png" class="review_update" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Alert.png" class="review_alert" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Close.png" class="review_close" style="width:20px; height:20px;">
-    		</div>
-    	</div>
-    	
-    	<div class="review_one" id="review_3">
-    		<div class="pf_img"><img class="pf_img" src="resources/img/Course/PF1.jpg"></div>
-    		<div class="review_detail">
-    			<span class="user_id"><b>여우비</b></span> &nbsp;&nbsp; <span class="date">(2021-06-11)</span><br>
-	    		<div class="content">재미있게 다녀왔습니다. 좋은 코스네요.</div>
-    		</div>
-    		<div class="review_icon">
-    			<img src="resources/img/Course/Pencil.png" class="review_update" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Alert.png" class="review_alert" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Close.png" class="review_close" style="width:20px; height:20px;">
-    		</div>
-    	</div>
-    	
-    	<div class="review_one" id="review_4">
-    		<div class="pf_img"><img class="pf_img" src="resources/img/Course/PF_Img.gif"></div>
-    		<div class="review_detail">
-    			<span class="user_id"><b>강낭콩</b></span> &nbsp;&nbsp; <span class="date">(2020-09-11)</span><br>
-	    		<div class="content">다음주에 여행가는데 참고할게요 ~ 감사합니다 ㅎㅎ</div>
-    		</div>
-    		<div class="review_icon">
-    			<img src="resources/img/Course/Pencil.png" class="review_update" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Alert.png" class="review_alert" style="width:20px; height:20px;">
-    			<img src="resources/img/Course/Close.png" class="review_close" style="width:20px; height:20px;">
-    		</div>
-    	</div>
+    	<c:choose>
+    		<c:when test="${empty review_list }">
+    			리뷰가 없습니다.
+    		</c:when>
+    		<c:otherwise>
+    			<c:forEach items="${review_list }" var="list" varStatus="status">
+    				<div class="review_one" id="${list.tcr_no }">
+			    		<div class="pf_img"><img class="pf_img" src="uploadfile/${list.profile_dto.pf_name }${list.profile_dto.pf_type}"></div>
+			    		<div class="review_detail">
+			    			<span class="user_id"><b>${list.user_dto.user_nickname }</b></span> &nbsp;&nbsp; <span class="date">(2021-08-30)</span><br>
+				    		<div class="content">${list.tcr_content }</div>
+			    		</div>
+			    		<c:if test="${list.tcr_userno eq user.user_no}">
+				    		<div class="review_icon">
+				    			<img src="resources/img/Course/Pencil.png" class="review_update" style="width:20px; height:20px;">
+				    			<img src="resources/img/Course/Close.png" class="review_close" style="width:20px; height:20px;">
+				    		</div>
+			    		</c:if>
+			    		<c:if test="${list.tcr_userno ne user.user_no and !empty user}">
+			    			<div class="review_icon">
+				    			<img src="resources/img/Course/Alert.png" class="review_alert" style="width:20px; height:20px;" onclick="report(${list.tcr_no },${list.tcr_userno},${user.user_no },'${list.tcr_content }');">
+			    			</div>
+			    		</c:if>
+			    	</div>
+    			</c:forEach>
+    		</c:otherwise>
+    	</c:choose>
     	
     	<div style="height:70px;"></div>
     </div>

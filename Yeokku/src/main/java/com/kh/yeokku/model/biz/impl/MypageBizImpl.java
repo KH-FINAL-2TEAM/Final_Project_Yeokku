@@ -11,6 +11,8 @@ import com.kh.yeokku.model.dao.impl.MypageDaoImpl;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.TourCourseReviewDto;
+import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Service
@@ -58,6 +60,16 @@ public class MypageBizImpl implements MypageBiz {
 	@Override
 	public List<LikeTourDto> mypageTravel(int no) {
 		return dao.mypageTravel(no);
+	}
+
+	@Override
+	public List<TourReviewDto> tourReviewList(int tr_userno) {
+		return dao.tourReviewList(tr_userno);
+	}
+
+	@Override
+	public List<TourCourseReviewDto> courseReviewList(int tcr_userno) {
+		return dao.courseReviewList(tcr_userno);
 	}
 
 }

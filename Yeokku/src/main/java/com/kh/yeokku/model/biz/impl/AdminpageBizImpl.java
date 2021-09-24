@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.yeokku.model.biz.AdminpageBiz;
 import com.kh.yeokku.model.dao.AdminpageDao;
+import com.kh.yeokku.model.dao.TestDao;
 import com.kh.yeokku.model.dto.QaDto;
 import com.kh.yeokku.model.dto.ReportDto;
 import com.kh.yeokku.model.dto.UserDto;
@@ -16,7 +17,8 @@ public class AdminpageBizImpl implements AdminpageBiz{
 
 	@Autowired
 	private AdminpageDao dao;
-	
+	@Autowired
+	private TestDao testdao;
 	@Override
 	public List<UserDto> selectUserList() {
 		return dao.selectUserList();
@@ -80,5 +82,11 @@ public class AdminpageBizImpl implements AdminpageBiz{
 	@Override
 	public int reportAllDelete() {
 		return dao.reportAllDelete();
+	}
+
+	@Override
+	public int reviewDelete(int report_reason) {
+		// TODO Auto-generated method stub
+		return testdao.deleteCourseReview(report_reason);
 	}
 }

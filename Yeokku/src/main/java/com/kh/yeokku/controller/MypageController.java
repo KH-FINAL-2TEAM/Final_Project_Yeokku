@@ -31,6 +31,8 @@ import com.kh.yeokku.model.biz.impl.MypageBizImpl;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.TourCourseReviewDto;
+import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
 
 @Controller
@@ -165,5 +167,27 @@ public class MypageController {
 		List<LikeTourDto> list = biz.mypageTravel(no);
 		model.addAttribute("list",list);
 		return "mypage/mypage_travel";
+	}
+	
+	@RequestMapping(value="/tour_review_list.do", method = RequestMethod.POST,produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String tourReviewList(Model model,int tr_userno) {
+		
+		
+			List<TourReviewDto> list = biz.tourReviewList(tr_userno);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
+	}
+	
+	@RequestMapping(value="/course_review_list.do", method = RequestMethod.POST,produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String courseReviewList(Model model,int tcr_userno) {
+		
+		
+			List<TourCourseReviewDto> list = biz.courseReviewList(tcr_userno);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
 	}
 }

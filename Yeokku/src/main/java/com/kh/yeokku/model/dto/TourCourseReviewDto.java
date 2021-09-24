@@ -11,14 +11,16 @@ public class TourCourseReviewDto {
 	private Date tcr_date;
 
 	private UserDto user_dto; // 쿼리로 join할 유저 dto
+	private ProfileDto profile_dto;
 	private TourCourseDto tour_course_dto; // 쿼리로 join할 여행코스 dto
 	
 	public TourCourseReviewDto() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public TourCourseReviewDto(int tcr_no, int tcr_tcno, int tcr_userno, String tcr_content, Date tcr_date,
-			UserDto user_dto, TourCourseDto tour_course_dto) {
+			UserDto user_dto, ProfileDto profile_dto, TourCourseDto tour_course_dto) {
 		super();
 		this.tcr_no = tcr_no;
 		this.tcr_tcno = tcr_tcno;
@@ -26,8 +28,10 @@ public class TourCourseReviewDto {
 		this.tcr_content = tcr_content;
 		this.tcr_date = tcr_date;
 		this.user_dto = user_dto;
+		this.profile_dto = profile_dto;
 		this.tour_course_dto = tour_course_dto;
 	}
+
 
 	public int getTcr_no() {
 		return tcr_no;
@@ -84,6 +88,24 @@ public class TourCourseReviewDto {
 	public void setTour_course_dto(TourCourseDto tour_course_dto) {
 		this.tour_course_dto = tour_course_dto;
 	}
-	
+
+
+	public ProfileDto getProfile_dto() {
+		return profile_dto;
+	}
+
+
+	public void setProfile_dto(ProfileDto profile_dto) {
+		this.profile_dto = profile_dto;
+	}
+
+
+	@Override
+	public String toString() {
+		return "TourCourseReviewDto [tcr_no=" + tcr_no + ", tcr_tcno=" + tcr_tcno + ", tcr_userno=" + tcr_userno
+				+ ", tcr_content=" + tcr_content + ", tcr_date=" + tcr_date + ", user_dto=" + user_dto
+				+ ", profile_dto=" + profile_dto + ", tour_course_dto=" + tour_course_dto + "]";
+	}
+
 	
 }

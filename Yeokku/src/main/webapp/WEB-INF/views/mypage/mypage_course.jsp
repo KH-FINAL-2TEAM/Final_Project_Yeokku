@@ -44,7 +44,7 @@
                     <li><a href="mypage_profile.html">회원정보</a></li>
                     <li><a href="mypage_travel.html">여행지</a></li>
                     <li class="selected_nav"><a href="mypage_course.html">여행코스</a></li>
-                    <li><a href="mypage_review.html">리뷰</a></li>
+                    <li><a href="mypage_review_form.do">리뷰</a></li>
                     <li><a href="mypage_qna.html">문의내역</a></li>
                 </ul>
             </div>

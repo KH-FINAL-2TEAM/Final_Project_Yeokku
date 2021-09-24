@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.yeokku.model.biz.RoomBiz;
+import com.kh.yeokku.model.biz.TripplaceBiz;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private TripplaceBiz biz;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -28,6 +31,7 @@ public class HomeController {
 		session.setAttribute("user_no", 1+Math.random()*1000);
 		session.setAttribute("pfimg", 1+Math.random()*1000);
 		
+		
 		return "main/main";
 	}
 	
@@ -35,6 +39,8 @@ public class HomeController {
 	//홈
 	@RequestMapping("/main_form.do")
 	public String mainForm(Model model) {
+		model.addAttribute("tour_list",biz.tripplaceMain());
+		
 		return "main/main";
 	}
 	//여행지
