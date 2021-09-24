@@ -1,7 +1,9 @@
 package com.kh.yeokku.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.yeokku.model.biz.RoomBiz;
 import com.kh.yeokku.model.biz.TripplaceBiz;
+import com.kh.yeokku.model.dto.RoomDto;
 
 @Controller
 public class HomeController {
@@ -23,6 +26,7 @@ public class HomeController {
 	private TripplaceBiz biz;
 	@Autowired
 	private RoomBiz roombiz;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping("/mypage.do")
@@ -41,7 +45,21 @@ public class HomeController {
 	@RequestMapping("/main_form.do")
 	public String mainForm(Model model) {
 		model.addAttribute("tour_list",biz.tripplaceMain());
-		model.addAttribute("course_list",roombiz.selectAll());
+		List<RoomDto> list = new ArrayList<RoomDto>();
+		list = roombiz.selectAll();
+		
+		for(int i=0; i<list.size(); i++) {
+			RoomDto dto = new RoomDto();
+			dto = list.get(i);
+			String temp_content = dto.getTc_content();
+			temp_content = temp_content.replace( "<img class=\"OF\" src=\"resources/img/Course/Minus.png\">", "");
+			temp_content = substringBetween(temp_content, "<img class=", ">");
+			temp_content = substringBetween(temp_content, "src=\"", "\"");
+			dto.setTc_content( temp_content );	
+			list.set(i, dto);
+		}
+
+		model.addAttribute("course_list",list);
 		return "main/main";
 	}
 	//여행지
@@ -83,5 +101,19 @@ public class HomeController {
 	@RequestMapping("/mypage_qna.do")
 	public String mypageQnaForm(Model model) {
 		return "mypage/mypage_qna";
+	}
+	
+	private String substringBetween(String str, String open, String close) {
+	    if (str == null || open == null || close == null) {
+	       return null;
+	    }
+	    int start = str.indexOf(open);
+	    if (start != -1) {
+	       int end = str.indexOf(close, start + open.length());
+	       if (end != -1) {
+	          return str.substring(start + open.length(), end);
+	       }
+	    }
+	    return null;
 	}
 }

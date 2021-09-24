@@ -61,7 +61,7 @@
                         <div class="banner_text_iner">
                             <h1> Do It Yourself </h1>
                             <p>당신만의 여행 꾸미기! 지금 여꾸와 함께 시작하세요.</p>
-                            <a href="#" class="btn_1">Plan your trip</a>
+                            <a href="course_making.do" class="btn_1">Plan your trip</a>
                         </div>
                     </div>
                 </div>
@@ -131,17 +131,19 @@
 	            		<c:when test="${empty course_list }"></c:when>
 	            		<c:otherwise>
 	            			<c:forEach items="${course_list }" var="list" end="5">
-	            				<div class="col-lg-4 col-md-4" style="width: 350px; height: 230px;">
-				                    <div class="single_place" style="width: 100%; height: 90%" >
-				                        <img src="${list.tc_content}" alt="" class="col-lg-12 col-md-12" >
-				                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
-				                            <div class="hover_text_iner">
-				                                <h3 style="padding-bottom: 5px;">${list.tc_title }</h3>
-				                                <a href='course_detail.do?room=${list.tc_no }' class="place_btn">자세히 보기</a>
-				                            </div>
-				                        </div>
-				                    </div>
-				                </div>
+	            				<c:if test="${list.tc_open eq 'Y' }">
+		            				<div class="col-lg-4 col-md-4" style="width: 350px; height: 230px;">
+					                    <div class="single_place" style="width: 100%; height: 90%" >
+					                        <img src="${list.tc_content}" alt="" class="col-lg-12 col-md-12" style="height: 100%">
+					                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
+					                            <div class="hover_text_iner">
+					                                <h3 style="padding-bottom: 5px;">${list.tc_title }</h3>
+					                                <a href='course_detail.do?room=${list.tc_no }' class="place_btn">자세히 보기</a>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+				                </c:if>
 	            			</c:forEach>
 	            		</c:otherwise>
 	            	</c:choose>
