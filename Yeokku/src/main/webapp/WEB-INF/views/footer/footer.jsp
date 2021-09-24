@@ -18,9 +18,9 @@
                     <div class="single-footer-widget">
                         <h4>Service center</h4>
                         <ul style="list-style: none;">
-                            <li><a href="#">공지사항</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">문의하기</a></li>
+                            <li><a href="qna_notice_form.do">공지사항</a></li>
+                            <li><a href="Qaform.do">FAQ</a></li>
+                            <li><a href="Qnaform.do">문의하기</a></li>
                         </ul>
 
                     </div>
