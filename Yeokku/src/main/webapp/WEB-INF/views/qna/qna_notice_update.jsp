@@ -21,23 +21,6 @@
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
     
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-lite.css">	
-
-    <script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
- 	<script>
- 		$("textarea.autosize").on('keydown keyup', function () {
-		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
-		});
-		
-	</script>
-	<style>
-		textarea.autosize { min-height: 500px; }
-		textarea:focus {
-    		outline: none;
-		}
-	</style>
-    
 </head>
 <body>
 	<!-- header 추가 -->
@@ -86,37 +69,31 @@
                 
                 <div class="col-lg-8">
                     <h2 class="contact-title">공지사항</h2>
-                    <table class="notice">
-                        <colgroup>
-                            <col width="450px"/>
-                            <col width="300px"/>
-                        </colgroup>
-                        <tr>
-                            <th colspan="2" align="center"><h4>${noticedto.notice_title}</h4></th>
-                        </tr>
-                        <tr>
-                        	<td></td>
-                        	<td align="left"><fmt:formatDate value="${noticedto.notice_reg_date}" pattern="yyyy-MM-dd (HH:mm)"/>  |  ${noticedto.notice_reg_view}</td>
-                        </tr>
-                        <tr>
-                        	<td colspan="2" align="center"><textarea id="summernote" readonly="readonly" rows="8" style="width:90%; resize: none; border: none">${noticedto.notice_content}</textarea></td>
-                        </tr>
-                        <tr>
-                        	<td colspan="2" align="right">
-                        		<c:if test="${user.user_role eq 'ADMIN' }">
-                        			<input type="button" value="글수정" onclick="location.href='qna_notice_update.do?notice_no=${noticedto.notice_no}'">
-                        			<input type="button" value="글삭제" onclick="location.href='deleteNotice.do?notice_no=${noticedto.notice_no}'">
-                        		</c:if>
-                        		<input type="button" value="목록" onclick="location.href='qna_notice_form.do'">
-                        	</td>
-                        </tr>
-                    </table>
+                    <form action="updateNotice.do" method="post">
+                    	<input type="hidden" name="notice_no" value="${noticedto.notice_no}">
+                    	<table class="notice">
+                        	<colgroup>
+                            	<col width="750px"/>
+                        	</colgroup>
+                        	<tr>
+                            	<th><input style="width: 600px;" type="text" name="notice_title" placeholder="제목을 입력하세요" value="${noticedto.notice_title}"></th>
+                        	</tr>
+                        	<tr>
+                        		<td align="center"><textarea name="notice_content" required="required" rows="10" cols="90">${noticedto.notice_content}</textarea></td>
+                        	</tr>
+                        	<tr>
+                        		<td align="right">
+                        			<input type="submit" value="작성완료">
+                        			<input type="button" value="취소" onclick="location.href='qna_notice_detail.do?notice_no=${noticedto.notice_no}'">
+                        		</td>
+                       		</tr>
+                    	</table>                    	
+                    </form>
                 </div>
             </div>
         </div>
     </section>
     <!-- Header part end-->
-
 
     
 </body>

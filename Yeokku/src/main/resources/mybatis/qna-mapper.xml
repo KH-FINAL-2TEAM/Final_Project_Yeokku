@@ -24,7 +24,27 @@
   		<result property="qa_done_date" column="QA_DONE_DATE"/>
   		<result property="qa_confirm" column="QA_CONFIRM"/>
   	</resultMap>
-  
+  	
+  	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM NOTICEBOARD
+	</select>
+  	
+  	
+  	<select id="selectBoard" resultMap="notice_map">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM NOTICEBOARD 
+							ORDER BY NOTICE_NO DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+  	
+  	
+  	
   	<select id="selectList" resultMap="notice_map">
   		SELECT NOTICE_NO, NOTICE_TITLE, NOTICE_REG_DATE, NOTICE_REG_VIEW 
 		FROM NOTICEBOARD
@@ -44,8 +64,8 @@
   	
   	<update id="updateNotice" parameterType="notice_dto">
   		UPDATE NOTICEBOARD
-  		SET NOTICE_TITLE= #{notice_title} , NOTICE_CONTENT= #{notice_content}
-  		WHERE NOTICE_NO= #{notice_no)
+  		SET NOTICE_TITLE=#{notice_title}, NOTICE_CONTENT=#{notice_content}
+  		WHERE NOTICE_NO=#{notice_no}
   	</update>
   	
   	<delete id="deleteNotice" parameterType="int">
@@ -55,7 +75,7 @@
   	
   	<insert id="insertEmail" parameterType="qa_dto">
   		INSERT INTO QABOARD
-  		VALUES(QASEQ.NEXTVAL,#{qa_name},#{qa_title},#{qa_content},#{qa_email},SYSDATE,,'N')
+  		VALUES(QASEQ.NEXTVAL,#{qa_name},#{qa_title},#{qa_content},#{qa_email},SYSDATE,null,'N')
   	</insert>
   	
   </mapper>

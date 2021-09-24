@@ -69,19 +69,19 @@
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-home"></i></span>
                         <div class="media-body">
-                            <a class="contact_a" href="">공지사항</a>
+                            <a class="contact_a" href="qna_notice_form.do">공지사항</a>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                         <div class="media-body">
-                            <a class="contact_a" href="">자주묻는질문</a>
+                            <a class="contact_a" href="Qnaform.do">자주묻는질문</a>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-email"></i></span>
                         <div class="media-body">
-                            <a class="contact_a" href="">온라인 문의</a>
+                            <a class="contact_a" href="Qaform.do">온라인 문의</a>
                         </div>
                     </div>
                 </div>
@@ -89,16 +89,16 @@
                 <div class="col-lg-8">
                     <h2 class="contact-title">자주 묻는 질문</h2>
                     <dl>
-                        <dt class="qna_dt"><a class="contact_a" href="#">1.이거 어떻게 하나요?</a></dt>
+                        <dt class="qna_dt"><a class="contact_a" href="#">1.회원 탈퇴는 어디서하나요?</a></dt>
                         <dd class="hidden">
                             <div class="qnadd_box">
-                                <span>이렇게저렇게 해보세요.</span>
+                                <span>마이페이지 - 정보수정 - 회원탈퇴란 에서 진행하시면됩니다.<br>다만 회원정보가 삭제되더라도 작성된글은 삭제되지 않으니 주의하세요 </span>
                             </div>
                         </dd>
-                        <dt class="qna_dt"><a class="contact_a" href="#">2.탈퇴하고 싶어요</a></dt>
+                        <dt class="qna_dt"><a class="contact_a" href="#">2.친구와 함께 일정을 짜고싶어요</a></dt>
                         <dd class="hidden">
                             <div class="qnadd_box">
-                                <span>안돼 돌아가.</span>
+                                <span>마이페이지 - 여행코스에서 작성중이신 여행코스 정보를 공유해보세요.<br>가족, 친구, 지인들과 함계 여행 계획을 세울수 있습니다.</span>
                             </div>
                         </dd>
                     </dl>

@@ -11,9 +11,11 @@ import com.kh.yeokku.model.dao.MypageDao;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.TourCourseDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
+import com.kh.yeokku.util.pagingVO;
 
 @Repository
 public class MypageDaoImpl implements MypageDao{
@@ -162,4 +164,34 @@ public class MypageDaoImpl implements MypageDao{
 		return list;
 	}
 
+	@Override
+	public int countCourse() {
+		int cnt = 0;
+		
+		try {
+			cnt = sqlSession.selectOne(NAMESPACE+"countBoard");
+		} catch (Exception e) {
+			System.out.println("[error] : count course list");
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+	
+	@Override
+	public List<TourCourseDto> myCourse(pagingVO vo) {
+		List<TourCourseDto> list = new ArrayList<TourCourseDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectBoard",vo);
+		} catch (Exception e) {
+			System.out.println("[error] : select course list");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	
+	
 }

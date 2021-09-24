@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.yeokku.model.biz.QnaBiz;
 import com.kh.yeokku.model.dto.NoticeDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.util.pagingVO;
 
 @Controller
 public class QnaController {
@@ -22,11 +23,28 @@ public class QnaController {
 	/*qna관련*/
 	//공지사항 목록
 	@RequestMapping("/qna_notice_form.do")
-	public String noticeForm(Model model) {
+	public String noticeForm(Model model,pagingVO vo, String nowPage) {
 		logger.info("SELECT NOTICE LIST");
-		model.addAttribute("list",biz.selectNoticeList());
+		int total = biz.countNotice();
+		
+		
+		int cntPerPage = 10;
+		if (nowPage == null) {
+			nowPage = "1";
+		} 
+		
+		
+		vo = new pagingVO(total, Integer.parseInt(nowPage), cntPerPage);
+		model.addAttribute("paging", vo);
+		model.addAttribute("list",biz.selectNoticeList(vo));
 		return "qna/qna_notice";
 	}
+	
+	
+	
+	
+	
+	
 	//공지사항 게시글
 	@RequestMapping("/qna_notice_detail.do")
 	public String noticeDetail(Model model, int notice_no) {
@@ -56,7 +74,7 @@ public class QnaController {
 	@RequestMapping("/qna_notice_update.do")
 	public String noticeUpdateForm(Model model, int notice_no) {
 		logger.info("UPDATE NOTICE");
-		model.addAttribute("dto",biz.selectNoticeOne(notice_no));
+		model.addAttribute("noticedto",biz.selectNoticeOne(notice_no));
 		return "qna/qna_notice_update";
 	}
 	//공지사항 수정 결과
@@ -95,9 +113,9 @@ public class QnaController {
 		logger.info("INSERT QA");
 		int res = biz.insertQna(dto);
 		if(res>0) {
-			return "redirect:qna_notice_form.do";
+			return "redirect:Qaform.do";
 		}else {
-			return "redirect:qna_notice_form.do";
+			return "redirect:Qaform.do";
 		}
 	}
 	//자주묻는 질문게시판

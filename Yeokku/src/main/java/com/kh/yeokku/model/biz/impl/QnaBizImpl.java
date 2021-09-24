@@ -9,6 +9,7 @@ import com.kh.yeokku.model.biz.QnaBiz;
 import com.kh.yeokku.model.dao.QnaDao;
 import com.kh.yeokku.model.dto.NoticeDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.util.pagingVO;
 
 @Service
 public class QnaBizImpl implements QnaBiz{
@@ -17,9 +18,16 @@ public class QnaBizImpl implements QnaBiz{
 	private QnaDao dao;
 	
 	
+	
+	
 	@Override
-	public List<NoticeDto> selectNoticeList() {
-		return dao.selectNoticeList();
+	public int countNotice() {
+		return dao.countNotice();
+	}
+	
+	@Override
+	public List<NoticeDto> selectNoticeList(pagingVO vo) {
+		return dao.selectNoticeList(vo);
 	}
 
 	@Override

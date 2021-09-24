@@ -55,13 +55,13 @@
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                         <div class="media-body">
-                            <a class="contact_a" href="">자주묻는질문</a>
+                            <a class="contact_a" href="Qnaform.do">자주묻는질문</a>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-email"></i></span>
                         <div class="media-body">
-                            <a class="contact_a" href="">온라인 문의</a>
+                            <a class="contact_a" href="Qaform.do">온라인 문의</a>
                         </div>
                     </div>
                 </div>
@@ -103,6 +103,28 @@
                         			<input type="button" value="글작성" onclick="location.href='qna_notice_insert.do'">
                         		</c:if>
                         		<input type="button" value="목록" onclick="qna_notice_form.do">
+                        	</td>
+                        </tr>
+                        <tr>
+                        	<td colspan="3">
+                        			<div style="display: block; text-align: center;">		
+									<c:if test="${paging.startPage != 1 }">
+										<a href="qna_notice_form.do?nowPage=${paging.startPage - 1 }">&lt;</a>
+									</c:if>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b>${p }</b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="qna_notice_form.do?nowPage=${p }">${p }</a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="qna_notice_form.do?nowPage=${paging.endPage+1 }">&gt;</a>
+									</c:if>
+								</div>
                         	</td>
                         </tr>
                     </table>

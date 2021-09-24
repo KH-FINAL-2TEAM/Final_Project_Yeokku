@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.kh.yeokku.model.dto.NoticeDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.util.pagingVO;
 
 public interface QnaDao {
 
 	String NAMESPACE="qna.";
 	
-	public List<NoticeDto> selectNoticeList();	//공지사항조회
+	public int countNotice();
+	public List<NoticeDto> selectNoticeList(pagingVO vo);	//공지사항조회
 	public NoticeDto selectNoticeOne(int notice_no); 	//공지사항선택
 	public int insertNotice(NoticeDto dto);	//공지사항 글쓰기
 	public int updateNotice(NoticeDto dto);	//공지사항 수정
