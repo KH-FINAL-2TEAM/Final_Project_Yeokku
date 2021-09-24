@@ -17,7 +17,7 @@ public interface QnaDao {
 	public int updateNotice(NoticeDto dto);	//공지사항 수정
 	public int deleteNotice(int notice_no);	//공지사항 삭제
 	public int insertQna(QaDto dto);	//문의 내역 추가
-	
+	public int updateViewCnt(int notice_no);
 	
 	
 	

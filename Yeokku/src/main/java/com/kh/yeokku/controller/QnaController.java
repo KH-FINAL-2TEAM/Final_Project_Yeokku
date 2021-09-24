@@ -49,6 +49,7 @@ public class QnaController {
 	@RequestMapping("/qna_notice_detail.do")
 	public String noticeDetail(Model model, int notice_no) {
 		logger.info("SELECT NOTICE ONE");
+		biz.updateViewCnt(notice_no);
 		model.addAttribute("noticedto",biz.selectNoticeOne(notice_no));
 		return "qna/qna_notice_detail";
 	}

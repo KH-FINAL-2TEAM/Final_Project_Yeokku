@@ -55,6 +55,9 @@ public class QnaBizImpl implements QnaBiz{
 		return dao.insertQna(dto);
 	}
 
-	
+	@Override
+	public int updateViewCnt(int notice_no) {
+		return dao.updateViewCnt(notice_no);
+	}
 	
 }

@@ -126,7 +126,19 @@ public class QnaDaoImpl implements QnaDao{
 	}
 
 	
-	
+	@Override
+	public int updateViewCnt(int notice_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateViewCnt",notice_no);
+		} catch (Exception e) {
+			System.out.println("[error] : update ViewCnt");
+			e.printStackTrace();
+		}
+				
+		return res;
+	}
 	
 	
 	

@@ -78,4 +78,14 @@
   		VALUES(QASEQ.NEXTVAL,#{qa_name},#{qa_title},#{qa_content},#{qa_email},SYSDATE,null,'N')
   	</insert>
   	
+  	
+  	<update id="updateViewCnt" parameterType="notice_dto">
+  		UPDATE NOTICEBOARD
+  		SET NOTICE_REG_VIEW = NOTICE_REG_VIEW + 1
+  		WHERE NOTICE_NO=#{notice_no}
+  	</update>
+  	
+  	
+  	
+  	
   </mapper>
