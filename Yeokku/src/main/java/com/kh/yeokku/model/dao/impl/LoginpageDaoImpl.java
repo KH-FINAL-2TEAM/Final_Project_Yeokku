@@ -39,6 +39,8 @@ public class LoginpageDaoImpl implements LoginpageDao{
 	public int insert(UserDto dto) {
 		int res = 0;
 		
+		System.out.println(dto.toString());
+		
 		try {
 			res = sqlSession.insert(NAMESPACE+"signup", dto);
 		}catch (Exception e) {

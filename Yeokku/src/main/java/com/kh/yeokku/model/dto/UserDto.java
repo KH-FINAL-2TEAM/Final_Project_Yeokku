@@ -171,5 +171,17 @@ public class UserDto {
 		this.user_room = user_room;
 	}
 
+
+	@Override
+	public String toString() {
+		return "UserDto [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
+				+ user_name + ", user_email=" + user_email + ", user_nickname=" + user_nickname + ", user_postcode="
+				+ user_postcode + ", user_address=" + user_address + ", user_extraaddress=" + user_extraaddress
+				+ ", user_reg_date=" + user_reg_date + ", user_able=" + user_able + ", user_role=" + user_role
+				+ ", user_room=" + user_room + "]";
+	}
+	
+	
+
 	
 }
