@@ -226,7 +226,12 @@
 			                    			<img src="resources/img/nullImage.png">
 			                    			<div class="hover_Text d-flex align-items-end justify-content-between">
 				                            	<div class="hover_text_iner">
-				                                <a href="tripplace_detail_form.do?contentid=${dto.contentid }" class="place_btn">자세히 보기</a>
+				                            	<form action="tripplace_detail_form.do" method="post">
+							                            <input type="hidden" name="contentid" value="${dto.contentid }">
+							                            <input type="hidden" name="userno" value="${user.user_no }">
+							                            <input type="hidden" name="title" value="${dto.title }">
+							                            <input type="submit" class="place_btn" style="border:0px" value="자세히 보기">
+					                            	</form>
 				                    				<h3>${dto.title }</h3>
 				                    				<p>${dto.addr1 }</p>
 			                    				</div>
@@ -236,7 +241,12 @@
 			                    			<img src="${dto.firstimage }">
 			                    			<div class="hover_Text d-flex align-items-end justify-content-between">
 					                            <div class="hover_text_iner">
-					                                <a href="tripplace_detail_form.do?contentid=${dto.contentid }" class="place_btn">자세히 보기</a>
+					                            	<form action="tripplace_detail_form.do" method="post">
+							                            <input type="hidden" name="contentid" value="${dto.contentid }">
+							                            <input type="hidden" name="userno" value="${user.user_no }">
+							                            <input type="hidden" name="title" value="${dto.title }">
+							                            <input type="submit" class="place_btn" style="border:0px" value="자세히 보기">
+					                            	</form>
 					                                <h3>${dto.title }</h3>
 					                                <p>${dto.addr1 }</p>
 					                            </div>
