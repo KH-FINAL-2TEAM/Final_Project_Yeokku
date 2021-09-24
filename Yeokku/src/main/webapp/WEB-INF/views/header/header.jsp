@@ -84,21 +84,11 @@
 		                                            <a class="dropdown-item" href="mypage_course_form.do">여행코스</a>
 		                                            <a class="dropdown-item" href="mypage_review_form.do">리뷰</a>
 		                                            <a class="dropdown-item" href="mypage_qna.do">문의</a>
-		                                            <a class="dropdown-item" href="#">로그아웃</a>
+		                                            <a class="dropdown-item" href="logout.do">로그아웃</a>
 		                                        </div>
 		                                    </li>
 		                                </ul>
-		                                <ul class="navbar-nav">
-		                                    <li class="nav-item dropdown alarm">
-		                                        <a class="nav-link" href="#" id="alarmDropdown"
-		                                            role="button" data-toggle="dropdown" aria-haspopup="true"
-		                                            aria-expanded="false">
-		                                            <div class="profile_img_div">
-		                                                <i class="fas fa-bell fa-3x"></i>
-		                                            </div>
-		                                        </a>
-		                                    </li>
-		                                </ul>
+		                               
 									</c:otherwise>
 								</c:choose>
                             </nav>
