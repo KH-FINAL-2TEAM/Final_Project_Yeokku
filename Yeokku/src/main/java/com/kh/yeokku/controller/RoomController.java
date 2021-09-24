@@ -47,18 +47,20 @@ public class RoomController {
 		//user = (UserDto)session.getAttribute("user");	
 		// int res = roomBiz.createRoom(user.getUser_id());
 		
+		UserDto user = new UserDto();
+		user = (UserDto)session.getAttribute("user");
+		String temp = user.getUser_id();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user_id", "임시아이디");
+		map.put("user_id", temp);
 		String pw = RandomStringUtils.randomAlphanumeric(20);
 		int res = roomBiz.createRoom(map, pw);
 		session.setAttribute("roomNo", res);
 		model.addAttribute("link", pw);
 		return "Course/CourseMaking";
 		
-		/*
-		UserDto user = new UserDto();
-		user = (UserDto)session.getAttribute("user");	
 		
+		/*
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", user.getUser_id());
 		String pw = RandomStringUtils.randomAlphanumeric(20);
@@ -66,6 +68,7 @@ public class RoomController {
 		session.setAttribute("roomNo", res);
 		model.addAttribute("link", pw);
 		return "Course/CourseMaking"; */
+		//return "Course/CourseMaking";
 	}
 	
 	@RequestMapping("/course_remake.do")
@@ -121,7 +124,7 @@ public class RoomController {
 		
 		return map;
 	}
-	
+	/*
 	@RequestMapping("/course_detail.do")
 	public String courseDetail(Model model, int room) {
 
@@ -132,7 +135,7 @@ public class RoomController {
 		model.addAttribute("jpg", jpg);
 		
 		return "Course/CourseDetail";
-	}
+	}*/
 	
 	@RequestMapping("/like.do")
 	@ResponseBody

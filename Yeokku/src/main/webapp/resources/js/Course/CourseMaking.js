@@ -316,6 +316,9 @@ window.onload = function()
 	});
 	
 	$('#Bus_Icon').bind('click', function(){
+	
+		alert("해당 기능은 국토교통부의 API가 서비스 중지함으로서 부득이하게 제외하였습니다....ㅠㅠ \n다 만들어놨는데.. ㅠㅠ");
+		return;
 
 		if(Icon_Switch[4] == 0) {
 			Icon_Switch[4] = 1;

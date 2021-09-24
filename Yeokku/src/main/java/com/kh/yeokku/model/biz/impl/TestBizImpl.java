@@ -149,6 +149,12 @@ public class TestBizImpl implements TestBiz{
 	public boolean reportChk(ReportDto dto) {
 		return dao.reportChk(dto);
 	}
+
+
+	@Override
+	public List<RoomDto> courseSearch(String keyword) {
+		return dao.courseSearch(keyword);
+	}
 	
 	
 	
