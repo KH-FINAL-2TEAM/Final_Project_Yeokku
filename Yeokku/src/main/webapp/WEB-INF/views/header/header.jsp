@@ -88,17 +88,7 @@
 		                                        </div>
 		                                    </li>
 		                                </ul>
-		                                <ul class="navbar-nav">
-		                                    <li class="nav-item dropdown alarm">
-		                                        <a class="nav-link" href="#" id="alarmDropdown"
-		                                            role="button" data-toggle="dropdown" aria-haspopup="true"
-		                                            aria-expanded="false">
-		                                            <div class="profile_img_div">
-		                                                <i class="fas fa-bell fa-3x"></i>
-		                                            </div>
-		                                        </a>
-		                                    </li>
-		                                </ul>
+		                               
 									</c:otherwise>
 								</c:choose>
                             </nav>
