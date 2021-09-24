@@ -34,6 +34,7 @@ import com.kh.yeokku.model.dto.QaDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
+import com.kh.yeokku.util.pagingVO;
 
 @Controller
 public class MypageController {
@@ -190,4 +191,22 @@ public class MypageController {
 			String json = gson.toJson(list);
 			return json;
 	}
+	
+	@RequestMapping("/mycourseform.do")
+	public String mypageCourse(Model model,pagingVO vo, String nowPage) {
+		int total = biz.countCourse();
+		
+		int cntPerPage = 5;
+		if (nowPage == null) {
+			nowPage = "1";
+		}
+		
+		vo = new pagingVO(total, Integer.parseInt(nowPage), cntPerPage);
+		model.addAttribute("paging", vo);
+		model.addAttribute("list",biz.myCourse(vo));
+		return "mypage/mypage_course";
+	}
+	
+	
+	
 }

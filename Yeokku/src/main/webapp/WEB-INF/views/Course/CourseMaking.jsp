@@ -3,7 +3,7 @@
     
 <%@ page import="java.io.File" %>
 <%@ page import="com.kh.yeokku.model.dto.RoomDto" %>
-<% String roomNo = session.getAttribute("roomNo").toString(); %>
+<% String roomNo = session.getAttribute("roomNo").toString();%>
 
 <script>
 	var detail_count = "${dto.tc_dc}";
@@ -65,11 +65,13 @@
 		   </div>
 		</div>
 				
-		<img id="Alarm_Img" src="resources/img/Course/Alarm2.png">
+		<img id="Alarm_Img" src="resources/img/Course/Alarm.png">
 		<img id="PF_Img" src="resources/img/Course/PF_Img.gif">
 	</header>
 	
 	<article style="">
+	
+		<div id="Alarm_Area"></div>
 	
 		<div id="Making_Area">
 			<canvas id="canvas" width="1960px" height="1280px"></canvas>
@@ -255,7 +257,7 @@
 			<input type="button" value="저장" class="Btn" onclick="save();"> &nbsp;&nbsp;
 			<input type="button" value="취소" class="Btn" onclick='Icon_Switch[9] = 1; $("#Save_Area").hide(); $("#Black_Mask").hide(); $("#Save_Icon").attr("src","resources/img/Course/Save.png");'>
 			
-			<br><hr><span style="font-size:15px">http://localhost:8787/yeokku/course_remake.do?room=${link }</span>
+			<br><hr><span style="font-size:15px" id="redirect_url">http://localhost:8787/yeokku/course_remake.do?room=${link }</span>
 		
 		</div>
 		
@@ -264,13 +266,13 @@
 	<footer></footer>
 </body>
 
-<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=188">
+<link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking.css?ver=190">
 <link rel= "stylesheet" type="text/css" href="resources/css/Course/CourseMaking_Map.css">
 
-<script src="resources/js/Course/CourseMaking_Paint.js" charset="utf-8"></script>
-<script src="resources/js/Course/CourseMaking.js?ver=185" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking_Paint.js?ver=1" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMaking.js?ver=195" charset="utf-8"></script>
 <script src="resources/js/Course/CourseMaking_Map.js" charset="utf-8"></script>
-<script src="resources/js/Course/CourseMaking_Chat.js?ver=13" charset="utf-8"></script>
-<script>var ws = new WebSocket("ws://" + root  +"/chat?room=${dto.tc_no}");  connect();</script>
+<script src="resources/js/Course/CourseMaking_Chat.js?ver=14" charset="utf-8"></script>
+<script>var ws = new WebSocket("ws://" + root  +"/chat?room=<%=roomNo%>");  connect();</script>
 
 </html>

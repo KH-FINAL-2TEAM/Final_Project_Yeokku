@@ -71,12 +71,34 @@ window.onload = function() {
 		
 	});
 	
+	$("#course_heart").bind('click', function() {
+		if(like_count >= 0) {							
+			$.ajax({
+				type:"post",
+				url:"like.do?room=" + tc_room,
+				contentType:"application/json",
+				dataType:"json",
+				success:function(msg) {
+					if(msg.check == true) {
+						alert("해당 여행 코스를 추천하였습니다.");
+						$("#course_heart").html("💗 " +  parseInt(parseInt(like_count)*1 + 1*1)*1 );
+						like_count = -100;
+					} else {
+						alert("[F] 오류가 발생하였습니다. 반복된다면 문의 부탁드립니다.");
+					}
+				},
+				error:function() {
+					alert("[E] 오류가 발생하였습니다. 반복된다면 문의 부탁드립니다.");
+				}
+			});
+		} else { alert("이미 추천한 여행 코스이거나 문제가 발생하였습니다.");}
+	});
+	
 	/////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////
 	
 	Course_Q = tc_q.split("&&");
 	
-	console.log( $(".hotel_2_2").children('span:first').children('b').html() );
 	var temp = '';
 	var count = 1;
 	

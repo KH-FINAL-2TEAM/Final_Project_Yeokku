@@ -12,5 +12,6 @@ public interface RoomBiz {
 	public int roomUpdate(RoomDto dto);
 	public RoomDto viewRoom(int room);
 	public RoomDto remakeRoom(String pw);
+	public int roomLike(int room);
 	
 }

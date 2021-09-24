@@ -88,6 +88,25 @@ header {
 	cursor:pointer;
 }
 
+#Alarm_Area {
+	position:absolute;
+	width: 15vw;
+	height: 30vh;
+	border:5px double white;
+	
+	margin-left:77.5vw;
+	margin-top:7vh;
+	
+	z-index:60;
+	
+	background-color:rgba(255, 255, 255, 0.8);
+	box-shadow: 7px 7px 20px rgb(119 119 119 / 60%);
+	
+	overflow-y:scroll;
+	
+	padding:15px;
+}
+
 #Making_Main {
 	width:95vw;
 	height:98vh;

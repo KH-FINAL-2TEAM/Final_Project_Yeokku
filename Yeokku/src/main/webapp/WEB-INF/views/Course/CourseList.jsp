@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="resources/css/style_dh.css">
     <link rel="stylesheet" href="resources/css/Course/CourseList.css">
     <script src="resources/js/Course/CourseList.js" charset="utf-8"></script>
-    
 </head>
 
 
@@ -23,38 +22,37 @@
 
 <body>
 
-    <section class="banner_part">
+     <!-- 배너 start-->
+    <section class="breadcrumb breadcrumb_bg">
         <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-10">
-                    <div class="banner_text text-center">
-                        <div class="banner_text_iner">
-                            <b style="color:red; font-size:40px;">W</b>
-                            <span style="font-size:25px;">here did you</span>
-                            <b style="font-size:40px; color:blue;">G</b>
-                            <span style="font-size:25px;">o</span> ?<br>
-                            <h1>Course List</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item text-center">
+                            <h2>Course List</h2>
                             <p>다른 사람들의 일정을 살펴볼까요 ?</p>
-                            <a href="course_making.do" class="btn_1" style="border:double 3px white;">나만의 계획 짜러가기 !!</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <hr>
- 
+    <!-- 배너 end-->
+     <section   style="margin:auto; width:50%; margin-top: 50px;">
+	        <div class="contatiner text-center">
+		        <form action="#">
+		            <div class="form-inline" style="padding-left: 10%; width:100%;">
+		                    <input type="text" class="form-control search_area" placeholder="검색어를 입력해주세요." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'" style="width:80%; margin: 5px;">
+		                    <button class="btn_1" type="submit" style="border-color: transparent;"> 🔍 </button>
+		            </div>
+		        </form>
+		    	<a href="course_making.do" class="btn_1" style="border:double 3px white; margin-top:24px;">나만의 계획 짜러가기 !!</a>
+	    	</div>
+	 </section>
+	    
 	 <div class="list_area">
 	    
-	    <section style="margin:auto; width:50%; margin-top: 50px;">
-	        <form action="#">
-	            <div class="form-inline" style="padding-left: 10%; width:100%;">
-	                    <input type="text" class="form-control search_area" placeholder="검색어를 입력해주세요." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'" style="width:80%; margin: 5px;">
-	                    <button class="btn_1" type="submit" style="border-color: transparent;"> 🔍 </button>
-	            </div>
-	        </form>
-	    </section>
+	   
 	    
 	     <br><br><hr><br><br>
 	
@@ -70,7 +68,7 @@
 								<div class="col-lg-4 col-md-4">
 				                	<a href="course_detail.do?room=${dto.tc_no }">
 					                    <div class="single_place">
-					                        <img src="resources/img/single_place_${status.index%4+1}.png" alt="" class="col-lg-12 col-md-12">
+					                        <img src="${dto.tc_content}" alt="" class="col-lg-12 col-md-12">
 					                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
 					                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
 					                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>${dto.tc_title } &nbsp; </b></span><br>

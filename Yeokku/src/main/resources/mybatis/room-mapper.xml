@@ -18,7 +18,7 @@
   	</insert>
   	
   	<select id="selectAll" resultType="room_dto">
-		SELECT * FROM TCBOARDALL
+		SELECT * FROM TCBOARDALL ORDER BY TC_LIKE DESC
 	</select>
 	
 	<select id="selectOne" resultType="room_dto">
@@ -38,6 +38,12 @@
   	<update id="viewPlus">
   		UPDATE TCBOARDALL
   		SET TC_VIEW = TC_VIEW + 1
+  		WHERE TC_NO= #{room}
+  	</update>
+  	
+  	<update id="roomLike">
+  		UPDATE TCBOARDALL
+  		SET TC_LIKE = TC_LIKE + 1
   		WHERE TC_NO= #{room}
   	</update>
   	

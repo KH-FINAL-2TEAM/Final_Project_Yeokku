@@ -21,11 +21,6 @@
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
     
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-  
-  
 </head>
 <body>
 	<!-- header 추가 -->
@@ -61,13 +56,13 @@
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                         <div class="media-body">
-                            <a class="contact_a" href="">자주묻는질문</a>
+                            <a class="contact_a" href="Qnaform.do">자주묻는질문</a>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-email"></i></span>
                         <div class="media-body">
-                            <a class="contact_a" href="">온라인 문의</a>
+                            <a class="contact_a" href="Qaform.do">온라인 문의</a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +79,7 @@
                             	<th><input style="width: 600px;" type="text" name="notice_title" placeholder="제목을 입력하세요"></th>
                         	</tr>
                         	<tr>
-                        		<td align="center"><textarea  name="notice_content"></textarea></td>
+                        		<td align="center"><textarea name="notice_content" required="required" rows="10" cols="90"></textarea></td>
                         	</tr>
                         	<tr>
                         		<td align="right">
@@ -92,24 +87,13 @@
                         			<input type="button" value="취소" onclick="location.href='qna_notice_form.do'">
                         		</td>
                        		</tr>
-                    	</table>
-                    	<div>
-                    		<textarea id="summernote" name="notice_content"></textarea>
-                    	
-                    	</div>
-                    	
+                    	</table>                    	
                     </form>
                 </div>
             </div>
         </div>
     </section>
     <!-- Header part end-->
-	<script>
-$('.summernote').summernote({
-	  height: 150,
-	  lang: "ko-KR"
-	});
-</script>
 
     
 </body>

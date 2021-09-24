@@ -40,4 +40,9 @@ public class RoomBizImpl implements RoomBiz {
 	public RoomDto remakeRoom(String pw) {
 		return dao.remakeRoom(pw);
 	}
+	
+	@Override
+	public int roomLike(int room) {
+		return dao.roomLike(room);
+	}
 }

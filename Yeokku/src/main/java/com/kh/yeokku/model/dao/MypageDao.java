@@ -5,9 +5,11 @@ import java.util.List;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.TourCourseDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
+import com.kh.yeokku.util.pagingVO;
 
 public interface MypageDao {
 
@@ -33,4 +35,8 @@ public interface MypageDao {
 
 	List<TourCourseReviewDto> courseReviewList(int tcr_userno); // 코스 리뷰 목록
 
+	public int countCourse(); /*페이징위한 카운트*/
+	
+	public List<TourCourseDto> myCourse(pagingVO vo); /*내가 작성한 여행코스 주소 리스트 확인*/
+		
 }
