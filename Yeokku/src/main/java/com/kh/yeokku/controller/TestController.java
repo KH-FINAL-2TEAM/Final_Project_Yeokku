@@ -71,7 +71,7 @@ public class TestController {
 			return "false";
 		}
 	}
-	
+	/*
 	@RequestMapping("/course_detail.do")
 	public String courseDetail(Model model, int room) {
 
@@ -85,7 +85,7 @@ public class TestController {
 		model.addAttribute("review_list",list);
 		return "Course/CourseDetail";
 	}
-	
+	*/
 	@RequestMapping(value="/update_course_review.do",method = RequestMethod.POST)
 	@ResponseBody
 	public String updateCourseReview(Model model, TourCourseReviewDto dto) {
