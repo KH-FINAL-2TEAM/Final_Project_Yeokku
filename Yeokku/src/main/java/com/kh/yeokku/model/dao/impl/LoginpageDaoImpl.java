@@ -21,7 +21,7 @@ public class LoginpageDaoImpl implements LoginpageDao{
 	public String idChk(String user_id) {
 		String res;
 		UserDto dto;
-		dto = sqlSession.selectOne(NAMESPACE+"idchk", user_id);//맵퍼추가하기 
+		dto = sqlSession.selectOne(NAMESPACE+"idchk", user_id);
 		
 		if(dto!=null) {
 			
@@ -94,6 +94,22 @@ public class LoginpageDaoImpl implements LoginpageDao{
 			res = sqlSession.selectOne(NAMESPACE+"profile",user);
 		} catch (Exception e) {
 			System.out.println("[error] : user profile info error");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	
+	//소셜로그인 db insert
+	@Override
+	public int kakao_insert(UserDto dto) {
+
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"kakaologin", dto);
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		

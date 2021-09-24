@@ -13,4 +13,5 @@ public interface LoginpageDao {
 	public UserDto findId(UserDto dto);//아이디 찾기 
 	public UserDto findPw(UserDto dto);//아이디 찾기 
 	public ProfileDto profile(UserDto user); // 프로필 사진 정보
+	public int kakao_insert(UserDto dto); //소셜로그인 db insert
 }

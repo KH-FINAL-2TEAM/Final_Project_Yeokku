@@ -49,4 +49,12 @@ public class LoginpageBizImpl implements LoginpageBiz{
 		return dao.profile(user);
 	}
 
+	
+	//소셜로그인 db insert
+	@Override
+	public int kakao_insert(UserDto dto) {
+		
+		return dao.kakao_insert(dto);
+	}
+
 }

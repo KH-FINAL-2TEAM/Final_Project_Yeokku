@@ -60,7 +60,10 @@
 
 //1. 아이디 중복확인
 function idChk(){
+	
+	
 	var doc = document.getElementsByName("user_id")[0];
+	
 	if(doc.value.trim()=="" || doc.value==null){
 		//아무것도 안입력하고 버튼누른경우
 		alert("아이디를 입력해주세요");
@@ -93,6 +96,37 @@ $(function(){
 		}
 		
 	});
+	
+	
+	
+	
+	$("#user_id").keyup(function(){
+		
+		var pattern = /^[a-zA-Z0-9]{6,15}$/;
+		var flag = pattern.test($("#user_id").val());
+
+		if(!(flag)){
+			$("#chkNotice3").html('6자 이상 15자 이하의 영문 혹은 영문과 숫자를 조합');
+			$("#chkNotice3").attr('color', 'red');
+			$("#chkNotice3").attr('title', 'n');
+			
+			//버튼 비활성화 
+			$('#id_chk_btn').attr('disabled', true);
+
+			
+		}else{
+			$("#chkNotice3").html(' ');
+			
+			//버튼 활성화 
+			$('#id_chk_btn').attr('disabled', false);
+		}
+		
+		
+	});
+	
+	
+	
+	
 	
 });
 
@@ -249,6 +283,10 @@ function mailFormCheck(email){
 
 
 
+
+
+
+
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -289,8 +327,9 @@ function mailFormCheck(email){
                                         <table class="regi_tool">
                                             <tr>
                                                 <th>아이디</th>
-                                                <td><input type="text" name="user_id" id="user_id" required="required" title="n" class="intext"  placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
-                                                	<input type="button" value=중복확인 id="id_chk_btn" class="finalbox" title="n" onclick="idChk();">
+                                                <td><input type="text" name="user_id" id="user_id" required="required" title="n" class="intext"  placeholder="6자 이상 15자 이하의 영문 혹은 영문과 숫자를 조합">
+                                                	<input type="button" value=중복확인 id="id_chk_btn" class="finalbox" title="n" onclick="idChk();"><br>
+                                                	<font id="chkNotice3" name="chkNotice3" size="2" title=""></font>
                                                 </td>
                                             </tr>
                                             <tr>

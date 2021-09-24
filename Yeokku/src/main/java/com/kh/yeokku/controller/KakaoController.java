@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +29,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kh.yeokku.model.biz.LoginpageBiz;
+import com.kh.yeokku.model.dto.UserDto;
 
 @Controller
 public class KakaoController {
+	
+	//추가 
+	@Autowired
+	private LoginpageBiz biz;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(KakaoController.class);
@@ -166,10 +173,14 @@ public class KakaoController {
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
             
+           
+            
+            
             if (userInfo.get("email") != null) {
                 session.setAttribute("userId", userInfo.get("email"));
                 session.setAttribute("access_Token", access_Token);
-                System.out.println(session);
+                System.out.println("****session: "+session.getAttribute("userId"));
+               
             }
             
             
@@ -182,31 +193,48 @@ public class KakaoController {
     }
 	
 
+    
+    //카카오 로그인 DB INSERT 
+    @RequestMapping("/kakao_login_insert.do")
+    @ResponseBody
+	public String kakaoInsert(Model model, String user_id, String user_pw, String user_name, String user_email, String user_nickname, HttpSession session) throws IOException {
+    	   
+    	UserDto dto = new UserDto();
+    	dto.setUser_id(user_id);
+    	dto.setUser_pw(user_pw);
+    	dto.setUser_name(user_name);
+    	dto.setUser_email(user_email);
+    	dto.setUser_nickname(user_name);
+    	
+    	//카카오 아이디가 회원가입 되어있는지 확인
+    	String idres = biz.idChk(user_id);
+    	
+    	if(idres.equals("none")) {
+    		
+    		//조회해서 없으면 insert 
+        	int res = biz.kakao_insert(dto);
+        	
+        	if(res>0) {
+        		logger.info("insert성공!!");
+        		session.setAttribute("user", dto);
+        		return "redirect:login_form.do";
+        	}else {
+        		logger.info("insert실패!!");
+        		return "login/login";
+        	}
+    		
+    	}else {
+    		
+    		session.setAttribute("user", dto);
+    		return "redirect:login_form.do";
+    		
+    	}
+    	
+	}
  
     
     
-   /* 
-    @RequestMapping("/kakao.do")
-	public String access(HttpSession session) throws IOException {
-    	    String reqURL = "https://kapi.kakao.com/v1/user/logout";
-    	    
-    	    URL url = new URL(reqURL);
-    	    
-    	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-    	    
-			String access_token = (String)session.getAttribute("access_token");
-			
-			Map<String, String> map = new HashMap<String, String>();
-			
-			map.put("Authorization", "Bearer "+ access_token);
-			
-			
-			
-			return "login/kakaoRedirectForm";
-		}
-    
- */
-    
+   
     
 
 

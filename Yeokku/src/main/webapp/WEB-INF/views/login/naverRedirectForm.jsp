@@ -30,8 +30,21 @@ $(document).ready(function() {
 	console.log(sessionStorage.getItem("naver_name"));
 	//console.log(sessionStorage.getItem("naver_token"));
 	
-    alert("네이버 로그인 성공");
-    location.href="login_form.do";
+	
+	$.ajax({
+		type:"GET",
+		url:"naver_login_insert.do?user_id="+email+"&user_pw="+email+"&user_name="+name+"&user_email="+email+"&user_nickname="+name,
+		success:function(){
+			alert("네이버 로그인 성공");
+			location.href="login_form.do"
+		}		
+		
+		
+	});
+	
+	
+    //alert("네이버 로그인 성공");
+    //location.href="login_form.do";
 	
   });
     

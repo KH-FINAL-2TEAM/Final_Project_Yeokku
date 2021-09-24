@@ -320,6 +320,52 @@ public class LoginController {
     
     
     
+    //네이버 로그인 db insert 
+    @RequestMapping("/naver_login_insert.do")
+    @ResponseBody
+    public String naverInsert(Model model, String user_id, String user_pw, String user_name, String user_email, String user_nickname, HttpSession session) {
+    	
+    	UserDto dto = new UserDto();
+    	dto.setUser_id(user_id);
+    	dto.setUser_pw(user_pw);
+    	dto.setUser_name(user_name);
+    	dto.setUser_email(user_email);
+    	dto.setUser_nickname(user_name);
+    	
+    	String idres = biz.idChk(user_id);
+    	
+    	if(idres.equals("none")) {
+    		
+    		int res = biz.kakao_insert(dto);
+    		
+    		if(res>0) {
+    			session.setAttribute("user", dto);
+    			return "redirect:login_form.do";
+    		}else {
+    			return "login/login";
+    		}
+    		
+    	}else {
+    		session.setAttribute("user", dto);
+    		return "redirect:login_form.do";
+    	}
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //로그아웃 
     @RequestMapping("/logout.do")
     public String logout(HttpSession session) {
