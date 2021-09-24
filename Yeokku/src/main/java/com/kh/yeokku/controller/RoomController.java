@@ -124,7 +124,7 @@ public class RoomController {
 		
 		return map;
 	}
-	
+	/*
 	@RequestMapping("/course_detail.do")
 	public String courseDetail(Model model, int room) {
 
@@ -135,7 +135,7 @@ public class RoomController {
 		model.addAttribute("jpg", jpg);
 		
 		return "Course/CourseDetail";
-	}
+	}*/
 	
 	@RequestMapping("/like.do")
 	@ResponseBody
