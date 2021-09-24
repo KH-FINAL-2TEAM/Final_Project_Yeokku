@@ -49,9 +49,9 @@
 		
 		<span id="Select_Area">
 		    <select id="Select">
-		        <option>숙소</option>
-		        <option>음식점</option>  
-		        <option>명소/관광지</option>
+		        <option value="39">숙소</option>
+		        <option value="32">음식점</option>  
+		        <option value="12">명소/관광지</option>
 		        <option>교통</option>
 		        <option>지도</option>
 		        <option>즐겨찾기</option>
@@ -273,6 +273,7 @@
 <script src="resources/js/Course/CourseMaking.js?ver=195" charset="utf-8"></script>
 <script src="resources/js/Course/CourseMaking_Map.js" charset="utf-8"></script>
 <script src="resources/js/Course/CourseMaking_Chat.js?ver=14" charset="utf-8"></script>
+<script src="resources/js/Course/CourseMakingTour.js" charset="utf-8"></script>
 <script>var ws = new WebSocket("ws://" + root  +"/chat?room=<%=roomNo%>");  connect();</script>
 
 </html>
