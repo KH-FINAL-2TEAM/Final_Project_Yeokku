@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="mypage.do">mypage</a>
+	<jsp:forward page="main_form.do"/>
 </body>
 </html>

@@ -19,8 +19,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		logger.info("[interceptor] : preHandle");
 		
+		//관리자만 접근
 		if(request.getRequestURI().contains("/admin_user.do") || request.getRequestURI().contains("/admin_report.do") 
-				|| request.getRequestURI().contains("/admin_qna.do")) 
+				|| request.getRequestURI().contains("/admin_qna.do") || request.getRequestURI().contains("/qna_notice_insert.do")
+				|| request.getRequestURI().contains("/qna_notice_update.do")) 
 		{
 			if(request.getSession().getAttribute("user") != null) {
 				UserDto dto = (UserDto)request.getSession().getAttribute("user");
@@ -34,6 +36,17 @@ public class LoginInterceptor implements HandlerInterceptor{
 				response.sendRedirect("main_form.do");
 				return false;
 			}
+		}
+		
+		if(request.getRequestURI().contains("/mypage_profile_form.do") || request.getRequestURI().contains("/mypage_travel_form.do")
+			|| request.getRequestURI().contains("/mypage_qna.do") || request.getRequestURI().contains("/mypage_review_form.do")	
+			|| request.getRequestURI().contains("/mypage_course_form.do") || request.getRequestURI().contains("/course_making.do")) 
+		{
+			if(request.getSession().getAttribute("user") != null) {
+				return true;
+			}
+			response.sendRedirect("login_form.do");
+			return false;
 		}
 		return true;
 	}
