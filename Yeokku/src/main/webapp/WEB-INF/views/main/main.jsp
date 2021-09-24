@@ -133,8 +133,7 @@
 	            			<c:forEach items="${course_list }" var="list" end="5">
 	            				<div class="col-lg-4 col-md-4" style="width: 350px; height: 230px;">
 				                    <div class="single_place" style="width: 100%; height: 90%" >
-				                        <img src="#" alt="" class="col-lg-12 col-md-12" style="height: 100%; object-fit: fill;">
-				                       
+				                        <img src="${list.tc_content}" alt="" class="col-lg-12 col-md-12" >
 				                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
 				                            <div class="hover_text_iner">
 				                                <h3 style="padding-bottom: 5px;">${list.tc_title }</h3>

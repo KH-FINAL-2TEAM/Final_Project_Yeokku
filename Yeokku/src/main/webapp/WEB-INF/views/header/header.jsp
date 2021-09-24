@@ -84,7 +84,7 @@
 		                                            <a class="dropdown-item" href="mypage_course_form.do">여행코스</a>
 		                                            <a class="dropdown-item" href="mypage_review_form.do">리뷰</a>
 		                                            <a class="dropdown-item" href="mypage_qna.do">문의</a>
-		                                            <a class="dropdown-item" href="#">로그아웃</a>
+		                                            <a class="dropdown-item" href="logout.do">로그아웃</a>
 		                                        </div>
 		                                    </li>
 		                                </ul>
