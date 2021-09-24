@@ -4,7 +4,7 @@
 <%@ page import="com.kh.yeokku.model.dto.RoomDto" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script>var tc_q = '${dto.tc_q}';</script>
+<script>var tc_q = '${dto.tc_q}'; var tc_room = '${dto.tc_no}'; var like_count = ' ${dto.tc_like }';</script>
     
 <!DOCTYPE html><html>
 

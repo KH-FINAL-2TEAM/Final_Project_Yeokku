@@ -93,6 +93,21 @@ public class RoomDaoImpl implements RoomDao {
 		
 		return dto;
 	}
+	
+	@Override
+	public int roomLike(int room) {
+		
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"roomLike", room);
+		} catch ( Exception e ) {
+			System.out.println("[ Error !! - Room Like ]");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 
 }
 

@@ -43,7 +43,7 @@ function draw(event){
 	}
 	
 	save_count++;
-	if(save_count == 100) { save_count=0; drawSave(); }
+	if(save_count == 150) { save_count=0; drawSave(); }
 }
  
 function finishDraw(){
@@ -152,29 +152,9 @@ $('#Pencil_Size').draggable({
 
 function drawSave() {
 
-	const imgBase64 = canvas.toDataURL('image/jpeg', 'image/octet-stream');
-	const decodImg = atob(imgBase64.split(',')[1]);
-	
-	let array = [];
-	for (let i = 0; i < decodImg .length; i++) {
-	  array.push(decodImg .charCodeAt(i));
-	}
-	
-	const file = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
-	const fileName = 'room_111.jpg'; // 임시 방 번호 이름
-	let formData = new FormData();
-	formData.append('file', file, fileName);
-	
-	$.ajax({
-	  type: 'post',
-	  url: '/paint_go',
-	  cache: false,
-	  data: formData,
-	  processData: false,
-	  contentType: false,
-	  success: function (data) {
-	    alert('Uploaded !!')
-	  }
-	})
+	const imgBase64 = canvas.toDataURL('image/png', 'image/octet-stream');
+	const img = imgBase64.replace("data:image/png;base64," ,"");
+
+	ws.send("imgtype&typeline&" + img);
 }
 

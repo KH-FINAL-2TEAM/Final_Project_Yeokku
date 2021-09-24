@@ -1,6 +1,6 @@
 
 var Icon_Switch = [ 1, 0, 1, 1, 1, 1, 1, 0, 1, 1 ];
-var Alarm_Check = true;
+var Alarm_Check = false;
 
 var Menu_Lock = "Lock";
 var Menu_Loading = false;
@@ -14,11 +14,12 @@ var Scroll_Check;
 
 window.onload = function()
 {
-	setTimeout(function() { remakeLoading(); }, 300);
+	setTimeout(function() { remakeLoading(); $("#Making_Area").append("<span></span>"); }, 300);
 	
 	$("#Start_Area").bind('click', function() { document.documentElement.requestFullscreen(); $("#Start_Area").fadeOut();});
 
-	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show(); $("#Pencil").hide(); $("#Save_Area").hide(); $("#Black_Mask").hide();
+	$("#Chat").hide();	$(".Search_Area").hide(); $("#Hotel").show(); $("#Alarm_Area").toggle();
+	$("#Pencil").hide(); $("#Save_Area").hide(); $("#Black_Mask").hide();
 	$("#Chat").resizable({ autoHide: true });
 	//$(".Detail").resizable({ autoHide: true });
 	$("#Making_Area").resizable({ 
@@ -34,13 +35,19 @@ window.onload = function()
 	$(".Search_Area").css("position", "absolute");
 	
 	$("#Alarm_Img").bind('click', function() {
+	
+		$("#Alarm_Area").toggle();
+		$(this).attr("src", "resources/img/Course/Alarm.png");
+		Alarm_Check = false;
+		
+		/*
 		if(Alarm_Check == true) { 
 			Alarm_Check = false;
 			$(this).attr("src", "resources/img/Course/Alarm.png");
 		} else {
 			Alarm_Check = true;
 			$(this).attr("src", "resources/img/Course/Alarm2.png");
-		}
+		}*/
 	});
 	
 	
@@ -517,7 +524,7 @@ window.onload = function()
 			window.scrollTo({left:0});
 		  },
 		  
-		  stop: function() { setTimeout(function() { Dragging=false; }, 200); }
+		  stop: function() { setTimeout(function() { Dragging=false; webSave(); }, 200); }
 	});
 	
 	$('#Sticker_Icon').bind('click', function(){
@@ -552,7 +559,7 @@ window.onload = function()
 		
 		$("#Making_Area>div:last").draggable({
 			drag: function( event, ui ) {Dragging = true;},
-			stop: function() {setTimeout(function() { Dragging=false; }, 200);}
+			stop: function() {setTimeout(function() { Dragging=false; webSave(); }, 200);}
 		})
 			.bind('click', function(){ if(Dragging == false) {$(this).remove();} })
 			.css("border","0px solid white")
@@ -561,17 +568,20 @@ window.onload = function()
 				autoHide: true, 
 				aspectRatio: false,
 				resize: function() {Dragging = true;},
-				stop: function() {setTimeout(function() { Dragging=false; }, 200);}
+				stop: function() {setTimeout(function() { Dragging=false; webSave(); }, 200);}
 			});
 		
 		$("#Making_Area>div:last>img:last").bind('click', function() {
 			$(this).parent().rotate( parseInt($(this).attr("name")) + 45*1 );
 			$(this).attr("name", parseInt($(this).attr("name")) + 45*1 );
+			setTimeout(function() { webSave(); }, 200);
 			return false;
 		});
 		
 		$("#Making_Area>div:last").bind('mouseover', function() { $(this).children(".Cycle").css("opacity", 1); });
 		$("#Making_Area>div:last").bind('mouseout', function() { $(this).children(".Cycle").css("opacity", 0); });
+		
+		setTimeout(function() { webSave(); }, 200);
 	});
 	
 	////////////////////////////////////////////////////////////////////////
@@ -675,7 +685,7 @@ window.onload = function()
 			}
 		},
 		
-		stop: function() { setTimeout(function() { Dragging=false; }, 200); }
+		stop: function() { setTimeout(function() { Dragging=false; webSave(); }, 200); }
 	});
 	
 	$(".Detail").bind('click', function(){
@@ -691,13 +701,14 @@ window.onload = function()
 			
 			$("#Making_Area>div:last").draggable({
 				drag: function(){Dragging = true;},
-				stop: function() { setTimeout(function() { Dragging=false; }, 200); }		
+				stop: function() { setTimeout(function() { Dragging=false; webSave();}, 200); }		
 			});
 			
 			$("#Making_Area>div:last").bind('click', function() { 
 				var arr = $(this).attr('class').split(" ");
 				$("."+arr[4]).remove(); $("#q_"+arr[4]).remove(); 
 				Q_Delete(Course_Q, -1, arr[4]);
+				setTimeout(function() { Dragging=false; webSave(); }, 200);
 				Q_Update();
 			});
 			
@@ -722,6 +733,7 @@ window.onload = function()
 
 			Course_Q.push( $(this).attr("id")+"_"+(detail_count) );
 			detail_count++;
+			setTimeout(function() { webSave(); }, 200);
 			Q_Update();
 
 	});
@@ -1144,6 +1156,24 @@ function save() {
     Icon_Switch[9] = 1;
 	$("#Save_Area").hide(); $("#Black_Mask").hide();
 	$("#Save_Icon").attr("src","resources/img/Course/Save.png");
+}
+
+function webSave() {
+
+	var content = $("#Making_Area").html();
+	var content2 = [];
+	var content3 = [];
+	
+	content2 = content.split('<span></span>');
+
+	var q = "START";
+	for(var i=0; i<Course_Q.length; i++) {
+		q += "&&" + Course_Q[i];
+	}
+	
+	var all = "webSave" + "&websplit&" + content2[1] + "&websplit&" +  q +  "&websplit&" + detail_count;
+	
+	ws.send(all);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
