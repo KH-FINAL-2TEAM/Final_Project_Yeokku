@@ -21,4 +21,5 @@ public interface AdminpageBiz {
 	public int userAllDelete(); // 회원 전체 삭제
 	public int reportSelectedDelete(List<Integer> selected_list); //선택한 신고 삭제
 	public int reportAllDelete(); // 신고 전체 삭제
+	public int reviewDelete(int report_reason); // 벤처리시 리뷰 삭제
 }

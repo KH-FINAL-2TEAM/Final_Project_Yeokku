@@ -63,8 +63,37 @@
   	</select>
   	
   	<select id="mypage_travel" parameterType="int" resultType="like_tour_dto">
-  		SELECT LT_CONTENTID, LT_CONTENTTYPEID, LT_TITLE, LT_FIRSTIMAGE
+  		SELECT LT_CONTENTID, LT_TITLE, LT_FIRSTIMAGE
   		FROM LTBOARD
   		WHERE LT_USERNO = #{no}
   	</select>
+  	
+  	<select id="tour_review_list" parameterType="int" resultType="tour_review_dto">
+  		SELECT * FROM TRBOARD
+  		WHERE TR_USERNO = #{tr_userno}
+  	</select>
+  	<select id="course_review_list" parameterType="int" resultType="tour_course_review_dto">
+  		SELECT * FROM TCRBOARD
+  		WHERE TCR_USERNO = #{tcr_userno}
+  	</select>
+  	
+  	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM TCBOARDALL
+	</select>
+  	
+  	<select id="selectBoard" resultType="tour_course_dto">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM TCBOARDALL
+							ORDER BY TC_NO DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+  	
+  	
+  	
   </mapper>

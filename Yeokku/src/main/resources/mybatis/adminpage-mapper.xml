@@ -48,7 +48,7 @@
   	<select id="select_user_list" resultMap="user_map">
   		SELECT * 
 		FROM USERBOARD
-		ORDER BY USER_NO DESC 
+		ORDER BY USER_NO DESC
   	</select>
   	
   	<select id="select_report_list" parameterType="user_dto" resultMap="report_map">
@@ -56,7 +56,7 @@
 		FROM REPORTBOARD
 	    LEFT JOIN USERBOARD A ON REPORT_USERNO = A.USER_NO
 	    LEFT JOIN USERBOARD B ON REPORT_TARGET_USERNO = B.USER_NO
-		ORDER BY REPORT_NO
+		ORDER BY REPORT_NO DESC
   	</select>
   	
   	<select id="select_qna_list" resultMap="qa_map">

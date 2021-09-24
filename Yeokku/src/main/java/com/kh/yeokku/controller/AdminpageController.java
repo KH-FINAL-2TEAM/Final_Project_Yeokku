@@ -83,12 +83,17 @@ public class AdminpageController {
 	
 	@RequestMapping(value = "/report_ban_confirm.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String reportBanConfirm(Model model, int report_no, int report_target_userno) {
+	public String reportBanConfirm(Model model, int report_no, int report_target_userno, int report_reason) {
 		int res = biz.reportBanConfirm(report_no, report_target_userno);
 		System.out.println(res);
 		
 		if(res>0) {
-			return "true";
+			int delete = biz.reviewDelete(report_reason);
+			if(delete >0) {
+				return "true";
+			}else {
+				return "false";
+			}
 		}else {
 			return "false";
 		}

@@ -11,7 +11,11 @@ import com.kh.yeokku.model.dao.impl.MypageDaoImpl;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.TourCourseDto;
+import com.kh.yeokku.model.dto.TourCourseReviewDto;
+import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
+import com.kh.yeokku.util.pagingVO;
 
 @Service
 public class MypageBizImpl implements MypageBiz {
@@ -60,4 +64,24 @@ public class MypageBizImpl implements MypageBiz {
 		return dao.mypageTravel(no);
 	}
 
+	@Override
+	public List<TourReviewDto> tourReviewList(int tr_userno) {
+		return dao.tourReviewList(tr_userno);
+	}
+
+	@Override
+	public List<TourCourseReviewDto> courseReviewList(int tcr_userno) {
+		return dao.courseReviewList(tcr_userno);
+	}
+
+	
+	@Override
+	public int countCourse() {
+		return dao.countCourse();
+	}
+	
+	@Override
+	public List<TourCourseDto> myCourse(pagingVO vo) {
+		return dao.myCourse(vo);
+	}
 }

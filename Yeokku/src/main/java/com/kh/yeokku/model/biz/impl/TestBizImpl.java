@@ -6,9 +6,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -16,6 +20,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.yeokku.model.biz.TestBiz;
 import com.kh.yeokku.model.dao.TestDao;
+import com.kh.yeokku.model.dto.ReportDto;
+import com.kh.yeokku.model.dto.RoomDto;
+import com.kh.yeokku.model.dto.TourCourseReviewDto;
 
 @Service
 public class TestBizImpl implements TestBiz{
@@ -106,5 +113,43 @@ public class TestBizImpl implements TestBiz{
 		}
 		return json_item;
 	}
+
+
+	@Override
+	public int insertCourseReview(TourCourseReviewDto dto) {
+		return dao.insertCourseReview(dto);
+	}
+
+
+	@Override
+	public List<TourCourseReviewDto> courceReviewList(int tc_no) {
+		return dao.courceReviewList(tc_no);
+	}
+
+
+	@Override
+	public int updateCourseReview(TourCourseReviewDto dto) {
+		return dao.updateCourseReview(dto);
+	}
+
+
+	@Override
+	public int deleteCourseReview(int tcr_no) {
+		return dao.deleteCourseReview(tcr_no);
+	}
+
+
+	@Override
+	public int courseReviewReport(ReportDto dto) {
+		return dao.courseReviewReport(dto);
+	}
+
+
+	@Override
+	public boolean reportChk(ReportDto dto) {
+		return dao.reportChk(dto);
+	}
+	
+	
 	
 }

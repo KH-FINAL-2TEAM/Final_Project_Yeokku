@@ -2,13 +2,22 @@ package com.kh.yeokku.model.dao.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yeokku.model.dao.TestDao;
+import com.kh.yeokku.model.dto.ReportDto;
+import com.kh.yeokku.model.dto.TourCourseReviewDto;
 @Repository
 public class TestDaoImpl implements TestDao{
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
 	public StringBuilder CourseTourList(String contenttypeid) {
 		StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"); /*URL*/
@@ -48,6 +57,90 @@ public class TestDaoImpl implements TestDao{
 			e.printStackTrace();
 		}
 		return urlBuilder;
+	}
+
+	@Override
+	public int insertCourseReview(TourCourseReviewDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insert_course_review", dto);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : insert course review error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public List<TourCourseReviewDto> courceReviewList(int tc_no) {
+		List<TourCourseReviewDto> list = new ArrayList<TourCourseReviewDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"course_review_list",tc_no);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : course review list error");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int updateCourseReview(TourCourseReviewDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"update_course_review", dto);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : update course review error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int deleteCourseReview(int tcr_no) {
+		int res = 0;
+		try {
+			res = sqlSession.insert(NAMESPACE+"delete_course_review", tcr_no);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : delete course review error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int courseReviewReport(ReportDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"course_review_report", dto);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : course review report error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public boolean reportChk(ReportDto dto) {
+		boolean chk = false;
+		int res = 0;
+		try {
+			res= sqlSession.selectOne(NAMESPACE+"report_chk", dto);
+			if(res>0) {
+				chk = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return chk;
 	}
 
 }

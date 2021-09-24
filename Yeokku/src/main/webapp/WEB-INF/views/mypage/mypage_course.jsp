@@ -18,6 +18,35 @@
     <link rel="stylesheet" href="resources/css/mypage.css">
     <script src="resources/js/cropper.js"></script>
     <title>Document</title>
+    
+<script>
+	$("#url-copy").click(function(){
+		$("#myc_url").attr("type","text");
+		$("#myc_url").select();
+		var success = document.execCommnad("copy");
+		$("#myc_url").attr("type","hidden");
+		if(success){
+			alert("코스페이지가 복사되었습니다. 함께하고 여행가고 싶은사람과 공유해보세요.");
+		}
+	});
+
+
+</script>    
+    
+<style type="text/css">
+	.row{
+		margin-top: 50px;
+		border: 30px;
+		align-self: center;
+	}
+	.mycourse{
+		width: 750px;
+	}
+
+</style>
+
+
+    
 </head>
 <body>
 	<!-- header 추가 -->
@@ -43,8 +72,8 @@
                 <ul>
                     <li><a href="mypage_profile.html">회원정보</a></li>
                     <li><a href="mypage_travel.html">여행지</a></li>
-                    <li class="selected_nav"><a href="mypage_course.html">여행코스</a></li>
-                    <li><a href="mypage_review.html">리뷰</a></li>
+                    <li class="selected_nav"><a href="mycourseform.do?nowPage=1">여행코스</a></li>
+                    <li><a href="mypage_review_form.do">리뷰</a></li>
                     <li><a href="mypage_qna.html">문의내역</a></li>
                 </ul>
             </div>
@@ -52,111 +81,158 @@
 
 
         <section class="list_nav">
-            <div>
-                <ul>
-                    <li>작성한 여행코스</li>
-                    <li>찜한 여행코스</li>
-                </ul>
-            </div>
+            <div class="row">
+            	<h2>나의 여행코스</h2>
+				<table class="mycourse">
+                        <colgroup>
+                            <col width="500px"/>
+                            <col width="150px"/>
+                            <col width="100px"/>
+                        </colgroup>
+                        <tr>
+                            <th>제목</th>
+                            <th>작성일</th>
+                            <th></th>
+                        </tr>
+                        <c:choose>
+                        	<c:when test="${empty list }">
+                        		<tr>
+                        			<td colspan="3" align="center">
+                        				<p>-----작성한 여행코스가 없습니다-----</p>
+                        			</td>
+                        		</tr>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<c:forEach items="${list}" var="dto">
+                        			<tr>
+                            			<td><a href="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">${dto.tc_title }</a></td>
+                            			<td>${dto.tc_date }</td>
+                            			<td>
+                            				<button id="url-copy">링크복사</button>
+                            				<input type="hidden" id="myc_url" value="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">
+                            			</td>
+                        			</tr>
+                        		</c:forEach>                        	
+                        	</c:otherwise>
+                        </c:choose>
+                        <tr>
+                        	<td colspan="3">
+                        		<div style="display: block; text-align: center;">		
+									<c:if test="${paging.startPage != 1 }">
+										<a href="mycourseform.do?nowPage=${paging.startPage - 1 }">&lt;</a>
+									</c:if>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b>${p }</b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="mycourseform.do?nowPage=${p }">${p }</a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="mycourseform.do?nowPage=${paging.endPage+1 }">&gt;</a>
+									</c:if>
+								</div>
+                        	</td>
+                        </tr>
+            	</table>
+        	</div>
+        	<br>
+        	<br>
         </section>
 
         <section class="content">
             <div class="row">
-
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_1.png" alt="">
-                        <h3> <a href="#">제목 </a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_2.png" alt="">
-                        <h3> <a href="#"> Guidence</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_3.png" alt="">
-                        <h3> <a href="#"> Accomodation fsdasfas dasdsa ds  sfasfas</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>               
-
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>   
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>   
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>   
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>   
-                <div class="col-lg-3 col-sm-6">
-                    <div class="course_list">
-                        <img src="img/services_4.png" alt="">
-                        <h3> <a href="#"> Discover world</a></h3>
-                        <div>
-                            <p>여행지역(여행일수)</p>
-                            <p>작성자</p>
-                        </div>
-                    </div>
-                </div>   
-            </div>
-
-            
+            	<h2>나의 여행코스</h2>
+				<table class="mycourse">
+                        <colgroup>
+                            <col width="450px"/>
+                            <col width="150px"/>
+                            <col width="150px"/>
+                        </colgroup>
+                        <tr>
+                            <th>제목</th>
+                            <th>작성일</th>
+                            <th></th>
+                        </tr>
+                        <c:choose>
+                        	<c:when test="${empty list }">
+                        		<tr>
+                        			<td colspan="3" align="center">
+                        				<p>-----작성한 여행코스가 없습니다-----</p>
+                        			</td>
+                        		</tr>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<c:forEach items="${list}" var="dto">
+                        			<tr>
+                            			<td><a href="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">${dto.tc_title }</a></td>
+                            			<td>${dto.tc_date }</td>
+                            			<td>
+                            				<button id="url-copy">링크복사</button>
+                            				<input type="hidden" id="myc_url" value="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">
+                            			</td>
+                        			</tr>
+                        		</c:forEach>                        	
+                        	</c:otherwise>
+                        </c:choose>
+                        <tr>
+                        	<td colspan="3">
+                        		<div style="display: block; text-align: center;">		
+									<c:if test="${paging.startPage != 1 }">
+										<a href="mycourseform.do?nowPage=${paging.startPage - 1 }">&lt;</a>
+									</c:if>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+										<c:choose>
+											<c:when test="${p == paging.nowPage }">
+												<b>${p }</b>
+											</c:when>
+											<c:when test="${p != paging.nowPage }">
+												<a href="mycourseform.do?nowPage=${p }">${p }</a>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${paging.endPage != paging.lastPage}">
+										<a href="mycourseform.do?nowPage=${paging.endPage+1 }">&gt;</a>
+									</c:if>
+								</div>
+                        	</td>
+                        </tr>
+            	</table>
+        	</div>
+        	<br>
+        	<br>
+        	<h2>찜한 여행코스</h2>
+        	<div class="infinite">
+        		<div class="i-list">
+        		<c:forEach items="${list }" var="dto" varStatus="status">
+						<c:choose>
+							<c:when test="${dto.tc_open == 'Y' }">
+								<div class="col-lg-4 col-md-4">
+				                	<a href="course_detail.do?room=${dto.tc_no }">
+					                    <div class="single_place">
+					                        <img src="resources/img/single_place_${status.index%4+1}.png" alt="" class="col-lg-12 col-md-12">
+					                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
+					                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
+					                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>${dto.tc_title } &nbsp; </b></span><br>
+					                                <span class="course_detail" id="id"> &nbsp; 👤  ${dto.tc_userid } &nbsp; </span><br>
+					                                <span class="course_detail" id="watch"> &nbsp; 👁 &nbsp; ${dto.tc_view } &nbsp; </span><br>
+					                                <span class="course_detail" id="heart"> &nbsp; 💗  ${dto.tc_like } &nbsp; </span><br>
+					                                <span class="course_tag"id="tag"> &nbsp; ${dto.tc_tag } &nbsp; </span><br>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </a>
+				                </div> 
+							</c:when>
+						</c:choose>
+				</c:forEach>
+        		</div>
+        		
+        		<!-- 반복 -->
+        	</div>
         </section>
 
 

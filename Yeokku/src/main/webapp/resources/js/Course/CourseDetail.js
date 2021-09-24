@@ -21,22 +21,54 @@ window.onload = function() {
 			updating = false;
 			var temp = $("#"+div_name).children('.review_detail').children('.content').val();
 			$("#"+div_name).children('.review_detail').children('.content').remove();
-			$("#"+div_name).children('.review_detail').append( '<div class="content">' + temp + '</div>' );
 			$(this).attr("src", "resources/img/Course/Pencil.png");
-			alert("수정되었습니다.");
+			
+			$.ajax({
+				url : 'update_course_review.do',
+				method : 'post',
+				data : {
+					tcr_no : div_name,
+					tcr_content : temp
+				},
+				success : function(msg){
+					if(msg == "true"){
+					$("#"+div_name).children('.review_detail').append( '<div class="content">' + temp + '</div>' );
+					alert("리뷰 수정 완료");
+					}else{
+					alert("리뷰 수정 실패");
+					}
+				},
+				error : function(){
+					alert("비동기 실패");
+				}
+			});
+			
 		}
 	
 	});
 	
 	
 	$(".review_close").bind('click', function() {
-		alert("댓글이 삭제되었습니다..");
-		$(this).parent().parent().remove();
-	});
-	
-	
-	$(".review_alert").bind('click', function() {
-		alert("신고가 완료되었습니다.");
+		var div_name = $(this).parent().parent().attr("id");
+		$.ajax({
+				url : 'delete_course_review.do',
+				method : 'post',
+				data : {
+					tcr_no : div_name
+				},
+				success : function(msg){
+					if(msg == "true"){
+					$('#'+div_name).remove();
+					alert("리뷰 삭제 완료");
+					}else{
+					alert("리뷰 삭제 실패");
+					}
+				},
+				error : function(){
+					alert("비동기 실패");
+				}
+			});
+		
 	});
 	
 	$("#course_heart").bind('click', function() {
@@ -106,3 +138,53 @@ window.onload = function() {
 	
 }
 
+
+
+
+function writeReview(tc_no,user_no){
+	$.ajax({
+		url : 'insert_course_review.do',
+		method : 'post',
+		data : {
+			tcr_tcno : tc_no,
+			tcr_userno : user_no,
+			tcr_content : $('#tcr_content').val()
+		},
+		success : function(msg){
+			if(msg == "true"){
+			alert("리뷰 작성 완료");
+			location.reload();
+			}else{
+			alert("리뷰 작성 실패");
+			}
+		},
+		error : function(){
+			alert("비동기 실패");
+		}
+	});
+}
+
+function report(a,b,c,d){
+	$.ajax({
+		url : 'report_course_review.do',
+		method : 'post',
+		data : {
+			report_reason : a,
+			report_content : d,
+			report_target_userno : b,
+			report_userno : c
+		},
+		success : function(msg){
+			if(msg == "true"){
+			alert("신고 완료");
+			}else if(msg == "false"){
+			alert("신고 실패");
+			}else if(msg == "chk"){
+			alert("이미 신고한 게시글 입니다");
+			}
+		},
+		error : function(){
+			alert("비동기 실패");
+		}
+	});
+}

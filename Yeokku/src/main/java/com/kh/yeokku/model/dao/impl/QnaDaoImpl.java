@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.yeokku.model.dao.QnaDao;
 import com.kh.yeokku.model.dto.NoticeDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.util.pagingVO;
 
 @Repository
 public class QnaDaoImpl implements QnaDao{
@@ -17,12 +18,34 @@ public class QnaDaoImpl implements QnaDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	
+	
 	@Override
-	public List<NoticeDto> selectNoticeList() {
+	public int countNotice() {
+		int cnt = 0;
+		
+		try {
+			cnt = sqlSession.selectOne(NAMESPACE+"countBoard");
+		} catch (Exception e) {
+			System.out.println("[error] : count notice list");
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public List<NoticeDto> selectNoticeList(pagingVO vo) {
 		List<NoticeDto> list = new ArrayList<NoticeDto>();
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE+"selectList");
+			list = sqlSession.selectList(NAMESPACE+"selectBoard",vo);
 		} catch (Exception e) {
 			System.out.println("[error] : select notice list");
 			e.printStackTrace();
@@ -65,7 +88,7 @@ public class QnaDaoImpl implements QnaDao{
 		int res = 0;
 		
 		try {
-			res = sqlSession.update(NAMESPACE+"updatetNotice",dto);
+			res = sqlSession.update(NAMESPACE+"updateNotice",dto);
 		} catch (Exception e) {
 			System.out.println("[error] : update notice");
 			e.printStackTrace();
@@ -79,7 +102,7 @@ public class QnaDaoImpl implements QnaDao{
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE+"deleteNoteice",notice_no);
+			res = sqlSession.delete(NAMESPACE+"deleteNotice",notice_no);
 		} catch (Exception e) {
 			System.out.println("[error] : delete notice");
 			e.printStackTrace();
@@ -93,9 +116,9 @@ public class QnaDaoImpl implements QnaDao{
 		int res = 0;
 		
 		try {
-			res = sqlSession.insert(NAMESPACE+"insertQa",dto);
+			res = sqlSession.insert(NAMESPACE+"insertEmail",dto);
 		} catch (Exception e) {
-			System.out.println("[error] : insert qa");
+			System.out.println("[error] : insert Email");
 			e.printStackTrace();
 		}
 		
@@ -103,7 +126,19 @@ public class QnaDaoImpl implements QnaDao{
 	}
 
 	
-	
+	@Override
+	public int updateViewCnt(int notice_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateViewCnt",notice_no);
+		} catch (Exception e) {
+			System.out.println("[error] : update ViewCnt");
+			e.printStackTrace();
+		}
+				
+		return res;
+	}
 	
 	
 	

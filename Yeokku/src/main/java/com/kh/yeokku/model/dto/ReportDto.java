@@ -126,6 +126,16 @@ public class ReportDto {
 	public void setReport_user_id(String report_user_id) {
 		this.report_user_id = report_user_id;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "ReportDto [report_no=" + report_no + ", report_reason=" + report_reason + ", report_content="
+				+ report_content + ", report_userno=" + report_userno + ", report_target_userno=" + report_target_userno
+				+ ", report_date=" + report_date + ", report_done_date=" + report_done_date + ", report_confirm="
+				+ report_confirm + ", user_dto=" + user_dto + ", report_user_id=" + report_user_id + "]";
+	}
 	
 	
 	

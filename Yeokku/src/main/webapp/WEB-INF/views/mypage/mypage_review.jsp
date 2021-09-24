@@ -19,6 +19,80 @@
     <link rel="stylesheet" href="resources/css/mypage.css">
     <script src="resources/js/cropper.js"></script>
     <title>Document</title>
+    <script type="text/javascript">
+    	window.onload = function(){
+    		tourReviewList();
+    	}
+    	
+    	function tourReviewList(){
+    		$.ajax({
+    			url : 'tour_review_list.do',
+    			method : 'post',
+    			data : {
+    				tr_userno : '${user.user_no}'
+    			},
+    			dataType : 'json',
+    			success : function(data){
+    				$('.comment-list').empty();
+    				
+    				if(data != ""){
+						$.each(data, function(index, item) { // 데이터 =item
+							 var str = '<div class="single-comment justify-content-between d-flex" onclick="location.href=\'tripplace_detail_form.do?contentid='+item.tr_contentid+'\'" style="cursor: pointer;">'
+			                    		+'<div class="desc">'
+			                        	+'<p class="comment">' + item.tr_content+ '</p>'
+			                        	+'<div class="d-flex justify-content-between">'
+			                        	+'<div class="d-flex align-items-center">'
+			                            +'<p class="date">' +item.tr_date+ '</p>'
+			                            +'</div>'
+			                            +'</div></div></div>';			
+						
+							$('.comment-list').append(str);
+						});
+    				}else{
+    					$('.comment-list').append("작성한 리뷰가 내역이 없습니다.");
+    				}
+    			},
+    			error : function(){
+    				alert("통신 실패");
+    			}
+    		});
+    	}
+    	
+    	function courseReviewList(){
+    		$.ajax({
+    			url : 'course_review_list.do',
+    			method : 'post',
+    			data : {
+    				tcr_userno : '${user.user_no}'
+    			},
+    			dataType : 'json',
+    			success : function(data){
+    				$('.comment-list').empty();
+    				
+    				if(data != ""){
+						$.each(data, function(index, item) { // 데이터 =item
+							 var str = '<div class="single-comment justify-content-between d-flex" onclick="location.href=\'course_detail.do?room='+item.tcr_tcno+'\'" style="cursor: pointer;">'
+			                    		+'<div class="desc">'
+			                        	+'<p class="comment">' + item.tcr_content+ '</p>'
+			                        	+'<div class="d-flex justify-content-between">'
+			                        	+'<div class="d-flex align-items-center">'
+			                            +'<p class="date">' +item.tcr_date+ '</p>'
+			                            +'</div>'
+			                            +'</div></div></div>';			
+						
+							$('.comment-list').append(str);
+						});
+    				}else{
+    					$('.comment-list').append("작성한 리뷰가 내역이 없습니다.");
+    				}
+    			},
+    			error : function(){
+    				alert("통신 실패");
+    			}
+    		});
+    	}
+    	
+    </script>
 </head>
 <body>
 	<!-- header 추가 -->
@@ -43,11 +117,11 @@
         <nav class="nav">
             <div class="navbar">
                 <ul>
-                    <li><a href="mypage_profile.html">회원정보</a></li>
-                    <li><a href="mypage_travel.html">여행지</a></li>
+                    <li><a href="mypage_profile_form.do">회원정보</a></li>
+                    <li><a href="mypage_travel_form.do">여행지</a></li>
                     <li><a href="mypage_course.html">여행코스</a></li>
-                    <li class="selected_nav"><a href="mypage_review.html">리뷰</a></li>
-                    <li><a href="mypage_qna.html">문의내역</a></li>
+                    <li class="selected_nav"><a href="mypage_review_form.do">리뷰</a></li>
+                    <li><a href="mypage_qna.do">문의내역</a></li>
                 </ul>
             </div>
         </nav>
@@ -56,8 +130,8 @@
         <section class="list_nav">
             <div>
                 <ul>
-                    <li>여행지</li>
-                    <li>여행코스</li>
+                    <li><p class="mypage_nav" onclick="tourReviewList();">여행지</p></li>
+                    <li><p class="mypage_nav" onclick="courseReviewList();">여행코스</p></li>
                 </ul>
             </div>
         </section>
@@ -69,7 +143,7 @@
                 <div class="single-comment justify-content-between d-flex">
                     <div class="desc">
                         <p>
-                            게시글 제목
+                            	게시글 제목
                         </p>
                         <p class="comment">
                             Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser

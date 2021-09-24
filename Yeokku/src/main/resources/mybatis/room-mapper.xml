@@ -18,7 +18,7 @@
   	</insert>
   	
   	<select id="selectAll" resultType="room_dto">
-		SELECT * FROM TCBOARDALL
+		SELECT * FROM TCBOARDALL ORDER BY TC_LIKE DESC
 	</select>
 	
 	<select id="selectOne" resultType="room_dto">

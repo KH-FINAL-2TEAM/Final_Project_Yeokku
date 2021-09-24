@@ -97,11 +97,6 @@
 		                                                <i class="fas fa-bell fa-3x"></i>
 		                                            </div>
 		                                        </a>
-		                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="alarmDropdown">
-		                                            <ul style="padding: 0;">
-		                                                <li class="dropdown-item" >알림 내용asfsafasfasdfsadsadasdasdsadfs</li>
-		                                            </ul>
-		                                        </div>
 		                                    </li>
 		                                </ul>
 									</c:otherwise>
