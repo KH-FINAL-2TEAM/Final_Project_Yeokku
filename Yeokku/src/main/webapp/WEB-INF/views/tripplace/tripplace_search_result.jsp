@@ -260,7 +260,6 @@
 					<input type="hidden" name="contentTypeId" value="${dto.contentTypeId }">
 					<input type="hidden" name="areaCode" value="${dto.areaCode }">
 					<input type="hidden" name="sigunguCode" value="${dto.sigunguCode }">
-					<input type="hidden" name="keyword" value="${dto.keyword }">
 					<input type="submit" value="이름순" formaction="tripplace_result_form.do?arrange=A" class="btn btn-link">
 					<input type="submit" value="인기순" formaction="tripplace_result_form.do?arrange=B" class="btn btn-link">
 					<input type="submit" value="최신순" formaction="tripplace_result_form.do?arrange=C" class="btn btn-link">
@@ -287,7 +286,12 @@
 			                    			<img src="resources/img/nullImage.png" style="height: 100%">
 			                    			<div class="hover_Text d-flex align-items-end justify-content-between">
 				                            	<div class="hover_text_iner">
-				                                <a href="tripplace_detail_form.do?contentid=${dto.contentid }" class="place_btn">자세히 보기</a>
+				                            	<form action="tripplace_detail_form.do" method="post">
+							                            <input type="hidden" name="contentid" value="${dto.contentid }">
+							                            <input type="hidden" name="userno" value="${user.user_no }">
+							                            <input type="hidden" name="title" value="${dto.title }">
+							                            <input type="submit" class="place_btn" style="border:0px" value="자세히 보기">
+					                            	</form>
 				                    				<h3 class="title">${dto.title }</h3>
 				                    				<p>${dto.addr1 }</p>
 			                    				</div>
@@ -297,7 +301,12 @@
 			                    			<img src="${dto.firstimage }">
 			                    			<div class="hover_Text d-flex align-items-end justify-content-between">
 					                            <div class="hover_text_iner">
-					                                <a href="tripplace_detail_form.do?contentid=${dto.contentid }" class="place_btn">자세히 보기</a>
+					                            	<form action="tripplace_detail_form.do" method="post">
+							                            <input type="hidden" name="contentid" value="${dto.contentid }">
+							                            <input type="hidden" name="userno" value="${user.user_no }">
+							                            <input type="hidden" name="title" value="${dto.title }">
+							                            <input type="submit" class="place_btn" style="border:0px" value="자세히 보기">
+					                            	</form>
 					                                <h3 class="title">${dto.title }</h3>
 					                                <p>${dto.addr1 }</p>
 					                            </div>
@@ -311,43 +320,6 @@
 	            </c:choose>
             </div>
             
-            
-		<%-- <div class="container">
-			<div class="row">
-				<div class="col">
-					<ul class="pagination">
-					
-					<%	int totalPage = (int)request.getAttribute("totalPage");
-						int startPage = (int)request.getAttribute("startPage");
-						int endPage = (int)request.getAttribute("endPage");
-						int currentPage = (int)request.getAttribute("currentPage"); 
-						System.out.println("\njsp 파라미터: "+totalPage+", "+startPage+","+endPage+","+currentPage);%>
-					
-						<c:if test="${not empty list }">
-						<%if(startPage>10){%>
-								<li class="page-item"><a class="page-link" href="result.jsp?page=<%=startPage-10%>">Previous</a></li>
-							<%	
-							}
-							if(endPage > totalPage){ endPage=totalPage; }
-							System.out.println("endPage: "+endPage);
-							for(int i=startPage; i<=endPage; i++){%>
-								<li class="page-item"><a class="page-link" href="result_form.do?page=<%=i%>"><%=i %></a></li>
-							<%
-							}
-							
-							if(endPage<totalPage){%>
-								<li class="page-item"><a class="page-link" href="result.jsp?page=<%=startPage+10%>">Next</a></li>
-								
-							<%
-							} %>
-							</c:if>
-					
-					
-					</ul>
-				</div>
-			</div>
-		</div> --%>
-                
         </div>
     </section>
     <!-- 검색결과 end -->

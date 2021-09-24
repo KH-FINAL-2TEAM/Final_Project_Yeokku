@@ -1,9 +1,8 @@
 package com.kh.yeokku.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,9 +42,11 @@ public class TripPlaceController {
 	
 	@RequestMapping("/tripplace_map_form.do")
 	public String tripPlaceShowMap(Model model, TourDto dto, String arrange) {
-		
-		model.addAttribute("list", biz.searchResult(dto, arrange));
-		
+		List<TourResultDto> list = biz.searchResult(dto, arrange);
+		model.addAttribute("list", list);
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("\n"+i+"번째 title: "+list.get(i).getTitle()+", addr1: "+list.get(i).getAddr1()+", contentid: "+list.get(i).getContentid()+", mapx: "+list.get(i).getMapx()+", mapy: "+list.get(i).getMapy());
+		}
 		return "tripplace/tripplace_show_map";
 	}
 	

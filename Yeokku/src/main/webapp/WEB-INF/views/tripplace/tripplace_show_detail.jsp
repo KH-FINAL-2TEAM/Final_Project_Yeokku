@@ -170,7 +170,6 @@
 			                            <a href="#" onclick="return likeInfo();" style="cursor:hand;" class="like-info" id="iconB"><i class="fas fa-heart fa-lg"></i></a><span style="font-size: 15px;">&nbsp 좋아요 ${likeCount }개</span>
 	                                </c:when>
 	                            </c:choose>
-	                            <!-- <i class="fas fa-heart fa-lg"></i> -->
 	                        </div>
 	                        <br><br>
                             <p>주소: (${dto.zipcode }) ${dto.addr1 } ${dto.addr2 }</p>
@@ -191,7 +190,6 @@
 	                    <c:forEach items="${blog }" var="dto">
 		                    <div class="blog-author" style="margin-top: 20px;">
 		                        <div class="media align-items-center">
-		                        	<!-- <img src="resources/img/naver.PNG" alt=""> -->
 		                            <div class="media-body">
 		                                <a href="${dto.link }">
 		                                    <h4>${dto.title }</h4>

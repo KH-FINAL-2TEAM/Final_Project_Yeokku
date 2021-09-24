@@ -12,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Martine</title>
+    <title>Yeokku</title>
     <link rel="icon" href="<c:url value="/resources/img/favicon.png"/>">
     <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
@@ -29,8 +29,6 @@
     <!-- magnific CSS -->
     <link rel="stylesheet" href="<c:url value= "/resources/css/magnific-popup.css" />">
     <link rel="stylesheet" href="<c:url value= "/resources/css/gijgo.min.css" />">
-    <!-- niceselect CSS -->
-    <link rel="stylesheet" href="<c:url value="/resources/css/nice-select.css" />">
     <!-- slick CSS -->
     <link rel="stylesheet" href="<c:url value= "/resources/css/slick.css" />">
     <!-- style CSS -->
@@ -230,6 +228,7 @@
             	    });
             	    
             	}
+              
             	// 인포윈도우 표시 
             	 function makeOverListener(map, marker, infowindow) {
             	    return function() {
@@ -246,6 +245,7 @@
             	function setBounds() {
             	    map.setBounds(bounds);
             	}
+            	
               </script>
             </div>
 
@@ -286,8 +286,6 @@
     <script src="../../resources/js/jquery.ajaxchimp.min.js"></script>
     <script src="../../resources/js/jquery.form.js"></script>
     <script src="../../resources/js/jquery.validate.min.js"></script>
-    <script src="../../resources/js/mail-script.js"></script>
-    <script src="../../resources/js/contact.js"></script>
     <!-- custom js -->
     <script src="../../resources/js/custom.js"></script>
 </body>
