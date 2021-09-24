@@ -67,8 +67,8 @@
 							<c:when test="${dto.tc_open == 'Y' }">
 								<div class="col-lg-4 col-md-4">
 				                	<a href="course_detail.do?room=${dto.tc_no }">
-					                    <div class="single_place">
-					                        <img src="${dto.tc_content}" alt="" class="col-lg-12 col-md-12">
+					                    <div class="single_place" style="height: 200px;">
+					                        <img src="${dto.tc_content}" alt="" class="col-lg-12 col-md-12" style="height: 100%;">
 					                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
 					                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
 					                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>${dto.tc_title } &nbsp; </b></span><br>
