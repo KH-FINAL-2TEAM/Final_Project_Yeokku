@@ -21,7 +21,7 @@
                             <li><a href="qna_notice_form.do">공지사항</a></li>
                             <li><a href="Qnaform.do">FAQ</a></li>
                             <li><a href="Qaform.do">문의하기</a></li>
-                            <li><a href="traffic.do">문의하기</a></li>
+                            <li><a href="traffic.do">오시는길</a></li>
                         </ul>
 
                     </div>
