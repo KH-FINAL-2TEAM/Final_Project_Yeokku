@@ -383,7 +383,7 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
 			                                 <b id="name" style="color:black;">${user.getUser_id()}</b><g style="color: darkgrey;">님 환영합니다.</g> <br>
 			                                   <g id="email" style="color: darkgrey;">${user.getUser_email()}</g> <br>
 			                           
-			                                   <a href="mypage_profile_form.do" style="text-decoration:none;" >마이페이지</a> | <a href="mypage_course_form.do"  style="text-decoration:none;">내 여행코스</a>
+			                                   <a href="mypage_profile_form.do" style="text-decoration:none;" >마이페이지</a> | <a href="mycourseform.do"  style="text-decoration:none;">내 여행코스</a>
 			                                   <br><br><br><br>
 			                                   <button onclick="logout();" style="float:right;">로그아웃</button>
 			                              </div>
