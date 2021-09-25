@@ -42,11 +42,7 @@ public class TripPlaceController {
 	
 	@RequestMapping("/tripplace_map_form.do")
 	public String tripPlaceShowMap(Model model, TourDto dto, String arrange) {
-		List<TourResultDto> list = biz.searchResult(dto, arrange);
-		model.addAttribute("list", list);
-		for(int i=0; i<list.size(); i++) {
-			System.out.println("\n"+i+"번째 title: "+list.get(i).getTitle()+", addr1: "+list.get(i).getAddr1()+", contentid: "+list.get(i).getContentid()+", mapx: "+list.get(i).getMapx()+", mapy: "+list.get(i).getMapy());
-		}
+		model.addAttribute("list", biz.searchResult(dto, arrange));
 		return "tripplace/tripplace_show_map";
 	}
 	
