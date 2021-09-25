@@ -81,7 +81,7 @@
                     </li>
                     <li>
                         <div class="submit_div">
-                            <input class="submit" type="button" value="검색" onclick="filter()">
+                            <input class="submit" type="button" value="검색" onclick="filter();">
                         </div>
                     </li>
                 </ul>
@@ -103,7 +103,7 @@
 							<div class="list_item col-lg-3 col-sm-6" onclick="location.href='tripplace_detail_form.do?contentid=${list.lt_contentid }&userno=${user.user_no }'" style="cursor: pointer;">
 			                    <div class="travel_list">
 			                        <img src="${list.lt_firstimage }" alt="" style="width:100%;">
-			                        <h3>${list.lt_title }</h3>
+			                        <h3 class="travel_title">${list.lt_title }</h3>
 			                    </div>
 			                </div>
 						</c:forEach>
