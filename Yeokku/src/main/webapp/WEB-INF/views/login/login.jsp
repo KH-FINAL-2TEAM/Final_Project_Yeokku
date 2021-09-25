@@ -343,7 +343,7 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
                                             <tr>
                                                 <th>비밀번호</th>
                                                 <td>
-                                                	<input type="text" name="user_pw" id="user_pw" required="required" class="intext" placeholder="비밀번호를 입력해주세요"><br>
+                                                	<input type="password" name="user_pw" id="user_pw" required="required" class="intext" placeholder="비밀번호를 입력해주세요"><br>
                                                 	<div class = "login_warn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
                                                 </td>
                                             </tr>
