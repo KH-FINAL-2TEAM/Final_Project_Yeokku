@@ -16,6 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="resources/css/mypage.css">
+    <link rel="stylesheet" href="resources/css/style_dh.css">
+    <link rel="stylesheet" href="resources/css/Course/CourseList.css">
     <script src="resources/js/cropper.js"></script>
     <title>Document</title>
     
@@ -181,8 +183,18 @@
             	</table>
             	
             	<br><br><br><br>
-            	<h3 style="padding-left: 32px;">찜한 여행코스</h3>
-            	<c:forEach items="${clist }" var="cdto" varStatus="status">
+    			<h3 style="padding-left: 32px;">찜한 여행코스</h3>
+        	</div>
+        	<br>
+        	<br>
+        </section>
+		<section class="top_place">
+	    
+	        <div class="container">
+	            
+	            <div class="row">
+	            
+					<c:forEach items="${clist }" var="cdto" varStatus="status">
 						<c:choose>
 							<c:when test="${cdto.tc_open == 'Y' }">
 								<div class="col-lg-4 col-md-4">
@@ -203,12 +215,12 @@
 				                </div> 
 							</c:when>
 						</c:choose>
-				</c:forEach>
-        	</div>
-        	<br>
-        	<br>
-        </section>
-
+					</c:forEach>
+	            
+	                <br><hr><br>
+	            </div>
+	        </div>
+	    </section>
         
 
  
