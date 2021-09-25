@@ -232,8 +232,10 @@
             	    						+"<p id='overview'>"+data.overview+"</p>"
             	    						+"<form action='tripplace_detail_form.do' method='post'>"
             	    						+"<input type='hidden' name='title' value='"+data.title+"'>"
-            	    						+"<input type='hidden' name='contentid' value='"+data.contentid+"'>" 
+            	    						+"<input type='hidden' name='contentid' value='"+data.contentid+"'>"
+            	    						+"<c:if test='"+${not empty user}+"'>"
             	    						+"<input type='hidden' name='userno' value='"+${user.user_no}+"'>" 
+            	    						+"</c:if>"
             	    						+"<input type='submit' value='자세히보기' class='btn btn-primary float-right'>"
             	    						+"</form>"
 			                                
