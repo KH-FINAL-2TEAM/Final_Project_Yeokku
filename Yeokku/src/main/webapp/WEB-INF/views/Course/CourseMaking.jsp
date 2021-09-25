@@ -49,8 +49,8 @@
 		
 		<span id="Select_Area">
 		    <select id="Select">
-		        <option value="39">숙소</option>
-		        <option value="32">음식점</option>  
+		        <option value="32">숙소</option>
+		        <option value="39">음식점</option>  
 		        <option value="12">명소/관광지</option>
 		        <option>교통</option>
 		        <option>지도</option>

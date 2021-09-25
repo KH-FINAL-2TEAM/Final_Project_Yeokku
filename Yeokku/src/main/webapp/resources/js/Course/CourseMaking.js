@@ -186,7 +186,7 @@ window.onload = function()
 		}
 	});
 	
-	$('#Hotel_Close').bind('click', function(){
+	$(document).on("click","#Hotel_Close", function(){
 		Icon_Switch[1] = 1;
 		$("#Hotel").hide();
 		$("#Hotel_Icon").attr("src","resources/img/Course/Hotel.png");
@@ -234,7 +234,7 @@ window.onload = function()
 		}
 	});
 	
-	$('#Food_Close').bind('click', function(){
+	$(document).on("click","#Food_Close", function(){
 		Icon_Switch[2] = 1;
 		$("#Food").hide();
 		$("#Food_Icon").attr("src","resources/img/Course/Food.png");
@@ -282,7 +282,7 @@ window.onload = function()
 		}
 	});
 	
-	$('#GP_Close').bind('click', function(){
+	$(document).on("click","#GP_Close", function(){
 		Icon_Switch[3] = 1;
 		$("#GP").hide();
 		$("#GP_Icon").attr("src","resources/img/Course/GoodPoint.png");
