@@ -38,6 +38,15 @@
   		<collection property="user_dto" resultMap="user_map"/>
   		<collection property="profile_dto" resultMap="profile_map"/>
 	</resultMap>
+	
+	<resultMap type="tour_cat_dto" id="tour_cat_map">
+		<result property="cat1" column="CAT1" />
+		<result property="cat2" column="CAT2" />
+		<result property="cat3" column="CAT3" />
+		<result property="cat1_kor" column="CAT1_KOR" />
+		<result property="cat2_kor" column="CAT2_KOR" />
+		<result property="cat3_kor" column="CAT3_KOR" />
+	</resultMap>
 
 	<select id="selectList" parameterType="int" resultMap="tour_review_map">
 		SELECT TR.*, U.USER_NAME, PF.PF_NAME, PF.PF_TYPE 
@@ -69,7 +78,12 @@
 		DELETE FROM TRBOARD
 		WHERE TR_NO=#{tr_no}
 	</delete>
-
+	
+	<select id="selectCat" parameterType="String" resultMap="tour_cat_map">
+		SELECT CAT1_KOR, CAT2_KOR, CAT3_KOR
+		FROM CATBOARD
+		WHERE CAT3 = #{cat3}
+	</select>
 
 
 </mapper>

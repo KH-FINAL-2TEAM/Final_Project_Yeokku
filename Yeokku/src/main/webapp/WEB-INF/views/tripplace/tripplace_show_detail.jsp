@@ -173,7 +173,7 @@
                             <p>주소: (${dto.zipcode }) ${dto.addr1 } ${dto.addr2 }</p>
                             <p>전화번호: ${dto.tel }</p>
                             <p>홈페이지: ${dto.homepage }</p>
-                            <p><strong>-분류</strong>&nbsp; &nbsp;${dto.cat1 } > ${dto.cat2 } > ${dto.cat3 }</p>
+                            <p><strong>-분류</strong>&nbsp; &nbsp;${cat.cat1_kor } > ${cat.cat2_kor } > ${cat.cat3_kor }</p>
          					
                             <div class="quote-wrapper">
                                 <div class="quotes">

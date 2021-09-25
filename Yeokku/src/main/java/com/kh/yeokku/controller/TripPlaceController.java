@@ -71,7 +71,9 @@ public class TripPlaceController {
 		model.addAttribute("likeUser", biz.tripplaceLikeUser(dto, userno));
 		model.addAttribute("likeCount", biz.tripplaceLikeCount(dto));
 		model.addAttribute("reviewCount",biz.tripplaceReviewCount(dto));
-		model.addAttribute("dto", biz.searchResultDetail(dto));
+		TourResultDto res = biz.searchResultDetail(dto);
+		model.addAttribute("dto", res);
+		model.addAttribute("cat",biz.tripplaceCat(res));
 		model.addAttribute("review",biz.tripplaceReviewList(dto));
 		return "tripplace/tripplace_show_detail";
 	}

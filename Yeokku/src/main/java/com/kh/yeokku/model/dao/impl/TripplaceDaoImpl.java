@@ -26,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 import com.kh.yeokku.model.dao.TripplaceDao;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.NaverBlogDto;
+import com.kh.yeokku.model.dto.TourCatDto;
 import com.kh.yeokku.model.dto.TourDto;
 import com.kh.yeokku.model.dto.TourResultDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
@@ -547,5 +548,21 @@ public class TripplaceDaoImpl implements TripplaceDao{
 		
 		
 	}
+
+	public TourCatDto tripplaceCat(TourResultDto dto) {
+		TourCatDto cat = new TourCatDto();
+		String cat3 = dto.getCat3();
+		try {
+			cat = sqlSession.selectOne(NAMESPACE+"selectCat", cat3);
+		} catch(Exception e) {
+			System.out.println("[error] : tour cat");
+			e.printStackTrace();
+		}
+		
+		return cat;
+	}
+	
+
+
 
 }
