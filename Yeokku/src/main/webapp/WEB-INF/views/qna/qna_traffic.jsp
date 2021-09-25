@@ -3,8 +3,8 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,22 +21,29 @@
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
     
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-lite.css">	
-
-    <script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
- 	<script>
- 		$("textarea.autosize").on('keydown keyup', function () {
-		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
-		});
-		
-	</script>
-	<style>
-		textarea.autosize { min-height: 500px; }
-		textarea:focus {
-    		outline: none;
+    <style type="text/css">
+    	.traffic_tb{
+  			font-size: 16px;
+  			border: 1px solid #bbdefb;
+  			margin-top: 10px; 
 		}
-	</style>
+		
+		.traffic_tb tr{
+			height: 50px;
+			border-bottom: 1px solid #bbdefb;
+		}
+		
+    	.traffic_tb th{
+    		text-align: center;
+  			background-color: #e3f2fd;
+		}
+    	.traffic_tb td{
+  			padding-left: 30px;
+		}
+		
+    </style>
+    
+    
     
 </head>
 <body>
@@ -91,40 +98,59 @@
                 </div>
                 
                 <div class="col-lg-8">
-                    <h2 class="contact-title">공지사항</h2>
-                    <table class="notice">
-                        <colgroup>
-                            <col width="450px"/>
-                            <col width="300px"/>
+                    <h2 class="contact-title">찾아오시는 길</h2>
+					<div id="map" style="width:100%;height:350px;"></div>
+					<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=724b81fc00a64486288dc0698b9a4edd"></script>
+					<script type="text/javascript">
+						var mapContainer = document.getElementById('map'), 
+    						
+						mapOption = {
+								center: new kakao.maps.LatLng(37.49898970067072, 127.03284078311904), 
+								level: 3
+						};  
+
+						var map = new kakao.maps.Map(mapContainer, mapOption); 
+						
+						var markerPosition  = new kakao.maps.LatLng(37.49898970067072, 127.03284078311904); 
+			            var marker = new kakao.maps.Marker({
+			                position: markerPosition
+			            });
+						marker.setMap(map);
+					</script>
+					<table class="traffic_tb">
+						<colgroup>
+                            <col width="200px"/>
+                            <col width="550px"/>
                         </colgroup>
-                        <tr>
-                            <th colspan="2" align="center"><h4>${noticedto.notice_title}</h4></th>
-                        </tr>
-                        <tr>
-                        	<td></td>
-                        	<td align="left"><fmt:formatDate value="${noticedto.notice_reg_date}" pattern="yyyy-MM-dd (HH:mm)"/>  |  ${noticedto.notice_reg_view}</td>
-                        </tr>
-                        <tr>
-                        	<td colspan="2" align="center"><textarea id="summernote" readonly="readonly" rows="8" style="width:90%; resize: none; border: none">${noticedto.notice_content}</textarea></td>
-                        </tr>
-                        <tr>
-                        	<td colspan="2" align="right">
-                        		<c:if test="${user.user_role eq 'ADMIN' }">
-                        			<input type="button" value="글수정" onclick="location.href='qna_notice_update.do?notice_no=${noticedto.notice_no}'">
-                        			<input type="button" value="글삭제" onclick="location.href='deleteNotice.do?notice_no=${noticedto.notice_no}'">
-                        		</c:if>
-                        		<input type="button" value="목록" onclick="location.href='qna_notice_form.do'">
-                        	</td>
-                        </tr>
-                    </table>
+						<tr>
+							<th>주소</th>
+							<td>서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F <br>(T: 1544-9970 / F: 02-562-2378)</td>
+						</tr>
+						<tr>
+							<th>지하철</th>
+							<td>지하철 2호선 역삼역 3번출구 100m</td>
+						</tr>
+						<tr>
+							<th>버스</th>
+							<td>
+								역삼역.포스코P&S타워 정류장<br>
+								<img alt="지선" src="<c:url value="/resources/img/sub01_06_busB.jpg" />">
+								 146 / 740 / 341 / 360 &nbsp;&nbsp;&nbsp;&nbsp;
+								<img alt="간선" src="<c:url value="/resources/img/sub01_06_busR.jpg" />">
+								 1100 / 1700 / 2000 / 7007 / 8001 
+							</td>
+						</tr>
+					</table>
+                    <div></div>
+                    
                 </div>
             </div>
         </div>
     </section>
     <!-- Header part end-->
-
 	<!-- footer 추가 -->
 	<%@ include file="../footer/footer.jsp" %>
+
     
 </body>
 </html>
