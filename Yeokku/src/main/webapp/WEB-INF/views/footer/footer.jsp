@@ -21,6 +21,7 @@
                             <li><a href="qna_notice_form.do">공지사항</a></li>
                             <li><a href="Qnaform.do">FAQ</a></li>
                             <li><a href="Qaform.do">문의하기</a></li>
+                            <li><a href="traffic.do">오시는길</a></li>
                         </ul>
 
                     </div>
@@ -31,7 +32,7 @@
                     <div class="single-footer-widget">
                         <h4>info.</h4>
                         <ul style="list-style: none;">
-                            <li><a href="#">KH정보교육원</a></li>
+                            <li><a href="traffic.do">KH정보교육원</a></li>
                             <li><a href="#">FINAL-2TEAM</a></li>
                             <li><a href="#">000-0000-0000</a></li>
                             <li><a href="#">000@000.com</a></li>

@@ -9,6 +9,7 @@ import com.kh.yeokku.model.biz.TripplaceBiz;
 import com.kh.yeokku.model.dao.TripplaceDao;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.NaverBlogDto;
+import com.kh.yeokku.model.dto.TourCatDto;
 import com.kh.yeokku.model.dto.TourDto;
 import com.kh.yeokku.model.dto.TourResultDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
@@ -88,6 +89,9 @@ public class TripplaceBizImpl implements TripplaceBiz{
 		return dao.tripplaceNaverBlog(dto);
 	}
 
-	
+	@Override
+	public TourCatDto tripplaceCat(TourResultDto dto) {
+		return dao.tripplaceCat(dto);
+	}
 
 }

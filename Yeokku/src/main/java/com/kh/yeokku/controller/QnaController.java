@@ -126,4 +126,11 @@ public class QnaController {
 		return "qna/qna_qna";
 	}
 	
+	//찾아 오시는 길
+	@RequestMapping("/traffic.do")
+	public String trafficform() {
+		logger.info("traffic");
+		return "qna/qna_traffic";
+	}
+	
 }

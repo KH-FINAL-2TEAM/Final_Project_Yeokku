@@ -153,11 +153,15 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
 				contentType:"application/json",
 				dataType:"json",
 				success:function(msg){
-					if(msg.check == true){
-						//제대로 로그인 성공해서 회원 정보 담김
-						location.href="test.do";
+					if(msg.able == true){
+						if(msg.check == true){
+							//제대로 로그인 성공해서 회원 정보 담김
+							location.href="test.do";
+						}else{
+							$(".login_warn").show();
+						}
 					}else{
-						$(".login_warn").show();
+						alert("정지된 계정입니다.");
 					}
 				},
 				error:function(){

@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="<c:url value= "/resources/css/themify-icons.css" />">
     <!-- flaticon CSS -->
     <link rel="stylesheet" href="<c:url value= "/resources/css/flaticon.css" />">
-    <!-- fontawesome CSS -->
-    <link rel="stylesheet" href="<c:url value= "/resources/css/fontawesome/css/all.min.css" />">
     <!-- magnific CSS -->
     <link rel="stylesheet" href="<c:url value= "/resources/css/magnific-popup.css" />">
     <link rel="stylesheet" href="<c:url value= "/resources/css/gijgo.min.css" />">
@@ -175,7 +173,7 @@
                             <p>주소: (${dto.zipcode }) ${dto.addr1 } ${dto.addr2 }</p>
                             <p>전화번호: ${dto.tel }</p>
                             <p>홈페이지: ${dto.homepage }</p>
-                            <p><strong>-분류</strong>&nbsp; &nbsp;${dto.cat1 } > ${dto.cat2 } > ${dto.cat3 }</p>
+                            <p><strong>-분류</strong>&nbsp; &nbsp;${cat.cat1_kor } > ${cat.cat2_kor } > ${cat.cat3_kor }</p>
          					
                             <div class="quote-wrapper">
                                 <div class="quotes">
@@ -332,28 +330,28 @@
     
     <!-- jquery plugins here-->
 
-    <script src="../../resources/js/jquery-1.12.1.min.js"></script>
+    <script src="resources/js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
-    <script src="../../resources/js/popper.min.js"></script>
+    <script src="resources/js/popper.min.js"></script>
     <!-- bootstrap js -->
-    <script src="../../resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <!-- magnific js -->
-    <script src="../../resources/js/jquery.magnific-popup.js"></script>
+    <script src="resources/js/jquery.magnific-popup.js"></script>
     <!-- swiper js -->
-    <script src="../../resources/js/owl.carousel.min.js"></script>
+    <script src="resources/js/owl.carousel.min.js"></script>
     <!-- masonry js -->
-    <script src="../../resources/js/masonry.pkgd.js"></script>
+    <script src="resources/js/masonry.pkgd.js"></script>
     <!-- masonry js -->
-    <script src="../../resources/js/jquery.nice-select.min.js"></script>
-    <script src="../../resources/js/gijgo.min.js"></script>
+    <script src="resources/js/jquery.nice-select.min.js"></script>
+    <script src="resources/js/gijgo.min.js"></script>
     <!-- contact js -->
-    <script src="../../resources/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../../resources/js/jquery.form.js"></script>
-    <script src="../../resources/js/jquery.validate.min.js"></script>
-    <script src="../../resources/js/mail-script.js"></script>
-    <script src="../../resources/js/contact.js"></script>
+    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="resources/js/jquery.form.js"></script>
+    <script src="resources/js/jquery.validate.min.js"></script>
+    <script src="resources/js/mail-script.js"></script>
+    <script src="resources/js/contact.js"></script>
     <!-- custom js -->
-    <script src="../../resources/js/custom.js"></script>
+    <script src="resources/js/custom.js"></script>
 </body>
 <!-- footer 추가 -->
 	<%@ include file="../footer/footer.jsp" %>
