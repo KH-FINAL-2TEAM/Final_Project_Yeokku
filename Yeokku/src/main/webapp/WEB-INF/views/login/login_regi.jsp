@@ -195,7 +195,7 @@ function mailCheckBtn(){
     
     /* 이메일 형식 유효성 검사 */
     if(mailFormCheck(email)){
-        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+        warnMsg.html("인증번호가 전송 되었습니다. 이메일을 확인해주세요.");
         warnMsg.css("display", "inline-block");
     } else {
         warnMsg.html("올바르지 못한 이메일 형식입니다.");

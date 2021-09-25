@@ -345,7 +345,7 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div class="loginmaintain"><input type="checkbox" name="loginCookie" id="idSaveCheck"> 로그인 유지 </div>                                                 
+                                                    <div class="loginmaintain"><input type="checkbox" name="loginCookie" id="idSaveCheck"> 아이디 기억하기 </div>                                                 
                                                    
                                                     <div class="loginfindbox"><a href="idfind.do">아이디찾기</a>|<a href="pwfind.do">비밀번호찾기</a></div>
                                                 	
