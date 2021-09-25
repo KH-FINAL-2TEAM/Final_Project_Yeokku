@@ -11,7 +11,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>여꾸 여행지 상세페이지</title>
-    <link rel="icon" href="<c:url value="/resources/img/favicon.png"/>">
     <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
     <!-- animate CSS -->

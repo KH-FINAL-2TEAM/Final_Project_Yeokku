@@ -18,7 +18,6 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>여꾸 여행지 지도보기</title>
-<link rel="icon" href="<c:url value="/resources/img/favicon.png"/>">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css" />">
