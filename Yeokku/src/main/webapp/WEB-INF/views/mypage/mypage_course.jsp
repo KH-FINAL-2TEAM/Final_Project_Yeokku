@@ -103,9 +103,9 @@
                         <div class="profile_img_div">
                             <img src="uploadfile/${profile.pf_name}${profile.pf_type}" onerror="this.src='resources/img/none_profile.png'" class="profile_img" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         </div>
-                        <p class="profile_name">닉네임</p>
+                        <p class="profile_name" style="color:white;">${user.user_nickname }</p>
                     </div>
-                    <h1>여행코스</h1>
+                    <h1 style="color:white;">여행코스</h1>
             </div>
         </section>
 
