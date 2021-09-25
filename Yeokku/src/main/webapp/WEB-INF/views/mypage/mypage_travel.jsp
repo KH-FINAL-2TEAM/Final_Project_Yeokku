@@ -100,7 +100,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${list }" var="list">
-							<div class="list_item col-lg-3 col-sm-6" onclick="location.href='tripplace_detail_form.do?contentid=${list.lt_contentid }'" style="cursor: pointer;">
+							<div class="list_item col-lg-3 col-sm-6" onclick="location.href='tripplace_detail_form.do?contentid=${list.lt_contentid }&userno=${user.user_no }'" style="cursor: pointer;">
 			                    <div class="travel_list">
 			                        <img src="${list.lt_firstimage }" alt="" style="width:100%;">
 			                        <h3>${list.lt_title }</h3>
