@@ -86,24 +86,19 @@ public class LoginController {
 		
 		UserDto user = biz.login(dto);
 		boolean check = false;
-		boolean able = true;
+		
 		if(user!=null) {
-			if(user.getUser_able().equals('Y')) {
-				ProfileDto pfdto = biz.profile(user);
-				if(pfdto!=null) {
-					session.setAttribute("profile", pfdto);
-				}
-				session.setAttribute("user", user);
-				check = true;
-			}else {
-				able = false;
+			ProfileDto pfdto = biz.profile(user);
+			if(pfdto!=null) {
+				session.setAttribute("profile", pfdto);
 			}
-			
+			session.setAttribute("user", user);
+			check = true;
 		}
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("check", check);
-		map.put("able",able);
+		
 	 return map;
 	}
 
