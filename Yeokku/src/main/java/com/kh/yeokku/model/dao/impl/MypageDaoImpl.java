@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yeokku.model.dao.MypageDao;
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.TourCourseDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
@@ -165,11 +167,11 @@ public class MypageDaoImpl implements MypageDao{
 	}
 
 	@Override
-	public int countCourse() {
+	public int countCourse(String search) {
 		int cnt = 0;
 		
 		try {
-			cnt = sqlSession.selectOne(NAMESPACE+"countBoard");
+			cnt = sqlSession.selectOne(NAMESPACE+"countBoard",search);
 		} catch (Exception e) {
 			System.out.println("[error] : count course list");
 			e.printStackTrace();
@@ -179,8 +181,8 @@ public class MypageDaoImpl implements MypageDao{
 	}
 	
 	@Override
-	public List<TourCourseDto> myCourse(pagingVO vo) {
-		List<TourCourseDto> list = new ArrayList<TourCourseDto>();
+	public List<RoomDto> myCourse(pagingVO vo) {
+		List<RoomDto> list = new ArrayList<RoomDto>();
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE+"selectBoard",vo);
@@ -190,6 +192,37 @@ public class MypageDaoImpl implements MypageDao{
 		}
 		
 		return list;
+	}
+	
+	@Override
+	public List<LikeTourCourseDto> likecourse(int user_no) {
+		List<LikeTourCourseDto> list = new ArrayList<LikeTourCourseDto>();
+		
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectLTC",user_no);
+		} catch (Exception e) {
+			System.out.println("[error] : like course_no list");
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
+	@Override
+	public RoomDto selectLikeCourse(int ltc_no) {
+		RoomDto dto = new RoomDto();
+		
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectLTCcon",ltc_no);
+		} catch (Exception e) {
+			System.out.println("[error] : like course_no check");
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 	
 	

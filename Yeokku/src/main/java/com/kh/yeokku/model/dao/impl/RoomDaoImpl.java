@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.yeokku.model.dao.RoomDao;
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.UserDto;
 
@@ -95,11 +96,12 @@ public class RoomDaoImpl implements RoomDao {
 	}
 	
 	@Override
-	public int roomLike(int room) {
+	public int roomLike(LikeTourCourseDto dto) {
 		
 		int res = 0;
 		try {
-			res = sqlSession.update(NAMESPACE+"roomLike", room);
+			res = sqlSession.update(NAMESPACE+"roomLike", dto);
+			res = sqlSession.insert(NAMESPACE+"likeCourse",dto);
 		} catch ( Exception e ) {
 			System.out.println("[ Error !! - Room Like ]");
 			e.printStackTrace();

@@ -129,7 +129,8 @@
     </section>
     <!-- Header part end-->
 
-
+	<!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
     
 </body>
 </html>

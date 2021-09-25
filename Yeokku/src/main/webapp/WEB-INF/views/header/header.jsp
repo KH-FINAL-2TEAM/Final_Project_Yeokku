@@ -81,7 +81,7 @@
 		                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 		                                            <a class="dropdown-item" href="mypage_profile_form.do">정보 수정</a>
 		                                            <a class="dropdown-item" href="mypage_travel_form.do">여행지</a>
-		                                            <a class="dropdown-item" href="mypage_course_form.do">여행코스</a>
+		                                            <a class="dropdown-item" href="mycourseform.do">여행코스</a>
 		                                            <a class="dropdown-item" href="mypage_review_form.do">리뷰</a>
 		                                            <a class="dropdown-item" href="mypage_qna.do">문의</a>
 		                                            <a class="dropdown-item" href="logout.do">로그아웃</a>

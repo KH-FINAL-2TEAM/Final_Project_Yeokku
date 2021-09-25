@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.yeokku.model.biz.RoomBiz;
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.UserDto;
 
@@ -139,9 +140,15 @@ public class RoomController {
 	
 	@RequestMapping("/like.do")
 	@ResponseBody
-	public Map<String, Boolean> courseLike(Model model, int room) {
+	public Map<String, Boolean> courseLike(Model model, int room, HttpSession session) {
+		UserDto user = new UserDto();
+		user = (UserDto)session.getAttribute("user");
+		int user_no = user.getUser_no();
+		LikeTourCourseDto dto = new LikeTourCourseDto();
+		dto.setLtc_userno(user_no);
+		dto.setLtc_tcno(room);
 		
-		int res = roomBiz.roomLike(room);
+		int res = roomBiz.roomLike(dto);
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		boolean check = false;
 

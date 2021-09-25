@@ -2,9 +2,11 @@ package com.kh.yeokku.model.dao;
 
 import java.util.List;
 
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.TourCourseDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
@@ -35,8 +37,12 @@ public interface MypageDao {
 
 	List<TourCourseReviewDto> courseReviewList(int tcr_userno); // 코스 리뷰 목록
 
-	public int countCourse(); /*페이징위한 카운트*/
+	public int countCourse(String search); /*페이징위한 카운트*/
 	
-	public List<TourCourseDto> myCourse(pagingVO vo); /*내가 작성한 여행코스 주소 리스트 확인*/
+	public List<RoomDto> myCourse(pagingVO vo); /*내가 작성한 여행코스 주소 리스트 확인*/
+	
+	public List<LikeTourCourseDto> likecourse(int user_no); /*좋아하는 코스 번호 가져오기*/
+	
+	public RoomDto selectLikeCourse(int ltc_no); /*좋아하는 여행코스 DTO 확인*/
 		
 }

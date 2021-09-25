@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -28,9 +29,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kh.yeokku.model.biz.MypageBiz;
 import com.kh.yeokku.model.biz.impl.MypageBizImpl;
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
 import com.kh.yeokku.model.dto.UserDto;
@@ -193,20 +196,76 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/mycourseform.do")
-	public String mypageCourse(Model model,pagingVO vo, String nowPage) {
-		int total = biz.countCourse();
+	public String mypageCourse(Model model,pagingVO vo, String nowPage, HttpSession session) {
+		UserDto user = (UserDto) session.getAttribute("user");
+		String search = user.getUser_id();
+		
+		int total = biz.countCourse(search);
 		
 		int cntPerPage = 5;
 		if (nowPage == null) {
 			nowPage = "1";
 		}
 		
-		vo = new pagingVO(total, Integer.parseInt(nowPage), cntPerPage);
+		vo = new pagingVO(total, Integer.parseInt(nowPage), cntPerPage, search);
+		System.out.println(vo.getSearch());
 		model.addAttribute("paging", vo);
 		model.addAttribute("list",biz.myCourse(vo));
+		
+		List<RoomDto> clist = new ArrayList<RoomDto>();
+		RoomDto ltcdto = new RoomDto();
+		int user_no = user.getUser_no();
+		/*user_no가 좋아하는 tc_no 가져오기*/
+		List<LikeTourCourseDto> like = biz.likecourse(user_no);
+		//System.out.println("과연 like에는 담겨 있는가 dto가"+like.get(0).getLtc_tcno());
+		
+		if(like != null) {
+			for(int i=0; i<like.size(); i++) {
+				LikeTourCourseDto dto = like.get(i);
+				int ltc_no = dto.getLtc_tcno();
+				/*해당 유저가 좋아하는 코스의 dto 하나씩 꺼내는중*/
+				ltcdto = biz.selectLikeCourse(ltc_no);
+				/*꺼낸 dto를  roomdto list에 담기*/
+				clist.add(ltcdto);				
+			}
+			/*clist에는 좋아하는 코스 dto들이 담긴 상태*/
+			System.out.println(clist.size());
+		}
+		
+		if(clist != null) {
+			for(int i=0; i<clist.size(); i++) {
+				RoomDto dto = new RoomDto();
+				dto = clist.get(i);
+				String temp_content = dto.getTc_content();
+				temp_content = temp_content.replace( "<img class=\"OF\" src=\"resources/img/Course/Minus.png\">", "");
+				temp_content = substringBetween(temp_content, "<img class=", ">");
+				temp_content = substringBetween(temp_content, "src=\"", "\"");
+				dto.setTc_content( temp_content );	
+				clist.set(i, dto);
+			}
+			model.addAttribute("clist", clist);			
+		}
+		
+		
 		return "mypage/mypage_course";
 	}
 	
+	
+	
+	
+	private String substringBetween(String str, String open, String close) {
+	    if (str == null || open == null || close == null) {
+	       return null;
+	    }
+	    int start = str.indexOf(open);
+	    if (start != -1) {
+	       int end = str.indexOf(close, start + open.length());
+	       if (end != -1) {
+	          return str.substring(start + open.length(), end);
+	       }
+	    }
+	    return null;
+	}
 	
 	
 }

@@ -20,29 +20,70 @@
     <title>Document</title>
     
 <script>
-	$("#url-copy").click(function(){
-		$("#myc_url").attr("type","text");
-		$("#myc_url").select();
-		var success = document.execCommnad("copy");
-		$("#myc_url").attr("type","hidden");
-		if(success){
-			alert("코스페이지가 복사되었습니다. 함께하고 여행가고 싶은사람과 공유해보세요.");
-		}
+	$(function(){
+		$(".url-copy").click(function(){
+			$(this).next().attr("type","text");
+			$(this).next().select();
+			var success = document.execCommand("copy");
+			$(this).next().attr("type","hidden");
+			if(success){
+				alert("링크가 복사되었습니다. 함께하고 여행가고 싶은사람과 공유해보세요.");
+			}
+		});
 	});
 
 
 </script>    
     
 <style type="text/css">
-	.row{
+	.course-content{
 		margin-top: 50px;
-		border: 30px;
-		align-self: center;
+		padding: 100px;
+		align-items: center;
+		justify-content: center;
 	}
 	.mycourse{
 		width: 750px;
 	}
+	.url-copy{
+		border: 1px solid white;
+		background-color: #2493e0;
+		color: white;
+		border-radius: 5px;
+	}
+	.c_url{
+		text-decoration: none;
+		color: #2493e0;
+		font-size: 20px;
+		font-weight: 500;	
+	}
+	.mycourse th{
+  		text-align: center;
+  		font-size: 16px;
+  		border-bottom: 1px solid black;
+	}
+	
+	.mycourse tr{
+  		height: 35px;
+	}
 
+	.mycourse td{
+  		border-bottom: 1px solid #f0e9ff;
+	}
+
+	.mycourse td:nth-child(1) a{
+  		margin-left: 30px;
+  		text-decoration: none;
+  		color: #2493e0;
+	}
+	.mycourse td:nth-child(2){
+		padding-left: 40px;
+	}
+
+	.mycourse td:nth-child(3){
+  		text-align: center;
+	}
+	
 </style>
 
 
@@ -66,50 +107,50 @@
             </div>
         </section>
 
-
+	
         <nav class="nav">
             <div class="navbar">
                 <ul>
-                    <li><a href="mypage_profile.html">회원정보</a></li>
-                    <li><a href="mypage_travel.html">여행지</a></li>
+                    <li><a href="mypage_profile_form.do">회원정보</a></li>
+                    <li><a href="mypage_travel_form.do">여행지</a></li>
                     <li class="selected_nav"><a href="mycourseform.do?nowPage=1">여행코스</a></li>
                     <li><a href="mypage_review_form.do">리뷰</a></li>
-                    <li><a href="mypage_qna.html">문의내역</a></li>
+                    <li><a href="mypage_qna.do">문의내역</a></li>
                 </ul>
             </div>
         </nav>
 
 
         <section class="list_nav">
-            <div class="row">
-            	<h2>나의 여행코스</h2>
-				<table class="mycourse">
+            <div class="course-content">
+            	<h3 style="padding-left: 32px;">나만의 여행코스</h3>
+				<table class="mycourse" style="margin-left: 250px; margin-top: 20px;">
                         <colgroup>
-                            <col width="500px"/>
-                            <col width="150px"/>
+                            <col width="200px"/>
+                            <col width="450px"/>
                             <col width="100px"/>
                         </colgroup>
                         <tr>
                             <th>제목</th>
-                            <th>작성일</th>
-                            <th></th>
+                            <th>설명 & 태그</th>
+                            <th>공유하기</th>
                         </tr>
                         <c:choose>
                         	<c:when test="${empty list }">
                         		<tr>
                         			<td colspan="3" align="center">
-                        				<p>-----작성한 여행코스가 없습니다-----</p>
+                        				<p>-----작성하신 여행코스가 없습니다-----</p>
                         			</td>
                         		</tr>
                         	</c:when>
                         	<c:otherwise>
                         		<c:forEach items="${list}" var="dto">
                         			<tr>
-                            			<td><a href="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">${dto.tc_title }</a></td>
-                            			<td>${dto.tc_date }</td>
-                            			<td>
-                            				<button id="url-copy">링크복사</button>
-                            				<input type="hidden" id="myc_url" value="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">
+                            			<td><a class="c_url" href="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">${dto.tc_title }</a></td>
+                            			<td>${dto.tc_tag }</td>
+                            			<td style="text-align: center;">
+                            				<button class="url-copy">링크공유</button>
+                            				<input type="hidden" class="myc_url" value="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">
                             			</td>
                         			</tr>
                         		</c:forEach>                        	
@@ -138,89 +179,23 @@
                         	</td>
                         </tr>
             	</table>
-        	</div>
-        	<br>
-        	<br>
-        </section>
-
-        <section class="content">
-            <div class="row">
-            	<h2>나의 여행코스</h2>
-				<table class="mycourse">
-                        <colgroup>
-                            <col width="450px"/>
-                            <col width="150px"/>
-                            <col width="150px"/>
-                        </colgroup>
-                        <tr>
-                            <th>제목</th>
-                            <th>작성일</th>
-                            <th></th>
-                        </tr>
-                        <c:choose>
-                        	<c:when test="${empty list }">
-                        		<tr>
-                        			<td colspan="3" align="center">
-                        				<p>-----작성한 여행코스가 없습니다-----</p>
-                        			</td>
-                        		</tr>
-                        	</c:when>
-                        	<c:otherwise>
-                        		<c:forEach items="${list}" var="dto">
-                        			<tr>
-                            			<td><a href="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">${dto.tc_title }</a></td>
-                            			<td>${dto.tc_date }</td>
-                            			<td>
-                            				<button id="url-copy">링크복사</button>
-                            				<input type="hidden" id="myc_url" value="http://localhost:8787/yeokku/course_remake.do?room=${dto.tc_pw}">
-                            			</td>
-                        			</tr>
-                        		</c:forEach>                        	
-                        	</c:otherwise>
-                        </c:choose>
-                        <tr>
-                        	<td colspan="3">
-                        		<div style="display: block; text-align: center;">		
-									<c:if test="${paging.startPage != 1 }">
-										<a href="mycourseform.do?nowPage=${paging.startPage - 1 }">&lt;</a>
-									</c:if>
-									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-										<c:choose>
-											<c:when test="${p == paging.nowPage }">
-												<b>${p }</b>
-											</c:when>
-											<c:when test="${p != paging.nowPage }">
-												<a href="mycourseform.do?nowPage=${p }">${p }</a>
-											</c:when>
-										</c:choose>
-									</c:forEach>
-									<c:if test="${paging.endPage != paging.lastPage}">
-										<a href="mycourseform.do?nowPage=${paging.endPage+1 }">&gt;</a>
-									</c:if>
-								</div>
-                        	</td>
-                        </tr>
-            	</table>
-        	</div>
-        	<br>
-        	<br>
-        	<h2>찜한 여행코스</h2>
-        	<div class="infinite">
-        		<div class="i-list">
-        		<c:forEach items="${list }" var="dto" varStatus="status">
+            	
+            	<br><br><br><br>
+            	<h3 style="padding-left: 32px;">찜한 여행코스</h3>
+            	<c:forEach items="${clist }" var="cdto" varStatus="status">
 						<c:choose>
-							<c:when test="${dto.tc_open == 'Y' }">
+							<c:when test="${cdto.tc_open == 'Y' }">
 								<div class="col-lg-4 col-md-4">
-				                	<a href="course_detail.do?room=${dto.tc_no }">
-					                    <div class="single_place">
-					                        <img src="resources/img/single_place_${status.index%4+1}.png" alt="" class="col-lg-12 col-md-12">
+				                	<a href="course_detail.do?room=${cdto.tc_no }">
+					                    <div class="single_place" style="height: 200px;">
+					                        <img src="${cdto.tc_content}" alt="" class="col-lg-12 col-md-12" style="height: 100%;">
 					                        <div class="hover_Text d-flex align-items-end justify-content-between" style="padding-bottom: 15px;">
 					                            <div class="hover_text_iner" style="color:white; background-color:rgba(0, 0, 0, 0.7);">
-					                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>${dto.tc_title } &nbsp; </b></span><br>
-					                                <span class="course_detail" id="id"> &nbsp; 👤  ${dto.tc_userid } &nbsp; </span><br>
-					                                <span class="course_detail" id="watch"> &nbsp; 👁 &nbsp; ${dto.tc_view } &nbsp; </span><br>
-					                                <span class="course_detail" id="heart"> &nbsp; 💗  ${dto.tc_like } &nbsp; </span><br>
-					                                <span class="course_tag"id="tag"> &nbsp; ${dto.tc_tag } &nbsp; </span><br>
+					                                <span class="course_title" style="padding-bottom: 5px; color:white;"> <b>${cdto.tc_title } &nbsp; </b></span><br>
+					                                <span class="course_detail" id="id"> &nbsp; 👤  ${cdto.tc_userid } &nbsp; </span><br>
+					                                <span class="course_detail" id="watch"> &nbsp; 👁 &nbsp; ${cdto.tc_view } &nbsp; </span><br>
+					                                <span class="course_detail" id="heart"> &nbsp; 💗  ${cdto.tc_like } &nbsp; </span><br>
+					                                <span class="course_tag"id="tag"> &nbsp; ${cdto.tc_tag } &nbsp; </span><br>
 					                            </div>
 					                        </div>
 					                    </div>
@@ -229,17 +204,15 @@
 							</c:when>
 						</c:choose>
 				</c:forEach>
-        		</div>
-        		
-        		<!-- 반복 -->
         	</div>
+        	<br>
+        	<br>
         </section>
 
+        
 
+ 
 
-
-
-    </div>
     
     
     <!-- Modal -->
@@ -324,6 +297,10 @@
 			}
 		
 	</script>
+    </div>
+    
+    <!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
     
 </body>
 </html>

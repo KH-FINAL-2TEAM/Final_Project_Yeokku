@@ -3,6 +3,7 @@ package com.kh.yeokku.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.RoomDto;
 
 public interface RoomDao {
@@ -14,5 +15,5 @@ public interface RoomDao {
 	public int roomUpdate(RoomDto dto);
 	public RoomDto viewRoom(int room);
 	public RoomDto remakeRoom(String pw);
-	public int roomLike(int room);
+	public int roomLike(LikeTourCourseDto dto);
 }

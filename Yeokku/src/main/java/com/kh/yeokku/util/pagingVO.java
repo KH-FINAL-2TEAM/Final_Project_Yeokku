@@ -19,8 +19,8 @@ public class pagingVO {
 	private int end;
 	/*블록당 페이지*/
 	private int cntPage = 5;
-	
-
+	/*검색어*/
+	private String search;
 	
 	public pagingVO() {
 	}
@@ -31,6 +31,16 @@ public class pagingVO {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
 		setTotal(total);
+		calcLastPage(getTotal(), getCntPerPage());
+		calcStartEndPage(getNowPage(), cntPage);
+		calcStartEnd(getNowPage(), getCntPerPage());
+	}
+	
+	public pagingVO(int total, int nowPage, int cntPerPage, String search) {
+		setNowPage(nowPage);
+		setCntPerPage(cntPerPage);
+		setTotal(total);
+		setSearch(search);
 		calcLastPage(getTotal(), getCntPerPage());
 		calcStartEndPage(getNowPage(), cntPage);
 		calcStartEnd(getNowPage(), getCntPerPage());
@@ -111,6 +121,17 @@ public class pagingVO {
 	public void getCntPage(int cntPage) {
 		this.cntPage = cntPage;
 	}
+	
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "PagingVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total

@@ -79,21 +79,35 @@
   	
   	<select id="countBoard" resultType="int">
 		SELECT COUNT(*) FROM TCBOARDALL
+		WHERE TC_USERID= #{search}
 	</select>
   	
-  	<select id="selectBoard" resultType="tour_course_dto">
-		SELECT * 
+  	<select id="selectBoard" resultType="room_dto">
+		SELECT TC_NO, TC_TITLE, TC_PW, TC_TAG  
 			FROM (
 				SELECT ROWNUM RN, A.* 
 					FROM (
 							SELECT * 
 							FROM TCBOARDALL
+							WHERE TC_USERID= #{search}
 							ORDER BY TC_NO DESC 
 							) A
 					)
-		WHERE RN BETWEEN #{start} AND #{end}
+		WHERE RN BETWEEN #{start} AND #{end} 
 	</select>
   	
+  	<select id="selectLTC" parameterType="int" resultType="like_tour_course_dto">
+  		SELECT *
+  		FROM LTCBOARD
+  		WHERE LTC_USERNO = #{user_no}
+  	</select>
+  	
+  	
+  	<select id="selectLTCcon" parameterType="int" resultType="room_dto">
+  		SELECT *
+  		FROM TCBOARDALL
+  		WHERE TC_NO=#{ltc_no}
+  	</select>
   	
   	
   </mapper>

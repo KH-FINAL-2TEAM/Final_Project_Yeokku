@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.yeokku.model.biz.RoomBiz;
 import com.kh.yeokku.model.dao.RoomDao;
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.RoomDto;
 
 @Service
@@ -42,7 +43,7 @@ public class RoomBizImpl implements RoomBiz {
 	}
 	
 	@Override
-	public int roomLike(int room) {
-		return dao.roomLike(room);
+	public int roomLike(LikeTourCourseDto dto) {
+		return dao.roomLike(dto);
 	}
 }
