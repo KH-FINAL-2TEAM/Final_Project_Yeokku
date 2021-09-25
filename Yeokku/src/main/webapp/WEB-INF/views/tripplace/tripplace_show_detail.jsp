@@ -355,5 +355,6 @@
     <!-- custom js -->
     <script src="../../resources/js/custom.js"></script>
 </body>
-
+<!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
 </html>
