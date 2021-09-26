@@ -1,6 +1,7 @@
 package com.kh.yeokku.model.biz.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,22 +24,22 @@ public class TransBizImpl implements TransBiz {
 	private TransDao dao;
 
 	@Override
-	public List<TransResultAirDto> search_air(TransSearchDto dto) {
+	public Map<String, List> search_air(TransSearchDto dto) {
 		return dao.search_air(dto);	
 	}
 
 	@Override
-	public List<TransResultShipDto> search_ship(TransSearchDto dto) {
+	public Map<String, List> search_ship(TransSearchDto dto) {
 		return dao.search_ship(dto);	
 	}
 
 	@Override
-	public List<TransResultBusDto> search_bus(TransSearchDto dto) {
+	public Map<String, List> search_bus(TransSearchDto dto) {
 		return dao.search_bus(dto);	
 	}
 
 	@Override
-	public List<TransResultTrainDto> search_train(TransSearchDto dto) {
+	public Map<String, List> search_train(TransSearchDto dto) {
 		return dao.search_train(dto);	
 	}
 

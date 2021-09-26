@@ -1146,7 +1146,7 @@ function save() {
 		success:function(msg) {
 			if(msg.check == true) {
 				var back = confirm(" 저장 완료 \n 현재 페이지에서 나가시겠습니까? ");
-				if(back==true) {location.href="mypage.do";}
+				if(back==true) { location.href="main.do"; }
 			} else {
 				alert("[F] 오류가 발생하였습니다. 반복된다면 문의 부탁드립니다.");
 			}
