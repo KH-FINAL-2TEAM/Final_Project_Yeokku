@@ -70,4 +70,11 @@
   		<select id="report_chk" parameterType="report_dto" resultType="int">
   			SELECT COUNT(*) FROM REPORTBOARD WHERE REPORT_REASON = #{report_reason} AND REPORT_USERNO = #{report_userno}
   		</select>
+  		
+  		<select id="course_search" parameterType="String" resultType="room_dto">
+  			SELECT * 
+  			FROM TCBOARDALL 
+  			WHERE TC_TITLE LIKE '%'||#{keyword}||'%'
+  			OR TC_TAG LIKE '%'||#{keyword}||'%'
+  		</select>
   	</mapper>

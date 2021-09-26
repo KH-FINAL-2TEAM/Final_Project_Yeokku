@@ -20,6 +20,12 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
+    <!-- jquery plugins here-->
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.6.0.min.js"/>"></script>
+    
+    
+    
+    
 </head>
 <body>
 	<!-- header 추가 -->
@@ -62,6 +68,12 @@
                         <span class="contact-info__icon"><i class="ti-email"></i></span>
                         <div class="media-body">
                             <a class="contact_a" href="Qaform.do">온라인 문의</a>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-email"></i></span>
+                        <div class="media-body">
+                            <a class="contact_a" href="traffic.do">오시는 길</a>
                         </div>
                     </div>
                 </div>
@@ -107,14 +119,14 @@
                         </tr>
                         <tr>
                         	<td colspan="3">
-                        			<div style="display: block; text-align: center;">		
+                        			<div style="display: block; text-align: center;" id="pagination">		
 									<c:if test="${paging.startPage != 1 }">
 										<a href="qna_notice_form.do?nowPage=${paging.startPage - 1 }">&lt;</a>
 									</c:if>
 									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 										<c:choose>
 											<c:when test="${p == paging.nowPage }">
-												<b>${p }</b>
+												<span>&nbsp<a style="text-decoration: underline;">${p }</a></span>
 											</c:when>
 											<c:when test="${p != paging.nowPage }">
 												<a href="qna_notice_form.do?nowPage=${p }">${p }</a>
@@ -128,12 +140,14 @@
                         	</td>
                         </tr>
                     </table>
+               
                 </div>
             </div>
         </div>
     </section>
     <!-- Header part end-->
-
+	<!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
 
     
 </body>

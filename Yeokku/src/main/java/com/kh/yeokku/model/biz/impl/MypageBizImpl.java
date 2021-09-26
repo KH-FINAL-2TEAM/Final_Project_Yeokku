@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.kh.yeokku.model.biz.MypageBiz;
 import com.kh.yeokku.model.dao.MypageDao;
 import com.kh.yeokku.model.dao.impl.MypageDaoImpl;
+import com.kh.yeokku.model.dto.LikeTourCourseDto;
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.ProfileDto;
 import com.kh.yeokku.model.dto.QaDto;
+import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.TourCourseDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
@@ -76,12 +78,23 @@ public class MypageBizImpl implements MypageBiz {
 
 	
 	@Override
-	public int countCourse() {
-		return dao.countCourse();
+	public int countCourse(String search) {
+		return dao.countCourse(search);
 	}
 	
 	@Override
-	public List<TourCourseDto> myCourse(pagingVO vo) {
+	public List<RoomDto> myCourse(pagingVO vo) {
 		return dao.myCourse(vo);
 	}
+	
+	@Override
+	public List<LikeTourCourseDto> likecourse(int user_no) {
+		return dao.likecourse(user_no);
+	}
+	
+	@Override
+	public RoomDto selectLikeCourse(int ltc_no) {
+		return dao.selectLikeCourse(ltc_no);
+	}
+	
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.yeokku.model.dao.TestDao;
 import com.kh.yeokku.model.dto.ReportDto;
+import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 @Repository
 public class TestDaoImpl implements TestDao{
@@ -141,6 +142,20 @@ public class TestDaoImpl implements TestDao{
 			e.printStackTrace();
 		}
 		return chk;
+	}
+
+	@Override
+	public List<RoomDto> courseSearch(String keyword) {
+		List<RoomDto> list = new ArrayList<RoomDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"course_search",keyword);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : course search list");
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

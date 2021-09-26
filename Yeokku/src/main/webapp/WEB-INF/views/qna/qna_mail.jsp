@@ -88,6 +88,12 @@
                             <a class="contact_a" href="Qaform.do">온라인 문의</a>
                         </div>
                     </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-email"></i></span>
+                        <div class="media-body">
+                            <a class="contact_a" href="traffic.do">오시는 길</a>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="col-lg-8">
@@ -129,7 +135,8 @@
     </section>
     <!-- Header part end-->
 
-
+	<!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
     
 </body>
 </html>

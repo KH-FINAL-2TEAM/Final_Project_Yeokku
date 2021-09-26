@@ -18,6 +18,7 @@
   		<typeAlias type="com.kh.yeokku.model.dto.TourReviewDto" alias="tour_review_dto"/>
   		<typeAlias type="com.kh.yeokku.model.dto.UserDto" alias="user_dto"/>
   		<typeAlias type="com.kh.yeokku.model.dto.RoomDto" alias="room_dto"/>
+  		<typeAlias type="com.kh.yeokku.model.dto.TourCatDto" alias="tour_cat_dto"/>
   	</typeAliases>
   
     <mappers>

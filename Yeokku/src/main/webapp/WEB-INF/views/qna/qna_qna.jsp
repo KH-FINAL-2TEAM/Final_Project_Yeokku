@@ -27,14 +27,15 @@
     <script src="<c:url value="/resources/css/js/contact.js" />"></script>
     <script type="text/javascript">
     	$(document).ready(function(){
-    		$('dt').click(function() {
+    		$('dt').click(function(e) {
                 var ddclass = $(this).next().attr('class');
                 if(ddclass == 'hidden'){
                     $('dd').addClass('hidden');
                     $(this).next().removeClass('hidden');
                 } else {
                     $('dd').addClass('hidden');
-                }                
+                }
+                e.preventDefault(); 
             });
 		});
     
@@ -84,21 +85,58 @@
                             <a class="contact_a" href="Qaform.do">온라인 문의</a>
                         </div>
                     </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-email"></i></span>
+                        <div class="media-body">
+                            <a class="contact_a" href="traffic.do">오시는 길</a>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="col-lg-8">
                     <h2 class="contact-title">자주 묻는 질문</h2>
                     <dl>
-                        <dt class="qna_dt"><a class="contact_a" href="#">1.회원 탈퇴는 어디서하나요?</a></dt>
+                    	<dt class="qna_dt"><a class="contact_a" href="#">1.로그인이 되지 않아요</a></dt>
+                        <dd class="hidden">
+                            <div class="qnadd_box">
+                                <span>사용자 ID 또는 비밀번호를 잘못 입력하셨습니다. 라는 문구가 뜨는지 확인해보세요<br>
+                                	계속해서 로그인이 되지 않는다면 <a href="idfind.do">아이디찾기</a>|<a href="pwfind.do">비밀번호찾기</a>를 사용해보세요 </span>
+                            </div>
+                        </dd>
+                        <dt class="qna_dt"><a class="contact_a" href="#">2.회원 정보를 수정하고싶어요</a></dt>
+                        <dd class="hidden">
+                            <div class="qnadd_box">
+                                <span>마이페이지 - 정보수정에서 수정을 진행해보세요.<br>가입하실 당시 이름과 메일주소는 변경이 불가능합니다.</span>
+                            </div>
+                        </dd>
+                        <dt class="qna_dt"><a class="contact_a" href="#">3.회원 탈퇴는 어디서하나요?</a></dt>
                         <dd class="hidden">
                             <div class="qnadd_box">
                                 <span>마이페이지 - 정보수정 - 회원탈퇴란 에서 진행하시면됩니다.<br>다만 회원정보가 삭제되더라도 작성된글은 삭제되지 않으니 주의하세요 </span>
                             </div>
                         </dd>
-                        <dt class="qna_dt"><a class="contact_a" href="#">2.친구와 함께 일정을 짜고싶어요</a></dt>
+                        <dt class="qna_dt"><a class="contact_a" href="#">4.탈퇴했는데 게시글을 삭제하고싶어요</a></dt>
                         <dd class="hidden">
                             <div class="qnadd_box">
-                                <span>마이페이지 - 여행코스에서 작성중이신 여행코스 정보를 공유해보세요.<br>가족, 친구, 지인들과 함계 여행 계획을 세울수 있습니다.</span>
+                                <span>온라인 문의를 이용해주세요<br>가입하실 당시 이름, 메일주소, 삭제하고 싶은 게시물을 작성해주시면 확인 후 진행해드리도록 하겠습니다. </span>
+                            </div>
+                        </dd>
+                        <dt class="qna_dt"><a class="contact_a" href="#">5.작성중이던 여행코스페이지를 못찾겠어요</a></dt>
+                        <dd class="hidden">
+                            <div class="qnadd_box">
+                                <span>마이페이지 - 여행코스에서 작성중이신 여행코스 확인해보세요<br>진행중이시던 여행 짜기 계획을 이어나갈수 있습니다.</span>
+                            </div>
+                        </dd>
+                        <dt class="qna_dt"><a class="contact_a" href="#">6.친구와 함께 일정을 짜고싶어요</a></dt>
+                        <dd class="hidden">
+                            <div class="qnadd_box">
+                                <span>마이페이지 - 여행코스에서 작성중이신 여행코스 정보를 공유해보세요.<br>주소 공유를 통해 가족, 친구, 지인들과 함께 여행 계획을 세울수 있습니다.</span>
+                            </div>
+                        </dd>
+                        <dt class="qna_dt"><a class="contact_a" href="#">7.사이트를 이용중 문제가 발생했어요</a></dt>
+                        <dd class="hidden">
+                            <div class="qnadd_box">
+                                <span>온라인 문의를 이용해주세요. <a href="Qaform.do">온라인문의</a><br>문의하신 내용을 검토후 메일로 답변해드리도록 하겠습니다.</span>
                             </div>
                         </dd>
                     </dl>
@@ -116,7 +154,8 @@
     <!-- contact js -->
     <script src="<c:url value="/resources/css/js/contact.js" />"></script>
     
-    
+    <!-- footer 추가 -->
+	<%@ include file="../footer/footer.jsp" %>
     
 </body>
 </html>

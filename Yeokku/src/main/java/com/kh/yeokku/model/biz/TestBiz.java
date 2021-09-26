@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.kh.yeokku.model.dto.ReportDto;
+import com.kh.yeokku.model.dto.RoomDto;
 import com.kh.yeokku.model.dto.TourCourseReviewDto;
 
 public interface TestBiz {
@@ -17,5 +18,6 @@ public interface TestBiz {
 	public int deleteCourseReview(int tcr_no); // 코스 리뷰 삭제
 	public int courseReviewReport(ReportDto dto); // 리뷰 신고
 	public boolean reportChk(ReportDto dto); // 신고 체크
+	public List<RoomDto> courseSearch(String keyword); // 여행코스 리스트 검색 조회
 
 }

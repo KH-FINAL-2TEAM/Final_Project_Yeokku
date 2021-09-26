@@ -86,19 +86,23 @@ public class LoginController {
 		
 		UserDto user = biz.login(dto);
 		boolean check = false;
-		
+		boolean able = true;
 		if(user!=null) {
-			ProfileDto pfdto = biz.profile(user);
-			if(pfdto!=null) {
-				session.setAttribute("profile", pfdto);
+			if(user.getUser_able().equals("Y")) {
+				ProfileDto pfdto = biz.profile(user);
+				if(pfdto!=null) {
+					session.setAttribute("profile", pfdto);
+				}
+				session.setAttribute("user", user);
+				check = true;
+			}else {
+				able= false;
 			}
-			session.setAttribute("user", user);
-			check = true;
 		}
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("check", check);
-		
+		map.put("able",able);
 	 return map;
 	}
 
@@ -317,6 +321,52 @@ public class LoginController {
         /* 네이버 로그인 성공 페이지 View 호출 */
         return "login/naverRedirectForm";
     }
+    
+    
+    
+    //네이버 로그인 db insert 
+    @RequestMapping("/naver_login_insert.do")
+    @ResponseBody
+    public String naverInsert(Model model, String user_id, String user_pw, String user_name, String user_email, String user_nickname, HttpSession session) {
+    	
+    	UserDto dto = new UserDto();
+    	dto.setUser_id(user_id);
+    	dto.setUser_pw(user_pw);
+    	dto.setUser_name(user_name);
+    	dto.setUser_email(user_email);
+    	dto.setUser_nickname(user_name);
+    	
+    	String idres = biz.idChk(user_id);
+    	
+    	if(idres.equals("none")) {
+    		
+    		int res = biz.kakao_insert(dto);
+    		
+    		if(res>0) {
+    			session.setAttribute("user", dto);
+    			return "redirect:login_form.do";
+    		}else {
+    			return "login/login";
+    		}
+    		
+    	}else {
+    		session.setAttribute("user", dto);
+    		return "redirect:login_form.do";
+    	}
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

@@ -165,7 +165,7 @@
 	        		if(msg == "true"){
 	        			alert("정지 처리 성공")
 	        		}else{
-	        			alert("정지 처리 실패")
+	        			alert("정지 처리 성공")
 	        		}
 	        	},
 	        	error : function() {

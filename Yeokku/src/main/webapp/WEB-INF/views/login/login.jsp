@@ -52,12 +52,12 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
   }
 
   $(document).ready(function() {
+	  
+	
 	  $(".success_login_total").hide();
 	  
 	  //로그인 하면 로그인창 안보이도록 
-	  if('<c:out value="${user.getUser_name()}"/>' !=""
-			  || window.sessionStorage.getItem("kakao_id") !=null 
-			  ||window.sessionStorage.getItem("naver_name") !=null){
+	  if('<c:out value="${user.getUser_name()}"/>' !=""){
 		  
 		  
 		$("#login_title").text("WELCOME TO YEOKKU");  
@@ -153,11 +153,15 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
 				contentType:"application/json",
 				dataType:"json",
 				success:function(msg){
-					if(msg.check == true){
-						//제대로 로그인 성공해서 회원 정보 담김
-						location.href="test.do";
+					if(msg.able == true){
+						if(msg.check == true){
+							//제대로 로그인 성공해서 회원 정보 담김
+							location.href="test.do";
+						}else{
+							$(".login_warn").show();
+						}
 					}else{
-						$(".login_warn").show();
+						alert("정지된 계정입니다.");
 					}
 				},
 				error:function(){
@@ -339,13 +343,13 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
                                             <tr>
                                                 <th>비밀번호</th>
                                                 <td>
-                                                	<input type="text" name="user_pw" id="user_pw" required="required" class="intext" placeholder="비밀번호를 입력해주세요"><br>
+                                                	<input type="password" name="user_pw" id="user_pw" required="required" class="intext" placeholder="비밀번호를 입력해주세요"><br>
                                                 	<div class = "login_warn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div class="loginmaintain"><input type="checkbox" name="loginCookie" id="idSaveCheck"> 로그인 유지 </div>                                                 
+                                                    <div class="loginmaintain"><input type="checkbox" name="loginCookie" id="idSaveCheck"> 아이디 기억하기 </div>                                                 
                                                    
                                                     <div class="loginfindbox"><a href="idfind.do">아이디찾기</a>|<a href="pwfind.do">비밀번호찾기</a></div>
                                                 	
@@ -369,23 +373,22 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
                                         </ul>
 
                                     </div>
-                                    <!-- 혜인 추가 -->
+                                   
                                       <div class="success_login_total" style="width: 40%; height: 200px; border: 1px solid #9acdf1;">
 			                              <div class="success_login_image" style="width:40%; height: 100%; border: 1px solid #9acdf1; float: left; margin: 0;">
-			                                 <img src="<c:url value="/resources/img/profile.PNG" />" width="100%" height="100%">
+			                                  <img src="uploadfile/${profile.pf_name}${profile.pf_type}" onerror="this.src='resources/img/none_profile.png'" alt=""  height="100%"class="profile_img">
 			                              </div>
 			                              
 			                              <div class="success_login_info" style="width: 60%; height: 100%; border: 1px solid #9acdf1; float: right; margin: 0; padding: 10px;">
 			                                 <b id="name" style="color:black;">${user.getUser_id()}</b><g style="color: darkgrey;">님 환영합니다.</g> <br>
 			                                   <g id="email" style="color: darkgrey;">${user.getUser_email()}</g> <br>
 			                           
-			                                   <a href="mypage.do" style="text-decoration:none;" >마이페이지</a> | <a href="#"  style="text-decoration:none;">내 정보</a>
+			                                   <a href="mypage_profile_form.do" style="text-decoration:none;" >마이페이지</a> | <a href="mycourseform.do"  style="text-decoration:none;">내 여행코스</a>
 			                                   <br><br><br><br>
 			                                   <button onclick="logout();" style="float:right;">로그아웃</button>
 			                              </div>
 
                                     </div>
-                                    <!--  -->
                                 </div>
                             </div>
                         </div>
@@ -394,11 +397,7 @@ Kakao.init('a177aa45bc680af73e036ef7d91922f0');
             </div>
         </div>
     </section>
-    <!-- Header part end-->
-
-
-
-    <!-- jquery plugins here-->
+    
     <script src="js/jquery-1.12.1.min.js"></script>
     
 </body>

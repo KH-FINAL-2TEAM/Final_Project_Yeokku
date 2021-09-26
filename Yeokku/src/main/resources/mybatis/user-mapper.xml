@@ -48,5 +48,12 @@
 		FROM PROFILEBOARD
 		WHERE PF_USERNO = #{user_no}
 	</select>
+	
+	
+	<!-- 소셜로그인  -->
+	<insert id="kakaologin" parameterType="user_dto" >
+	 	INSERT INTO USERBOARD
+	 	VALUES(USERBOARDSEQ.NEXTVAL, #{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_nickname, jdbcType=VARCHAR}, #{user_postcode, jdbcType=VARCHAR}, #{user_address, jdbcType=VARCHAR}, #{user_extraaddress, jdbcType=VARCHAR}, SYSDATE, 'Y', 'USER')
+	</insert>
 
 </mapper>  

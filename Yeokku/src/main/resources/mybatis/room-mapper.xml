@@ -41,11 +41,16 @@
   		WHERE TC_NO= #{room}
   	</update>
   	
-  	<update id="roomLike">
+  	<update id="roomLike" parameterType="like_tour_course_dto">
   		UPDATE TCBOARDALL
   		SET TC_LIKE = TC_LIKE + 1
-  		WHERE TC_NO= #{room}
+  		WHERE TC_NO= #{ltc_tcno}
   	</update>
+  	
+  	<insert id="likeCourse" parameterType="like_tour_course_dto">
+  		INSERT INTO LTCBOARD
+  		VALUES ( #{ltc_tcno} ,#{ltc_userno} ,SYSDATE)
+  	</insert>
   	
   	<update id="imgUpdate" parameterType="room_dto">
   		UPDATE TCBOARDALL

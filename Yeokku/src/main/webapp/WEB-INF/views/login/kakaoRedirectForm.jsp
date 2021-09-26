@@ -49,8 +49,29 @@
 					console.log(sessionStorage.getItem("kakao_email"));
 					console.log(sessionStorage.getItem("kakao_name"));
 					
-					alert("카카오 로그인 성공");
-				    location.href="login_form.do";
+					//alert("카카오 로그인 성공");
+					
+					//0923
+					var kakaoInfo = {
+							"user_id":id,
+							"user_pw":id,
+							"user_name":name,
+							"user_email":email
+					};		
+					
+					$.ajax({
+						type:"GET",
+						url:"kakao_login_insert.do?user_id="+id+"&user_pw="+id+"&user_name="+name+"&user_email="+email+"&user_nickname="+name,
+						
+						success:function(){
+							alert("카카오 로그인 성공");
+							location.href="login_form.do";
+							
+						}
+						
+					});
+					
+				    //location.href="login_form.do";
 					
 				}
 				

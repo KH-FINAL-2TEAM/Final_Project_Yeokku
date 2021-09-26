@@ -200,9 +200,9 @@
 	                			<tr>
 	                				<td></td>
 		                			<td>${qa_dto.qa_no }</td>
-			                        <td>${qa_dto.qa_name }</td>
 			                        <td>${qa_dto.qa_title }</td>
 			                        <td>${qa_dto.qa_content }</td>
+			                        <td>${qa_dto.qa_name }</td>
 			                        <td>${qa_dto.qa_email }</td>
 			                        <td>${qa_dto.qa_date }</td>
 			                        <td>${qa_dto.qa_done_date }</td>

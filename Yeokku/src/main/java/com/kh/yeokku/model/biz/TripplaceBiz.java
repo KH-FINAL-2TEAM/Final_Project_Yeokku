@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.yeokku.model.dto.LikeTourDto;
 import com.kh.yeokku.model.dto.NaverBlogDto;
+import com.kh.yeokku.model.dto.TourCatDto;
 import com.kh.yeokku.model.dto.TourDto;
 import com.kh.yeokku.model.dto.TourResultDto;
 import com.kh.yeokku.model.dto.TourReviewDto;
@@ -23,4 +24,5 @@ public interface TripplaceBiz {
 	public int tripplaceLike(LikeTourDto dto);
 	public int tripplaceLikeCancel(LikeTourDto dto);
 	public List<NaverBlogDto> tripplaceNaverBlog(TourResultDto dto);
+	public TourCatDto tripplaceCat(TourResultDto dto);
 }
