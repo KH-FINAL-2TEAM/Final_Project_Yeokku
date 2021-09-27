@@ -20,6 +20,12 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
     
     <link rel="stylesheet" href="<c:url value="/resources/css/login_Qna.css" />">
+    <!-- jquery plugins here-->
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.6.0.min.js"/>"></script>
+    
+    
+    
+    
 </head>
 <body>
 	<!-- header 추가 -->
@@ -113,14 +119,14 @@
                         </tr>
                         <tr>
                         	<td colspan="3">
-                        			<div style="display: block; text-align: center;">		
+                        			<div style="display: block; text-align: center;" id="pagination">		
 									<c:if test="${paging.startPage != 1 }">
 										<a href="qna_notice_form.do?nowPage=${paging.startPage - 1 }">&lt;</a>
 									</c:if>
 									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 										<c:choose>
 											<c:when test="${p == paging.nowPage }">
-												<b>${p }</b>
+												<span>&nbsp<a style="text-decoration: underline;">${p }</a></span>
 											</c:when>
 											<c:when test="${p != paging.nowPage }">
 												<a href="qna_notice_form.do?nowPage=${p }">${p }</a>

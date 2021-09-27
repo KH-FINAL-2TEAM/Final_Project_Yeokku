@@ -31,29 +31,25 @@ public class TransController {
 	
 	@RequestMapping(value="/air_search.do", method=RequestMethod.POST)
 	@ResponseBody
-	public <TransResultAirDto>List search_air(TransSearchDto dto) {
-		
+	public Map<String, List> search_air(TransSearchDto dto) {
 		return biz.search_air(dto);
 	}
 	
 	@RequestMapping(value="/ship_search.do", method=RequestMethod.POST)
 	@ResponseBody
-	public <TransResultShipDto>List search_ship(TransSearchDto dto) {
-		
+	public Map<String, List> search_ship(TransSearchDto dto) {
 		return biz.search_ship(dto);
 	}
 	
 	@RequestMapping(value="/train_search.do", method=RequestMethod.POST)
 	@ResponseBody
-	public <TransResultTrainDto>List search_train(TransSearchDto dto) {
-		
+	public Map<String, List> search_train(TransSearchDto dto) {
 		return biz.search_train(dto);	
 	}
 	
 	@RequestMapping(value="/bus_search.do", method=RequestMethod.POST)
 	@ResponseBody
-	public <TransResultBusDto>List search_bus(TransSearchDto dto) {
-		
+	public Map<String, List> search_bus(TransSearchDto dto) {
 		return biz.search_bus(dto);
 	}
 }

@@ -115,6 +115,40 @@
 	</style>
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		function string_to_code(type, string) {
+			
+			var code = "";
+			
+			string = string.replace(",", "");
+			string = string.replace(".", "");
+			string = string.replace(";", "");
+			string = string.replace(" ", "");
+			string = string.replace("공항", "");
+			string = string.replace("비행장", "");
+			string = string.replace("비행", "");
+			
+			if(type=="air") {
+				if(string == "무안"){ code = "NAARKJB";}
+				else if(string == "광주"){ code = "NAARKJJ"; }
+				else if(string == "군산"){ code = "NAARKJK"; }
+				else if(string == "여수"){ code = "NAARKJY"; }
+				else if(string == "원주"){ code = "NAARKNW"; }
+				else if(string == "양양"){ code = "NAARKNY"; }
+				else if(string == "제주"){ code = "NAARKPC"; }
+				else if(string == "제주도"){ code = "NAARKPC"; }
+				else if(string == "김해"){ code = "NAARKPK"; }
+				else if(string == "사천"){ code = "NAARKPS"; }
+				else if(string == "울산"){ code = "NAARKPU"; }
+				else if(string == "인천"){ code = "NAARKSI"; }
+				else if(string == "김포"){ code = "NAARKSS"; }
+				else if(string == "포항"){ code = "NAARKTH"; }
+				else if(string == "대구"){ code = "NAARKTN"; }
+				else if(string == "청주"){ code = "NAARKTU"; }
+			}
+			return code;
+		}
+	</script>
 	<script type="text/javascript">
 	
 		////////////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +172,8 @@
     	
 	    	if(type == "air") {
 	    		
+	    		$("#air_result_area").html("");
+	    		
 	    		var loc_start = $("#air_loc_start").val().trim();
 	    		var loc_goal = $("#air_loc_goal").val().trim();
 	    		var date_start = $("#datepicker_1").val().trim();
@@ -156,11 +192,13 @@
 	    		if(parseInt(dcs) > parseInt(dcr)) { alert("타임머신은 아직 없어요.\n출발 : " + dcs + " / 복귀 : " + dcr ); return; }
 	    		
 				var search_val = {
-						"start_loc" : loc_start,
-			    		"goal_loc" : loc_goal,
+						"start_loc" : string_to_code("air", loc_start),
+			    		"goal_loc" : string_to_code("air", loc_goal),
 			    		"start_time" : dcs,
 			    		"return_time" : dcr
 				}
+				
+				console.log(search_val);
 						
 				if( loc_start == null || loc_start == "" || loc_goal == "" || loc_goal == null) { alert("출발지와 목적지를 입력해주세요."); }
 				else if ( date_start == null || date_start == "" || date_return == "" || date_return == null) { alert("출발 날짜와 돌아오는 날짜를 입력해주세요."); }
@@ -169,11 +207,13 @@
 						type:"POST",
 						url:"air_search.do",
 						data:search_val,
-						success:function(list) {
-							if(list.length == 0) { alert("해당 조건에 맞는 결과가 없습니다."); }
-							else { list_update(list, "air"); }
+						success:function(map) {
+							try {
+								if( (map.go[0].airlineNm.length <= 1) && (map.back[0].airlineNm.length <= 1) ) { alert("해당 조건에 맞는 결과가 없습니다."); return;}
+							} catch (err) { alert("해당 조건에 맞는 결과가 없을 수도 있습니다."); }
+							list_update(map, "air")
 						},
-						error:function() {}
+						error:function() { alert("[3] 해당 조건에 맞는 결과가 없습니다."); }
 					});
 				}
 	    	}
@@ -182,6 +222,8 @@
 			////////////////////////////////////////////////////////////////////////////////////////
 			
 	    	else if(type == "ship") {
+	    		
+	    		$("#ship_result_area").html("");
 	    		
 	    		var loc_start = $("#ship_loc_start").val().trim();
 	    		var loc_goal = $("#ship_loc_goal").val().trim();
@@ -214,11 +256,13 @@
 						type:"POST",
 						url:"ship_search.do",
 						data:search_val,
-						success:function(list) {
-							if(list.length == 0) { alert("해당 조건에 맞는 결과가 없습니다."); }
-							else { list_update(list, "ship"); }
+						success:function(map) {
+							try {
+								if( (map.go[0].depPlaceNm.length <= 1) && (map.back[0].depPlaceNm.length <= 1) )  { alert("해당 조건에 맞는 결과가 없습니다."); return;}
+							} catch (err) { alert("해당 조건에 맞는 결과가 없을 수도 있습니다."); }
+							list_update(map, "ship");
 						},
-						error:function() {}
+						error:function() { alert("[3] 해당 조건에 맞는 결과가 없습니다."); }
 					});
 				}
 	    	}
@@ -259,9 +303,12 @@
 						type:"POST",
 						url:"train_search.do",
 						data:search_val,
-						success:function(list) {
-							if(list.length == 0) { alert("해당 조건에 맞는 결과가 없습니다."); }
-							else { list_update(list, "train"); }
+						success:function(map) {
+							console.log(map);
+							try {
+								if( (map.go[0].depplacename.length <= 1) && (map.back[0].depplacename.length <= 1) )  { alert("해당 조건에 맞는 결과가 없습니다."); return;}
+							} catch (err) { alert("해당 조건에 맞는 결과가 없을 수도 있습니다."); }
+							list_update(map, "train");
 						},
 						error:function() {}
 					});
@@ -304,9 +351,12 @@
 						type:"POST",
 						url:"bus_search.do",
 						data:search_val,
-						success:function(list) {
-							if(list.length == 0) { alert("해당 조건에 맞는 결과가 없습니다."); }
-							else { list_update(list, "bus"); }
+						success:function(map) {
+							console.log(map);
+							try {
+								if( (map.go[0].depPlaceNm.length <= 1) && (map.back[0].depPlaceNm.length <= 1) )  { alert("해당 조건에 맞는 결과가 없습니다."); return;}
+							} catch (err) { alert("해당 조건에 맞는 결과가 없을 수도 있습니다."); }
+							list_update(map, "bus");
 						},
 						error:function() {}
 					});
@@ -314,133 +364,329 @@
 	    	}
 		}
 		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		function list_update(list, type) {
+		function list_update(map, type) {
 			
-			if(type=="air") {
+			try {
 				
-				for(var i=0; i<list.length; i++) {				
+				var list = map.go;
+				var list2 = map.back;
+				
+				if(type=="air") {
 					
-					var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
-					"<div>출발 정보</div><div class='row'>" +
-					"<div class='col-lg-8' id='result_info'><div class='row'><div class='col-lg-3'>" +
-					"<div id='airlineNm'>" + list[i].airlineNm + "</div>" +
-					"<div id='vihicleId'>" + list[i].vihicleId + "</div></div><div class='col-lg-3'>" +
-					"<div id='depPlandTime'>" + list[i].depPlandTime + "</div>" +
-					"<div id='depAirportNm'>" + list[i].depAirportNm + "</div></div>" +
-					"<div class='col-lg-2'><div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrPlandTime'>" + list[i].arrPlandTime + "</div>" +
-					"<div id='arrAirportNm'>" + list[i].arrAirportNm + "</div></div></div></div>" +
-					"<div class='col-lg-4' id='result_price'><div id='economyCharge'><span>일반석 운임: </span>" + list[i].economyCharge + "</div>" +
-					"<div id='prestigeCharge'><span>비즈니스석 운임: </span>" + list[i].prestigeCharge + "</div>" +
-					"</div></div><hr><div>도착 정보</div><div class='row'><div class='col-lg-8' id='result_info'>" +
-					"<div class='row'><div class='col-lg-3'><div id='airlineNm'>" + list[i].airlineNm + "</div>" +
-					"<div id='vihicleId'>" + list[i].vihicleId + "</div></div><div class='col-lg-3'>" +
-					"<div id='depPlandTime'>" + list[i].depPlandTime + "</div>" +
-					"<div id='depAirportNm'>" + list[i].depAirportNm + "</div></div><div class='col-lg-2'>" +
-					"<div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrPlandTime'>" + list[i].arrPlandTime + "</div>" +
-					"<div id='arrAirportNm'>" + list[i].arrAirportNm + "</div></div></div>" +
-					"</div><div class='col-lg-4' id='result_price'><div id='economyCharge'><span>일반석 운임: </span>" + list[i].economyCharge + "</div>" +
-					"<div id='prestigeCharge'><span>비즈니스석 운임: </span>" + list[i].prestigeCharge + "</div></div></div></div>";
-					
-					$("#air_result_area").append(all);
-					$("#flight_result").show();
-				}
+					for(var i=0; i<list.length; i++) {				
+						
+						if(list[i].economyCharge == null) { list[i].economyCharge = "미제공"; }
+						if(list[i].prestigeCharge == null) { list[i].prestigeCharge = "미제공"; }
+						
+						var deptime = list[i].depPlandTime;
+						var arrtime = list[i].arrPlandTime;
+						
+						console.log(list[i].depPlandTime);  console.log(list[i].arrPlandTime);
 
-			}
-			
-			////////////////////////////////////////////////////////////////////////////////////////
-			////////////////////////////////////////////////////////////////////////////////////////
-			
-			else if(type=="ship"){
-				
-				for(var i=0; i<list.length; i++) {
+						deptime = [deptime.slice(4, 6), ".",  deptime.slice(6, 8), "  ", deptime.slice(8, 10), ":", deptime.slice(10, 12)].join('');
+						arrtime = [arrtime.slice(4, 6), ".",  arrtime.slice(6, 8), "  ", arrtime.slice(8, 10), ":", arrtime.slice(10, 12)].join('');
+						
+						var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
+						    "<div>출발 정보</div>" +
+						    "<div class='row'>" +
+						        "<div class='col-lg-8' id='result_info'>" +
+						            "<div class='row'>" +
+						                "<div class='col-lg-3'>" +
+						                    "<div id='airlineNm'>" + list[i].airlineNm + "</div>" +
+						                    "<div id='vihicleId'>" + list[i].vihicleId + "</div>" +
+						                "</div>" +
+						                "<div class='col-lg-3'>" +
+						                    "<div id='depPlandTime'>" + deptime + "</div>" +
+						                    "<div id='depAirportNm'>" + list[i].depAirportNm + "</div>" +
+						                "</div>" +
+						                "<div class='col-lg-2'>" +
+						                    "<div><img src='resources/img/icon/right.svg'></div>" +
+						                "</div>" +
+						                "<div class='col-lg-3'>" +
+						                    "<div id='arrPlandTime'>" + arrtime + "</div>" +
+						                    "<div id='arrAirportNm'>" + list[i].arrAirportNm + "</div>" +
+						                "</div>" +
+						            "</div>" +
+						        "</div>" +
+						    "<div class='col-lg-4' id='result_price'>" +
+						        "<div id='economyCharge'><span>일반석 운임: </span>" + list[i].economyCharge + "</div>" +
+						        "<div id='prestigeCharge'><span>비즈니스석 운임: </span>" + list[i].prestigeCharge + "</div>" +
+						    "</div>" +
+						"</div>";
+						
+						$("#air_result_area").append(all);
+						$("#flight_result").show();
+					}
 					
-					var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
-					"<div>출발 정보</div><div class='row'><div class='col-lg-8' id='result_info'><div class='row'><div class='col-lg-3'>" +
-					"<div id='vihicleNm'>" + list[i].vihicleNm + "</div></div><div class='col-lg-3'>" +
-					"<div id='depPlandTime'>" + list[i].depPlandTime + "</div>" +
-					"<div id='depPlaceNm'>" + list[i].depPlaceNm + "</div></div><div class='col-lg-2'><div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrPlandTime'>" + list[i].arrPlandTime + "</div>" +
-					"<div id='arrPlaceNm'>" + list[i].arrPlaceNm + "</div></div></div></div><div class='col-lg-4' id='result_price'>" +
-					"<div><span>운임: </span>" + list[i].charge + "</div></div></div><hr><div>도착 정보</div><div class='row'>" +
-					"<div class='col-lg-8' id='result_info'><div class='row'><div class='col-lg-3'>" +
-					"<div id='vihicleNm'>" + list[i].vihicleNm + "</div></div><div class='col-lg-3'>" +
-					"<div id='depPlandTime'>" + list[i].depPlandTime + "</div>" +
-					"<div id='depPlaceNm'>" + list[i].depPlaceNm + "</div></div><div class='col-lg-2'><div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrPlandTime'>" + list[i].arrPlandTime + "</div>" +
-					"<div id='arrPlaceNm'>" + list[i].arrPlaceNm + "</div></div></div></div><div class='col-lg-4' id='result_price'>" +
-					"<div id='charge'><span> 운임: </span>" + list[i].charge + "</div></div></div></div>";
-					
-					$("#ship_result_area").append(all);
-					$("#ship_result").show();
-				}
+					for(var i=0; i<list2.length; i++) {	
+						
+						if(list2[i].economyCharge == null) { list2[i].economyCharge = "미제공"; }
+						if(list2[i].prestigeCharge == null) { list2[i].prestigeCharge = "미제공"; }
+						
+						var deptime = list[i].depPlandTime;
+						var arrtime = list[i].arrPlandTime;
 
-			}
-			
-			////////////////////////////////////////////////////////////////////////////////////////
-			////////////////////////////////////////////////////////////////////////////////////////
-			
-			else if(type=="train"){
-				
-				for(var i=0; i<list.length; i++) {
+						deptime = [deptime.slice(4, 6), ".",  deptime.slice(6, 8), "  ", deptime.slice(8, 10), ":", deptime.slice(10, 12)].join('');
+						arrtime = [arrtime.slice(4, 6), ".",  arrtime.slice(6, 8), "  ", arrtime.slice(8, 10), ":", arrtime.slice(10, 12)].join('');
 					
-					var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
-					"<div>출발 정보</div><div class='row'><div class='col-lg-8' id='result_info'><div class='row'><div class='col-lg-3'>" +
-					"<div id='traingradename'>" + list[i].traingradename + "</div>" +
-					"<div id='trainno'>" + list[i].trainno + "</div></div><div class='col-lg-3'>" +
-					"<div id='depplandtime'>" + list[i].depplandtime + "</div>" +
-					"<div id='depplacename'>" + list[i].depplacename + "</div></div><div class='col-lg-2'><div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrplandtime'>" + list[i].arrplandtime + "</div>" +
-					"<div id='arrplacename'>" + list[i].arrplacename + "</div></div></div></div><div class='col-lg-4' id='result_price'>" +
-					"<div id='adultcharge'><span>요금 : </span>" + list[i].adultcharge + "</div></div></div><hr>" +
-					"<div>도착 정보</div><div class='row'><div class='col-lg-8' id='result_info'><div class='row'><div class='col-lg-3'>" +
-					"<div id='traingradename'>" + list[i].traingradename + "</div>" +
-					"<div id='trainno'>" + list[i].trainno + "</div></div><div class='col-lg-3'>" +
-					"<div id='depplandtime'>" + list[i].depplandtime + "</div>" +
-					"<div id='depplacename'>" + list[i].depplacename + "</div></div><div class='col-lg-2'><div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrplandtime'>" + list[i].arrplandtime + "</div>" +
-					"<div id='arrplacename'>" + list[i].arrplacename + "</div></div></div></div><div class='col-lg-4' id='result_price'>" +
-					"<div id='adultcharge'><span>요금 : </span>" + list[i].adultcharge + "</div></div></div></div>";
-					
-					$("#train_result_area").append(all);
-					$("#train_result").show();
+						var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
+					    "<div>도착 정보</div>" +
+					    "<div class='row'>" +
+					        "<div class='col-lg-8' id='result_info'>" +
+					            "<div class='row'>" +
+					                "<div class='col-lg-3'>" +
+					                    "<div id='airlineNm'>" + list2[i].airlineNm + "</div>" +
+					                    "<div id='vihicleId'>" + list2[i].vihicleId + "</div>" +
+					                "</div>" +
+					                "<div class='col-lg-3'>" +
+					                    "<div id='depPlandTime'>" + deptime + "</div>" +
+					                    "<div id='depAirportNm'>" + list2[i].depAirportNm + "</div>" +
+					                "</div>" +
+					                "<div class='col-lg-2'>" +
+					                    "<div><img src='resources/img/icon/right.svg'></div>" +
+					                "</div>" +
+					                "<div class='col-lg-3'>" +
+					                    "<div id='arrPlandTime'>" + arrtime + "</div>" +
+					                    "<div id='arrAirportNm'>" + list2[i].arrAirportNm + "</div>" +
+					                "</div>" +
+					            "</div>" +
+					        "</div>" +
+					    "<div class='col-lg-4' id='result_price'>" +
+					        "<div id='economyCharge'><span>일반석 운임: </span>" + list2[i].economyCharge + "</div>" +
+					        "<div id='prestigeCharge'><span>비즈니스석 운임: </span>" + list2[i].prestigeCharge + "</div>" +
+					    "</div>" +
+					"</div>";
+						
+						$("#air_result_area").append(all);
+						$("#flight_result").show();
+					}
+	
 				}
 				
-				console.log(list[0]);
-			}
-			
-			////////////////////////////////////////////////////////////////////////////////////////
-			////////////////////////////////////////////////////////////////////////////////////////
-			
-			else if(type=="bus"){
+				////////////////////////////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////////////////////////////
 				
-				for(var i=0; i<list.length; i++) {
+				else if(type=="ship"){
 					
-					var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
-					"<div>출발 정보</div><div class='row'><div class='col-lg-8' id='result_info'><div class='row'><div class='col-lg-3'>" +
-					"<div id='gradeNm'>" + list[i].gradeNm + "</div></div><div class='col-lg-3'>" +
-					"<div id='depPlandTime'>" + list[i].depPlandTime + "</div>" +
-					"<div id='depPlaceNm'>" + list[i].depPlaceNm + "</div></div><div class='col-lg-2'><div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrPlandTime'>" + list[i].arrPlandTime + "</div>" +
-					"<div id='arrPlaceNm'>" + list[i].arrPlaceNm + "</div></div></div></div><div class='col-lg-4' id='result_price'>" +
-					"<div id='charge'><span>요금 : </span>" + list[i].charge + "</div></div></div><hr>" +
-					"<div>도착 정보</div><div class='row'><div class='col-lg-8' id='result_info'><div class='row'><div class='col-lg-3'>" +
-					"<div id='gradeNm'>" + list[i].gradeNm + "</div></div><div class='col-lg-3'>" +
-					"<div id='depPlandTime'>" + list[i].depPlandTime + "</div>" +
-					"<div id='depPlaceNm'>" + list[i].depPlaceNm + "</div></div><div class='col-lg-2'><div><img src='img/icon/right.svg'></div></div><div class='col-lg-3'>" +
-					"<div id='arrPlandTime'>" + list[i].arrPlandTime + "</div>" +
-					"<div id='arrPlaceNm'>" + list[i].arrPlaceNm + "</div></div></div></div><div class='col-lg-4' id='result_price'>" +
-					"<div id='charge'><span>요금 : </span>" + list[i].charge + "</div></div></div></div>";
+					for(var i=0; i<list.length; i++) {
+						
+						if(list[i].arrPlandTime == null) { list[i].arrPlandTime = "미제공"; }
+						
+						var deptime = list[i].depPlandTime;
+						//var arrtime = list[i].arrPlandTime;
+
+						deptime = [deptime.slice(4, 6), ".",  deptime.slice(6, 8), "  ", deptime.slice(8, 10), ":", deptime.slice(10, 12)].join('');
+						//arrtime = [arrtime.slice(4, 6), ".",  arrtime.slice(6, 8), "  ", arrtime.slice(8, 10), ":", arrtime.slice(10, 12)].join('');
+						
+						var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
+							    "<div>출발 정보</div>" +
+						        "<div class='row'>" +
+						            "<div class='col-lg-8' id='result_info'>" +
+						                "<div class='row'>" +
+						                    "<div class='col-lg-3'>" +
+						                        "<div id='vihicleNm'>" + list[i].vihicleNm + "</div>" +
+						                    "</div>" +
+						                    "<div class='col-lg-3'>" +
+						                        "<div id='depPlandTime'>" + deptime + "</div>" +
+						                        "<div id='depPlaceNm'>" + list[i].depPlaceNm + "</div>" +
+						                    "</div>" +
+						                "<div class='col-lg-2'><div>" +
+						                    "<img src='resources/img/icon/right.svg'></div>" +
+						                "</div>" +
+						                "<div class='col-lg-3'>" +
+						                    "<div id='arrPlandTime'>" + list[i].arrPlandTime + "</div>" +
+						                    "<div id='arrPlaceNm'>" + list[i].arrPlaceNm + "</div>" +
+						                "</div>" +
+						            "</div>" +
+						        "</div>" +
+						        "<div class='col-lg-4' id='result_price'>" +
+						            "<div><span>운임: </span>" + list[i].charge + "</div>" +
+						        "</div>" +
+						    "</div>" +
+						"</div>";
+						
+						$("#ship_result_area").append(all);
+						$("#ship_result").show();
+					}
 					
-					$("#bus_result_area").append(all);
-					$("#bus_result").show();
+					for(var i=0; i<list2.length; i++) {
+						
+						if(list2[i].arrPlandTime == null) { list2[i].arrPlandTime = "미제공"; }
+						
+						var deptime = list[i].depPlandTime;
+						//var arrtime = list[i].arrPlandTime;
+
+						deptime = [deptime.slice(4, 6), ".",  deptime.slice(6, 8), "  ", deptime.slice(8, 10), ":", deptime.slice(10, 12)].join('');
+						//arrtime = [arrtime.slice(4, 6), ".",  arrtime.slice(6, 8), "  ", arrtime.slice(8, 10), ":", arrtime.slice(10, 12)].join('');
+						
+						var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
+							    "<div>복귀 정보</div>" +
+						        "<div class='row'>" +
+						            "<div class='col-lg-8' id='result_info'>" +
+						                "<div class='row'>" +
+						                    "<div class='col-lg-3'>" +
+						                        "<div id='vihicleNm'>" + list2[i].vihicleNm + "</div>" +
+						                    "</div>" +
+						                    "<div class='col-lg-3'>" +
+						                        "<div id='depPlandTime'>" + deptime + "</div>" +
+						                        "<div id='depPlaceNm'>" + list2[i].depPlaceNm + "</div>" +
+						                    "</div>" +
+						                "<div class='col-lg-2'><div>" +
+						                    "<img src='resources/img/icon/right.svg'></div>" +
+						                "</div>" +
+						                "<div class='col-lg-3'>" +
+						                    "<div id='arrPlandTime'>" + list2[i].arrPlandTime + "</div>" +
+						                    "<div id='arrPlaceNm'>" + list2[i].arrPlaceNm + "</div>" +
+						                "</div>" +
+						            "</div>" +
+						        "</div>" +
+						        "<div class='col-lg-4' id='result_price'>" +
+						            "<div><span>운임: </span>" + list2[i].charge + "</div>" +
+						        "</div>" +
+						    "</div>" +
+						"</div>";
+						
+						$("#ship_result_area").append(all);
+						$("#ship_result").show();
+					}
+	
 				}
-				console.log(list[0]);
-			}
+				
+				////////////////////////////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////////////////////////////
+				
+				else if(type=="train"){
+					
+					$("#train_result_area").html("");
+					
+					for(var i=0; i<list.length; i++) {
+						
+						var charge = list[i].adultcharge;
+						if(list[i].adultcharge == 0) { charge = "정보없음"; }
+						
+						var deptime = list[i].depplandtime;
+						var arrtime = list[i].arrplandtime;
+
+						deptime = [deptime.slice(4, 6), ".",  deptime.slice(6, 8), "  ", deptime.slice(8, 10), ":", deptime.slice(10, 12)].join('');
+						arrtime = [arrtime.slice(4, 6), ".",  arrtime.slice(6, 8), "  ", arrtime.slice(8, 10), ":", arrtime.slice(10, 12)].join('');
+						
+						var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
+						    "<div>출발 정보</div>" +
+						    "<div class='row'>" +
+						        "<div class='col-lg-8' id='result_info'>" +
+						            "<div class='row'><div class='col-lg-3'>" +
+						                "<div id='traingradename'>" + list[i].traingradename + "</div>" +
+						                "<div id='trainno'>" + list[i].trainno + "</div>" +
+						                "</div>" +
+						            "<div class='col-lg-3'>" +
+						                "<div id='depplandtime'>" + deptime + "</div>" +
+						                "<div id='depplacename'>" + list[i].depplacename + " 역</div>" +
+						            "</div>" +
+						            "<div class='col-lg-2'>" +
+						                "<div><img src='resources/img/icon/right.svg'></div>" +
+						            "</div>" +
+						            "<div class='col-lg-3'>" +
+						                "<div id='arrplandtime'>" + arrtime + "</div>" +
+						                "<div id='arrplacename'>" + list[i].arrplacename + " 역</div>" +
+						            "</div>" +
+						        "</div>" +
+						    "</div>" +
+						    "<div class='col-lg-4' id='result_price'>" +
+						        "<div id='adultcharge'><span>요금 : </span>" + charge + "</div>" +
+						    "</div>" +
+						"</div>";
+						
+						$("#train_result_area").append(all);
+						$("#train_result").show();
+					}
+					
+					for(var i=0; i<list2.length; i++) {
+						
+						var charge = list[i].adultcharge;
+						if(list[i].adultcharge == 0) { charge = "정보없음"; }
+						
+						var deptime = list[i].depplandtime;
+						var arrtime = list[i].arrplandtime;
+
+						deptime = [deptime.slice(4, 6), ".",  deptime.slice(6, 8), "  ", deptime.slice(8, 10), ":", deptime.slice(10, 12)].join('');
+						arrtime = [arrtime.slice(4, 6), ".",  arrtime.slice(6, 8), "  ", arrtime.slice(8, 10), ":", arrtime.slice(10, 12)].join('');
+						
+					    var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
+					        "<div>도착 정보</div>" +
+					        "<div class='row'>" +
+					            "<div class='col-lg-8' id='result_info'>" +
+					                "<div class='row'><div class='col-lg-3'>" +
+					                    "<div id='traingradename'>" + list2[i].traingradename + "</div>" +
+					                    "<div id='trainno'>" + list2[i].trainno + "</div>" +
+					                    "</div>" +
+					                "<div class='col-lg-3'>" +
+					                    "<div id='depplandtime'>" + deptime + "</div>" +
+					                    "<div id='depplacename'>" + list2[i].depplacename + " 역</div>" +
+					                "</div>" +
+					                "<div class='col-lg-2'>" +
+					                    "<div><img src='resources/img/icon/right.svg'></div>" +
+					                "</div>" +
+					                "<div class='col-lg-3'>" +
+					                    "<div id='arrplandtime'>" + arrtime + "</div>" +
+					                    "<div id='arrplacename'>" + list2[i].arrplacename + " 역</div>" +
+					                "</div>" +
+					            "</div>" +
+					        "</div>" +
+					        "<div class='col-lg-4' id='result_price'>" +
+					            "<div id='adultcharge'><span>요금 : </span>" + charge +  "</div>" +
+					        "</div>" +
+					    "</div>";
+					    
+					    $("#train_result_area").append(all);
+					    $("#train_result").show();
+					}
+					
+				}
+				
+				////////////////////////////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////////////////////////////
+				
+				else if(type=="bus"){
+					
+					for(var i=0; i<list2.length; i++) {
+						
+					    var all = "<div id='result_detail' class='col-lg-12' style='border: 1px solid #2493e0'>" +
+					        "<div>출발 정보</div>" +
+					        "<div class='row'>" +
+					            "<div class='col-lg-8' id='result_info'>" +
+					                "<div class='row'>" +
+					                    "<div class='col-lg-3'>" +
+					                        "<div id='gradeNm'>" + list2[i].gradeNm + "</div>" +
+					                    "</div>" +
+					                    "<div class='col-lg-3'>" +
+					                        "<div id='depPlandTime'>" + list2[i].depPlandTime + "</div>" +
+					                        "<div id='depPlaceNm'>" + list2[i].depPlaceNm + "</div>" +
+					                    "</div>" +
+					                    "<div class='col-lg-2'>" +
+					                        "<div><img src='img/icon/right.svg'></div>" +
+					                    "</div>" +
+					                    "<div class='col-lg-3'>" +
+					                        "<div id='arrPlandTime'>" + list2[i].arrPlandTime + "</div>" +
+					                        "<div id='arrPlaceNm'>" + list2[i].arrPlaceNm + "</div>" +
+					                    "</div>" +
+					                "</div>" +
+					            "</div>" +
+					            "<div class='col-lg-4' id='result_price'>" +
+					                "<div id='charge'><span>요금 : </span>" + list2[i].charge + "</div>" +
+					            "</div>" +
+					        "</div>" +
+					    "</div>";
+					    
+					    $("#bus_result_area").append(all);
+					    $("#bus_result").show();
+					}
+				}
+			} catch (err) {}
 			
 			////////////////////////////////////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////////////////////////////////////
@@ -554,11 +800,11 @@
 	                                    <form action="ship_search.do" id="ship_btn_search">
 	                                        <div class="form-row">
 	                                            <div class="form_colum col-lg-6">
-	                                                <input type="search" class="form-control searchinput" id="ship_loc_start" placeholder="출발지를 입력하세요" >
+	                                                <input type="search" class="form-control searchinput" id="ship_loc_start" placeholder="출발지를 입력하세요">
 	                                                <span id="ship_loc_start" class="glyphicon glyphicon-remove-circle searchclear"></span>
 	                                            </div>
 	                                            <div class="form_colum col-lg-6">
-	                                                <input type="search" class="form-control searchinput" id="ship_loc_goal" placeholder="목적지를 입력하세요">
+	                                                <input type="search" class="form-control searchinput" id="ship_loc_goal" placeholder="도착지를 입력하세요">
 	                                                <span id="ship_loc_goal" class="glyphicon glyphicon-remove-circle searchclear"></span>
 	                                            </div>
 	                                            <div class="form_colum col-lg-6">
