@@ -1,0 +1,364 @@
+/**************** common css start ****************/
+.message_submit_form:focus {
+  outline: none;
+}
+
+input:hover, input:focus {
+  outline: none !important;
+}
+
+.gray_bg {
+  background-color: #f7f7f7;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+a:hover {
+  color: #ff7e5f;
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #0c3e72;
+  font-family: "Open Sans", sans-serif;
+}
+
+p {
+  color: #a2a2a2;
+  font-family: "Open Sans", sans-serif;
+  line-height: 28px;
+  font-size: 16px;
+  margin-bottom: 0px;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 44px;
+  line-height: 28px;
+  color: #0c3e72;
+  font-weight: 600;
+  line-height: 1.222;
+}
+
+
+h3 {
+  font-size: 24px;
+  line-height: 25px;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+img {
+  max-width: 100%;
+}
+
+a:focus, .button:focus, button:focus, .btn:focus {
+  text-decoration: none;
+  outline: none;
+  box-shadow: none;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.section_tittle {
+  margin-bottom: 73px;
+}
+
+.section_tittle h2 {
+  font-size: 46px;
+  color: #0c3e72;
+  line-height: 1.1;
+  font-weight: 700;
+  position: relative;
+  margin-bottom: 26px;
+}
+
+.section_tittle p {
+  color: #777;
+  font-weight: 400;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/**************** banner part css start ****************/
+.banner_part {
+  height: 880px;
+  position: relative;
+  overflow: hidden;
+  background-image: url(../img/banner_bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.banner_part .banner_text {
+  display: table;
+  width: 100%;
+  height: 880px;
+}
+
+.banner_part .banner_text .banner_text_iner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.banner_part .banner_text p {
+  font-size: 24px;
+  color: #fff;
+}
+
+.banner_part .banner_text h1 {
+  font-size: 120px;
+  line-height: 1;
+  text-transform: capitalize;
+  color: #fff;
+  font-weight: 900;
+  margin-bottom: 22px;
+}
+
+.banner_part .banner_text .btn_1 {
+  margin-top: 60px;
+  background-color: #2493e0;
+  padding: 23px 79px;
+}
+
+.banner_part .banner_text .btn_1:hover {
+  color: #fff;
+  background-color: #fe5c24;
+}
+
+/*********** search_part ******************/
+
+.search_part .container{
+	display: flex;
+	flex-direction : column;
+	margin-top: -60px;
+	z-index: 9;
+	position: relative;
+	background-color : white;
+	height: 120px;
+	justify-content: center;
+} 
+
+/*********** booking css start *************/
+.booking_part {
+  margin-top: -80px;
+  z-index: 9;
+  position: relative;
+}
+
+.booking_part .booking_menu {
+  background-color: #fff;
+  padding: 0 35px;
+}
+
+.booking_part .booking_menu .nav-tabs .nav-item .nav-link, .booking_part .booking_menu .nav-tabs .nav-link {
+  color: #0c3e72;
+  border-color: transparent;
+  border-bottom: 3px solid transparent;
+  text-transform: capitalize;
+  padding: 28.5px 20px;
+}
+
+.booking_part .booking_menu .nav-tabs {
+  border-bottom: 0px solid transparent;
+}
+
+.booking_part .booking_content {
+  background-color: white;
+  box-shadow: 0px 10px 40px 0px rgba(221, 221, 221, 0.3);
+  padding: 40px;
+}
+
+.booking_part .form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking_part .form-row .form_colum {
+  width: 20%;
+}
+
+.booking_part .form-row .form_colum .nc_select, .booking_part .form-row .form_colum .gj-datepicker {
+  width: 100%;
+  border-color: #2493e0;
+  border-radius: 0;
+  color: #2493e0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.booking_part .form-row .form_colum .nice-select:after {
+  border-bottom: 2px solid #2493e0;
+  border-right: 2px solid #2493e0;
+  content: '';
+  display: block;
+  height: 8px;
+  width: 8px;
+  right: 18px;
+}
+
+.booking_part .form-row .form_colum .gj-textbox-md {
+  border: 1px solid #2493e0;
+  padding: 16px;
+  color: #2493e0;
+  font-size: 14px;
+}
+
+.booking_part .form-row .form_colum .gj-datepicker-md [role=right-icon] {
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  font-size: 24px;
+}
+
+.booking_part .form-row .form_colum ::placeholder {
+  color: #2493e0;
+}
+
+.booking_part .nav-link.active {
+  border-bottom: 3px solid #2493e0 !important;
+}
+
+
+
+/*********** top place *************/
+.top_place .single_place {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+.top_place .single_place:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0c3e72;
+  opacity: 0;
+  z-index: 1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.top_place .single_place .hover_Text {
+  padding: 40px;
+  position: absolute;
+  bottom: -20px;
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.top_place .single_place .hover_Text .place_btn {
+  display: inline-block;
+  padding: 10px 25px;
+  color: #fff;
+  background-color: #fe5c24;
+  text-transform: capitalize;
+  margin-bottom: 14px;
+}
+
+.top_place .single_place .hover_Text h3 {
+  font-size: 30px;
+  line-height: 36px;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.top_place .single_place .hover_Text p {
+  color: #fff;
+}
+
+.top_place .single_place:hover .hover_Text {
+  opacity: 1;
+  visibility: visible;
+  bottom: 0;
+}
+
+.top_place .single_place:hover:after {
+  opacity: 0;
+}
+
+.top_place .btn_1 {
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
+/* transportation */
+.breadcrumb_bg {
+  background-image: url("../img/breadcrumb.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.breadcrumb {
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  content: "";
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.breadcrumb .breadcrumb_iner {
+  height: 400px;
+  width: 100%;
+  display: table;
+}
+
+.breadcrumb .breadcrumb_iner .breadcrumb_iner_item {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.breadcrumb .breadcrumb_iner .breadcrumb_iner_item h2 {
+  color: #fff;
+  font-size: 80px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  text-transform: capitalize;
+}
+
+.breadcrumb .breadcrumb_iner .breadcrumb_iner_item p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.breadcrumb {
+  margin-bottom: 0px !important;
+}

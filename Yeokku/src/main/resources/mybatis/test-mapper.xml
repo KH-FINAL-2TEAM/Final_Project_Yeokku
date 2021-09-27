@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="test">
+	  <resultMap type="user_dto" id="user_map">
+	  		<result property="user_no" column="USER_NO"/>
+	  		<result property="user_id" column="USER_ID"/>
+	  		<result property="user_pw" column="USER_PW"/>
+	  		<result property="user_name" column="USER_NAME"/>
+	  		<result property="user_email" column="USER_EMAIL"/>
+	  		<result property="user_nickname" column="USER_NICKNAME"/>
+	  		<result property="user_postcode" column="USER_POSTCODE"/>
+	  		<result property="user_address" column="USER_ADDRESS"/>
+	  		<result property="user_extraaddress" column="USER_EXTRAADDRESS"/>
+	  		<result property="user_reg_date" column="USER_REG_DATE"/>
+	  		<result property="user_able" column="USER_ABLE"/>
+	  		<result property="user_role" column="USER_ROLE"/>
+	  </resultMap>
+	  
+	  <resultMap type="profile_dto" id="profile_map">
+		<result property="pf_no" column="PF_NO" />
+		<result property="pf_userno" column="PF_USERNO" />
+		<result property="pf_name" column="PF_NAME" />
+		<result property="pf_src" column="PF_SRC" />
+		<result property="pf_type" column="PF_TYPE" />
+  		<collection property="user_dto" resultMap="user_map"/>
+	</resultMap>
+  	
+	  	<resultMap type="tour_course_review_dto" id="course_review_map">
+	  		<result property="tcr_no" column="TCR_NO"/>
+	  		<result property="tcr_tcno" column="TCR_TCNO"/>
+	  		<result property="tcr_userno" column="TCR_USERNO"/>
+	  		<result property="tcr_content" column="TCR_CONTENT"/>
+	  		<result property="tcr_date" column="TCR_DATE"/>
+	  		<collection property="user_dto" resultMap="user_map" />
+	  		<collection property="profile_dto" resultMap="profile_map"/>
+	  	</resultMap>
+	  	
+	  	<insert id="insert_course_review" parameterType="tour_course_review_dto">
+	  		INSERT INTO TCRBOARD
+	  		VALUES(NVL((SELECT MAX(TCR_NO) FROM TCRBOARD)+1,0),#{tcr_tcno},#{tcr_userno},#{tcr_content},SYSDATE)
+	  	</insert>
+  	
+  		<select id="course_review_list" parameterType="int" resultMap="course_review_map">
+  			SELECT * 
+			FROM TCRBOARD
+			LEFT JOIN USERBOARD ON (USER_NO = TCR_USERNO)
+			LEFT JOIN PROFILEBOARD ON (USER_NO = PF_USERNO)
+			WHERE TCR_TCNO = #{tc_no}
+			ORDER BY TCR_NO DESC
+  		</select>
+  		
+  		<update id="update_course_review" parameterType="tour_course_review_dto">
+  			UPDATE TCRBOARD
+  			SET TCR_CONTENT = #{tcr_content}
+  			WHERE TCR_NO = #{tcr_no}
+  		</update>
+  		
+  		<delete id="delete_course_review" parameterType="int">
+  			DELETE FROM TCRBOARD
+  			WHERE TCR_NO = #{tcr_no}
+  		</delete>
+  		
+  		<insert id="course_review_report" parameterType="report_dto">
+  			INSERT INTO REPORTBOARD
+	  		VALUES(NVL((SELECT MAX(REPORT_NO) FROM REPORTBOARD)+1,0),#{report_reason},#{report_content},#{report_userno},#{report_target_userno},SYSDATE,NULL,'N')
+  		</insert>
+  		
+  		<select id="report_chk" parameterType="report_dto" resultType="int">
+  			SELECT COUNT(*) FROM REPORTBOARD WHERE REPORT_REASON = #{report_reason} AND REPORT_USERNO = #{report_userno}
+  		</select>
+  		
+  		<select id="course_search" parameterType="String" resultType="room_dto">
+  			SELECT * 
+  			FROM TCBOARDALL 
+  			WHERE TC_TITLE LIKE '%'||#{keyword}||'%'
+  			OR TC_TAG LIKE '%'||#{keyword}||'%'
+  		</select>
+  	</mapper>

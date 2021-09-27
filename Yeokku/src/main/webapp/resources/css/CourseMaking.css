@@ -1,0 +1,661 @@
+@font-face {
+    font-family: 'Goyang';
+    src: url('resources/etc/Goyang.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	background:url('../img/making/Back.jpg') 100% 100%;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+  	background-position: center;
+  	background-attachment: fixed;
+  	
+  	font-family:'Goyang', Goyang;
+  	
+  	overflow:hidden;
+}
+
+header {
+	width:110vw;
+	height:5vh;
+
+	background-color:white;
+	
+	left:0; right:0;
+	margin-top:-1vh;
+	
+	padding-top:1vh;
+	padding-bottom:1vh;
+	
+	border-top:solid 1vh #0C3E72;
+	
+	box-shadow: 7px 7px 20px rgb(119 119 119 / 60%);
+	background-color: rgba(255, 255, 255, 0.7);
+	
+	position:absolute;
+	
+	z-index:100;
+}
+
+#Menu_Icon {
+	
+	width:2.8vw;
+	height:5vh;
+	
+	z-index:500;
+	margin-top:1vh;
+	position:absolute;
+}
+
+#PF_Img {
+	
+	position: absolute;
+	
+	width:2.8vw;
+	height:5vh;
+	
+	margin-left:54vw;
+}
+
+#Alarm_Img {
+	
+	position: absolute;
+	
+	width:2.8vw;
+	height:5vh;
+	
+	margin-left:50vw;
+	
+	cursor:pointer;
+}
+
+#Making_Main {
+	width:95vw;
+	height:98vh;
+	position:absolute;
+}
+
+#White_Mask {
+	
+	width:100vw;
+	height:100vh;
+	position:absolute;
+	
+	left:0; right:0; margin-left:auto; margin-right:auto;
+	top:0; bottom:0; margin-top:auto; margin-bottom:auto;
+	
+	background-color:white;
+	opacity:1;
+	z-index:999;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+
+#Select_Area {
+  position: absolute;
+  margin-left:8vw;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.15vw;
+}
+
+#Select_Area select {
+  width:9.5vw;
+  height:5vh;
+  background-color: #2125f8;
+  color: white;
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 1.5em;	
+  border: 0;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button;
+}
+
+#Select_Area::before,
+#Select_Area::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+
+#Select_Area::before {
+  width: 2em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+
+#Select_Area::before {
+  background-color: rgba(0,0,0,.15);
+}
+
+#Select_Area::after {
+  color: rgba(0,0,0,.4);
+}
+
+#Select {
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	
+	font-family:'Goyang', Goyang;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+#Search_Wrap{
+  width: 45%;
+  position: absolute;
+  top: 50%;
+  margin-left: 83vw;
+  transform: translate(-50%, -50%);
+}
+
+#Search_Area {
+  width: 40%;
+  position: relative;
+  display: flex;
+}
+
+#Search_Input {
+  width: 100%;
+  border: 0.3vh solid #2125f8;
+  border-right: none;
+  padding: 0.5vh;
+  height: 3vh;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #2125f8;
+}
+
+#Search_Input:focus{
+  color: #2125f8;
+}
+
+#Search_Icon {
+  width: 3.5vw;
+  height: 4.6vh;
+  border: 0.3vh solid #2125f8;
+  background: #2125f8;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 1.5vw;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+.Close {
+	position:absolute;
+	
+	width:1.5vw;
+	height:1.5vw;
+	
+	margin-top:1%;
+	margin-left:95.7%;
+	
+	z-index:49;
+}
+
+.Close:hover { cursor: crosshair; }
+
+#Chat_Close { margin-left:88%; }
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+#Chat { 
+	 min-width:20vw;
+	 min-height:40vh;
+	 position:absolute;
+	
+	 margin-left:78vw;
+	 margin-top:53vh;
+	
+	 background-color: rgba(12,62,114,0.75);
+	 border-radius: 20px;
+	 border-top : 25px solid #150273;
+	 
+	 box-shadow: 7px 7px 20px rgb(119 119 119 / 60%);
+}
+#Chat_Icon {  
+	z-index:50;
+	cursor:pointer;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+#Chat_Middle {
+	width: 100%;
+	height: 82.5%;
+	
+	overflow-y:scroll;
+}
+
+.Chat_One {
+	width:80%;
+	height:10%;
+	
+	margin-top:1.5vh;
+}
+
+.Your_PF {
+	position:absolute;
+	width:10%;
+	height:10%;
+	margin-left : 5%;
+}
+
+.My_PF {
+	position:absolute;
+	width:10%;
+	height:10%;
+	margin-left : 85.3%;
+}
+
+.Your_Chat { 
+	position:absolute;
+	margin-left:25%;
+	background:#5ddddf;
+}
+.My_Chat { 
+	position:absolute;
+	margin-left:29%; 
+	background:#2eacd6;
+}
+.Your_Chat:after {
+	
+	position: absolute;
+	
+	content: '';
+	
+	left: 0; top: 50%;
+	margin-top: -0.2vw;
+	margin-left: -0.4vw;
+	
+	width: 0;
+	height: 0;
+	
+	border: 0.45vw solid transparent;
+	border-right-color: #5ddddf;
+	border-left: 0;
+}
+.My_Chat:after {
+	
+	position: absolute;
+	
+	content: '';
+	
+	right: 0; top: 50%;
+	margin-top: -0.2vw;
+	margin-right: -0.4vw;
+	
+	width: 0;
+	height: 0;
+	
+	border: 0.4vw solid transparent;
+	border-left-color: #2eacd6;
+	border-right: 0;
+}
+
+.Chat_Detail {
+	
+	font-size:0.85em;
+	
+	width:70%;
+	height:auto;
+	
+	padding:1vh;
+	
+	position: relative;
+	border-radius: .6em;
+	
+	color:white;
+}
+
+#Chat_Middle::-webkit-scrollbar-track{ 
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+#Chat_Middle::-webkit-scrollbar{ 
+	width: 10px;
+	background-color: #F5F5F5;
+}
+#Chat_Middle::-webkit-scrollbar-thumb{ 
+	background-color: #0ae;
+	
+	background-image: -webkit-gradient(linear, 0 0, 0 100%,
+	                   color-stop(.5, rgba(255, 255, 255, .2)),
+					   color-stop(.5, transparent), to(transparent));
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+#Chat_Bottom {
+	position: absolute;
+	width: 100%;
+	height: 7vh;
+	bottom: 0;
+	background: white;;
+	border-radius: 0 0 10px 10px;
+}
+
+#Chat_Input {
+  padding: 7px;
+  width: 74%;
+  left: 5%;
+  position: absolute;
+  border: 0;
+  top: 13px;
+  background: #F9FBFF;
+  color: #79C7C5;
+
+}
+
+#Chat_Input::placeholder {
+	color: #A1E2D9;
+}
+
+#Chat_Input:focus {
+	color: #777777;
+	outline: 0;
+}
+
+#Chat_Button { 
+	
+	position: absolute;
+	border: 0;
+	top:  13px;
+	opacity: 0.8;
+	right: 12px;
+	cursor: pointer;
+	outline: 0;
+	background-color:white;
+}
+
+#Chat_Button:after { 
+	width:30px;
+	height:30px;
+	
+	content:"";
+	background-image: url("../img/making/Paper.png");
+	display:inline-block;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+.Icon { 
+	
+	width:2.8vw;
+	height:5vh;
+	
+	margin-right:1vw;
+	z-index:50;
+	cursor:pointer;
+}
+
+.Search_Area { 
+	 width:42vw;
+	 height:83vh;
+	 position:absolute;
+	
+	 margin-left: 5vw;
+	 margin-top:11vh;
+	
+	 background-color: rgba(170,228,238, 0.75);
+	 border-radius: 20px;
+	 border-top : 25px solid #2c91ee;
+	 
+	 box-shadow: 7px 7px 20px rgb(119 119 119 / 60%);
+	 
+	 overflow-y:auto;
+	 overflow-x:hidden;
+}
+
+.Search_Area::-webkit-scrollbar-track{ 
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+.Search_Area::-webkit-scrollbar{ 
+	width: 10px;
+	background-color: #F5F5F5;
+}
+.Search_Area::-webkit-scrollbar-thumb{ 
+	background-color: #0ae;
+	
+	background-image: -webkit-gradient(linear, 0 0, 0 100%,
+	                   color-stop(.5, rgba(255, 255, 255, .2)),
+					   color-stop(.5, transparent), to(transparent));
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+.Hotel_One {
+	width:234px;
+	height:292px;
+	
+	padding:10px;
+	
+	display:inline-block;
+	
+	border:white 0.3vw double;
+	
+	margin-left:1vw;
+	margin-top:1vw;
+	
+	background-color: rgba(255, 255, 255, 0.75);
+	
+	z-index:32;
+	
+	cursor:crosshair;
+}
+.Hotel_Img {
+	width:100%;
+	height:45%;
+	display:inline-block;
+	
+	cursor:pointer;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+.Food_One {
+	width:234px;
+	height:292px;
+	
+	padding:10px;
+	
+	display:inline-block;
+	
+	border:white 0.3vw double;
+	
+	margin-left:1vw;
+	margin-top:1vw;
+	
+	background-color: rgba(255, 255, 255, 0.75);
+	
+	z-index:32;
+	
+	cursor:crosshair;
+}
+.Food_Img {
+	width:100%;
+	height:45%;
+	display:inline-block;
+	
+	cursor:pointer;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+.GP_One {
+	width:234px;
+	height:292px;
+	
+	padding:10px;
+	
+	display:inline-block;
+	
+	border:white 0.3vw double;
+	
+	margin-left:1vw;
+	margin-top:1vw;
+	
+	background-color: rgba(255, 255, 255, 0.75);
+	
+	z-index:32;
+	
+	cursor:crosshair;
+}
+.GP_Img {
+	width:100%;
+	height:45%;
+	display:inline-block;
+	
+	cursor:pointer;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+#Bus {
+	width:810px;
+	height:500px;
+}
+
+.Bus_Img {
+	width:810px;
+	height:500px;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+#Map {
+	width:890px;
+	height:483px;
+}
+
+.Map_Img {
+	width:890px;
+	height:483px;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+#Making_Area { 
+	 width:42vw;
+	 height:83vh;
+	 position:absolute;
+	
+	 margin-left: 53vw;
+	 margin-top: 11vh;
+	
+	 background-color: rgba(21,155,218,0.8);
+	 border-radius: 20px;
+	 border-top : 25px solid #0C3E72;
+	 
+	 box-shadow: 7px 7px 20px rgb(119 119 119 / 60%);
+	 
+	 overflow-y:auto;
+	 overflow-x:hidden;
+}
+
+#Making_Area::-webkit-scrollbar-track{ 
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+#Making_Area::-webkit-scrollbar{ 
+	width: 10px;
+	background-color: #F5F5F5;
+}
+#Making_Area::-webkit-scrollbar-thumb{ 
+	background-color: #0ae;
+	
+	background-image: -webkit-gradient(linear, 0 0, 0 100%,
+	                   color-stop(.5, rgba(255, 255, 255, .2)),
+					   color-stop(.5, transparent), to(transparent));
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+.Detail {
+	
+}
+
+.Heart_In {
+	position:absolute;
+	
+	margin-left:0.5vw;
+	margin-top:1vh;
+	width:2vw;
+	height:2vw;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+
+.Sticker_One {
+	
+	margin-top:2vh;
+	margin-left:1vw;
+	
+	width:12vw;
+	height:auto;
+	display:inline-block;
+	
+	border:1px double white;
+	
+	cursor:pointer;
+	
+	position:relative;
+}
+
+.Sticker {
+	width:100%;
+	height:100%;
+}
+
+.Cycle {
+	width:1vw;
+	height:1vw;
+	
+	position:absolute;
+	
+	margin-left:-1.5vw;
+	margin-top:0.5vh;
+	
+	opacity:0;
+}
+
+.info {
+	cursor:crosshair;
+	padding:0.3vw;
+	padding:0.6vh
+}
+
+.info h5 {
+	font-size:1vw;
+}
