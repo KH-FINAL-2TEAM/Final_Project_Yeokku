@@ -35,8 +35,7 @@ import java.io.IOException;
 @Repository
 public class TransDaoImpl implements TransDao {
 	
-	//String key = "kwDkY16Hb17nzd1oXj1gPDW3w59pp3McZn3hO4ut1mg%2F8HCFskd%2FEqjPgKtYBvkqPIUnPPEgfUudq2lnyFNyvg%3D%3D";
-	String key = "kwDkY16Hb17nzd1oXj1gPDW3w59pp3McZn3hO4ut1mg/8HCFskd/EqjPgKtYBvkqPIUnPPEgfUudq2lnyFNyvg==";
+	String key = "";
 
 	@Override
 	public Map<String, List> search_air(TransSearchDto dto) {
