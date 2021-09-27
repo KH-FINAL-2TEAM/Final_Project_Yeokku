@@ -157,7 +157,7 @@
 						결과 위치로 이동</button>
 				</p>
 				<script type="text/javascript"
-					src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=724b81fc00a64486288dc0698b9a4edd"></script>
+					src="http://dapi.kakao.com/v2/maps/sdk.js?appkey="></script>
 				<script type="text/javascript">
               var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
               

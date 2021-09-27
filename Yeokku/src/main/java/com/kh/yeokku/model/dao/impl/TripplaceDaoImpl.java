@@ -36,7 +36,7 @@ public class TripplaceDaoImpl implements TripplaceDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	String serviceKey ="ZQscfOiocZrQpK8kXr9QPPdHPfyhCNoAZ8fMA%2BO83K3x1rrMn8AL%2FP%2FvKnQghMb8XezP4cqE%2Fpree8FPMqfdwQ%3D%3D";
+	String serviceKey ="";
 	
 	@Override
 	public List<TourResultDto> tripplaceMain() {

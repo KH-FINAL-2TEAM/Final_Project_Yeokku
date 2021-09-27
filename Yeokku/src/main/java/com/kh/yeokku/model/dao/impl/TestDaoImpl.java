@@ -24,7 +24,7 @@ public class TestDaoImpl implements TestDao{
 		StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"); /*URL*/
         // 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
         try {
-        	urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=ZQscfOiocZrQpK8kXr9QPPdHPfyhCNoAZ8fMA%2BO83K3x1rrMn8AL%2FP%2FvKnQghMb8XezP4cqE%2Fpree8FPMqfdwQ%3D%3D"); /*Service Key*/
+        	urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "="); /*Service Key*/
         	urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("100", "UTF-8")); /*한 페이지 결과 수*/
         	//urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
         	urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8") + "=AppTest"); 
@@ -44,7 +44,7 @@ public class TestDaoImpl implements TestDao{
 		StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword"); /*URL*/
         // 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
         try {
-        	urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=jLK5HOYHfkNqmB%2FXB1nEWEI66%2B%2BWD2DHpwrgEIKFd31SjomZJRf%2B3KsfW36QN%2BN2Noix9ae2l%2BuCuPRKEzeOVg%3D%3D"); /*Service Key*/
+        	urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "="); /*Service Key*/
         	urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
         	//urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
         	urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8") + "=AppTest"); 
